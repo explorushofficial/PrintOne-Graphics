@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "PrintOne Graphics"
+description = "A service-led website for PrintOne Graphics, helping businesses explore design, digital and commercial printing, publications, annual reports, and corporate gifting before requesting a quote on WhatsApp."
+version = "1.0.0"
+id = "artifacts/printone-graphics"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24428
+
+[services.development]
+run = "pnpm --filter @workspace/printone-graphics run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/printone-graphics", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/printone-graphics/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24428"
+BASE_PATH = "/"
