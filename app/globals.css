@@ -115,6 +115,129 @@
   .page-wrap { width: min(100% - 40px, 600px); }
   .section-space { padding-block: 76px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+
+/* Animations for PrintOne Interactive Experience */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 }
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes scroll-vertical-up {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes scroll-vertical-down {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0%); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.35); }
+}
+
+@keyframes float-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+@keyframes bar-shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 34s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-scroll-up {
+  animation: scroll-vertical-up 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-scroll-down {
+  animation: scroll-vertical-down 34s linear infinite;
+  will-change: transform;
+}
+
+.animate-scroll-up:hover,
+.animate-scroll-down:hover {
+  animation-play-state: paused;
+}
+
+.vertical-fade-mask {
+  mask-image: linear-gradient(to bottom, transparent, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 8%, black 92%, transparent 100%);
+}
+
+.horizontal-fade-mask {
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent 100%);
+}
+
+.animate-float {
+  animation: float-subtle 4.5s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2.4s ease-in-out infinite;
+}
+
+.print-registration-mark {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.print-registration-mark::before,
+.print-registration-mark::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+}
+.print-registration-mark::before {
+  width: 100%;
+  height: 1px;
+}
+.print-registration-mark::after {
+  height: 100%;
+  width: 1px;
+}
+
+.cmyk-strip {
+  display: inline-flex;
+  height: 6px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.cmyk-strip span {
+  width: 14px;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
