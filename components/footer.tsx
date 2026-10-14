@@ -80,7 +80,7 @@ export function Footer() {
         {/* Bottom Copyright Strip */}
         <div className="mt-5 flex flex-col justify-between gap-2 border-t border-[#333536] pt-4 text-[10px] tracking-[.04em] text-[#8e8a81] sm:flex-row">
           <span>© {currentYear} PrintOne Graphics. All rights reserved.</span>
-          <span>Tactile Print & Packaging Atelier · Serving organisations across India</span>
+          <span>Your Trusted Partner for Design, Digital Printing &amp; Corporate Gifting · Byculla East, Mumbai</span>
         </div>
       </div>
     </footer>
