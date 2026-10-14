@@ -20,25 +20,25 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL('https://printonegraphics.com'),
   title: {
-    default: 'PrintOne Graphics | Mumbai Print & Design Solutions',
+    default: 'PrintOne Graphics | Design • Digital Printing • Corporate Gifting',
     template: '%s | PrintOne Graphics',
   },
   description:
-    'Design, digital printing, annual reports, publications and corporate gifting from PrintOne Graphics in Mumbai, serving organisations across India.',
+    'Your trusted partner for design, digital printing, annual reports, publications and corporate gifting from Byculla East, Mumbai, serving organisations across India.',
   icons: {
     icon: '/favicon.svg',
   },
   openGraph: {
-    title: 'PrintOne Graphics | Mumbai Print & Design Solutions',
+    title: 'PrintOne Graphics | Your Trusted Partner for Design, Digital Printing & Corporate Gifting',
     description:
-      'Design, digital printing, annual reports, publications and corporate gifting from PrintOne Graphics in Mumbai, serving organisations across India.',
+      'From concept and creative design to premium printing and finishing, we deliver quality, precision and reliable service for every project.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PrintOne Graphics | Mumbai Print & Design Solutions',
+    title: 'PrintOne Graphics | Design • Digital Printing • Corporate Gifting',
     description:
-      'Design, digital printing, annual reports, publications and corporate gifting from PrintOne Graphics in Mumbai, serving organisations across India.',
+      'From concept and creative design to premium printing and finishing, we deliver quality, precision and reliable service for every project.',
   },
 };
 

@@ -1,29 +1,37 @@
 import { HeroShowcase } from '@/components/hero-showcase';
 import { ProductionTicker } from '@/components/production-ticker';
+import { VisionMissionValues } from '@/components/vision-mission-values';
 import { StudioPressDuality } from '@/components/studio-press-duality';
 import { TactileSpecimenBar } from '@/components/tactile-specimen-bar';
 import { InteractiveCapabilities } from '@/components/interactive-capabilities';
+import { Testimonials } from '@/components/testimonials';
 import { ProductionJourney } from '@/components/production-journey';
 
 export default function HomePage() {
   return (
     <main>
-      {/* 1. Interactive Hero with Live Specimen Console */}
+      {/* 1. Interactive Hero with Live Specimen Console & Client Value Proposition */}
       <HeroShowcase />
 
-      {/* 2. Continuous Production & Credibility Ticker */}
+      {/* 2. Continuous Production & Core Expertise Ticker */}
       <ProductionTicker />
 
-      {/* 3. The Studio & The Press: Two Worlds, One Roof */}
+      {/* 3. Our Vision, Mission & Values + Core Expertise (Client Brief) */}
+      <VisionMissionValues showExpertise={true} />
+
+      {/* 4. The Studio & The Press: Two Worlds, One Roof */}
       <StudioPressDuality />
 
-      {/* 4. The Materials & Tactile Finishes Laboratory */}
+      {/* 5. The Materials & Tactile Finishes Laboratory */}
       <TactileSpecimenBar />
 
-      {/* 5. Filterable Capabilities & Services Grid */}
+      {/* 6. Filterable Capabilities & Services Grid */}
       <InteractiveCapabilities />
 
-      {/* 6. The 4-Phase Production Journey */}
+      {/* 7. Client Testimonials (Trusted by Businesses. Proven by Results) */}
+      <Testimonials />
+
+      {/* 8. The 4-Phase Production Journey: From Concept to Delivery */}
       <ProductionJourney />
     </main>
   );
