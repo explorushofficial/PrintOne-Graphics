@@ -173,30 +173,40 @@ export function HeroShowcase() {
         <div className="mt-2 grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
           {/* Left Column: Bold, High-Impact Editorial Statement */}
           <div className="reveal">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#ded7cc] bg-[#f2ede4] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.16em] text-[#6b6760]">
-              <span>Tactile Craft · Made in Mumbai · Shipped Pan-India</span>
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#ded7cc] bg-[#f2ede4] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6b6760]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#e97819]" />
+              <span>DESIGN • DIGITAL PRINTING • CORPORATE GIFTING</span>
             </div>
 
-            <h1 className="mt-6 font-display text-[clamp(2.7rem,5.2vw,5.3rem)] font-extrabold leading-[0.92] tracking-[-.065em] text-[#1c1d1f]">
-              CRAFTED<br />
-              <span className="text-[#e97819]">TO BE FELT.</span><br />
-              MADE TO LAST.
+            <h1 className="mt-5 font-display text-[clamp(2.5rem,4.8vw,4.8rem)] font-extrabold leading-[0.93] tracking-[-.06em] text-[#1c1d1f]">
+              YOUR TRUSTED<br />
+              <span className="text-[#e97819]">PRINT PARTNER.</span><br />
+              FROM CONCEPT TO FINISH.
             </h1>
 
-            <p className="mt-5 max-w-[480px] text-[15px] sm:text-[16px] leading-[1.65] text-[#55524c]">
-              We unite boardroom-level design direction with heavy-duty mechanical printing under one Mumbai roof. 
-              Annual reports, monographs, luxury rigid packaging, and commercial collateral engineered for unforgettable touch.
+            <p className="mt-4 font-sans text-xs sm:text-sm font-bold uppercase tracking-[.14em] text-[#e97819]">
+              Your Trusted Partner for Design, Digital Printing &amp; Corporate Gifting
+            </p>
+
+            <p className="mt-3 max-w-[500px] text-[15px] sm:text-[16px] leading-[1.65] text-[#55524c]">
+              From concept and creative design to premium printing and finishing, we deliver quality, precision and reliable service for every project. Based in Byculla East, Mumbai, serving organisations across India.
             </p>
 
             {/* Quick Category Visual Links */}
             <div className="mt-6 flex flex-wrap gap-2 text-xs">
-              {['Annual Reports', 'Luxury Packaging', 'Books & Publishing', 'Commercial Print'].map((cat) => (
+              {[
+                { label: 'Annual Reports', tag: 'Ideas to artwork' },
+                { label: 'Commercial & Digital Print', tag: 'Business essentials' },
+                { label: 'Books & Publications', tag: 'Books + learning' },
+                { label: 'Corporate Gifting', tag: 'Gifting + merchandise' },
+                { label: 'Packaging & Boxes', tag: 'Production' },
+              ].map((cat) => (
                 <Link
-                  key={cat}
-                  href="/products"
+                  key={cat.label}
+                  href={`/products?tag=${encodeURIComponent(cat.tag)}`}
                   className="rounded border border-[#ded6c9] bg-white/70 px-3 py-1.5 font-bold text-[#45433d] transition-all hover:border-[#e97819] hover:bg-white hover:text-[#e97819]"
                 >
-                  {cat}
+                  {cat.label}
                 </Link>
               ))}
             </div>
@@ -204,12 +214,12 @@ export function HeroShowcase() {
             {/* Action Buttons */}
             <div className="mt-8 flex flex-wrap items-center gap-3.5">
               <Link href="/products" className="btn-primary group" data-testid="link-hero-services">
-                <span>Explore all what we make</span>
+                <span>Explore all what we do</span>
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
 
               <Link href="/contact" className="btn-outline group" data-testid="link-hero-contact">
-                <span>Request physical swatches</span>
+                <span>Get a project quote</span>
                 <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </Link>
             </div>
@@ -217,23 +227,23 @@ export function HeroShowcase() {
             {/* Bottom Proof Metrics Ribbon */}
             <div className="mt-8 grid grid-cols-3 gap-3 border-t border-[#e2dacf] pt-5">
               <div>
-                <span className="block font-display text-2xl font-black text-[#1c1d1f]">48h</span>
+                <span className="block font-display text-2xl font-black text-[#1c1d1f]">2021</span>
                 <span className="mt-0.5 block text-[10px] font-bold text-[#7a7770] uppercase tracking-wider">
-                  Physical Proofs
+                  Established Mumbai
                 </span>
               </div>
 
               <div>
-                <span className="block font-display text-2xl font-black text-[#1c1d1f]">30+</span>
+                <span className="block font-display text-2xl font-black text-[#1c1d1f]">In-House</span>
                 <span className="mt-0.5 block text-[10px] font-bold text-[#7a7770] uppercase tracking-wider">
-                  Curated Papers
+                  Design &amp; Press Facility
                 </span>
               </div>
 
               <div>
                 <span className="block font-display text-2xl font-black text-[#e97819]">Pan-India</span>
                 <span className="mt-0.5 block text-[10px] font-bold text-[#7a7770] uppercase tracking-wider">
-                  Despatch Network
+                  Dependable Delivery
                 </span>
               </div>
             </div>
