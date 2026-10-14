@@ -23,71 +23,64 @@ export function Footer() {
   const currentYear = useCurrentYear();
 
   return (
-    <footer className="bg-[#252728] text-[#f7f2e9]">
-      <div className="page-wrap grid gap-12 py-14 md:grid-cols-[1.15fr_.7fr_.8fr] md:py-16">
-        <div>
+    <footer className="border-t border-[#353738] bg-[#222425] text-[#e8e4dc]">
+      <div className="page-wrap py-6">
+        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          {/* Brand & Studio Location */}
           <div className="flex items-center gap-3">
             <img
               src="/printone-logo.jpeg"
               alt="PrintOne Graphics"
-              className="h-14 w-[68px] object-contain mix-blend-screen"
+              className="h-8 w-auto object-contain mix-blend-screen"
             />
-            <span className="font-display text-xl font-extrabold tracking-[-.05em]">
-              PrintOne <span className="font-sans text-[9px] font-semibold tracking-[.2em] text-[#c6c0b5]">GRAPHICS</span>
-            </span>
+            <div>
+              <span className="font-display text-base font-extrabold tracking-[-.04em] text-white">
+                PrintOne <span className="font-sans text-[8px] font-semibold tracking-[.2em] text-[#c6c0b5]">GRAPHICS</span>
+              </span>
+              <p className="text-[11px] text-[#9b968c]">
+                Byculla East, Mumbai · Since 2021
+              </p>
+            </div>
           </div>
-          <p className="mt-5 max-w-sm text-sm leading-6 text-[#c7c2b8]">
-            A creative and production partner for ideas that deserve to be held, read and remembered.
-          </p>
-          <p className="mt-6 text-xs font-semibold uppercase tracking-[.14em] text-[#e99547]">
-            Ideas to impressions.
-          </p>
-        </div>
 
-        <div>
-          <p className="eyebrow text-[#c7c2b8]">Explore</p>
-          <div className="mt-5 flex flex-col gap-3 text-sm text-[#e9e4da]">
+          {/* Quick Nav Links */}
+          <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs" aria-label="Footer navigation">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="hover:text-[#f19a46] transition-colors"
+                className="text-[#cfcac0] hover:text-[#e97819] transition-colors"
                 data-testid={`link-footer-${link.label.toLowerCase().replaceAll(' ', '-')}`}
               >
                 {link.label}
               </Link>
             ))}
+          </nav>
+
+          {/* Contact Details */}
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#b8b3a8]">
+            <a
+              className="text-[#f19a46] hover:text-white transition-colors"
+              href="tel:+919819124907"
+              data-testid="link-footer-phone"
+            >
+              +91 98191 24907 / +91 95940 05894
+            </a>
+            <span className="hidden sm:inline text-white/20">|</span>
+            <a
+              className="text-[#cfcac0] hover:text-white transition-colors"
+              href="mailto:printone.graphics21@gmail.com"
+              data-testid="link-footer-email"
+            >
+              printone.graphics21@gmail.com
+            </a>
           </div>
         </div>
 
-        <div>
-          <p className="eyebrow text-[#c7c2b8]">Say hello</p>
-          <p className="mt-5 text-sm leading-6 text-[#e9e4da]">
-            A-Wing, Unit No. 309<br />
-            Byculla Service Industrial Premises<br />
-            Byculla East, Mumbai – 400027
-          </p>
-          <a
-            className="mt-4 inline-block text-sm text-[#f19a46] hover:text-white transition-colors"
-            href="tel:+919594005894"
-            data-testid="link-footer-phone"
-          >
-            +91 95940 05894
-          </a>
-          <a
-            className="mt-2 block text-sm text-[#f19a46] hover:text-white transition-colors"
-            href="mailto:printone.graphics21@gmail.com"
-            data-testid="link-footer-email"
-          >
-            printone.graphics21@gmail.com
-          </a>
-        </div>
-      </div>
-
-      <div className="border-t border-[#454646]">
-        <div className="page-wrap flex flex-col justify-between gap-2 py-4 text-[10px] tracking-[.05em] text-[#a7a299] sm:flex-row">
-          <span>© {currentYear} PrintOne Graphics</span>
-          <span>Mumbai, India · Working with organisations across India</span>
+        {/* Bottom Copyright Strip */}
+        <div className="mt-5 flex flex-col justify-between gap-2 border-t border-[#333536] pt-4 text-[10px] tracking-[.04em] text-[#8e8a81] sm:flex-row">
+          <span>© {currentYear} PrintOne Graphics. All rights reserved.</span>
+          <span>Tactile Print & Packaging Atelier · Serving organisations across India</span>
         </div>
       </div>
     </footer>

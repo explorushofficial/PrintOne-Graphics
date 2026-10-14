@@ -4,7 +4,6 @@ import { StudioPressDuality } from '@/components/studio-press-duality';
 import { TactileSpecimenBar } from '@/components/tactile-specimen-bar';
 import { InteractiveCapabilities } from '@/components/interactive-capabilities';
 import { ProductionJourney } from '@/components/production-journey';
-import { SwatchEnquiryBanner } from '@/components/swatch-enquiry-banner';
 
 export default function HomePage() {
   return (
@@ -26,9 +25,6 @@ export default function HomePage() {
 
       {/* 6. The 4-Phase Production Journey */}
       <ProductionJourney />
-
-      {/* 7. Closing Consultation & Swatchkit Banner */}
-      <SwatchEnquiryBanner />
     </main>
   );
 }

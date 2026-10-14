@@ -22,6 +22,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { SwatchEnquiryBanner } from '@/components/swatch-enquiry-banner';
 
 interface ValueItem {
   number: string;
@@ -202,97 +203,115 @@ export function AboutClient() {
 
   return (
     <div className="overflow-x-hidden">
-      {/* 1. Grand Kinetic Hero Section with Motion */}
-      <section className="relative overflow-hidden bg-[#1c1e1f] py-20 text-[#faf8f2] sm:py-28 border-b border-[#313335]">
+      {/* 1. Atelier Hero Section */}
+      <section className="relative overflow-hidden border-b border-[#e5ded4] bg-[#faf8f2]">
+        {/* Background Architectural Dot Grid Pattern */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.05]"
+          className="pointer-events-none absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage:
-              'radial-gradient(#ffffff 1px, transparent 1px), radial-gradient(#ffffff 1px, #1c1e1f 1px)',
-            backgroundSize: '36px 36px',
+              'radial-gradient(#202223 1px, transparent 1px), radial-gradient(#202223 1px, #faf8f2 1px)',
+            backgroundSize: '28px 28px',
+            backgroundPosition: '0 0, 14px 14px',
           }}
           aria-hidden="true"
         />
 
-        <div className="page-wrap relative z-10 grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[.2em] text-[#e8e4dc]">
-              <Sparkles size={13} className="text-[#e97819]" />
-              <span>Byculla East · Mumbai Atelier · Est. 2021</span>
-            </div>
-
-            <div className="mt-6">
-              <h1 className="font-display text-[clamp(2.9rem,6.8vw,6.4rem)] font-extrabold leading-[0.91] tracking-[-.065em]">
-                <span className="block">We don’t just print.</span>
-                <span className="block text-[#e97819]">We engineer physical</span>
-                <span className="block">presence.</span>
-              </h1>
-            </div>
-
-            <p className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-[#c7c2b6]">
-              PrintOne Graphics unites boardroom design strategy with industrial pressroom physics. From our home in Byculla East, Mumbai, we craft annual reports, archival publications, and bespoke packaging for institutions across India.
-            </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link href="/products" className="btn-primary group" data-testid="link-about-hero-products">
-                <span>Inspect all what we make</span>
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </Link>
-              <Link
-                href="/contact"
-                className="btn-outline border-white/35 text-white hover:border-[#e97819] hover:bg-[#e97819] transition-all"
-                data-testid="link-about-hero-contact"
-              >
-                <span>Consult with our master printers</span>
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* Concentric Compass Graphic with Continuous Smooth CSS Rotation */}
-          <div className="relative flex min-h-[340px] items-center justify-center sm:min-h-[420px]">
-            {/* Outer Continuous Compass Ring */}
-            <div className="absolute h-[300px] w-[300px] rounded-full border border-[#444648] sm:h-[390px] sm:w-[390px] animate-[spin_50s_linear_infinite]">
-              <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full bg-[#e97819] shadow-lg shadow-[#e97819]/50" />
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 h-2.5 w-2.5 rounded-full bg-[#2c9fc3] shadow-lg shadow-[#2c9fc3]/50" />
-            </div>
-
-            {/* Middle Dashed Ring */}
-            <div className="absolute h-[220px] w-[220px] rounded-full border border-dashed border-[#57595c] sm:h-[280px] sm:w-[280px] animate-[spin_35s_linear_infinite_reverse]">
-              <span className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full bg-[#cf2879] shadow-lg shadow-[#cf2879]/50" />
-              <span className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full bg-[#e7c627] shadow-lg shadow-[#e7c627]/50" />
-            </div>
-
-            {/* Inner Core Dial */}
-            <div className="relative z-10 flex h-36 w-36 flex-col items-center justify-center rounded-full border border-[#525557] bg-[#141516] shadow-2xl text-center">
-              <span className="font-display text-5xl font-black text-[#e97819] tracking-tight">
-                01
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-[.22em] text-[#aaa69d]">
-                Mumbai
-              </span>
-              <div className="cmyk-strip mt-2">
-                <span className="bg-[#2c9fc3]"></span>
-                <span className="bg-[#cf2879]"></span>
-                <span className="bg-[#e7c627]"></span>
-                <span className="bg-[#27292a]"></span>
+        <div className="page-wrap relative z-10 py-14 sm:py-18 lg:py-20">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+            {/* Left Column: Refined Editorial Headline & Story */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#ded7cc] bg-[#f2ede4] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6b6760]">
+                <Sparkles size={12} className="text-[#e97819]" />
+                <span>Byculla East, Mumbai · Established 2021</span>
               </div>
-            </div>
 
-            {/* Floating CMYK Registration Orbs */}
-            <span className="animate-float absolute left-[12%] top-[16%] h-4 w-4 rounded-full bg-[#e97819] shadow-xl shadow-[#e97819]/60" />
-            <span className="animate-float absolute right-[10%] top-[26%] h-3.5 w-3.5 rounded-full bg-[#2c9fc3] shadow-xl shadow-[#2c9fc3]/60" />
-            <span className="animate-float absolute bottom-[16%] left-[20%] h-4 w-4 rounded-full bg-[#cf2879] shadow-xl shadow-[#cf2879]/60" />
-            <span className="animate-float absolute bottom-[20%] right-[16%] h-3.5 w-3.5 rounded-full bg-[#e7c627] shadow-xl shadow-[#e7c627]/60" />
+              <h1 className="mt-6 font-display text-[clamp(2.4rem,5vw,4.5rem)] font-extrabold leading-[0.96] tracking-[-.055em] text-[#1c1d1f]">
+                A practical kind of creative.<br />
+                <span className="text-[#e97819]">Engineered to be held.</span>
+              </h1>
+
+              <p className="mt-5 max-w-xl text-[15px] sm:text-[16px] leading-[1.7] text-[#55524c]">
+                Established in 2021 in Byculla East, Mumbai, PrintOne Graphics combines design direction with heavy-duty mechanical printing under one roof. We craft corporate annual reports, archival publications, luxury packaging, and brand collateral for organisations across India.
+              </p>
+
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <Link href="/products" className="btn-primary group" data-testid="link-about-hero-products">
+                  <span>Explore all what we make</span>
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  href="/contact"
+                  className="btn-outline group"
+                  data-testid="link-about-hero-contact"
+                >
+                  <span>Request physical swatches</span>
+                  <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </Link>
+              </div>
+
+              {/* Atelier Credentials Pill Tags */}
+              <div className="mt-8 flex flex-wrap items-center gap-2 pt-6 border-t border-[#e5dfd4] text-[11px] font-bold uppercase tracking-wider text-[#636058]">
+                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1">ISO 12647-2 Standard</span>
+                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1">30+ FSC Fine Papers</span>
+                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1">In-House Bindery</span>
+              </div>
+            </motion.div>
+
+            {/* Right Column: Workshop Floor & Production Composite */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              className="relative"
+            >
+              <div className="relative overflow-hidden rounded-2xl border border-[#dcd4c7] bg-white p-3 shadow-xl">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-[#242628]">
+                  <img
+                    src="/production/digital-press.jpg"
+                    alt="PrintOne Graphics Pressroom in Byculla East, Mumbai"
+                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                  <div className="absolute top-3 left-3 flex items-center gap-2 rounded bg-black/65 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
+                    <span className="h-2 w-2 rounded-full bg-[#e97819] animate-pulse" />
+                    <span>Live Presswork · Byculla East</span>
+                  </div>
+
+                  <div className="absolute bottom-3 left-3 right-3 text-white">
+                    <span className="text-[10px] font-bold uppercase tracking-[.18em] text-[#e97819]">
+                      Two Worlds · One Roof
+                    </span>
+                    <h3 className="font-display text-base sm:text-lg font-bold leading-tight">
+                      Boardroom Typography & Precision Offset Physics
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Sub-card specs bar */}
+                <div className="mt-3 grid grid-cols-2 gap-2 text-center text-xs">
+                  <div className="rounded-lg border border-[#ede7dd] bg-[#faf8f2] p-2.5">
+                    <span className="block font-display text-lg font-extrabold text-[#1f2122]">48 Hours</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#7c7972]">Wet Proofing Turnaround</span>
+                  </div>
+                  <div className="rounded-lg border border-[#ede7dd] bg-[#faf8f2] p-2.5">
+                    <span className="block font-display text-lg font-extrabold text-[#e97819]">Pan-India</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#7c7972]">Despatch & Logistics</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* 2. Real-Time Animated Metrics Ticker */}
-      <section className="border-b border-[#e5ded4] bg-[#faf8f2] py-14">
+      <section className="bg-[#faf8f2] py-14">
         <div className="page-wrap">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <div className="border-l-2 border-[#e97819] pl-4">
@@ -333,6 +352,53 @@ export function AboutClient() {
                 Rapid Physical Proofing
               </span>
               <p className="mt-1 text-[11px] text-[#8e8a81]">Delivered Before Long Runs</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2b. Our Story, Vision & Mission */}
+      <section className="section-space border-b border-[#e2d9cd] bg-[#ede7dc]">
+        <div className="page-wrap">
+          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <p className="eyebrow">Our Story</p>
+              <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold tracking-[-.05em] text-[#1f2122]">
+                Bridging Design Direction and Heavy Press Physics.
+              </h2>
+              <p className="mt-4 text-xs sm:text-sm leading-relaxed text-[#5e5b54]">
+                Printed publications represent more than paper and ink. They represent an organisation’s identity, credibility, and institutional memory.
+              </p>
+              <p className="mt-3 text-xs sm:text-sm leading-relaxed text-[#5e5b54]">
+                From initial design layout and structural dieline engineering to offset plate imposition, Smyth thread sewing, and moisture-shielded packing, we eliminate agency-to-vendor friction by housing creative direction and mechanical manufacturing together in Mumbai.
+              </p>
+            </div>
+
+            {/* Vision & Mission Cards */}
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div className="rounded-xl border border-[#ded5c7] bg-white p-6 shadow-sm">
+                <span className="text-[10px] font-bold uppercase tracking-[.2em] text-[#e97819]">
+                  01 / Vision
+                </span>
+                <h3 className="mt-3 font-display text-xl font-bold text-[#1f2122]">
+                  The Preferred Craft Partner
+                </h3>
+                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[#68645d]">
+                  To be the trusted partner for listed enterprises, educational publishers, and design studios across India who believe tangible print carries enduring authority.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-[#ded5c7] bg-white p-6 shadow-sm">
+                <span className="text-[10px] font-bold uppercase tracking-[.2em] text-[#2c9fc3]">
+                  02 / Mission
+                </span>
+                <h3 className="mt-3 font-display text-xl font-bold text-[#1f2122]">
+                  End-to-End Excellence
+                </h3>
+                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[#68645d]">
+                  To provide seamless print engineering — uniting creative typography, certified paper stocks, calibrated presswork, and dependable pan-India delivery under one roof.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -660,27 +726,8 @@ export function AboutClient() {
         </div>
       </section>
 
-      {/* 7. Closing High-Value CTA */}
-      <section className="bg-[#1c1e1f] py-16 text-white border-t border-[#313335]">
-        <div className="page-wrap flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-          <div>
-            <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.2em] text-[#e97819]">
-              <Sparkles size={12} />
-              <span>Let’s Build Something Enduring</span>
-            </div>
-            <h2 className="mt-2 font-display text-2xl sm:text-4xl font-extrabold tracking-tight">
-              Ready to meet our Mumbai print masters?
-            </h2>
-            <p className="mt-1 text-xs text-[#a9a59c]">
-              We courier physical sample swatches to corporate design teams across India.
-            </p>
-          </div>
-          <Link href="/contact" className="btn-primary" data-testid="link-about-cta">
-            <span>Start a conversation</span>
-            <ArrowRight size={16} />
-          </Link>
-        </div>
-      </section>
+      {/* 7. Physical Production Consultation & Swatch Desk */}
+      <SwatchEnquiryBanner />
     </div>
   );
 }

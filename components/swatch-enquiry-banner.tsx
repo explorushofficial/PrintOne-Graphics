@@ -72,9 +72,15 @@ export function SwatchEnquiryBanner() {
             <div className="mt-6 space-y-3 border-t border-white/10 pt-5 text-xs text-[#dcd7ce]">
               <div className="flex items-center gap-3">
                 <PhoneCall size={15} className="text-[#e97819]" />
-                <a href="tel:+919594005894" className="hover:text-white transition-colors">
-                  +91 95940 05894
-                </a>
+                <div className="flex flex-wrap gap-x-2">
+                  <a href="tel:+919819124907" className="hover:text-white transition-colors">
+                    +91 98191 24907
+                  </a>
+                  <span className="text-white/40">/</span>
+                  <a href="tel:+919594005894" className="hover:text-white transition-colors">
+                    +91 95940 05894
+                  </a>
+                </div>
               </div>
 
               <div className="flex items-center gap-3">

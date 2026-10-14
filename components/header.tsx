@@ -25,10 +25,10 @@ export function Header() {
           <span>Ideas to impressions, across India.</span>
           <a
             className="hidden text-[#f5a049] hover:text-white transition-colors sm:inline"
-            href="tel:+919594005894"
+            href="tel:+919819124907"
             data-testid="link-top-phone"
           >
-            +91 95940 05894
+            +91 98191 24907
           </a>
           <span className="sm:hidden">Mumbai · Since 2021</span>
         </div>

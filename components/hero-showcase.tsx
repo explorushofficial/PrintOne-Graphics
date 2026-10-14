@@ -10,10 +10,7 @@ import {
   Eye,
   Layers,
   MessageCircle,
-  Pause,
-  Play,
   Plus,
-  Sparkles,
   X,
 } from 'lucide-react';
 import { useCart, createWhatsAppUrl } from '@/context/cart-context';
@@ -144,7 +141,6 @@ const COLUMN_2_ITEMS: ReelItem[] = [
 ];
 
 export function HeroShowcase() {
-  const [isPaused, setIsPaused] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ReelItem | null>(null);
   const { add } = useCart();
 
@@ -172,43 +168,12 @@ export function HeroShowcase() {
       />
 
       <div className="page-wrap relative z-10 pt-8 pb-12 lg:pt-10 lg:pb-14">
-        {/* Top Atelier Status Strip */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#e6dfd5] pb-4">
-          <div className="flex items-center gap-3">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e97819] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#e97819]"></span>
-            </span>
-            <p className="text-[11px] font-bold uppercase tracking-[.18em] text-[#6b6861]">
-              Mumbai Design Studio & Industrial Press · <span className="text-[#202223]">Live Work in Production</span>
-            </p>
-          </div>
-
-          <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.14em] text-[#78756e]">
-            <div className="cmyk-strip" title="CMYK Press Calibration">
-              <span className="bg-[#2c9fc3]"></span>
-              <span className="bg-[#cf2879]"></span>
-              <span className="bg-[#e7c627]"></span>
-              <span className="bg-[#27292a]"></span>
-            </div>
-            <span className="hidden sm:inline">ISO 12647-2 Standard</span>
-            <button
-              onClick={() => setIsPaused(!isPaused)}
-              className="inline-flex items-center gap-1.5 rounded border border-[#dcd5c9] bg-[#f2ede4] px-2.5 py-1 text-[9px] font-bold uppercase text-[#5a5852] hover:bg-white hover:text-[#202223] transition-colors"
-              title={isPaused ? 'Resume Scroller' : 'Pause Scroller'}
-            >
-              {isPaused ? <Play size={10} className="text-[#e97819]" /> : <Pause size={10} className="text-[#e97819]" />}
-              <span>{isPaused ? 'Resume Motion' : 'Pause Reel'}</span>
-            </button>
-          </div>
-        </div>
-
+        
         {/* Main Hero Grid: Typographic Anchor (Left) + Vertical Kinetic Scrollers (Right) */}
-        <div className="mt-8 grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
+        <div className="mt-2 grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
           {/* Left Column: Bold, High-Impact Editorial Statement */}
           <div className="reveal">
             <div className="inline-flex items-center gap-2 rounded-full border border-[#ded7cc] bg-[#f2ede4] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.16em] text-[#6b6760]">
-              <Sparkles size={12} className="text-[#e97819]" />
               <span>Tactile Craft · Made in Mumbai · Shipped Pan-India</span>
             </div>
 
@@ -290,7 +255,7 @@ export function HeroShowcase() {
             <div className="grid h-full grid-cols-2 gap-3">
               {/* Column 1: Rolling Upward */}
               <div
-                className={`flex flex-col gap-3 ${isPaused ? '' : 'animate-scroll-up'}`}
+                className="flex flex-col gap-3 animate-scroll-up"
                 style={{ willChange: 'transform' }}
               >
                 {[...COLUMN_1_ITEMS, ...COLUMN_1_ITEMS].map((item, idx) => (
@@ -333,7 +298,7 @@ export function HeroShowcase() {
 
               {/* Column 2: Rolling Downward */}
               <div
-                className={`flex flex-col gap-3 ${isPaused ? '' : 'animate-scroll-down'}`}
+                className="flex flex-col gap-3 animate-scroll-down"
                 style={{ willChange: 'transform' }}
               >
                 {[...COLUMN_2_ITEMS, ...COLUMN_2_ITEMS].map((item, idx) => (
