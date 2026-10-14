@@ -142,6 +142,12 @@ export function StudioPressDuality() {
                   src="/client-assets/machinery/accuriopress-c7100.png"
                   alt="Konica Minolta AccurioPress C7100"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-108"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.src.endsWith('/production/accuriopress-c7100.png')) {
+                      target.src = '/production/accuriopress-c7100.png';
+                    }
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
                 <span className="absolute bottom-2.5 left-2.5 text-[10px] font-bold uppercase tracking-wider text-white">
@@ -154,6 +160,12 @@ export function StudioPressDuality() {
                   src="/client-assets/machinery/heidelberg-offset.jpg"
                   alt="Heidelberg Speedmaster XL 106"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-108"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.src.endsWith('/production/heidelberg-offset.jpg')) {
+                      target.src = '/production/heidelberg-offset.jpg';
+                    }
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
                 <span className="absolute bottom-2.5 left-2.5 text-[10px] font-bold uppercase tracking-wider text-white">
