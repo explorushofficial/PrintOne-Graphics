@@ -1,14 +1,18 @@
 'use client';
 
 const TICKER_ITEMS = [
-  '48-Hour Rapid Physical Proofing',
-  'Mumbai Atelier Craft · Pan-India Despatch',
-  '30+ Curated Fine Paper Stocks (FSC Certified)',
-  'Precision CMYK & Pantone Spot Calibration',
-  'Bespoke Hot Foil Stamping & Blind Debossing',
-  'PUR, Smyth Sewn & Singer Thread Binding',
-  'Short Run & Long Run Offset Capabilities',
-  'End-to-End Design & Production Under One Roof',
+  'Annual Reports Design & Printing',
+  'Commercial & Digital Printing',
+  'Books & Publications',
+  'Educational Printing',
+  'Custom Calendars & Diaries',
+  'Corporate Gifting & Merchandise',
+  'Luxury Packaging & Boxes',
+  'Creative Design & Typesetting',
+  'Precision Binding & Finishing',
+  'Established 2021 · Byculla East, Mumbai',
+  'Serving Organisations Across India',
+  'Competitive Pricing & Dependable Delivery',
 ];
 
 export function ProductionTicker() {
