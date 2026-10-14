@@ -126,10 +126,10 @@ const HORIZONTAL_SHOWCASE = [
   },
   {
     id: 'showcase-5',
-    title: 'High-Speed Digital & Offset Pressroom',
-    category: 'In-House Manufacturing',
-    specs: 'Multi-Color In-Line Densitometry · 500K+ Monthly',
-    image: '/production/digital-press.jpg',
+    title: 'Konica Minolta AccurioPress C7100',
+    category: 'In-House Digital Production',
+    specs: '100 A4 ppm · 3600 x 2400 DPI · Heavy Stocks up to 400 GSM',
+    image: '/client-assets/machinery/accuriopress-c7100.png',
     accent: '#27292a',
   },
 ];
@@ -276,23 +276,23 @@ export function AboutClient() {
               <div className="relative overflow-hidden rounded-2xl border border-[#dcd4c7] bg-white p-3 shadow-xl">
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-[#242628]">
                   <img
-                    src="/production/digital-press.jpg"
-                    alt="PrintOne Graphics Pressroom in Byculla East, Mumbai"
+                    src="/client-assets/machinery/accuriopress-c7100.png"
+                    alt="Konica Minolta AccurioPress C7100 at PrintOne Graphics in Byculla East, Mumbai"
                     className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                   <div className="absolute top-3 left-3 flex items-center gap-2 rounded bg-black/65 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
                     <span className="h-2 w-2 rounded-full bg-[#e97819] animate-pulse" />
-                    <span>Live Presswork · Byculla East</span>
+                    <span>In-House Pressroom · Byculla East</span>
                   </div>
 
                   <div className="absolute bottom-3 left-3 right-3 text-white">
                     <span className="text-[10px] font-bold uppercase tracking-[.18em] text-[#e97819]">
-                      Two Worlds · One Roof
+                      Konica Minolta AccurioPress C7100
                     </span>
                     <h3 className="font-display text-base sm:text-lg font-bold leading-tight">
-                      Boardroom Typography & Precision Offset Physics
+                      High-Speed Digital &amp; Precision Offset Infrastructure
                     </h3>
                   </div>
                 </div>
@@ -694,70 +694,154 @@ export function AboutClient() {
       </section>
 
       {/* 6. Production Workshop & Pressroom Facilities Gallery */}
-      <section className="border-t border-[#e2d9cd] bg-[#ede7dc] py-16">
+      <section className="border-t border-[#e2d9cd] bg-[#ede7dc] py-16 sm:py-20">
         <div className="page-wrap">
-          <div className="max-w-md">
-            <p className="eyebrow">The Workshop Floor</p>
-            <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold tracking-[-.05em] text-[#1f2122]">
-              In-House Mechanical Muscle.
-            </h2>
-            <p className="mt-2 text-xs sm:text-sm text-[#6b6760]">
-              Take a look inside the machines and bindery setups that bring our work to life in Byculla East, Mumbai.
-            </p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="max-w-xl">
+              <p className="eyebrow">In-House Mechanical Support</p>
+              <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold tracking-[-.05em] text-[#1f2122]">
+                Our Machinery &amp; Production Floor.
+              </h2>
+              <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[#6b6760]">
+                Take a look inside our in-house pressroom in Byculla East, Mumbai. Equipped with cutting-edge Konica Minolta AccurioPress digital engines and high-volume Heidelberg offset presses for uncompromised print quality and dependable turnaround.
+              </p>
+            </div>
+            <div className="flex items-center gap-2 rounded-full border border-[#ded7cd] bg-white px-4 py-1.5 text-xs font-bold text-[#55524b] shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-[#10b981] animate-pulse" />
+              <span>Full In-House Facility · Byculla East</span>
+            </div>
           </div>
 
-          <div className="mt-8 grid gap-5 sm:grid-cols-3">
+          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+            {/* Machine 1: AccurioPress C7100 */}
             <motion.div
-              whileHover={{ y: -5, scale: 1.02 }}
+              whileHover={{ y: -6 }}
               transition={{ duration: 0.3 }}
-              className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#202223] shadow-md"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-[#ded7cc] bg-white shadow-md transition-shadow hover:shadow-xl"
             >
-              <img
-                src="/production/digital-press.jpg"
-                alt="High Definition Digital & Offset Press"
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-108"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="text-[10px] font-bold uppercase text-[#e97819]">01 Pressroom</span>
-                <h4 className="font-display text-base font-bold">High-Speed Digital & Offset</h4>
-                <p className="text-[10px] text-white/80 mt-0.5">Pantone Spot Calibration & Fogra Proofing</p>
+              <div className="relative aspect-[16/10] overflow-hidden bg-[#242628]">
+                <img
+                  src="/client-assets/machinery/accuriopress-c7100.png"
+                  alt="Konica Minolta AccurioPress C7100 Digital Production Press"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                <div className="absolute top-3 left-3 rounded bg-black/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#e97819] backdrop-blur-sm">
+                  Flagship Digital Production
+                </div>
+                <div className="absolute bottom-3 left-3 right-3 text-white">
+                  <h4 className="font-display text-base font-bold leading-tight">Konica Minolta AccurioPress C7100</h4>
+                  <p className="text-[11px] text-[#f2ede4] font-medium mt-0.5">Print Beyond Boundaries · High Speed &amp; Full Color</p>
+                </div>
+              </div>
+              <div className="flex flex-1 flex-col justify-between p-5">
+                <div>
+                  <p className="text-xs text-[#635f58] leading-relaxed">
+                    High-definition digital production engine delivering up to 100 ppm with 3600 × 2400 dpi equivalent resolution. Equipped for heavy media up to 400 gsm and embossed textured papers.
+                  </p>
+                  <div className="mt-4 grid grid-cols-2 gap-2 text-center text-[11px]">
+                    <div className="rounded border border-[#ece4d8] bg-[#faf8f4] p-2">
+                      <span className="block font-bold text-[#1f2122]">100 A4 ppm</span>
+                      <span className="text-[10px] text-[#858077] uppercase font-semibold">Engine Speed</span>
+                    </div>
+                    <div className="rounded border border-[#ece4d8] bg-[#faf8f4] p-2">
+                      <span className="block font-bold text-[#e97819]">Up to 400 gsm</span>
+                      <span className="text-[10px] text-[#858077] uppercase font-semibold">Media Weight</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[#f0eae1] flex items-center justify-between text-[11px] font-bold text-[#6c6861]">
+                  <span>Annual Reports · Short Runs</span>
+                  <span className="text-[#e97819]">Live In-House</span>
+                </div>
               </div>
             </motion.div>
 
+            {/* Machine 2: AccurioPress C4080 */}
             <motion.div
-              whileHover={{ y: -5, scale: 1.02 }}
+              whileHover={{ y: -6 }}
               transition={{ duration: 0.3 }}
-              className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#202223] shadow-md"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-[#ded7cc] bg-white shadow-md transition-shadow hover:shadow-xl"
             >
-              <img
-                src="/production/finishing-bindery.jpg"
-                alt="Finishing and Bindery Equipment"
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-108"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="text-[10px] font-bold uppercase text-[#2c9fc3]">02 Bindery</span>
-                <h4 className="font-display text-base font-bold">Smyth Sewing & PUR Bindery</h4>
-                <p className="text-[10px] text-white/80 mt-0.5">Hand-Gathered Thread Stitched Hardcovers</p>
+              <div className="relative aspect-[16/10] overflow-hidden bg-[#242628]">
+                <img
+                  src="/client-assets/machinery/accuriopress-c4080.png"
+                  alt="Konica Minolta AccurioPress C4080 Digital Press"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                <div className="absolute top-3 left-3 rounded bg-black/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#2c9fc3] backdrop-blur-sm">
+                  Commercial Versatility
+                </div>
+                <div className="absolute bottom-3 left-3 right-3 text-white">
+                  <h4 className="font-display text-base font-bold leading-tight">Konica Minolta AccurioPress C4080</h4>
+                  <p className="text-[11px] text-[#f2ede4] font-medium mt-0.5">High-Precision Banner &amp; Booklet Production</p>
+                </div>
+              </div>
+              <div className="flex flex-1 flex-col justify-between p-5">
+                <div>
+                  <p className="text-xs text-[#635f58] leading-relaxed">
+                    Versatile digital press engineered for long banner duplexing up to 1300 mm, micro-registration, and inline booklet finishing for catalogues, brochures, and corporate portfolios.
+                  </p>
+                  <div className="mt-4 grid grid-cols-2 gap-2 text-center text-[11px]">
+                    <div className="rounded border border-[#ece4d8] bg-[#faf8f4] p-2">
+                      <span className="block font-bold text-[#1f2122]">81 A4 ppm</span>
+                      <span className="text-[10px] text-[#858077] uppercase font-semibold">Continuous Feed</span>
+                    </div>
+                    <div className="rounded border border-[#ece4d8] bg-[#faf8f4] p-2">
+                      <span className="block font-bold text-[#2c9fc3]">1300 mm</span>
+                      <span className="text-[10px] text-[#858077] uppercase font-semibold">Banner Format</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[#f0eae1] flex items-center justify-between text-[11px] font-bold text-[#6c6861]">
+                  <span>Catalogues · Booklets · Folders</span>
+                  <span className="text-[#2c9fc3]">Live In-House</span>
+                </div>
               </div>
             </motion.div>
 
+            {/* Machine 3: Heidelberg Speedmaster XL 106 */}
             <motion.div
-              whileHover={{ y: -5, scale: 1.02 }}
+              whileHover={{ y: -6 }}
               transition={{ duration: 0.3 }}
-              className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#202223] shadow-md"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-[#ded7cc] bg-white shadow-md transition-shadow hover:shadow-xl"
             >
-              <img
-                src="/production/wide-format-printer.jpg"
-                alt="Wide Format Printer"
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-108"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="text-[10px] font-bold uppercase text-[#cf2879]">03 Structural</span>
-                <h4 className="font-display text-base font-bold">Wide Format & Exhibition Units</h4>
-                <p className="text-[10px] text-white/80 mt-0.5">Heavy-Duty Roll-Up & Architectural Flex</p>
+              <div className="relative aspect-[16/10] overflow-hidden bg-[#242628]">
+                <img
+                  src="/client-assets/machinery/heidelberg-offset.jpg"
+                  alt="Heidelberg Speedmaster XL 106 Commercial Offset Press"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                <div className="absolute top-3 left-3 rounded bg-black/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#cf2879] backdrop-blur-sm">
+                  Heavy-Duty Commercial Offset
+                </div>
+                <div className="absolute bottom-3 left-3 right-3 text-white">
+                  <h4 className="font-display text-base font-bold leading-tight">Heidelberg Speedmaster XL 106</h4>
+                  <p className="text-[11px] text-[#f2ede4] font-medium mt-0.5">High-Volume Corporate &amp; Publication Offset</p>
+                </div>
+              </div>
+              <div className="flex flex-1 flex-col justify-between p-5">
+                <div>
+                  <p className="text-xs text-[#635f58] leading-relaxed">
+                    Industrial multi-colour offset press for large volume print runs. Delivers precise spot Pantone ink mixing, consistent Fogra/ISO 12647 calibration, and speed up to 18,000 sheets per hour.
+                  </p>
+                  <div className="mt-4 grid grid-cols-2 gap-2 text-center text-[11px]">
+                    <div className="rounded border border-[#ece4d8] bg-[#faf8f4] p-2">
+                      <span className="block font-bold text-[#1f2122]">18,000 sph</span>
+                      <span className="text-[10px] text-[#858077] uppercase font-semibold">Maximum Speed</span>
+                    </div>
+                    <div className="rounded border border-[#ece4d8] bg-[#faf8f4] p-2">
+                      <span className="block font-bold text-[#cf2879]">Pantone &amp; Spot</span>
+                      <span className="text-[10px] text-[#858077] uppercase font-semibold">Spectrophotometry</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[#f0eae1] flex items-center justify-between text-[11px] font-bold text-[#6c6861]">
+                  <span>Annual Reports · Books · Publishing</span>
+                  <span className="text-[#cf2879]">Live In-House</span>
+                </div>
               </div>
             </motion.div>
           </div>
