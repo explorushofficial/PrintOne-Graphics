@@ -139,25 +139,25 @@ export function StudioPressDuality() {
             <div className="mt-5 grid grid-cols-2 gap-3">
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#202223]">
                 <img
-                  src="/production/digital-press.jpg"
-                  alt="Digital & Offset Press"
+                  src="/client-assets/machinery/accuriopress-c7100.png"
+                  alt="Konica Minolta AccurioPress C7100"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-108"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
                 <span className="absolute bottom-2.5 left-2.5 text-[10px] font-bold uppercase tracking-wider text-white">
-                  High-Speed Press
+                  AccurioPress Digital
                 </span>
               </div>
 
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#202223]">
                 <img
-                  src="/production/finishing-bindery.jpg"
-                  alt="Finishing Bindery"
+                  src="/client-assets/machinery/heidelberg-offset.jpg"
+                  alt="Heidelberg Speedmaster XL 106"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-108"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
                 <span className="absolute bottom-2.5 left-2.5 text-[10px] font-bold uppercase tracking-wider text-white">
-                  Hand-Crafted Bindery
+                  Heidelberg Offset
                 </span>
               </div>
             </div>
