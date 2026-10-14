@@ -21,26 +21,37 @@ export function ContactClient() {
   return (
     <main>
       <section className="bg-[#ede8de]">
-        <div className="page-wrap grid min-h-[350px] items-end gap-8 py-14 md:grid-cols-[1fr_auto] md:py-16">
+        <div className="page-wrap grid min-h-[350px] items-end gap-8 py-14 md:grid-cols-[1.1fr_0.9fr] md:py-16">
           <div className="reveal">
-            <p className="eyebrow">Get in touch</p>
-            <h1 className="mt-6 max-w-3xl font-display text-[clamp(3.2rem,7vw,6.2rem)] font-extrabold leading-[.91] tracking-[-.075em]">
-              Let’s make<br />
-              <span className="text-[#e97819]">something</span><br className="sm:hidden" /> together.
+            <p className="eyebrow">Contact Us • Get a Quote</p>
+            <h1 className="mt-5 max-w-3xl font-display text-[clamp(2.7rem,6vw,5.5rem)] font-extrabold leading-[.93] tracking-[-.065em]">
+              Let’s Create<br />
+              <span className="text-[#e97819]">Something Great</span><br className="sm:hidden" /> Together.
             </h1>
+            <p className="mt-4 font-sans text-xs sm:text-sm font-bold uppercase tracking-[.14em] text-[#e97819]">
+              Your Trusted Partner for Design, Digital Printing &amp; Corporate Gifting
+            </p>
           </div>
-          <p className="max-w-[320px] pb-1 text-sm leading-7 text-[#66645f]">
-            Have a print project, annual report, publication, gifting requirement or custom design in mind? We’d like to hear about it.
-          </p>
+          <div className="pb-1 text-xs sm:text-sm leading-relaxed text-[#615e58]">
+            <p>
+              Have a printing project, annual report, publication, corporate gifting requirement or a custom design in mind? PrintOne Graphics is here to help.
+            </p>
+            <p className="mt-2.5">
+              From concept and design to printing, finishing and delivery, our team provides complete solutions tailored to your requirements.
+            </p>
+          </div>
         </div>
       </section>
 
       <section className="page-wrap grid gap-14 py-14 sm:py-20 lg:grid-cols-[.82fr_1.18fr]">
         <div>
-          <p className="eyebrow">Visit or reach us</p>
-          <h2 className="mt-5 font-display text-3xl font-extrabold tracking-[-.055em]">
-            A real conversation, from Mumbai.
+          <p className="eyebrow">Get in Touch</p>
+          <h2 className="mt-4 font-display text-2xl sm:text-3xl font-extrabold tracking-[-.05em] text-[#1c1d1f]">
+            PrintOne Graphics
           </h2>
+          <p className="mt-1 text-xs font-semibold text-[#8e8a82] uppercase tracking-wider">
+            Your Trusted Partner for Design, Digital Printing &amp; Corporate Gifting
+          </p>
           <div className="mt-8 space-y-7">
             <div className="flex gap-4">
               <span className="grid h-10 w-10 shrink-0 place-items-center border border-[#d8d0c6] text-[#e97819]">
@@ -110,12 +121,12 @@ export function ContactClient() {
 
         <div className="bg-[#f0ece4] p-6 sm:p-9">
           <div className="max-w-[600px]">
-            <p className="eyebrow">Tell us a little</p>
+            <p className="eyebrow">Get a Quote / Project Brief</p>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-.05em]">
-              What are you working on?
+              Tell us about your project.
             </h2>
             <p className="mt-2 text-sm leading-6 text-[#77736d]">
-              Share a few details and your message will open in WhatsApp, ready to send to our team.
+              Share a few details about your printing project, annual report, publication, or corporate gifting requirement. We will prepare your enquiry directly for our team.
             </p>
             <form className="mt-7 space-y-5" onSubmit={submitEnquiry} data-testid="form-contact-enquiry">
               <div className="grid gap-5 sm:grid-cols-2">

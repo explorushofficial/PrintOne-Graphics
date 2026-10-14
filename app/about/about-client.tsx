@@ -37,57 +37,57 @@ interface ValueItem {
 const VALUES: ValueItem[] = [
   {
     number: '01',
-    title: 'Zero-Tolerance Press Calibration',
-    subtitle: 'Spectral Density & Dot-Gain Control',
-    icon: ShieldCheck,
+    title: 'Creative Design Expertise',
+    subtitle: 'Thoughtful Visual Concepts',
+    icon: Palette,
     accent: '#e97819',
-    copy: 'Every sheet is inspected with in-line densitometry. We adhere to ISO 12647-2 standards ensuring Delta-E < 1.5 across long runs.',
-    spec: 'Sub-1.5 Delta-E Color Accuracy',
+    copy: 'Thoughtfully designed layouts and visual concepts that communicate your brand message clearly and professionally.',
+    spec: 'Brand Identity & Visual Hierarchy',
   },
   {
     number: '02',
-    title: 'The Single-Table Philosophy',
-    subtitle: 'Designers & Pressmen Together',
-    icon: Handshake,
+    title: 'In-House Production Capabilities',
+    subtitle: 'Integrated Studio & Press',
+    icon: Printer,
     accent: '#2c9fc3',
-    copy: 'Direct access to typographers and pressmasters under one roof. No disconnected account managers or agency-to-vendor blame games.',
-    spec: 'Direct Pre-Press Collaboration',
+    copy: 'Integrated design, digital printing, binding and finishing capabilities help us coordinate projects efficiently.',
+    spec: 'End-to-End In-House Workflow',
   },
   {
     number: '03',
-    title: 'Tactile Material Integrity',
-    subtitle: 'Certified Fine & Archival Papers',
-    icon: Compass,
+    title: 'Commitment to Timely Delivery',
+    subtitle: 'Strict Production Schedules',
+    icon: Timer,
     accent: '#cf2879',
-    copy: 'We specify genuine FSC-certified papers, non-warping Kappa binder boards, and imported hot-stamping foils that do not flake or fade.',
-    spec: '30+ Curated Global Paper Mills',
+    copy: 'We plan our production schedules carefully to meet project deadlines and business requirements.',
+    spec: 'Punctual AGM & Semester Dispatch',
   },
   {
     number: '04',
-    title: 'Structural Innovation & Dielines',
-    subtitle: 'From Flat Sheet to 3D Form',
-    icon: Lightbulb,
+    title: 'Competitive Pricing',
+    subtitle: 'Cost-Conscious Excellence',
+    icon: Sparkles,
     accent: '#e7c627',
-    copy: 'Custom dielines, magnetic flap closures, hidden ribbon pulls, and multi-level blind debossing engineered for sensory unboxing drama.',
-    spec: 'Bespoke Dieline Prototyping',
+    copy: 'Cost-conscious solutions designed to balance quality, production requirements and your budget.',
+    spec: 'Tailored Budget Optimization',
   },
   {
     number: '05',
-    title: 'Punctual Pan-India Logistics',
-    subtitle: 'Boardroom-Ready Deliveries',
-    icon: Timer,
+    title: 'Quality & Attention to Detail',
+    subtitle: 'Flawless Colour & Finishing',
+    icon: ShieldCheck,
     accent: '#27292a',
-    copy: 'Guaranteed delivery dates for corporate AGMs, product launches, and academic semesters with moisture-shielded shrink packing.',
-    spec: '48h Wet Proofing Turnaround',
+    copy: 'A focus on colour consistency, accurate layouts, finishing quality and careful coordination at every stage.',
+    spec: 'Zero-Defect Quality Checks',
   },
   {
     number: '06',
-    title: 'Enduring Partnerships',
-    subtitle: '80%+ Returning Corporate Roster',
-    icon: Sparkles,
+    title: 'Long-Term Client Partnerships',
+    subtitle: 'Relationships Built on Trust',
+    icon: Handshake,
     accent: '#e97819',
-    copy: 'Trusted year after year by listed enterprises, publishing houses, and design studios across Mumbai, Delhi, Bengaluru, and Pune.',
-    spec: 'Long-Term Corporate Retainers',
+    copy: 'We value transparent communication, dependable support and relationships built on trust.',
+    spec: 'Continuous Dedicated Support',
   },
 ];
 
@@ -230,18 +230,22 @@ export function AboutClient() {
                 <span>Byculla East, Mumbai · Established 2021</span>
               </div>
 
-              <h1 className="mt-6 font-display text-[clamp(2.4rem,5vw,4.5rem)] font-extrabold leading-[0.96] tracking-[-.055em] text-[#1c1d1f]">
-                A practical kind of creative.<br />
-                <span className="text-[#e97819]">Engineered to be held.</span>
+              <h1 className="mt-6 font-display text-[clamp(2.4rem,4.6vw,4.3rem)] font-extrabold leading-[0.96] tracking-[-.055em] text-[#1c1d1f]">
+                Your Trusted Partner for Design,<br />
+                <span className="text-[#e97819]">Digital Printing &amp; Corporate Gifting.</span>
               </h1>
 
               <p className="mt-5 max-w-xl text-[15px] sm:text-[16px] leading-[1.7] text-[#55524c]">
-                Established in 2021 in Byculla East, Mumbai, PrintOne Graphics combines design direction with heavy-duty mechanical printing under one roof. We craft corporate annual reports, archival publications, luxury packaging, and brand collateral for organisations across India.
+                At PrintOne Graphics, we transform ideas into impactful print solutions through creative design, advanced digital printing, quality production and dependable service. Established in 2021, we have grown rapidly by focusing on quality, competitive pricing, timely delivery and long-term client relationships.
+              </p>
+
+              <p className="mt-3 max-w-xl text-xs sm:text-sm leading-[1.65] text-[#66635c]">
+                Based in Byculla East, Mumbai, we provide comprehensive printing and corporate communication solutions to businesses, listed companies, educational institutions, publishers and organisations across India. Our goal is simple: to deliver printing solutions that communicate your brand&apos;s identity, strengthen your corporate image and create a lasting impression.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link href="/products" className="btn-primary group" data-testid="link-about-hero-products">
-                  <span>Explore all what we make</span>
+                  <span>Explore all what we do</span>
                   <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                 </Link>
                 <Link
@@ -249,16 +253,16 @@ export function AboutClient() {
                   className="btn-outline group"
                   data-testid="link-about-hero-contact"
                 >
-                  <span>Request physical swatches</span>
+                  <span>Get in touch with us</span>
                   <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </Link>
               </div>
 
               {/* Atelier Credentials Pill Tags */}
               <div className="mt-8 flex flex-wrap items-center gap-2 pt-6 border-t border-[#e5dfd4] text-[11px] font-bold uppercase tracking-wider text-[#636058]">
-                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1">ISO 12647-2 Standard</span>
-                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1">30+ FSC Fine Papers</span>
-                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1">In-House Bindery</span>
+                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1">Creative Design</span>
+                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1">Digital &amp; Commercial Printing</span>
+                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1">In-House Production</span>
               </div>
             </motion.div>
 
@@ -364,39 +368,47 @@ export function AboutClient() {
             <div>
               <p className="eyebrow">Our Story</p>
               <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold tracking-[-.05em] text-[#1f2122]">
-                Bridging Design Direction and Heavy Press Physics.
+                A Reliable, Professional &amp; Competitive Print Partner.
               </h2>
-              <p className="mt-4 text-xs sm:text-sm leading-relaxed text-[#5e5b54]">
-                Printed publications represent more than paper and ink. They represent an organisation’s identity, credibility, and institutional memory.
-              </p>
-              <p className="mt-3 text-xs sm:text-sm leading-relaxed text-[#5e5b54]">
-                From initial design layout and structural dieline engineering to offset plate imposition, Smyth thread sewing, and moisture-shielded packing, we eliminate agency-to-vendor friction by housing creative direction and mechanical manufacturing together in Mumbai.
-              </p>
+              <div className="mt-4 space-y-3.5 text-xs sm:text-sm leading-relaxed text-[#5e5b54]">
+                <p>
+                  PrintOne Graphics was established with a vision to provide businesses with a reliable, professional and competitive partner for their printing and design requirements.
+                </p>
+                <p>
+                  Since our inception, we have continuously expanded our capabilities to serve a wide range of industries and clients. By combining creative expertise, modern printing technology and practical production experience, we manage projects from initial design and content preparation to printing, finishing and final delivery.
+                </p>
+                <p>
+                  Our growing portfolio includes annual reports, corporate publications, educational books, commercial printing, calendars, diaries and customised corporate gifts.
+                </p>
+                <p className="font-semibold text-[#1f2122]">
+                  We believe every project deserves attention to detail, consistent quality and a commitment to delivering the best possible results.
+                </p>
+              </div>
             </div>
 
             {/* Vision & Mission Cards */}
             <div className="grid gap-5 sm:grid-cols-2">
               <div className="rounded-xl border border-[#ded5c7] bg-white p-6 shadow-sm">
                 <span className="text-[10px] font-bold uppercase tracking-[.2em] text-[#e97819]">
-                  01 / Vision
+                  01 / Our Vision
                 </span>
                 <h3 className="mt-3 font-display text-xl font-bold text-[#1f2122]">
-                  The Preferred Craft Partner
+                  The Preferred Partner
                 </h3>
                 <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[#68645d]">
-                  To be the trusted partner for listed enterprises, educational publishers, and design studios across India who believe tangible print carries enduring authority.
+                  To become a trusted and preferred partner for printing, publishing, corporate communications and gifting solutions by consistently delivering value, innovation and quality.
                 </p>
               </div>
 
               <div className="rounded-xl border border-[#ded5c7] bg-white p-6 shadow-sm">
                 <span className="text-[10px] font-bold uppercase tracking-[.2em] text-[#2c9fc3]">
-                  02 / Mission
+                  02 / Our Mission
                 </span>
                 <h3 className="mt-3 font-display text-xl font-bold text-[#1f2122]">
-                  End-to-End Excellence
+                  End-to-End Solutions
                 </h3>
                 <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[#68645d]">
-                  To provide seamless print engineering — uniting creative typography, certified paper stocks, calibrated presswork, and dependable pan-India delivery under one roof.
+                  To provide end-to-end print solutions that combine creative design, modern technology, competitive pricing and dependable delivery, helping our clients communicate more effectively.
                 </p>
               </div>
             </div>
@@ -592,18 +604,18 @@ export function AboutClient() {
         </div>
       </section>
 
-      {/* 5. Core Principles (Guaranteed Non-Blank, Beautifully Animated with motion.div) */}
+      {/* 5. Why Choose PrintOne Graphics? (Client brief) */}
       <section className="section-space border-b border-[#e2d9cd] bg-[#f5f1e8]">
         <div className="page-wrap">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <p className="eyebrow">Our Principles</p>
+              <p className="eyebrow">Client Advantages</p>
               <h2 className="mt-3 font-display text-3xl sm:text-5xl font-extrabold tracking-[-.055em] text-[#1c1d1f]">
-                The way we do the work.
+                Why Choose PrintOne Graphics?
               </h2>
             </div>
             <p className="max-w-sm text-xs sm:text-sm text-[#66635c] leading-relaxed">
-              Built on enduring principles that keep enterprises returning cycle after cycle.
+              Thoughtfully designed layouts, in-house production, competitive pricing, and dependable delivery across India.
             </p>
           </div>
 
@@ -620,7 +632,7 @@ export function AboutClient() {
                   transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   whileHover={{ y: -6, transition: { duration: 0.2 } }}
                   className="relative flex flex-col justify-between rounded-xl border border-[#ded7cc] bg-white p-7 shadow-sm transition-shadow duration-300 hover:border-[#e97819] hover:shadow-xl"
-                  data-testid={`value-card-${val.number}`}
+                  data-testid={`why-choose-card-${val.number}`}
                 >
                   <div>
                     <div className="flex items-center justify-between border-b border-[#ece6dd] pb-4">
@@ -651,6 +663,32 @@ export function AboutClient() {
                 </motion.div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* 5b. Our Commitment to Every Client (Client brief) */}
+      <section className="border-b border-[#e2d9cd] bg-[#222425] text-white py-14 sm:py-16">
+        <div className="page-wrap">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#e8e4dc]">
+              <Sparkles size={12} className="text-[#e97819]" />
+              <span>Dedicated Value</span>
+            </div>
+            <h2 className="mt-4 font-display text-3xl sm:text-4xl font-extrabold text-white">
+              Our Commitment to Every Client
+            </h2>
+            <div className="mt-5 space-y-4 text-xs sm:text-sm leading-relaxed text-[#dcd7cb]">
+              <p>
+                At PrintOne Graphics, we understand that printed materials represent more than paper and ink. They represent your organisation&apos;s identity, credibility and values.
+              </p>
+              <p>
+                Whether it is a detailed annual report, a publication, an educational book or a customised corporate gift, we approach every assignment with dedication and a focus on delivering value.
+              </p>
+              <p className="font-display text-base sm:text-lg font-bold text-[#e97819]">
+                From concept to creation, we bring your ideas to print.
+              </p>
+            </div>
           </div>
         </div>
       </section>
