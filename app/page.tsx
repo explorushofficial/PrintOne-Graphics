@@ -6,8 +6,13 @@ import { TactileSpecimenBar } from '@/components/tactile-specimen-bar';
 import { InteractiveCapabilities } from '@/components/interactive-capabilities';
 import { Testimonials } from '@/components/testimonials';
 import { ProductionJourney } from '@/components/production-journey';
+import { getProducts } from '@/sanity/lib/fetchData';
 
-export default function HomePage() {
+export const instant = false;
+
+export default async function HomePage() {
+  const products = await getProducts();
+
   return (
     <main>
       {/* 1. Interactive Hero with Live Specimen Console & Client Value Proposition */}
@@ -26,7 +31,7 @@ export default function HomePage() {
       <TactileSpecimenBar />
 
       {/* 6. Filterable Capabilities & Services Grid */}
-      <InteractiveCapabilities />
+      <InteractiveCapabilities initialProducts={products} />
 
       {/* 7. Client Testimonials (Trusted by Businesses. Proven by Results) */}
       <Testimonials />
@@ -36,3 +41,4 @@ export default function HomePage() {
     </main>
   );
 }
+

@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const links = [
   { href: '/', label: 'Home' },
@@ -9,6 +10,7 @@ const links = [
   { href: '/products', label: 'Products' },
   { href: '/about', label: 'About us' },
   { href: '/contact', label: 'Contact' },
+  { href: '/admin', label: 'Admin Desk' },
 ];
 
 const emptySubscribe = () => () => {};
@@ -22,6 +24,11 @@ function useCurrentYear() {
 
 export function Footer() {
   const currentYear = useCurrentYear();
+  const pathname = usePathname();
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   return (
     <footer className="border-t border-[#353738] bg-[#222425] text-[#e8e4dc]">

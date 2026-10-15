@@ -7,6 +7,7 @@ export type Product = {
   color: string;
   image: string;
   imageAlt: string;
+  capabilities?: string[];
 };
 
 // Alias for compatibility

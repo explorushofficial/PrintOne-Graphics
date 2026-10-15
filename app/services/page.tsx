@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { servicesData } from '@/data/services-data';
+import { getServices } from '@/sanity/lib/fetchData';
 import { ServicesClient } from './services-client';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://printonegraphics.in';
@@ -56,14 +56,18 @@ const breadcrumbJsonLd = {
   ],
 };
 
-export default function ServicesPage() {
+export const instant = false;
+
+export default async function ServicesPage() {
+  const services = await getServices();
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <ServicesClient services={servicesData} />
+      <ServicesClient services={services} />
     </>
   );
 }
