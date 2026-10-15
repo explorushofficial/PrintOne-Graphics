@@ -28,7 +28,7 @@ import { createWhatsAppUrl } from '@/context/cart-context';
 
 export function AboutClient() {
   const whatsAppUrl = createWhatsAppUrl(
-    'Hello PrintOne Graphics, I am interested in discussing a design, digital printing or corporate gifting project.'
+    'Hello Print One Graphics, I am interested in discussing a design, digital printing or corporate gifting project.'
   );
 
   return (
@@ -65,24 +65,24 @@ export function AboutClient() {
               </h1>
 
               <p className="mt-5 max-w-xl text-[15px] sm:text-[16px] leading-[1.7] text-[#55524c]">
-                PrintOne Graphics is a trusted design, printing and corporate gifting solutions provider dedicated to delivering high-quality print and visual communication services.
+                Print One Graphics is a trusted design, printing and corporate gifting solutions provider dedicated to delivering high-quality print and visual communication services.
               </p>
 
               <p className="mt-3 max-w-xl text-xs sm:text-sm leading-[1.65] text-[#66635c]">
                 We partner with corporate organisations, educational institutions, publishers and businesses of all sizes to transform ideas into impactful printed materials. Combining creative design, advanced printing technology and dependable service, we ensure every project meets the highest standards of quality and precision.
               </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <Link href="/products" className="btn-primary group" data-testid="link-about-hero-products">
-                  <span>Explore what we do</span>
+              <div className="mt-8 flex flex-wrap items-center gap-3.5">
+                <Link href="/services" className="btn-primary group" data-testid="link-about-hero-services">
+                  <span>Explore our services</span>
                   <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/products"
                   className="btn-outline group"
-                  data-testid="link-about-hero-contact"
+                  data-testid="link-about-hero-products"
                 >
-                  <span>Get in touch with us</span>
+                  <span>View products</span>
                   <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </Link>
               </div>
@@ -107,7 +107,7 @@ export function AboutClient() {
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-[#242628]">
                   <img
                     src="/client-assets/machinery/accuriopress-c7100.png"
-                    alt="Konica Minolta AccurioPress C7100 at PrintOne Graphics"
+                    alt="Konica Minolta AccurioPress C7100 at Print One Graphics"
                     className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                     onError={(e) => {
                       const target = e.currentTarget;
@@ -160,7 +160,7 @@ export function AboutClient() {
               </h2>
               <div className="mt-5 space-y-4 text-xs sm:text-sm leading-relaxed text-[#5e5b54]">
                 <p>
-                  PrintOne Graphics was founded with a clear vision: to simplify the printing and corporate gifting process while delivering exceptional quality and reliability.
+                  Print One Graphics was founded with a clear vision: to simplify the printing and corporate gifting process while delivering exceptional quality and reliability.
                 </p>
                 <p>
                   Over the years, we have grown into a dependable partner for organisations seeking comprehensive design, print and gifting solutions under one roof.
@@ -206,7 +206,7 @@ export function AboutClient() {
               Our Core Values.
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-[#615e58] leading-relaxed">
-              These fundamental values guide every interaction, proof review, and production run at PrintOne Graphics.
+              These fundamental values guide every interaction, proof review, and production run at Print One Graphics.
             </p>
           </div>
 
@@ -288,7 +288,7 @@ export function AboutClient() {
                 Why Choose Us.
               </h2>
               <p className="mt-2 text-xs sm:text-sm text-[#615e58] leading-relaxed">
-                Six foundational strengths that make PrintOne Graphics the preferred choice for businesses across India.
+                Six foundational strengths that make Print One Graphics the preferred choice for businesses across India.
               </p>
             </div>
             <Link
@@ -357,7 +357,7 @@ export function AboutClient() {
                     0{pillar.num}
                   </span>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#918d84]">
-                    PrintOne Pillar
+                    Print One Pillar
                   </span>
                 </div>
                 <h3 className="mt-4 font-display text-lg font-bold text-[#1f2122]">
@@ -555,7 +555,7 @@ export function AboutClient() {
             </h2>
             <div className="mt-5 space-y-4 text-xs sm:text-sm leading-relaxed text-[#dcd7cb]">
               <p>
-                At PrintOne Graphics, we understand that printed materials represent more than paper and ink. They represent your organisation&apos;s identity, credibility and values.
+                At Print One Graphics, we understand that printed materials represent more than paper and ink. They represent your organisation&apos;s identity, credibility and values.
               </p>
               <p>
                 Whether it is a detailed annual report, a publication, an educational book or a customised corporate gift, we approach every assignment with dedication and a focus on delivering value.
