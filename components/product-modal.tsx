@@ -26,18 +26,22 @@ interface ProductModalProps {
 export function ProductModal({ service, onClose }: ProductModalProps) {
   const [quantity, setQuantity] = useState(1);
   const [addedNotice, setAddedNotice] = useState(false);
+  const [prevServiceId, setPrevServiceId] = useState(service?.id);
   const { add } = useCart();
 
-  useEffect(() => {
+  if (service?.id !== prevServiceId) {
+    setPrevServiceId(service?.id);
     setQuantity(1);
     setAddedNotice(false);
+  }
 
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [service, onClose]);
+  }, [onClose]);
 
   if (!service) return null;
 

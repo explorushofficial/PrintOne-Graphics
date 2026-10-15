@@ -10,7 +10,7 @@ interface Testimonial {
   content: string;
   clientType: string;
   projectType: string;
-  icon: any;
+  icon: React.ElementType;
   accent: string;
 }
 

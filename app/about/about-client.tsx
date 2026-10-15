@@ -588,6 +588,6 @@ export function AboutClient() {
 }
 
 // Icon helper
-function HeartHandshake(props: any) {
+function HeartHandshake(props: React.ComponentProps<typeof Handshake>) {
   return <Handshake {...props} />;
 }
