@@ -95,7 +95,7 @@ export function VisionMissionValues({ showExpertise = true }: { showExpertise?: 
             <span className="text-[#e97819]">&amp; Core Values.</span>
           </h2>
           <p className="mt-4 text-xs sm:text-base leading-relaxed text-[#615e57]">
-            At PrintOne Graphics, our foundation is built on delivering dependable printing, publishing, and gifting solutions that strengthen your corporate brand and inspire lasting trust.
+            At Print One Graphics, our foundation is built on delivering dependable printing, publishing, and gifting solutions that strengthen your corporate brand and inspire lasting trust.
           </p>
         </div>
 

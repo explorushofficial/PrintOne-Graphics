@@ -158,7 +158,7 @@ export function TactileSpecimenBar() {
               <div className="mt-5">
                 <a
                   href={createWhatsAppUrl(
-                    `Hello PrintOne! I would like to request sample swatches of ${active.title}.`
+                    `Hello Print One Graphics! I would like to request sample swatches of ${active.title}.`
                   )}
                   target="_blank"
                   rel="noreferrer"

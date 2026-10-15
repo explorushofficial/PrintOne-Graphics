@@ -19,7 +19,7 @@ const TESTIMONIALS: Testimonial[] = [
     id: 'test-1',
     headline: 'A Trusted Printing Partner for Our Annual Reports',
     content:
-      'PrintOne Graphics has been a dependable partner for our annual report projects. Their team understands the importance of accuracy, presentation and timelines. From design and typesetting to printing and finishing, the entire process was handled professionally.',
+      'Print One Graphics has been a dependable partner for our annual report projects. Their team understands the importance of accuracy, presentation and timelines. From design and typesetting to printing and finishing, the entire process was handled professionally.',
     clientType: 'Corporate Client',
     projectType: 'Annual Report',
     icon: FileText,
@@ -29,7 +29,7 @@ const TESTIMONIALS: Testimonial[] = [
     id: 'test-2',
     headline: 'Excellent Quality & Timely Delivery',
     content:
-      'We appreciate the quality of printing and the quick response from the PrintOne Graphics team. They consistently delivered our requirements within the committed timeline while maintaining excellent print quality.',
+      'We appreciate the quality of printing and the quick response from the Print One Graphics team. They consistently delivered our requirements within the committed timeline while maintaining excellent print quality.',
     clientType: 'Corporate Client',
     projectType: 'Commercial Printing',
     icon: Printer,
@@ -39,7 +39,7 @@ const TESTIMONIALS: Testimonial[] = [
     id: 'test-3',
     headline: 'Professional Team with Great Attention to Detail',
     content:
-      'The team at PrintOne Graphics is extremely responsive and detail-oriented. Their understanding of corporate publications, design requirements and finishing options made the entire project smooth and hassle-free.',
+      'The team at Print One Graphics is extremely responsive and detail-oriented. Their understanding of corporate publications, design requirements and finishing options made the entire project smooth and hassle-free.',
     clientType: 'Corporate Client',
     projectType: 'Corporate Publications',
     icon: Award,
@@ -49,7 +49,7 @@ const TESTIMONIALS: Testimonial[] = [
     id: 'test-4',
     headline: 'One-Stop Solution for Printing & Corporate Gifting',
     content:
-      'PrintOne Graphics offers a complete solution under one roof—from creative design and digital printing to calendars, diaries and corporate gifting. Their team is professional, flexible and easy to work with.',
+      'Print One Graphics offers a complete solution under one roof—from creative design and digital printing to calendars, diaries and corporate gifting. Their team is professional, flexible and easy to work with.',
     clientType: 'Corporate Client',
     projectType: 'Corporate Gifting',
     icon: Gift,
@@ -59,7 +59,7 @@ const TESTIMONIALS: Testimonial[] = [
     id: 'test-5',
     headline: 'Quality Printing with Quick Turnaround',
     content:
-      'For projects where deadlines are critical, PrintOne Graphics has always been a reliable choice. Their in-house capabilities and experienced team help achieve quick turnaround without compromising on quality.',
+      'For projects where deadlines are critical, Print One Graphics has always been a reliable choice. Their in-house capabilities and experienced team help achieve quick turnaround without compromising on quality.',
     clientType: 'Corporate Client',
     projectType: 'Digital Printing',
     icon: Building2,
@@ -69,7 +69,7 @@ const TESTIMONIALS: Testimonial[] = [
     id: 'test-6',
     headline: 'A Reliable Partner for Educational & Publication Printing',
     content:
-      'PrintOne Graphics understands the specific requirements of books, journals, magazines and educational publications. Their attention to paper quality, colour reproduction, binding and finishing has made them a valued printing partner.',
+      'Print One Graphics understands the specific requirements of books, journals, magazines and educational publications. Their attention to paper quality, colour reproduction, binding and finishing has made them a valued printing partner.',
     clientType: 'Educational & Publishing Client',
     projectType: 'Books & Educational Journals',
     icon: BookOpen,
@@ -116,7 +116,7 @@ export function Testimonials() {
               “We value every relationship we build and every project we deliver. Our clients&apos; trust inspires us to continually raise the standard of design, printing and service.”
             </p>
             <p className="mt-2 pl-4 text-[11px] font-bold uppercase tracking-wider text-[#8b877f]">
-              PrintOne Graphics Leadership Promise
+              Print One Graphics Leadership Promise
             </p>
           </div>
         </div>

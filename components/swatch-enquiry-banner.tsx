@@ -44,7 +44,7 @@ export function SwatchEnquiryBanner() {
 
               <a
                 href={createWhatsAppUrl(
-                  "Hello PrintOne Graphics! I'd like to talk about an upcoming print/design project. Could we connect?"
+                  "Hello Print One Graphics! I'd like to talk about an upcoming print/design project. Could we connect?"
                 )}
                 target="_blank"
                 rel="noreferrer"
@@ -63,7 +63,7 @@ export function SwatchEnquiryBanner() {
               Mumbai Studio Desk
             </span>
             <h3 className="mt-2 font-display text-xl font-bold text-white">
-              PrintOne Graphics Mumbai
+              Print One Graphics Mumbai
             </h3>
             <p className="mt-1 text-xs text-[#b8b3aa]">
               Ideas to impressions, delivered across India since 2021.
