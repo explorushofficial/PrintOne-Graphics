@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { writeClient } from '@/sanity/lib/client';
-import fs from 'fs/promises';
-import path from 'path';
+import { isSanityConfigured } from '@/sanity/env';
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const {
+      id,
       title,
       tag,
       intro,
@@ -15,6 +16,8 @@ export async function POST(request: Request) {
       image,
       imageAlt,
       order = 1,
+      sanityAssetId,
+      capabilities = [],
     } = body;
 
     if (!title || !tag || !detail) {
@@ -24,62 +27,100 @@ export async function POST(request: Request) {
       );
     }
 
-    const slugString = (body.slug || title)
+    if (!isSanityConfigured) {
+      return NextResponse.json(
+        {
+          error:
+            'NEXT_PUBLIC_SANITY_PROJECT_ID is not set in .env.local. Please add your Sanity project ID.',
+        },
+        { status: 400 }
+      );
+    }
+
+    if (!writeClient) {
+      return NextResponse.json(
+        {
+          error:
+            'SANITY_API_WRITE_TOKEN is not configured in .env.local. Please create an Editor token at sanity.io/manage and add SANITY_API_WRITE_TOKEN=... to allow saving into Sanity CMS.',
+        },
+        { status: 400 }
+      );
+    }
+
+    const slugString = (id || body.slug || title)
       .toLowerCase()
       .trim()
       .replace(/[^\w\s-]/g, '')
       .replace(/[\s_-]+/g, '-')
       .replace(/^-+|-+$/g, '');
 
-    const newProduct = {
-      id: slugString,
+    const docId = id ? (id.startsWith('product-') ? id : `product-${id}`) : `product-${slugString}`;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const sanityDoc: { _id: string; _type: string; [key: string]: any } = {
+      _id: docId,
+      _type: 'product',
       title: title.trim(),
+      slug: { _type: 'slug', current: slugString },
       tag,
-      intro: intro || 'Precision crafted printed collateral.',
+      intro: intro || '',
       detail: detail.trim(),
       color: color || 'orange',
-      image: image || '/catalog/brochures.jpg',
+      imageUrl: image || '',
       imageAlt: imageAlt || `Sample of ${title}`,
       order: Number(order) || 1,
+      capabilities: Array.isArray(capabilities)
+        ? capabilities.map((c: string) => String(c).trim()).filter(Boolean)
+        : typeof capabilities === 'string'
+        ? capabilities
+            .split('\n')
+            .map((c) => c.trim())
+            .filter(Boolean)
+        : [],
     };
 
-    // 1. Save to custom-store.json for immediate reflection on live site
-    const storePath = path.join(process.cwd(), 'data', 'custom-store.json');
-    const content = await fs.readFile(storePath, 'utf-8').catch(() => '{"products":[],"services":[]}');
-    const store = JSON.parse(content);
-    store.products = [newProduct, ...(store.products || []).filter((p: { id: string }) => p.id !== newProduct.id)];
-    await fs.writeFile(storePath, JSON.stringify(store, null, 2), 'utf-8');
+    if (sanityAssetId) {
+      sanityDoc.image = {
+        _type: 'image',
+        asset: {
+          _type: 'reference',
+          _ref: sanityAssetId,
+        },
+      };
+    }
 
-    // 2. If Sanity writeClient is active, also push to Sanity CMS
-    let sanityDocId = null;
-    if (writeClient) {
-      try {
-        const sanityDoc = await writeClient.create({
-          _type: 'product',
-          title: newProduct.title,
-          slug: { _type: 'slug', current: newProduct.id },
-          tag: newProduct.tag,
-          intro: newProduct.intro,
-          detail: newProduct.detail,
-          color: newProduct.color,
-          imageUrl: newProduct.image,
-          imageAlt: newProduct.imageAlt,
-          order: newProduct.order,
-        });
-        sanityDocId = sanityDoc._id;
-      } catch (err) {
-        console.warn('[Sanity CMS] Could not push to Sanity writeClient:', err);
-      }
+    // Direct write to Sanity CMS Cloud
+    const result = await writeClient.createOrReplace(sanityDoc);
+
+    // Invalidate caches so the main site and products page immediately reflect the new product
+    try {
+      revalidateTag('products', 'seconds');
+      revalidatePath('/', 'layout');
+    } catch (err) {
+      console.warn('Revalidation notice:', err);
     }
 
     return NextResponse.json({
       success: true,
-      message: 'Product successfully added and live on the website!',
-      product: newProduct,
-      sanityDocId,
+      message: 'Product successfully saved directly in Sanity CMS!',
+      product: {
+        id: slugString,
+        title: result.title,
+        tag: result.tag,
+        intro: result.intro,
+        detail: result.detail,
+        color: result.color,
+        image: result.imageUrl || image || '/catalog/brochures.jpg',
+        imageAlt: result.imageAlt,
+        capabilities: result.capabilities || [],
+      },
+      sanityDocId: result._id,
     });
   } catch (error) {
-    console.error('Error creating product:', error);
-    return NextResponse.json({ error: 'Failed to create product' }, { status: 500 });
+    console.error('Error saving product directly in Sanity CMS:', error);
+    return NextResponse.json(
+      { error: 'Failed to write product to Sanity CMS' },
+      { status: 500 }
+    );
   }
 }

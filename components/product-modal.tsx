@@ -125,22 +125,32 @@ export function ProductModal({ service, onClose }: ProductModalProps) {
             </div>
 
             <div className="mt-3 grid gap-2.5 sm:grid-cols-2 text-[#43413b]">
-              <div className="flex items-start gap-2">
-                <Check size={14} className="text-[#e97819] mt-0.5 flex-none" />
-                <span><strong>Paper Stocks:</strong> Fine art, textured linen, recycled wove, and FSC cotton stocks.</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <Check size={14} className="text-[#e97819] mt-0.5 flex-none" />
-                <span><strong>Specialty Finishes:</strong> Foil stamping, blind deboss, spot gloss UV, and soft-touch lamination.</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <Check size={14} className="text-[#e97819] mt-0.5 flex-none" />
-                <span><strong>Custom Sizes:</strong> Standard ISO dimensions or bespoke custom dieline trims.</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <Check size={14} className="text-[#e97819] mt-0.5 flex-none" />
-                <span><strong>Speed & Proofs:</strong> 48-hour physical proofing available prior to production run.</span>
-              </div>
+              {(service.capabilities && service.capabilities.length > 0
+                ? service.capabilities
+                : [
+                    'Paper Stocks: Fine art, textured linen, recycled wove, and FSC cotton stocks.',
+                    'Specialty Finishes: Foil stamping, blind deboss, spot gloss UV, and soft-touch lamination.',
+                    'Custom Sizes: Standard ISO dimensions or bespoke custom dieline trims.',
+                    'Speed & Proofs: 48-hour physical proofing available prior to production run.',
+                  ]
+              ).map((cap, i) => {
+                const parts = cap.split(':');
+                const hasLabel = parts.length > 1;
+                return (
+                  <div key={i} className="flex items-start gap-2">
+                    <Check size={14} className="text-[#e97819] mt-0.5 flex-none" />
+                    <span>
+                      {hasLabel ? (
+                        <>
+                          <strong>{parts[0].trim()}:</strong> {parts.slice(1).join(':').trim()}
+                        </>
+                      ) : (
+                        cap
+                      )}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           </div>
 

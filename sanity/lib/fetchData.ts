@@ -1,3 +1,4 @@
+import { cacheTag, cacheLife } from 'next/cache';
 import { client } from './client';
 import { urlForImage } from './image';
 import { products as mockProducts, type Product } from '@/data/products';
@@ -16,6 +17,7 @@ interface SanityProductDoc {
   imageUrl?: string;
   imageAlt?: string;
   order?: number;
+  capabilities?: string[];
 }
 
 interface SanityServiceDoc {
@@ -40,29 +42,14 @@ interface SanityServiceDoc {
   order?: number;
 }
 
-export async function getStoredLocalItems(): Promise<{ products: Product[]; services: ServiceItem[] }> {
-  try {
-    const fs = await import('fs/promises');
-    const path = await import('path');
-    const storePath = path.join(process.cwd(), 'data', 'custom-store.json');
-    const content = await fs.readFile(storePath, 'utf-8');
-    const data = JSON.parse(content);
-    return {
-      products: Array.isArray(data.products) ? data.products : [],
-      services: Array.isArray(data.services) ? data.services : [],
-    };
-  } catch {
-    return { products: [], services: [] };
-  }
-}
-
 /**
- * Fetches all products from Sanity CMS & custom store and seamlessly combines them with existing mock data.
- * Any product added via the Admin Panel will immediately reflect at the top of the catalogue.
+ * Fetches all products directly from Sanity CMS and combines them with mock data.
+ * All newly published products from Sanity appear immediately at the top of the catalogue.
  */
 export async function getProducts(): Promise<Product[]> {
   'use cache';
-  const localItems = await getStoredLocalItems();
+  cacheTag('products');
+  cacheLife('seconds');
   let sanityMapped: Product[] = [];
 
   if (client) {
@@ -89,29 +76,30 @@ export async function getProducts(): Promise<Product[]> {
             color: p.color || 'orange',
             image: resolvedImage,
             imageAlt: p.imageAlt || `Sample of ${p.title || 'product'}`,
+            capabilities: p.capabilities || [],
           };
         });
       }
     } catch (error) {
-      console.warn('[Sanity CMS] Could not fetch products, using local store and mock data:', error);
+      console.warn('[Sanity CMS] Could not fetch products, using fallback:', error);
     }
   }
 
-  // Precedence: Sanity -> Local Admin Items -> Mock data (no duplicates by id)
-  const combinedLive = [...sanityMapped, ...localItems.products];
-  const liveIds = new Set(combinedLive.map((p) => p.id));
+  // Precedence: Live Sanity CMS Products -> Initial mock products
+  const liveIds = new Set(sanityMapped.map((p) => p.id));
   const nonCollidingMock = mockProducts.filter((p) => !liveIds.has(p.id));
 
-  return [...combinedLive, ...nonCollidingMock];
+  return [...sanityMapped, ...nonCollidingMock];
 }
 
 /**
- * Fetches all services from Sanity CMS & custom store and seamlessly combines them with existing mock data.
- * Any service added via the Admin Panel will immediately reflect at the top of the services section.
+ * Fetches all services directly from Sanity CMS and combines them with mock data.
+ * All newly published services from Sanity appear immediately at the top of the services section.
  */
 export async function getServices(): Promise<ServiceItem[]> {
   'use cache';
-  const localItems = await getStoredLocalItems();
+  cacheTag('services');
+  cacheLife('seconds');
   let sanityMapped: ServiceItem[] = [];
 
   if (client) {
@@ -151,14 +139,13 @@ export async function getServices(): Promise<ServiceItem[]> {
         });
       }
     } catch (error) {
-      console.warn('[Sanity CMS] Could not fetch services, using local store and mock data:', error);
+      console.warn('[Sanity CMS] Could not fetch services, using fallback:', error);
     }
   }
 
-  // Precedence: Sanity -> Local Admin Items -> Mock data
-  const combinedLive = [...sanityMapped, ...localItems.services];
-  const liveIds = new Set(combinedLive.map((s) => s.id));
+  // Precedence: Live Sanity CMS Services -> Initial mock services
+  const liveIds = new Set(sanityMapped.map((s) => s.id));
   const nonCollidingMock = mockServices.filter((s) => !liveIds.has(s.id));
 
-  return [...combinedLive, ...nonCollidingMock];
+  return [...sanityMapped, ...nonCollidingMock];
 }

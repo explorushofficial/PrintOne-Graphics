@@ -94,6 +94,14 @@ export const productType = defineType({
       description: 'Lower numbers display first (e.g. 1, 2, 3...)',
       initialValue: 10,
     }),
+    defineField({
+      name: 'capabilities',
+      title: 'Production Capabilities',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description:
+        'List of production capabilities for this item (e.g., Paper Stocks: ..., Specialty Finishes: ..., Custom Sizes: ...)',
+    }),
   ],
   preview: {
     select: {
