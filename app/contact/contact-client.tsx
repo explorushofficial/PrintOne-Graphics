@@ -12,7 +12,7 @@ export function ContactClient() {
 
   function submitEnquiry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const body = `Hello PrintOne Graphics,\n\n${message}\n\nName: ${name}\nOrganisation: ${
+    const body = `Hello Print One Graphics,\n\n${message}\n\nName: ${name}\nOrganisation: ${
       organisation || 'Not specified'
     }\nProject: ${project || 'Not specified'}`;
     window.open(createWhatsAppUrl(body), '_blank', 'noopener,noreferrer');
@@ -34,7 +34,7 @@ export function ContactClient() {
           </div>
           <div className="pb-1 text-xs sm:text-sm leading-relaxed text-[#615e58]">
             <p>
-              Have a printing project, annual report, publication, corporate gifting requirement or a custom design in mind? PrintOne Graphics is here to help.
+              Have a printing project, annual report, publication, corporate gifting requirement or a custom design in mind? Print One Graphics is here to help.
             </p>
             <p className="mt-2.5">
               From concept and design to printing, finishing and delivery, our team provides complete solutions tailored to your requirements.
@@ -47,7 +47,7 @@ export function ContactClient() {
         <div>
           <p className="eyebrow">Get in Touch</p>
           <h2 className="mt-4 font-display text-2xl sm:text-3xl font-extrabold tracking-[-.05em] text-[#1c1d1f]">
-            PrintOne Graphics
+            Print One Graphics
           </h2>
           <p className="mt-1 text-xs font-semibold text-[#8e8a82] uppercase tracking-wider">
             Your Trusted Partner for Design, Digital Printing &amp; Corporate Gifting
@@ -109,7 +109,7 @@ export function ContactClient() {
           </div>
 
           <a
-            href={createWhatsAppUrl('Hello PrintOne Graphics, I would like to discuss a project.')}
+            href={createWhatsAppUrl('Hello Print One Graphics, I would like to discuss a project.')}
             target="_blank"
             rel="noreferrer"
             className="btn-outline mt-9"
