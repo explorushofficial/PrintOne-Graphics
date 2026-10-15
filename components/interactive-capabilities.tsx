@@ -5,24 +5,26 @@ import Link from 'next/link';
 import { ArrowRight, Filter } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ServiceCard } from '@/components/service-card';
-import { services } from '@/data/services';
+import { ProductModal } from '@/components/product-modal';
+import { products, type Product } from '@/data/products';
 
 const CATEGORIES = [
-  { id: 'all', label: 'All Capabilities' },
-  { id: 'Ideas to artwork', label: 'Annual Reports & Design' },
-  { id: 'Books + learning', label: 'Books & Publishing' },
-  { id: 'Production', label: 'Packaging & Production' },
+  { id: 'all', label: 'All Offerings' },
   { id: 'Business essentials', label: 'Brand Collateral' },
+  { id: 'Books + learning', label: 'Books & Publishing' },
   { id: 'Gifting + merchandise', label: 'Corporate Gifting' },
+  { id: 'Packaging + displays', label: 'Packaging & Production' },
+  { id: 'Publications + reports', label: 'Annual Reports & Design' },
 ];
 
 export function InteractiveCapabilities() {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const filteredServices =
     selectedCategory === 'all'
-      ? services.slice(0, 6)
-      : services.filter((s) => s.tag === selectedCategory).slice(0, 6);
+      ? products.slice(0, 6)
+      : products.filter((s) => s.tag === selectedCategory).slice(0, 6);
 
   return (
     <section className="section-space bg-[#faf8f2]">
@@ -35,7 +37,7 @@ export function InteractiveCapabilities() {
           className="flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
           <div>
-            <p className="eyebrow">Comprehensive Capabilities</p>
+            <p className="eyebrow">Featured Products &amp; Capabilities</p>
             <h2 className="mt-4 font-display text-3xl sm:text-5xl font-extrabold tracking-[-.055em] text-[#1c1d1f]">
               Everything you need,<br />
               <span className="text-[#e97819]">crafted with precision.</span>
@@ -70,10 +72,10 @@ export function InteractiveCapabilities() {
           })}
         </div>
 
-        {/* Services Grid with Motion Stagger */}
+        {/* Services Grid with Motion Stagger - 2 cols on mobile, 3 cols on desktop */}
         <motion.div
           layout
-          className="mt-10 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-10 grid grid-cols-2 gap-3.5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
           <AnimatePresence mode="popLayout">
             {filteredServices.map((service, index) => (
@@ -85,7 +87,11 @@ export function InteractiveCapabilities() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.35, delay: index * 0.05 }}
               >
-                <ServiceCard service={service} index={index} />
+                <ServiceCard
+                  service={service}
+                  index={index}
+                  onSelect={(p) => setSelectedProduct(p)}
+                />
               </motion.div>
             ))}
           </AnimatePresence>
@@ -94,19 +100,36 @@ export function InteractiveCapabilities() {
         {/* Footer Link */}
         <div className="mt-12 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-[#e2d8cd] pt-6">
           <p className="text-xs text-[#737068]">
-            Showing 6 of {services.length} items. Need something custom engineered? We manufacture to bespoke trim, stock & finish specifications.
+            Showing 6 of {products.length} products. Need something custom engineered? We manufacture to bespoke trim, stock &amp; finish specifications.
           </p>
 
-          <Link
-            href="/products"
-            className="inline-flex items-center gap-2 font-display text-sm font-bold text-[#e97819] hover:text-[#212324] transition-colors"
-            data-testid="link-home-all-services"
-          >
-            <span>Browse our full catalog of 30+ services</span>
-            <ArrowRight size={16} />
-          </Link>
+          <div className="flex flex-wrap items-center gap-4">
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-1.5 font-display text-xs sm:text-sm font-bold text-[#212324] hover:text-[#e97819] transition-colors"
+              data-testid="link-home-view-services"
+            >
+              <span>Explore Services</span>
+              <ArrowRight size={14} />
+            </Link>
+
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-1.5 font-display text-xs sm:text-sm font-bold text-[#e97819] hover:text-[#212324] transition-colors"
+              data-testid="link-home-all-products"
+            >
+              <span>Browse Full Products Catalog</span>
+              <ArrowRight size={14} />
+            </Link>
+          </div>
         </div>
       </div>
+
+      {/* Product Detail Modal */}
+      <ProductModal
+        service={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+      />
     </section>
   );
 }

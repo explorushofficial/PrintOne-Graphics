@@ -213,13 +213,13 @@ export function HeroShowcase() {
 
             {/* Action Buttons */}
             <div className="mt-8 flex flex-wrap items-center gap-3.5">
-              <Link href="/products" className="btn-primary group" data-testid="link-hero-services">
-                <span>Explore all what we do</span>
+              <Link href="/services" className="btn-primary group" data-testid="link-hero-services">
+                <span>Explore our services</span>
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
 
-              <Link href="/contact" className="btn-outline group" data-testid="link-hero-contact">
-                <span>Get a project quote</span>
+              <Link href="/products" className="btn-outline group" data-testid="link-hero-products">
+                <span>Browse products</span>
                 <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </Link>
             </div>
@@ -384,7 +384,7 @@ export function HeroShowcase() {
 
             <div className="mt-5">
               <span className="text-[10px] font-bold uppercase tracking-[.18em] text-[#e97819]">
-                PrintOne Physical Specimen
+                Print One Physical Specimen
               </span>
               <h3 className="mt-1 font-display text-2xl font-extrabold text-[#1d1f20]">
                 {selectedItem.title}
@@ -415,7 +415,7 @@ export function HeroShowcase() {
 
                 <a
                   href={createWhatsAppUrl(
-                    `Hello PrintOne! I would like to enquire about ${selectedItem.title} (${selectedItem.spec}).`
+                    `Hello Print One Graphics! I would like to enquire about ${selectedItem.title} (${selectedItem.spec}).`
                   )}
                   target="_blank"
                   rel="noreferrer"

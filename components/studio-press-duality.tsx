@@ -101,7 +101,7 @@ export function StudioPressDuality() {
 
             <div className="mt-6 border-t border-[#ece6dd] pt-4">
               <Link
-                href="/products?tag=Ideas%20to%20artwork"
+                href="/services"
                 className="inline-flex items-center gap-2 text-xs font-bold text-[#e97819] hover:text-[#212324] transition-colors"
               >
                 <span>View studio services</span>
@@ -191,7 +191,7 @@ export function StudioPressDuality() {
 
             <div className="mt-6 border-t border-[#ece6dd] pt-4">
               <Link
-                href="/products?tag=Production"
+                href="/services"
                 className="inline-flex items-center gap-2 text-xs font-bold text-[#2c9fc3] hover:text-[#212324] transition-colors"
               >
                 <span>View press capabilities</span>

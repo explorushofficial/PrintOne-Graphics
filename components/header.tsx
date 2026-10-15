@@ -8,7 +8,8 @@ import { useCart } from '@/context/cart-context';
 
 const links = [
   { href: '/', label: 'Home' },
-  { href: '/products', label: 'Products & services' },
+  { href: '/services', label: 'Services' },
+  { href: '/products', label: 'Products' },
   { href: '/about', label: 'About us' },
   { href: '/contact', label: 'Contact' },
 ];
@@ -42,17 +43,19 @@ export function Header() {
         <div className="page-wrap flex h-[78px] items-center justify-between">
           <Link
             href="/"
-            className="flex items-center"
-            aria-label="PrintOne Graphics home"
+            className="flex items-center gap-2.5"
+            aria-label="Print One Graphics home"
             data-testid="link-home-logo"
           >
             <img
-              src="/printone-logo.jpeg"
-              alt="PrintOne Graphics — Design, Print, Brand"
-              className="h-[61px] w-[75px] object-contain mix-blend-multiply"
+              src="/printone-logo.png"
+              alt="Print One Graphics — Design, Print, Brand"
+              className="h-[52px] w-auto object-contain"
+              width={54}
+              height={52}
             />
-            <span className="ml-2 hidden font-display text-[17px] font-extrabold tracking-[-.06em] sm:block">
-              PrintOne <span className="font-sans text-[9px] font-semibold tracking-[.23em] text-[#6d6d69]">GRAPHICS</span>
+            <span className="font-display text-[17px] font-extrabold tracking-[-.04em] text-[#1c1d1f] sm:text-[18px]">
+              Print One <span className="font-sans text-[9px] font-bold tracking-[.22em] text-[#6d6d69]">GRAPHICS</span>
             </span>
           </Link>
 

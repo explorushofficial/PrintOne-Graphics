@@ -1,7 +1,6 @@
 'use client';
 
-import { ArrowUpRight, Eye, MessageCircle, Plus } from 'lucide-react';
-import { createWhatsAppUrl, useCart } from '@/context/cart-context';
+import { ArrowRight, Eye } from 'lucide-react';
 import type { Service } from '@/data/services';
 
 export function ServiceCard({
@@ -13,108 +12,77 @@ export function ServiceCard({
   index?: number;
   onSelect?: (service: Service) => void;
 }) {
-  const { add } = useCart();
+  const handleSelect = () => {
+    if (onSelect) {
+      onSelect(service);
+    }
+  };
 
   return (
     <article
-      className="service-card group flex min-h-[290px] flex-col justify-between py-6 transition-all duration-300"
-      data-testid={`card-service-${service.id}`}
+      className="service-card group flex h-full flex-col justify-between rounded-xl border border-[#e4ded5] bg-white p-3 sm:p-5 shadow-xs transition-all duration-300 hover:border-[#e97819] hover:shadow-md cursor-pointer"
+      data-testid={`card-product-${service.id}`}
+      onClick={handleSelect}
     >
-      {service.image && (
-        <div
-          className={`service-image relative mb-5 aspect-[4/3] overflow-hidden rounded-md bg-[#e9e2d7] ${
-            onSelect ? 'cursor-pointer' : ''
-          }`}
-          onClick={() => onSelect && onSelect(service)}
-        >
-          <img
-            src={service.image}
-            alt={service.imageAlt}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            loading="lazy"
-            data-testid={`img-service-${service.id}`}
-          />
-          {onSelect && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3.5 py-1.5 text-xs font-bold text-[#1f2122] shadow-md">
-                <Eye size={13} className="text-[#e97819]" />
+      <div>
+        {/* Product Image */}
+        {service.image && (
+          <div className="service-image relative mb-3 aspect-[4/3] w-full overflow-hidden rounded-lg bg-[#efeae1]">
+            <img
+              src={service.image}
+              alt={service.imageAlt}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+              data-testid={`img-product-${service.id}`}
+            />
+            <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-[1.5px] transition-opacity duration-300 group-hover:opacity-100">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-bold text-[#1f2122] shadow-sm">
+                <Eye size={12} className="text-[#e97819]" />
                 Inspect Details
               </span>
             </div>
-          )}
-        </div>
-      )}
+          </div>
+        )}
 
-      <div>
-        <div className="flex items-center justify-between">
-          <span className="text-[10px] font-bold uppercase tracking-[.14em] text-[#7b7770]">
+        {/* Category & Index Pill */}
+        <div className="flex items-center justify-between gap-1 text-[9px] sm:text-[10px]">
+          <span className="truncate font-bold uppercase tracking-[.12em] text-[#7b7770]">
             {service.tag}
           </span>
-          <span className={`service-mark ${service.color}`} aria-hidden="true">
+          <span className={`service-mark ${service.color} shrink-0`} aria-hidden="true">
             {String(index + 1).padStart(2, '0')}
           </span>
         </div>
 
-        <h3
-          className={`mt-4 max-w-[290px] font-display text-[24px] font-bold leading-[1.08] tracking-[-.045em] transition-colors ${
-            onSelect ? 'cursor-pointer hover:text-[#e97819]' : ''
-          }`}
-          onClick={() => onSelect && onSelect(service)}
-        >
+        {/* Product Title */}
+        <h3 className="mt-2 font-display text-[15px] sm:text-[19px] font-bold leading-snug tracking-tight text-[#1c1d1f] transition-colors group-hover:text-[#e97819] line-clamp-1 sm:line-clamp-none">
           {service.title}
         </h3>
-        <p className="mt-2.5 max-w-[340px] text-xs sm:text-sm leading-relaxed text-[#696761]">
+
+        {/* Product Description */}
+        <p className="mt-1 sm:mt-1.5 text-[11px] sm:text-xs leading-relaxed text-[#696761] line-clamp-2">
           {service.detail}
         </p>
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#ede7de] pt-4">
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-          <button
-            className="inline-flex items-center gap-2 text-xs font-bold text-[#242525] transition-colors hover:text-[#e97819]"
-            onClick={(e) => {
-              e.stopPropagation();
-              add(service);
-            }}
-            data-testid={`button-add-${service.id}`}
-          >
-            <span className="grid h-7 w-7 place-items-center rounded-sm border border-[#d4cec4] group-hover:border-[#e97819] transition-colors">
-              <Plus size={14} />
-            </span>
-            Add to list
-          </button>
-
-          <a
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#e97819] transition-colors hover:text-[#242525]"
-            href={createWhatsAppUrl(
-              `Hello PrintOne Graphics, I'd like to enquire about ${service.title}. Please share details and next steps.`
-            )}
-            target="_blank"
-            rel="noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            data-testid={`link-whatsapp-${service.id}`}
-          >
-            <MessageCircle size={14} />
-            <span>WhatsApp</span>
-          </a>
-        </div>
-
-        {onSelect ? (
-          <button
-            onClick={() => onSelect(service)}
-            className="text-[#9e998f] transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#e97819]"
-            title="Open Details Modal"
-          >
-            <ArrowUpRight size={18} />
-          </button>
-        ) : (
-          <ArrowUpRight
-            size={18}
-            className="text-[#aaa49a] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#e97819]"
-            aria-hidden="true"
-          />
-        )}
+      {/* Outer Action: Clean View Details Button (No Add to List or WhatsApp here) */}
+      <div className="mt-3 sm:mt-4 pt-3 border-t border-[#ede7de]">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleSelect();
+          }}
+          className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-[#27292a] bg-white py-2 px-2 sm:px-3 text-[11px] sm:text-xs font-bold text-[#27292a] transition-all hover:bg-[#27292a] hover:text-white"
+          data-testid={`button-view-details-${service.id}`}
+        >
+          <span>View Details</span>
+          <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
+        </button>
       </div>
     </article>
   );
 }
+
+// Named alias
+export const ProductCard = ServiceCard;

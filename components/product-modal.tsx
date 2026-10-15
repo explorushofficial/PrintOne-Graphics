@@ -53,7 +53,7 @@ export function ProductModal({ service, onClose }: ProductModalProps) {
     setTimeout(() => setAddedNotice(false), 2400);
   };
 
-  const whatsAppMessage = `Hello PrintOne Graphics,\n\nI would like to enquire about:\n*${service.title}*\nCategory: ${service.tag}\nQuantity: ${quantity}\nDetails: ${service.detail}\n\nPlease share paper recommendations, pricing estimate, and next steps.`;
+  const whatsAppMessage = `Hello Print One Graphics,\n\nI would like to enquire about:\n*${service.title}*\nCategory: ${service.tag}\nQuantity: ${quantity}\nDetails: ${service.detail}\n\nPlease share paper recommendations, pricing estimate, and next steps.`;
 
   return (
     <div
