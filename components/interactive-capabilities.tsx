@@ -17,14 +17,16 @@ const CATEGORIES = [
   { id: 'Publications + reports', label: 'Annual Reports & Design' },
 ];
 
-export function InteractiveCapabilities() {
+export function InteractiveCapabilities({ initialProducts }: { initialProducts?: Product[] } = {}) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
+  const activeCatalog = initialProducts && initialProducts.length > 0 ? initialProducts : products;
+
   const filteredServices =
     selectedCategory === 'all'
-      ? products.slice(0, 6)
-      : products.filter((s) => s.tag === selectedCategory).slice(0, 6);
+      ? activeCatalog.slice(0, 6)
+      : activeCatalog.filter((s) => s.tag === selectedCategory).slice(0, 6);
 
   return (
     <section className="section-space bg-[#faf8f2]">

@@ -19,6 +19,10 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { count, setIsCartOpen } = useCart();
 
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
   return (
     <>
       <div className="border-b border-[#e5ded4] bg-[#252728] text-[#f5f1e9]">

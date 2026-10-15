@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { products } from '@/data/products';
+import { getProducts } from '@/sanity/lib/fetchData';
 import { ProductsClient } from './products-client';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://printonegraphics.in';
@@ -56,7 +56,9 @@ const breadcrumbJsonLd = {
   ],
 };
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const products = await getProducts();
+
   return (
     <>
       <script
