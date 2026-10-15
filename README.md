@@ -1,6 +1,6 @@
-# PrintOne Graphics — Official Website
+# Print One Graphics — Official Website
 
-Modern, production-ready Next.js application (App Router) for **PrintOne Graphics**, Mumbai's premier design, digital printing, publications, and corporate gifting partner.
+Modern, production-ready Next.js application (App Router) for **Print One Graphics**, Mumbai's premier design, digital printing, publications, and corporate gifting partner.
 
 ---
 
