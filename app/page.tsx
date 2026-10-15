@@ -8,6 +8,8 @@ import { Testimonials } from '@/components/testimonials';
 import { ProductionJourney } from '@/components/production-journey';
 import { getProducts } from '@/sanity/lib/fetchData';
 
+export const instant = false;
+
 export default async function HomePage() {
   const products = await getProducts();
 

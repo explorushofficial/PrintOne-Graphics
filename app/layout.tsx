@@ -18,6 +18,8 @@ const manrope = Manrope({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://printonegraphics.in';
+const rawWhatsApp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919594005894';
+const whatsappClean = rawWhatsApp.replace(/[^\d]/g, '');
 
 export const viewport: Viewport = {
   themeColor: '#e97819',
@@ -143,7 +145,7 @@ const jsonLd = {
       email: 'printone.graphics21@gmail.com',
       sameAs: [
         'https://wa.me/919819124907',
-        'https://wa.me/919594005894',
+        `https://wa.me/${whatsappClean}`,
       ],
       contactPoint: [
         {
@@ -155,7 +157,7 @@ const jsonLd = {
         },
         {
           '@type': 'ContactPoint',
-          telephone: '+919594005894',
+          telephone: `+${whatsappClean}`,
           contactType: 'sales',
           areaServed: 'IN',
           availableLanguage: ['English', 'Hindi', 'Marathi'],
@@ -266,7 +268,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${manrope.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${dmSans.variable} ${manrope.variable}`}>
       <head>
         <script
           type="application/ld+json"

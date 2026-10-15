@@ -100,6 +100,16 @@ export function useCart() {
   return context;
 }
 
+export function getWhatsAppNumber(): string {
+  const envNumber =
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ||
+    process.env.NEXT_PUBLIC_PHONE_NUMBER ||
+    '919594005894';
+  // Strip all non-digit characters (+, spaces, dashes, parentheses)
+  return envNumber.replace(/[^\d]/g, '');
+}
+
 export function createWhatsAppUrl(message: string) {
-  return `https://wa.me/919594005894?text=${encodeURIComponent(message)}`;
+  const number = getWhatsAppNumber();
+  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }

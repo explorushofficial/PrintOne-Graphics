@@ -56,6 +56,8 @@ const breadcrumbJsonLd = {
   ],
 };
 
+export const instant = false;
+
 export default async function ServicesPage() {
   const services = await getServices();
 

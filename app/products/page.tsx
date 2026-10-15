@@ -56,6 +56,8 @@ const breadcrumbJsonLd = {
   ],
 };
 
+export const instant = false;
+
 export default async function ProductsPage() {
   const products = await getProducts();
 

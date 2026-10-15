@@ -8,9 +8,13 @@ import {
   CheckCircle2,
   Database,
   ExternalLink,
+  Eye,
+  EyeOff,
   Filter,
   Layers,
   Loader2,
+  Lock,
+  LogOut,
   Package,
   Pencil,
   Plus,
@@ -64,6 +68,13 @@ export default function AdminPage() {
   const [selectedTag, setSelectedTag] = useState('ALL');
   const [submitting, setSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  // Authentication States
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [loginPassword, setLoginPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [loginError, setLoginError] = useState('');
 
   // Modal states
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
@@ -138,9 +149,67 @@ export default function AdminPage() {
     }
   };
 
+  // Check if session is already active
+  const checkAuth = async () => {
+    try {
+      const res = await fetch('/api/admin/auth');
+      const data = await res.json();
+      if (data.authenticated) {
+        setIsAuthenticated(true);
+        fetchData();
+      } else {
+        setIsAuthenticated(false);
+        setLoading(false);
+      }
+    } catch {
+      setIsAuthenticated(false);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetchData();
+    checkAuth();
   }, []);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!loginPassword.trim()) {
+      setLoginError('Please enter your admin passcode.');
+      return;
+    }
+    setLoginLoading(true);
+    setLoginError('');
+    try {
+      const res = await fetch('/api/admin/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: loginPassword }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setIsAuthenticated(true);
+        setLoginPassword('');
+        showToast('success', 'Passcode verified. Welcome to Admin Portal!');
+        fetchData();
+      } else {
+        setLoginError(data.error || 'Incorrect passcode. Please try again.');
+      }
+    } catch {
+      setLoginError('Network error verifying passcode.');
+    } finally {
+      setLoginLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/auth', { method: 'DELETE' });
+      setIsAuthenticated(false);
+      showToast('success', 'Logged out safely.');
+    } catch {
+      setIsAuthenticated(false);
+    }
+  };
 
   const showToast = (type: 'success' | 'error', text: string) => {
     setFeedback({ type, text });
@@ -357,6 +426,120 @@ export default function AdminPage() {
     return matchesSearch && matchesTag;
   });
 
+  if (isAuthenticated === null) {
+    return (
+      <div className="min-h-screen bg-[#faf8f2] flex flex-col items-center justify-center p-4">
+        <Loader2 size={32} className="animate-spin text-[#e97819]" />
+        <p className="mt-3 text-xs text-[#78746c] font-medium">Checking authorization...</p>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-[#faf8f2] text-[#1c1d1f] flex flex-col justify-between font-sans">
+        {/* Simple top bar */}
+        <header className="px-6 py-4 flex items-center justify-between border-b border-[#e5dfd4] bg-white/70 backdrop-blur-xs">
+          <Link href="/" className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center border border-[#e5dfd4] shadow-xs">
+              <img src="/printone-logo.png" alt="Print One Graphics" className="h-full w-full object-contain" />
+            </div>
+            <span className="font-bold text-sm text-[#1c1d1f]">Print One Graphics</span>
+          </Link>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-xs text-[#6e6a60] hover:text-[#e97819] font-semibold transition-colors"
+          >
+            <ArrowLeft size={13} />
+            <span>Back to Website</span>
+          </Link>
+        </header>
+
+        {/* Center Login Box */}
+        <div className="flex-1 flex items-center justify-center p-4 sm:p-6">
+          <div className="w-full max-w-md bg-white rounded-3xl border border-[#e5dfd4] shadow-xl p-8 sm:p-10 text-center animate-in fade-in zoom-in-95 duration-200">
+            <div className="w-14 h-14 mx-auto rounded-2xl bg-[#fff4eb] border border-[#ffd8be] flex items-center justify-center text-[#e97819] mb-5 shadow-xs">
+              <Lock size={26} />
+            </div>
+
+            <h1 className="font-display font-bold text-xl sm:text-2xl text-[#1c1d1f] tracking-tight">
+              Admin Portal
+            </h1>
+            <p className="mt-1.5 text-xs text-[#78746c] max-w-xs mx-auto leading-relaxed">
+              Enter your administrative passcode to manage products, services &amp; Sanity CMS content.
+            </p>
+
+            {loginError && (
+              <div className="mt-4 p-3 rounded-xl bg-[#fef2f2] border border-[#fca5a5] text-[#991b1b] text-xs font-medium text-left flex items-start gap-2">
+                <X size={15} className="mt-0.5 shrink-0 text-[#dc2626]" />
+                <span>{loginError}</span>
+              </div>
+            )}
+
+            <form onSubmit={handleLogin} className="mt-6 space-y-4 text-left">
+              <div>
+                <label className="block text-xs font-semibold text-[#302e29] mb-1.5">
+                  Administrative Passcode
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Enter admin password..."
+                    value={loginPassword}
+                    onChange={(e) => {
+                      setLoginPassword(e.target.value);
+                      if (loginError) setLoginError('');
+                    }}
+                    autoFocus
+                    required
+                    className="w-full pl-3.5 pr-10 py-3 rounded-xl bg-[#faf8f2] border border-[#dcd5c7] text-sm text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#e97819] transition-all"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8c877d] hover:text-[#1c1d1f] p-1 transition-colors cursor-pointer"
+                    title={showPassword ? 'Hide password' : 'Show password'}
+                  >
+                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  </button>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={loginLoading}
+                className="w-full py-3 px-4 rounded-xl bg-[#e97819] hover:bg-[#d56a12] text-white text-xs sm:text-sm font-bold transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              >
+                {loginLoading ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    <span>Verifying Passcode...</span>
+                  </>
+                ) : (
+                  <>
+                    <Lock size={15} />
+                    <span>Unlock Admin Desk</span>
+                  </>
+                )}
+              </button>
+            </form>
+
+            <div className="mt-6 pt-5 border-t border-[#f0eae0] text-center">
+              <p className="text-[11px] text-[#918c81]">
+                Passcode is configured in your <code className="bg-[#f5efe6] px-1.5 py-0.5 rounded text-[#c45b0a] font-mono">.env.local</code> as <span className="font-semibold text-[#5a564d]">ADMIN_PASSWORD</span>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Simple bottom footer */}
+        <footer className="py-4 text-center text-[11px] text-[#918c81]">
+          Print One Graphics &copy; {new Date().getFullYear()} &bull; Secure Management Portal
+        </footer>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#faf8f2] text-[#1c1d1f] flex flex-col font-sans">
       {/* 1. Global Admin Header (Light Theme) */}
@@ -383,7 +566,7 @@ export default function AdminPage() {
             <button
               onClick={fetchData}
               disabled={loading}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#ded6c9] bg-[#fcfaf6] text-xs font-semibold text-[#5a564d] hover:border-[#e97819] hover:text-[#e97819] hover:bg-white transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#ded6c9] bg-[#fcfaf6] text-xs font-semibold text-[#5a564d] hover:border-[#e97819] hover:text-[#e97819] hover:bg-white transition-colors cursor-pointer"
               title="Refresh catalogue data"
             >
               <RefreshCw size={13} className={loading ? 'animate-spin text-[#e97819]' : ''} />
@@ -398,6 +581,16 @@ export default function AdminPage() {
               <span>View Live Website</span>
               <ExternalLink size={13} />
             </Link>
+
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#ded6c9] bg-[#fcfaf6] text-xs font-semibold text-[#78746c] hover:border-[#dc2626] hover:text-[#dc2626] hover:bg-white transition-colors cursor-pointer"
+              title="Log out from admin"
+            >
+              <LogOut size={13} />
+              <span className="hidden sm:inline">Log Out</span>
+            </button>
           </div>
         </div>
       </header>
