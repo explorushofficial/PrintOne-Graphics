@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, ShoppingBag, X } from 'lucide-react';
-import { useCart } from '@/context/cart-context';
+import { FileText, Menu, X } from 'lucide-react';
 
 const links = [
   { href: '/', label: 'Home' },
@@ -17,7 +16,6 @@ const links = [
 export function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const { count, setIsCartOpen } = useCart();
 
   if (pathname?.startsWith('/admin')) {
     return null;
@@ -79,27 +77,22 @@ export function Header() {
             })}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <button
-              className="relative inline-flex h-11 items-center gap-2 border border-[#d8d0c6] px-3 text-[12px] font-bold hover:border-[#e97819] hover:text-[#d76b11] transition-colors"
-              aria-label={`Open enquiry cart, ${count} items`}
-              onClick={() => setIsCartOpen(true)}
-              data-testid="button-open-cart"
+          <div className="flex items-center gap-2.5">
+            <Link
+              href="/quote"
+              className={`inline-flex h-10 sm:h-11 items-center gap-2 px-3.5 sm:px-5 text-[12px] sm:text-[13px] font-bold text-white transition-all shadow-sm ${
+                pathname === '/quote'
+                  ? 'bg-[#0f766e]'
+                  : 'bg-[#e97819] hover:bg-[#cb5f09]'
+              }`}
+              data-testid="button-nav-quote"
             >
-              <ShoppingBag size={16} strokeWidth={1.8} />
-              <span className="hidden sm:inline">Enquiry list</span>
-              {count > 0 && (
-                <span
-                  className="grid h-[19px] min-w-[19px] place-items-center rounded-full bg-[#e97819] px-1 text-[10px] text-white"
-                  data-testid="text-cart-count"
-                >
-                  {count}
-                </span>
-              )}
-            </button>
+              <FileText size={15} />
+              <span>Get a Quote</span>
+            </Link>
 
             <button
-              className="grid h-11 w-11 place-items-center border border-[#d8d0c6] md:hidden hover:border-[#e97819] transition-colors"
+              className="grid h-10 sm:h-11 w-10 sm:w-11 place-items-center border border-[#d8d0c6] md:hidden hover:border-[#e97819] transition-colors"
               aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen(!menuOpen)}
@@ -129,6 +122,15 @@ export function Header() {
                   </Link>
                 );
               })}
+              <Link
+                href="/quote"
+                className="mt-4 flex items-center justify-center gap-2 bg-[#e97819] py-3 text-center text-xs font-bold text-white shadow-sm hover:bg-[#cb5f09] transition-colors"
+                onClick={() => setMenuOpen(false)}
+                data-testid="link-mobile-quote-cta"
+              >
+                <FileText size={15} />
+                <span>Fill Print Specification Form (WhatsApp)</span>
+              </Link>
             </div>
           </nav>
         )}
