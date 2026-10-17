@@ -545,44 +545,6 @@ export function AboutClient() {
         </div>
       </section>
 
-      {/* 6. Our Commitment to Every Client */}
-      <section className="bg-[#10383A] py-16 sm:py-20 text-[#faf8f2]">
-        <div className="page-wrap">
-          <div className="max-w-2xl mx-auto text-center">
-            <span className="eyebrow justify-center text-[#809276]">Our Commitment</span>
-            <h2 className="mt-3 font-display text-2xl sm:text-4xl font-extrabold tracking-tight">
-              Our Commitment to Every Client.
-            </h2>
-            <div className="mt-5 space-y-4 text-xs sm:text-sm leading-relaxed text-[#dcd7cb]">
-              <p>
-                At Print One Graphics, we understand that printed materials represent more than paper and ink. They represent your organisation&apos;s identity, credibility and values.
-              </p>
-              <p>
-                Whether it is a detailed annual report, a publication, an educational book or a customised corporate gift, we approach every assignment with dedication and a focus on delivering value.
-              </p>
-              <p className="font-display text-lg sm:text-xl font-bold text-[#809276] pt-2">
-                From concept to creation, we bring your ideas to print.
-              </p>
-            </div>
-
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <Link href="/contact" className="btn-primary">
-                <span>Start a project with us</span>
-                <ArrowRight size={15} />
-              </Link>
-              <a
-                href={whatsAppUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline border-white/20 text-white hover:bg-white/10"
-              >
-                <MessageCircle size={15} className="text-[#25D366]" />
-                <span>Chat on WhatsApp</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
