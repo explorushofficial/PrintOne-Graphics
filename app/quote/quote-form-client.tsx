@@ -7,7 +7,6 @@ import {
   MessageCircle,
   CheckCircle2,
   Copy,
-  Sparkles,
   Printer,
   RotateCcw,
   ChevronRight,
@@ -159,122 +158,6 @@ export function QuoteFormClient() {
     }
   };
 
-  const loadSample = (sampleType: 'annual-report' | 'flyer' | 'box') => {
-    if (sampleType === 'annual-report') {
-      setFormData({
-        firstName: 'Jogendra',
-        lastName: 'Vichare',
-        organisation: 'Apex Media & Publications',
-        phone: '+91 95940 05894',
-        email: 'info@printonegraphics.in',
-        fax: '',
-        city: 'Mumbai',
-
-        jobTitle: 'Annual Reports 2025-26',
-        projectType: 'Annual Reports',
-        quantity: '500',
-        sizeWidth: '210',
-        sizeHeight: '297',
-        sizeUnit: 'mm',
-        sizeFormat: 'Folded',
-        numberOfPages: '64',
-        includingCover: 'Yes',
-
-        coverPaperGsm: '350 GSM Art Card',
-        coverColour: '4 colours (CMYK)',
-        coverMetallic: 'Yes',
-        coverFinish: 'Matt',
-        coverLamination: 'Yes',
-
-        insidePaperGsm: '130 GSM Gloss Art Paper',
-        insideColour: '4 colours (CMYK)',
-        insideMetallic: 'No',
-        insideFinish: 'Matt',
-
-        fileFormat: 'PDF (Print Ready with bleed & CMYK profiling)',
-        binding: 'Perfect Binding',
-        handsOnDetails: 'Spot UV on logo, Gold Foil stamping on title, Thermal Matt lamination.',
-
-        freeFormNotes: 'Please quote with delivery in Mumbai. Delivery needed by next month.',
-      });
-    } else if (sampleType === 'flyer') {
-      setFormData({
-        firstName: 'Amit',
-        lastName: 'Kulkarni',
-        organisation: 'Kulkarni Retail Enterprises',
-        phone: '+91 98191 24907',
-        email: 'amit@kulkarnigroup.in',
-        fax: '',
-        city: 'Mumbai',
-
-        jobTitle: 'Promotional Flyer',
-        projectType: 'Flyer',
-        quantity: '5000',
-        sizeWidth: '148',
-        sizeHeight: '210',
-        sizeUnit: 'mm',
-        sizeFormat: 'Open',
-        numberOfPages: '2',
-        includingCover: 'No',
-
-        coverPaperGsm: '170 GSM Art Paper',
-        coverColour: '4 colours (CMYK)',
-        coverMetallic: 'No',
-        coverFinish: 'Gloss',
-        coverLamination: 'No',
-
-        insidePaperGsm: '170 GSM Art Paper',
-        insideColour: '4 colours (CMYK)',
-        insideMetallic: 'No',
-        insideFinish: 'Gloss',
-
-        fileFormat: 'PDF & CorelDraw',
-        binding: 'None',
-        handsOnDetails: 'Cut to size, bundled in packets of 500.',
-
-        freeFormNotes: 'Urgent turnaround required within 3 business days.',
-      });
-    } else {
-      setFormData({
-        firstName: 'Sneha',
-        lastName: 'Patil',
-        organisation: 'Organica Herbal Products',
-        phone: '+91 95940 05894',
-        email: 'sneha@organicaproducts.com',
-        fax: '',
-        city: 'Thane',
-
-        jobTitle: 'Herbal Cosmetics Packaging Box',
-        projectType: 'Packaging Box',
-        quantity: '2500',
-        sizeWidth: '85',
-        sizeHeight: '135',
-        sizeUnit: 'mm',
-        sizeFormat: 'Folded',
-        numberOfPages: '1',
-        includingCover: 'Yes',
-
-        coverPaperGsm: '350 GSM Food Grade FBB Board',
-        coverColour: '4 colours (CMYK)',
-        coverMetallic: 'Yes',
-        coverFinish: 'Matt',
-        coverLamination: 'Yes',
-
-        insidePaperGsm: 'N/A',
-        insideColour: '1 colour',
-        insideMetallic: 'No',
-        insideFinish: 'Plain (Maplitho/Creamwove)',
-
-        fileFormat: 'Adobe Illustrator (.AI) with Dieline layer',
-        binding: 'None',
-        handsOnDetails: 'Die punching, embossing on logo, matt thermal lamination.',
-
-        freeFormNotes: 'Please include die creation charge in the initial quote.',
-      });
-    }
-    setErrors({});
-  };
-
   const buildWhatsAppMessage = () => {
     const fullName = [formData.firstName, formData.lastName].filter(Boolean).join(' ') || 'Customer';
     const dimensions = formData.sizeWidth && formData.sizeHeight
@@ -400,45 +283,14 @@ export function QuoteFormClient() {
             <span className="text-[#00828a]">Print Specification Form</span>
           </div>
 
-          <div className="mt-3 flex flex-col justify-between gap-4 sm:gap-6 md:flex-row md:items-end">
-            <div>
-              <h1 className="font-display text-2xl sm:text-4xl font-extrabold tracking-tight text-[#1c1d1f]">
-                Print Job Specification <span className="text-[#00828a]">&amp; Quote Form</span>
-              </h1>
-              <p className="mt-2 max-w-2xl text-xs sm:text-sm leading-relaxed text-[#615e58]">
-                Fill out the required printing, paper, and finishing specifications below.
-                All information will be formatted into a structured message and directed to WhatsApp for an instant quote.
-              </p>
-            </div>
-
-            {/* Quick Auto-Fill Buttons for testing */}
-            <div className="flex flex-wrap items-center gap-1.5 rounded-lg border border-[#d8d0c6] bg-[#faf8f2] p-2.5 shadow-2xs">
-              <span className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-[#615e58] mr-1">
-                <Sparkles size={13} className="text-[#e97819]" />
-                <span>Sample Presets:</span>
-              </span>
-              <button
-                type="button"
-                onClick={() => loadSample('annual-report')}
-                className="rounded border border-[#cfc9bf] bg-white px-2 py-1 text-[11px] font-semibold text-[#1c1d1f] hover:border-[#00828a] hover:bg-[#e6f4f2] hover:text-[#00828a] transition-colors"
-              >
-                Annual Report
-              </button>
-              <button
-                type="button"
-                onClick={() => loadSample('flyer')}
-                className="rounded border border-[#cfc9bf] bg-white px-2 py-1 text-[11px] font-semibold text-[#1c1d1f] hover:border-[#00828a] hover:bg-[#e6f4f2] hover:text-[#00828a] transition-colors"
-              >
-                Flyer
-              </button>
-              <button
-                type="button"
-                onClick={() => loadSample('box')}
-                className="rounded border border-[#cfc9bf] bg-white px-2 py-1 text-[11px] font-semibold text-[#1c1d1f] hover:border-[#00828a] hover:bg-[#e6f4f2] hover:text-[#00828a] transition-colors"
-              >
-                Packaging Box
-              </button>
-            </div>
+          <div className="mt-3">
+            <h1 className="font-display text-2xl sm:text-4xl font-extrabold tracking-tight text-[#1c1d1f]">
+              Print Job Specification <span className="text-[#00828a]">&amp; Quote Form</span>
+            </h1>
+            <p className="mt-2 max-w-2xl text-xs sm:text-sm leading-relaxed text-[#615e58]">
+              Fill out the required printing, paper, and finishing specifications below.
+              All information will be formatted into a structured message and directed to WhatsApp for an instant quote.
+            </p>
           </div>
         </div>
       </section>
