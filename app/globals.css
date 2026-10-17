@@ -106,7 +106,7 @@
 .service-card:hover { border-color: #10383A; transform: translateY(-3px); }
 .service-mark { display: grid; height: 31px; width: 31px; place-items: center; border: 1px solid #768886; font-size: 9px; font-weight: 700; color: #666E51; }
 .service-mark.gold, .cart-dot.gold, .service-mark.orange, .cart-dot.orange { border-color: #DAA112; color: #DAA112; }
-.service-mark.spruce, .cart-dot.spruce, .service-mark.black, .cart-dot.black { border-color: #10383A; color: #10383A; }
+.service-mark.spruce, .cart-dot.spruce, .service-mark.black, .cart-dot.black, .service-mark.green, .cart-dot.green { border-color: #10383A; color: #10383A; }
 .service-mark.sage, .cart-dot.sage { border-color: #809276; color: #666E51; }
 .service-mark.olive, .cart-dot.olive { border-color: #666E51; color: #666E51; }
 .service-mark.slate, .cart-dot.slate { border-color: #768886; color: #768886; }

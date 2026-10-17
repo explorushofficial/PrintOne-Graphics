@@ -50,7 +50,7 @@ const SERVICE_TAG_FILTERS = [
 ];
 
 const PRESET_COLORS = [
-  { id: 'orange', label: 'Orange (Brand)', hex: '#e97819' },
+  { id: 'green', label: 'Emerald Green (Brand)', hex: '#10383A' },
   { id: 'blue', label: 'Royal Blue', hex: '#2563eb' },
   { id: 'pink', label: 'Crimson / Pink', hex: '#db2777' },
   { id: 'yellow', label: 'Golden Amber', hex: '#d97706' },
@@ -111,7 +111,7 @@ export default function AdminPage() {
     tagFilter: 'Commercial Print',
     shortDescription: '',
     fullDescription: '',
-    accent: '#e97819',
+    accent: '#10383A',
     image: '',
     turnaround: '3–5 working days post-approval',
   });
@@ -275,7 +275,7 @@ export default function AdminPage() {
       tagFilter: 'Commercial Print',
       shortDescription: '',
       fullDescription: '',
-      accent: '#e97819',
+      accent: '#10383A',
       image: '',
       turnaround: '3–5 working days post-approval',
     });
@@ -293,7 +293,7 @@ export default function AdminPage() {
       tagFilter: service.tagFilter,
       shortDescription: service.shortDescription,
       fullDescription: service.fullDescription,
-      accent: service.accent || '#e97819',
+      accent: service.accent || '#10383A',
       image: service.image,
       turnaround: service.turnaround || '3–5 working days post-approval',
     });
@@ -305,16 +305,19 @@ export default function AdminPage() {
   // Handle Product Save / Update
   const handleSaveProduct = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!prodForm.title.trim() || !prodForm.detail.trim()) {
-      showToast('error', 'Please fill in Product Title and Description.');
+    if (!prodForm.title.trim()) {
+      showToast('error', 'Please fill in Product Title.');
       return;
     }
 
     setSubmitting(true);
     try {
+      const finalDetail = prodForm.detail?.trim() || prodForm.intro?.trim() || prodForm.title.trim();
       const payload = {
         ...prodForm,
-        capabilities: capabilitiesList,
+        detail: finalDetail,
+        color: prodForm.color || 'green',
+        capabilities: capabilitiesList.length > 0 ? capabilitiesList : [],
         ...(editingProductId ? { id: editingProductId } : {}),
       };
 
@@ -429,7 +432,7 @@ export default function AdminPage() {
   if (isAuthenticated === null) {
     return (
       <div className="min-h-screen bg-[#faf8f2] flex flex-col items-center justify-center p-4">
-        <Loader2 size={32} className="animate-spin text-[#e97819]" />
+        <Loader2 size={32} className="animate-spin text-[#10383A]" />
         <p className="mt-3 text-xs text-[#78746c] font-medium">Checking authorization...</p>
       </div>
     );
@@ -448,7 +451,7 @@ export default function AdminPage() {
           </Link>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs text-[#6e6a60] hover:text-[#e97819] font-semibold transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-[#6e6a60] hover:text-[#10383A] font-semibold transition-colors"
           >
             <ArrowLeft size={13} />
             <span>Back to Website</span>
@@ -458,7 +461,7 @@ export default function AdminPage() {
         {/* Center Login Box */}
         <div className="flex-1 flex items-center justify-center p-4 sm:p-6">
           <div className="w-full max-w-md bg-white rounded-3xl border border-[#e5dfd4] shadow-xl p-8 sm:p-10 text-center animate-in fade-in zoom-in-95 duration-200">
-            <div className="w-14 h-14 mx-auto rounded-2xl bg-[#fff4eb] border border-[#ffd8be] flex items-center justify-center text-[#e97819] mb-5 shadow-xs">
+            <div className="w-14 h-14 mx-auto rounded-2xl bg-[#eaf3f0] border border-[#b8dbd2] flex items-center justify-center text-[#10383A] mb-5 shadow-xs">
               <Lock size={26} />
             </div>
 
@@ -492,7 +495,7 @@ export default function AdminPage() {
                     }}
                     autoFocus
                     required
-                    className="w-full pl-3.5 pr-10 py-3 rounded-xl bg-[#faf8f2] border border-[#dcd5c7] text-sm text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#e97819] transition-all"
+                    className="w-full pl-3.5 pr-10 py-3 rounded-xl bg-[#faf8f2] border border-[#dcd5c7] text-sm text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#10383A] transition-all"
                   />
                   <button
                     type="button"
@@ -508,7 +511,7 @@ export default function AdminPage() {
               <button
                 type="submit"
                 disabled={loginLoading}
-                className="w-full py-3 px-4 rounded-xl bg-[#e97819] hover:bg-[#d56a12] text-white text-xs sm:text-sm font-bold transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="w-full py-3 px-4 rounded-xl bg-[#10383A] hover:bg-[#164a4d] text-white text-xs sm:text-sm font-bold transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 {loginLoading ? (
                   <>
@@ -526,7 +529,7 @@ export default function AdminPage() {
 
             <div className="mt-6 pt-5 border-t border-[#f0eae0] text-center">
               <p className="text-[11px] text-[#918c81]">
-                Passcode is configured in your <code className="bg-[#f5efe6] px-1.5 py-0.5 rounded text-[#c45b0a] font-mono">.env.local</code> as <span className="font-semibold text-[#5a564d]">ADMIN_PASSWORD</span>.
+                Passcode is configured in your <code className="bg-[#f5efe6] px-1.5 py-0.5 rounded text-[#10383A] font-mono">.env.local</code> as <span className="font-semibold text-[#5a564d]">ADMIN_PASSWORD</span>.
               </p>
             </div>
           </div>
@@ -554,7 +557,7 @@ export default function AdminPage() {
                 <h1 className="text-base sm:text-lg font-bold font-display text-[#1c1d1f] tracking-tight">
                   Print One Graphics Desk
                 </h1>
-                <span className="hidden sm:inline-block px-2 py-0.5 text-[10px] font-bold rounded-full bg-[#fff4eb] text-[#e97819] border border-[#ffd8be] uppercase tracking-wider">
+                <span className="hidden sm:inline-block px-2 py-0.5 text-[10px] font-bold rounded-full bg-[#eaf3f0] text-[#10383A] border border-[#b8dbd2] uppercase tracking-wider">
                   Admin Panel
                 </span>
               </div>
@@ -566,17 +569,17 @@ export default function AdminPage() {
             <button
               onClick={fetchData}
               disabled={loading}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#ded6c9] bg-[#fcfaf6] text-xs font-semibold text-[#5a564d] hover:border-[#e97819] hover:text-[#e97819] hover:bg-white transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#ded6c9] bg-[#fcfaf6] text-xs font-semibold text-[#5a564d] hover:border-[#10383A] hover:text-[#10383A] hover:bg-white transition-colors cursor-pointer"
               title="Refresh catalogue data"
             >
-              <RefreshCw size={13} className={loading ? 'animate-spin text-[#e97819]' : ''} />
+              <RefreshCw size={13} className={loading ? 'animate-spin text-[#10383A]' : ''} />
               <span className="hidden sm:inline">Refresh</span>
             </button>
 
             <Link
               href="/"
               target="_blank"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#e97819] hover:bg-[#d56a12] text-white text-xs font-bold transition-colors shadow-xs"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#10383A] hover:bg-[#164a4d] text-white text-xs font-bold transition-colors shadow-xs"
             >
               <span>View Live Website</span>
               <ExternalLink size={13} />
@@ -623,7 +626,7 @@ export default function AdminPage() {
             }}
             className={`flex items-center gap-2 px-4 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all ${
               activeTab === 'products'
-                ? 'border-[#e97819] text-[#e97819] bg-white rounded-t-lg shadow-xs'
+                ? 'border-[#10383A] text-[#10383A] bg-white rounded-t-lg shadow-xs'
                 : 'border-transparent text-[#6e695f] hover:text-[#1c1d1f]'
             }`}
           >
@@ -641,7 +644,7 @@ export default function AdminPage() {
             }}
             className={`flex items-center gap-2 px-4 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all ${
               activeTab === 'services'
-                ? 'border-[#e97819] text-[#e97819] bg-white rounded-t-lg shadow-xs'
+                ? 'border-[#10383A] text-[#10383A] bg-white rounded-t-lg shadow-xs'
                 : 'border-transparent text-[#6e695f] hover:text-[#1c1d1f]'
             }`}
           >
@@ -656,7 +659,7 @@ export default function AdminPage() {
             onClick={() => setActiveTab('settings')}
             className={`flex items-center gap-2 px-4 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all ${
               activeTab === 'settings'
-                ? 'border-[#e97819] text-[#e97819] bg-white rounded-t-lg shadow-xs'
+                ? 'border-[#10383A] text-[#10383A] bg-white rounded-t-lg shadow-xs'
                 : 'border-transparent text-[#6e695f] hover:text-[#1c1d1f]'
             }`}
           >
@@ -696,7 +699,7 @@ export default function AdminPage() {
                     placeholder="Search products..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-8 pr-3 py-2 rounded-xl bg-[#faf8f2] border border-[#dcd5c7] text-xs text-[#1c1d1f] placeholder-[#8c877d] focus:outline-none focus:bg-white focus:border-[#e97819]"
+                    className="pl-8 pr-3 py-2 rounded-xl bg-[#faf8f2] border border-[#dcd5c7] text-xs text-[#1c1d1f] placeholder-[#8c877d] focus:outline-none focus:bg-white focus:border-[#10383A]"
                   />
                 </div>
 
@@ -704,7 +707,7 @@ export default function AdminPage() {
                 <select
                   value={selectedTag}
                   onChange={(e) => setSelectedTag(e.target.value)}
-                  className="px-3 py-2 rounded-xl bg-[#faf8f2] border border-[#dcd5c7] text-xs text-[#1c1d1f] focus:outline-none focus:bg-white focus:border-[#e97819]"
+                  className="px-3 py-2 rounded-xl bg-[#faf8f2] border border-[#dcd5c7] text-xs text-[#1c1d1f] focus:outline-none focus:bg-white focus:border-[#10383A]"
                 >
                   <option value="ALL">All Categories</option>
                   {PRODUCT_TAGS.map((t) => (
@@ -718,7 +721,7 @@ export default function AdminPage() {
                 <button
                   type="button"
                   onClick={openNewProductModal}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#e97819] hover:bg-[#d56a12] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#10383A] hover:bg-[#164a4d] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
                 >
                   <Plus size={15} />
                   <span>Add New Product</span>
@@ -742,7 +745,7 @@ export default function AdminPage() {
                   <button
                     type="button"
                     onClick={openNewProductModal}
-                    className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#e97819] hover:bg-[#d56a12] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                    className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#10383A] hover:bg-[#164a4d] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
                   >
                     <Plus size={15} />
                     <span>Create Your First Product</span>
@@ -767,7 +770,7 @@ export default function AdminPage() {
                             (e.target as HTMLImageElement).src = '/catalog/brochures.jpg';
                           }}
                         />
-                        <span className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/95 text-[#c45b0a] border border-[#ffd8be] shadow-2xs backdrop-blur-xs">
+                        <span className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/95 text-[#10383A] border border-[#b8dbd2] shadow-2xs backdrop-blur-xs">
                           {p.tag}
                         </span>
                       </div>
@@ -784,7 +787,7 @@ export default function AdminPage() {
                       <button
                         type="button"
                         onClick={() => openEditProductModal(p)}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[#ded7cc] hover:border-[#e97819] hover:text-[#e97819] text-[#4d4a43] text-xs font-semibold transition-all cursor-pointer shadow-2xs"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[#ded7cc] hover:border-[#10383A] hover:text-[#10383A] text-[#4d4a43] text-xs font-semibold transition-all cursor-pointer shadow-2xs"
                       >
                         <Pencil size={12} />
                         <span>Edit</span>
@@ -830,7 +833,7 @@ export default function AdminPage() {
                     placeholder="Search services..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-8 pr-3 py-2 rounded-xl bg-[#faf8f2] border border-[#dcd5c7] text-xs text-[#1c1d1f] placeholder-[#8c877d] focus:outline-none focus:bg-white focus:border-[#e97819]"
+                    className="pl-8 pr-3 py-2 rounded-xl bg-[#faf8f2] border border-[#dcd5c7] text-xs text-[#1c1d1f] placeholder-[#8c877d] focus:outline-none focus:bg-white focus:border-[#10383A]"
                   />
                 </div>
 
@@ -838,7 +841,7 @@ export default function AdminPage() {
                 <select
                   value={selectedTag}
                   onChange={(e) => setSelectedTag(e.target.value)}
-                  className="px-3 py-2 rounded-xl bg-[#faf8f2] border border-[#dcd5c7] text-xs text-[#1c1d1f] focus:outline-none focus:bg-white focus:border-[#e97819]"
+                  className="px-3 py-2 rounded-xl bg-[#faf8f2] border border-[#dcd5c7] text-xs text-[#1c1d1f] focus:outline-none focus:bg-white focus:border-[#10383A]"
                 >
                   <option value="ALL">All Categories</option>
                   {SERVICE_TAG_FILTERS.map((f) => (
@@ -852,7 +855,7 @@ export default function AdminPage() {
                 <button
                   type="button"
                   onClick={openNewServiceModal}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#e97819] hover:bg-[#d56a12] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#10383A] hover:bg-[#164a4d] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
                 >
                   <Plus size={15} />
                   <span>Add New Service</span>
@@ -876,7 +879,7 @@ export default function AdminPage() {
                   <button
                     type="button"
                     onClick={openNewServiceModal}
-                    className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#e97819] hover:bg-[#d56a12] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                    className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#10383A] hover:bg-[#164a4d] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
                   >
                     <Plus size={15} />
                     <span>Create Your First Service</span>
@@ -905,7 +908,7 @@ export default function AdminPage() {
                           <span className="px-2 py-0.5 rounded-full text-[11px] font-mono font-bold bg-[#1c1d1f] text-white shadow-xs">
                             {s.number}
                           </span>
-                          <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/95 text-[#c45b0a] border border-[#ffd8be] shadow-2xs backdrop-blur-xs">
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/95 text-[#10383A] border border-[#b8dbd2] shadow-2xs backdrop-blur-xs">
                             {s.tagFilter}
                           </span>
                         </div>
@@ -949,7 +952,7 @@ export default function AdminPage() {
                       <button
                         type="button"
                         onClick={() => openEditServiceModal(s)}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[#ded7cc] hover:border-[#e97819] hover:text-[#e97819] text-[#4d4a43] text-xs font-semibold transition-all cursor-pointer shadow-2xs"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[#ded7cc] hover:border-[#10383A] hover:text-[#10383A] text-[#4d4a43] text-xs font-semibold transition-all cursor-pointer shadow-2xs"
                       >
                         <Pencil size={12} />
                         <span>Edit</span>
@@ -976,7 +979,7 @@ export default function AdminPage() {
         {activeTab === 'settings' && (
           <div className="max-w-2xl mx-auto rounded-2xl border border-[#e5dfd4] bg-white p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-3 pb-6 border-b border-[#eee8dc]">
-              <div className="w-10 h-10 rounded-xl bg-[#fff4eb] border border-[#ffd8be] flex items-center justify-center text-[#e97819]">
+              <div className="w-10 h-10 rounded-xl bg-[#eaf3f0] border border-[#b8dbd2] flex items-center justify-center text-[#10383A]">
                 <Database size={20} />
               </div>
               <div>
@@ -1026,7 +1029,7 @@ export default function AdminPage() {
 
               <div className="p-4 rounded-xl bg-[#f5efe6] border border-[#e2dbce] font-mono text-[11px] leading-relaxed">
                 <p className="text-[#7a756b] font-sans font-medium mb-1"># Your .env.local keys:</p>
-                <p className="text-[#c45b0a]">NEXT_PUBLIC_SANITY_PROJECT_ID=...</p>
+                <p className="text-[#10383A]">NEXT_PUBLIC_SANITY_PROJECT_ID=...</p>
                 <p className="text-[#55524b]">NEXT_PUBLIC_SANITY_DATASET=production</p>
                 <p className="text-[#55524b]">SANITY_API_WRITE_TOKEN=...</p>
               </div>
@@ -1037,7 +1040,7 @@ export default function AdminPage() {
                   Whenever you publish or edit a product or service, it is <strong>immediately reflected on the main website</strong>.
                 </p>
                 <p>
-                  If you have configured Sanity credentials in <code className="bg-[#f0ebe1] px-1 py-0.5 rounded text-[#c45b0a]">.env.local</code>, the items are additionally mirrored into your Sanity CMS database automatically!
+                  If you have configured Sanity credentials in <code className="bg-[#f0ebe1] px-1 py-0.5 rounded text-[#10383A]">.env.local</code>, the items are additionally mirrored into your Sanity CMS database automatically!
                 </p>
               </div>
             </div>
@@ -1052,7 +1055,7 @@ export default function AdminPage() {
             {/* Modal Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-[#eee8dc] bg-[#faf8f4]">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-[#fff4eb] border border-[#ffd8be] flex items-center justify-center text-[#e97819]">
+                <div className="w-8 h-8 rounded-lg bg-[#eaf3f0] border border-[#b8dbd2] flex items-center justify-center text-[#10383A]">
                   {editingProductId ? <Pencil size={15} /> : <Plus size={16} />}
                 </div>
                 <div>
@@ -1081,7 +1084,7 @@ export default function AdminPage() {
               {/* Title */}
               <div>
                 <label className="block font-semibold text-[#302e29] mb-1.5">
-                  Product Title <span className="text-[#e97819]">*</span>
+                  Product Title <span className="text-[#10383A]">*</span>
                 </label>
                 <input
                   type="text"
@@ -1089,7 +1092,7 @@ export default function AdminPage() {
                   placeholder="e.g., Luxury Foil Stamped Presentation Boxes"
                   value={prodForm.title}
                   onChange={(e) => setProdForm({ ...prodForm, title: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#e97819] focus:ring-1 focus:ring-[#e97819]"
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
                 />
               </div>
 
@@ -1099,7 +1102,7 @@ export default function AdminPage() {
                 <select
                   value={prodForm.tag}
                   onChange={(e) => setProdForm({ ...prodForm, tag: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] focus:outline-none focus:bg-white focus:border-[#e97819]"
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] focus:outline-none focus:bg-white focus:border-[#10383A]"
                 >
                   {PRODUCT_TAGS.map((t) => (
                     <option key={t} value={t}>
@@ -1117,113 +1120,8 @@ export default function AdminPage() {
                   placeholder="e.g., A lasting impression with custom velvet finish."
                   value={prodForm.intro}
                   onChange={(e) => setProdForm({ ...prodForm, intro: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#e97819]"
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#10383A]"
                 />
-              </div>
-
-              {/* Detailed Description */}
-              <div>
-                <label className="block font-semibold text-[#302e29] mb-1.5">
-                  Detailed Description <span className="text-[#e97819]">*</span>
-                </label>
-                <textarea
-                  rows={4}
-                  required
-                  placeholder="Describe paper weights, binding, finish treatments, standard formats, and application..."
-                  value={prodForm.detail}
-                  onChange={(e) => setProdForm({ ...prodForm, detail: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#e97819]"
-                />
-              </div>
-
-              {/* Card Color Accent */}
-              <div>
-                <label className="block font-semibold text-[#302e29] mb-1.5">Card Color Accent</label>
-                <div className="flex flex-wrap gap-2">
-                  {PRESET_COLORS.map((c) => {
-                    const isSelected = prodForm.color === c.id;
-                    return (
-                      <button
-                        type="button"
-                        key={c.id}
-                        onClick={() => setProdForm({ ...prodForm, color: c.id })}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[11px] font-semibold transition-all ${
-                          isSelected
-                            ? 'border-[#e97819] bg-[#fff5eb] text-[#c45b0a] shadow-2xs'
-                            : 'border-[#ded7cb] bg-[#faf8f2] text-[#5e5a52] hover:border-[#b8b0a2] hover:bg-white'
-                        }`}
-                      >
-                        <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: c.hex }} />
-                        <span>{c.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Production Capabilities for this item */}
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <label className="block font-semibold text-[#302e29]">
-                    Production Capabilities for this item
-                  </label>
-                  <span className="text-[10px] text-[#8c877d]">
-                    Displayed on product card details
-                  </span>
-                </div>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    placeholder="e.g. Paper Stocks: 350 GSM Art Card or Specialty Finishes: Gold Foil..."
-                    value={capabilityInput}
-                    onChange={(e) => setCapabilityInput(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        if (capabilityInput.trim()) {
-                          setCapabilitiesList([...capabilitiesList, capabilityInput.trim()]);
-                          setCapabilityInput('');
-                        }
-                      }
-                    }}
-                    className="flex-1 px-3.5 py-2 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#e97819]"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (capabilityInput.trim()) {
-                        setCapabilitiesList([...capabilitiesList, capabilityInput.trim()]);
-                        setCapabilityInput('');
-                      }
-                    }}
-                    className="px-3 py-2 rounded-lg bg-[#fff4eb] border border-[#ffd8be] hover:bg-[#ffe8d7] text-[#e97819] font-bold cursor-pointer"
-                    title="Add capability"
-                  >
-                    <Plus size={14} />
-                  </button>
-                </div>
-
-                {/* Capabilities list */}
-                <div className="mt-2.5 space-y-1.5">
-                  {capabilitiesList.map((cap, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center justify-between gap-2 px-3 py-1.5 rounded-lg bg-[#f5efe6] text-[11px] text-[#423f38] border border-[#e5dfd4]"
-                    >
-                      <div className="flex items-center gap-2 overflow-hidden text-ellipsis">
-                        <Check size={12} className="text-[#e97819] shrink-0" />
-                        <span className="truncate">{cap}</span>
-                      </div>
-                      <X
-                        size={13}
-                        className="cursor-pointer text-[#8a8479] hover:text-[#dc2626] shrink-0"
-                        onClick={() =>
-                          setCapabilitiesList(capabilitiesList.filter((_, idx) => idx !== i))
-                        }
-                      />
-                    </div>
-                  ))}
-                </div>
               </div>
 
               {/* Image Upload Component */}
@@ -1247,7 +1145,7 @@ export default function AdminPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-5 py-2.5 rounded-xl bg-[#e97819] hover:bg-[#d56a12] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                  className="px-5 py-2.5 rounded-xl bg-[#10383A] hover:bg-[#164a4d] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
                 >
                   {submitting ? (
                     <>
@@ -1274,7 +1172,7 @@ export default function AdminPage() {
             {/* Modal Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-[#eee8dc] bg-[#faf8f4]">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-[#fff4eb] border border-[#ffd8be] flex items-center justify-center text-[#e97819]">
+                <div className="w-8 h-8 rounded-lg bg-[#eaf3f0] border border-[#b8dbd2] flex items-center justify-center text-[#10383A]">
                   {editingServiceId ? <Pencil size={15} /> : <Wrench size={16} />}
                 </div>
                 <div>
@@ -1304,7 +1202,7 @@ export default function AdminPage() {
               <div className="grid grid-cols-[1fr_80px] gap-3">
                 <div>
                   <label className="block font-semibold text-[#302e29] mb-1.5">
-                    Service Title <span className="text-[#e97819]">*</span>
+                    Service Title <span className="text-[#10383A]">*</span>
                   </label>
                   <input
                     type="text"
@@ -1312,7 +1210,7 @@ export default function AdminPage() {
                     placeholder="e.g., Rigid Luxury Box Fabrication"
                     value={serviceForm.title}
                     onChange={(e) => setServiceForm({ ...serviceForm, title: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#e97819]"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#10383A]"
                   />
                 </div>
                 <div>
@@ -1322,7 +1220,7 @@ export default function AdminPage() {
                     placeholder="10"
                     value={serviceForm.number}
                     onChange={(e) => setServiceForm({ ...serviceForm, number: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#e97819]"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#10383A]"
                   />
                 </div>
               </div>
@@ -1336,7 +1234,7 @@ export default function AdminPage() {
                     placeholder="e.g., Bespoke Rigid Packaging"
                     value={serviceForm.category}
                     onChange={(e) => setServiceForm({ ...serviceForm, category: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#e97819]"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#10383A]"
                   />
                 </div>
                 <div>
@@ -1344,7 +1242,7 @@ export default function AdminPage() {
                   <select
                     value={serviceForm.tagFilter}
                     onChange={(e) => setServiceForm({ ...serviceForm, tagFilter: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] focus:outline-none focus:bg-white focus:border-[#e97819]"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] focus:outline-none focus:bg-white focus:border-[#10383A]"
                   >
                     {SERVICE_TAG_FILTERS.map((f) => (
                       <option key={f} value={f}>
@@ -1358,7 +1256,7 @@ export default function AdminPage() {
               {/* Short Description */}
               <div>
                 <label className="block font-semibold text-[#302e29] mb-1.5">
-                  Short Description <span className="text-[#e97819]">*</span>
+                  Short Description <span className="text-[#10383A]">*</span>
                 </label>
                 <textarea
                   rows={2}
@@ -1368,7 +1266,7 @@ export default function AdminPage() {
                   onChange={(e) =>
                     setServiceForm({ ...serviceForm, shortDescription: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#e97819]"
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#10383A]"
                 />
               </div>
 
@@ -1382,7 +1280,7 @@ export default function AdminPage() {
                   onChange={(e) =>
                     setServiceForm({ ...serviceForm, fullDescription: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#e97819]"
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#10383A]"
                 />
               </div>
 
@@ -1404,7 +1302,7 @@ export default function AdminPage() {
                         }
                       }
                     }}
-                    className="flex-1 px-3.5 py-2 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#e97819]"
+                    className="flex-1 px-3.5 py-2 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#10383A]"
                   />
                   <button
                     type="button"
@@ -1414,7 +1312,7 @@ export default function AdminPage() {
                         setFeatureInput('');
                       }
                     }}
-                    className="px-3 py-2 rounded-lg bg-[#fff4eb] border border-[#ffd8be] hover:bg-[#ffe8d7] text-[#e97819] font-bold"
+                    className="px-3 py-2 rounded-lg bg-[#eaf3f0] border border-[#b8dbd2] hover:bg-[#d8ede7] text-[#10383A] font-bold"
                   >
                     <Plus size={14} />
                   </button>
@@ -1454,7 +1352,7 @@ export default function AdminPage() {
                         }
                       }
                     }}
-                    className="flex-1 px-3.5 py-2 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#e97819]"
+                    className="flex-1 px-3.5 py-2 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#10383A]"
                   />
                   <button
                     type="button"
@@ -1464,7 +1362,7 @@ export default function AdminPage() {
                         setMachineryInput('');
                       }
                     }}
-                    className="px-3 py-2 rounded-lg bg-[#fff4eb] border border-[#ffd8be] hover:bg-[#ffe8d7] text-[#e97819] font-bold"
+                    className="px-3 py-2 rounded-lg bg-[#eaf3f0] border border-[#b8dbd2] hover:bg-[#d8ede7] text-[#10383A] font-bold"
                   >
                     <Plus size={14} />
                   </button>
@@ -1513,7 +1411,7 @@ export default function AdminPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-5 py-2.5 rounded-xl bg-[#e97819] hover:bg-[#d56a12] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                  className="px-5 py-2.5 rounded-xl bg-[#10383A] hover:bg-[#164a4d] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
                 >
                   {submitting ? (
                     <>

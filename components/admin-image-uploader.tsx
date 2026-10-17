@@ -82,7 +82,7 @@ export function AdminImageUploader({
             onClick={() => setTab('upload')}
             className={`px-2.5 py-1 rounded-md font-semibold transition-all ${
               tab === 'upload'
-                ? 'bg-white text-[#e97819] shadow-2xs'
+                ? 'bg-white text-[#10383A] shadow-2xs'
                 : 'text-[#6e6a60] hover:text-[#1c1d1f]'
             }`}
           >
@@ -93,7 +93,7 @@ export function AdminImageUploader({
             onClick={() => setTab('preset')}
             className={`px-2.5 py-1 rounded-md font-semibold transition-all ${
               tab === 'preset'
-                ? 'bg-white text-[#e97819] shadow-2xs'
+                ? 'bg-white text-[#10383A] shadow-2xs'
                 : 'text-[#6e6a60] hover:text-[#1c1d1f]'
             }`}
           >
@@ -129,18 +129,18 @@ export function AdminImageUploader({
               onClick={() => fileInputRef.current?.click()}
               className={`cursor-pointer rounded-xl border-2 border-dashed p-6 text-center transition-all ${
                 dragOver
-                  ? 'border-[#e97819] bg-[#fff8f2]'
-                  : 'border-[#ded7cb] bg-[#faf8f2] hover:border-[#e97819] hover:bg-white'
+                  ? 'border-[#10383A] bg-[#f0f7f5]'
+                  : 'border-[#ded7cb] bg-[#faf8f2] hover:border-[#10383A] hover:bg-white'
               }`}
             >
               {uploading ? (
-                <div className="flex flex-col items-center justify-center py-3 text-[#e97819]">
+                <div className="flex flex-col items-center justify-center py-3 text-[#10383A]">
                   <Loader2 size={24} className="animate-spin mb-1.5" />
                   <span className="text-xs font-bold">Uploading image...</span>
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center py-2">
-                  <div className="w-11 h-11 rounded-full bg-[#fff4eb] border border-[#ffd8be] flex items-center justify-center text-[#e97819] mb-2 shadow-2xs">
+                  <div className="w-11 h-11 rounded-full bg-[#eaf3f0] border border-[#b8dbd2] flex items-center justify-center text-[#10383A] mb-2 shadow-2xs">
                     <UploadCloud size={22} />
                   </div>
                   <p className="text-xs font-bold text-[#1c1d1f]">
@@ -201,7 +201,7 @@ export function AdminImageUploader({
             placeholder="/catalog/brochures.jpg or https://..."
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="w-full px-3.5 py-2 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] text-xs placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#e97819]"
+            className="w-full px-3.5 py-2 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] text-xs placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#10383A]"
           />
 
           <div>
@@ -216,7 +216,7 @@ export function AdminImageUploader({
                     onClick={() => onChange(p.url)}
                     className={`group relative rounded-lg border overflow-hidden p-1 text-left transition-all cursor-pointer ${
                       isSelected
-                        ? 'border-[#e97819] ring-2 ring-[#e97819]/30 bg-[#fff5eb]'
+                        ? 'border-[#10383A] ring-2 ring-[#10383A]/30 bg-[#eaf3f0]'
                         : 'border-[#e5dfd4] bg-[#faf8f2] hover:border-[#c5beaf]'
                     }`}
                   >
