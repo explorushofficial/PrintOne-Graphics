@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { ArrowRight, Eye } from 'lucide-react';
 import type { Service } from '@/data/services';
 
@@ -38,7 +39,7 @@ export function ServiceCard({
             <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-[1.5px] transition-opacity duration-300 group-hover:opacity-100">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-bold text-[#10383A] shadow-sm">
                 <Eye size={12} className="text-[#10383A]" />
-                Inspect Details
+                View Image
               </span>
             </div>
           </div>
@@ -65,20 +66,17 @@ export function ServiceCard({
         </p>
       </div>
 
-      {/* Outer Action: Clean View Details Button (No Add to List or WhatsApp here) */}
-      <div className="mt-3 sm:mt-4 pt-3 border-t border-[#ede7de]">
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleSelect();
-          }}
-          className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-[#10383A] bg-white py-2 px-2 sm:px-3 text-[11px] sm:text-xs font-bold text-[#10383A] transition-all hover:bg-[#10383A] hover:text-white"
-          data-testid={`button-view-details-${service.id}`}
+      {/* Action Button: Get Quote */}
+      <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-[#ede7de]">
+        <Link
+          href={`/quote?service=${encodeURIComponent(service.title)}`}
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#10383A] py-2 px-3 text-[11px] sm:text-xs font-bold text-white transition-all hover:bg-[#164a4d] shadow-2xs group/btn"
+          data-testid={`button-get-quote-${service.id}`}
         >
-          <span>View Details</span>
-          <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
-        </button>
+          <span>Get Quote</span>
+          <ArrowRight size={13} className="transition-transform group-hover/btn:translate-x-0.5" />
+        </Link>
       </div>
     </article>
   );

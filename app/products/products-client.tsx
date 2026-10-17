@@ -34,26 +34,25 @@ export function ProductsClient({ products }: { products: Product[] }) {
 
   return (
     <main>
-      {/* 1. Products Hero Header */}
-      <section className="border-b border-[#e5ded4] bg-[#ede8de]">
-        <div className="page-wrap grid min-h-[300px] items-end gap-8 py-12 md:grid-cols-[1.1fr_0.9fr] md:py-16">
+      {/* 1. Products Hero Header - Centered (matching /about and /services) */}
+      <section className="border-b border-[#e5ded4] bg-[#ede8de] py-14 sm:py-16 lg:py-20">
+        <div className="page-wrap text-center max-w-4xl lg:max-w-5xl mx-auto">
           <div className="reveal">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#ded5c7] bg-[#f5efe5] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.15em] text-[#706c64]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#ded5c7] bg-[#f5efe5] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6b6760]">
               <Package size={13} className="text-[#10383A]" />
               <span>Pure Products Catalog</span>
             </div>
-            <h1 className="mt-4 max-w-3xl font-display text-[clamp(2.4rem,5.5vw,4.5rem)] font-extrabold leading-[.95] tracking-[-.06em]">
-              Precision Printed Products &amp;<br />
-              <span className="text-[#DAA112]">Branded Merchandise.</span>
+
+            <h1 className="mt-4 font-display text-[clamp(1.65rem,3vw,2.85rem)] font-extrabold leading-[1.15] tracking-[-.035em] text-[#1c1d1f]">
+              <span className="block sm:whitespace-nowrap">Precision Printed Products &amp;</span>
+              <span className="block text-[#DAA112] sm:whitespace-nowrap">Branded Merchandise.</span>
             </h1>
-          </div>
-          <div className="pb-1 text-xs sm:text-sm leading-relaxed text-[#615e58]">
-            <p>
-              Explore our comprehensive range of commercial printed stationery, books, corporate gifting items, packaging boxes, and display merchandise.
-            </p>
-            <p className="mt-3">
-              Click &quot;View Details&quot; on any product to inspect fine tactile specifications, select quantities for your enquiry list, or consult directly on WhatsApp.
-            </p>
+
+            <div className="mx-auto mt-6 max-w-3xl lg:max-w-4xl space-y-3 text-center text-[15px] sm:text-[16px] leading-[1.75] text-[#524f48]">
+              <p>
+                Explore our comprehensive range of commercial printed stationery, books, corporate gifting items, packaging boxes, and display merchandise.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -64,7 +63,7 @@ export function ProductsClient({ products }: { products: Product[] }) {
           <div>
             <p className="eyebrow">Product Catalog ({visible.length} Items)</p>
             <p className="mt-1 text-xs sm:text-sm text-[#77736d]">
-              Click any product to inspect specifications, customize quantities, and request quotes.
+              Click any product to preview or request a tailored commercial print quote.
             </p>
           </div>
 
