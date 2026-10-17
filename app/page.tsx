@@ -1,4 +1,5 @@
 import { HeroShowcase } from '@/components/hero-showcase';
+import { AdvisoryBoard } from '@/components/advisory-board';
 import { ProductionTicker } from '@/components/production-ticker';
 import { VisionMissionValues } from '@/components/vision-mission-values';
 import { StudioPressDuality } from '@/components/studio-press-duality';
@@ -17,6 +18,9 @@ export default async function HomePage() {
     <main>
       {/* 1. Interactive Hero with Live Specimen Console & Client Value Proposition */}
       <HeroShowcase />
+
+      {/* Advisory Board Section */}
+      <AdvisoryBoard />
 
       {/* 2. Continuous Production & Core Expertise Ticker */}
       {/* <ProductionTicker /> */}

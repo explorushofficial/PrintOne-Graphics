@@ -5,10 +5,6 @@ import Link from 'next/link';
 import {
   ArrowRight,
   ArrowUpRight,
-  CheckCircle2,
-  ExternalLink,
-  Eye,
-  Layers,
   MessageCircle,
   Plus,
   X,
@@ -24,20 +20,42 @@ interface ReelItem {
   image: string;
   finish: string;
   serviceId: string;
+  isFeaturedCenter?: boolean;
 }
 
-const COLUMN_1_ITEMS: ReelItem[] = [
+const COLLAGE_ITEMS: ReelItem[] = [
+  // Row 1
   {
-    id: 'col1-1',
+    id: 'col-1',
     title: 'Integrated Annual Report',
     category: 'Annual Reports',
     spec: '320 GSM Colorplan · Copper Foil',
-    finish: 'Section Sewn Hardcover with Exposed Spine',
+    finish: 'Section Sewn Hardcover with Spine',
     image: '/annual-report.jpg',
     serviceId: 'annual-report-design',
   },
   {
-    id: 'col1-2',
+    id: 'col-2',
+    title: 'Executive Stationery Suite',
+    category: 'Stationery',
+    spec: '350 GSM Cotton Wove · Letterpress',
+    finish: 'Duplexed Card with Foil Edge Gilding',
+    image: '/catalog/corporate-stationery.jpg',
+    serviceId: 'corporate-stationery',
+  },
+  {
+    id: 'col-3',
+    title: 'Editorial Layouts & Grids',
+    category: 'Design Studio',
+    spec: 'Typographic Baseline Grids',
+    finish: 'Archival Information Architecture',
+    image: '/print-editorial.jpg',
+    serviceId: 'publication-design',
+  },
+
+  // Row 2
+  {
+    id: 'col-4',
     title: 'Rigid Luxury Packaging Box',
     category: 'Packaging',
     spec: '1200 GSM Kappa Core · Magnetic Flap',
@@ -46,7 +64,28 @@ const COLUMN_1_ITEMS: ReelItem[] = [
     serviceId: 'packaging-boxes',
   },
   {
-    id: 'col1-3',
+    id: 'col-5',
+    title: 'Curated Corporate Gifting',
+    category: 'Corporate Gifting',
+    spec: 'Custom EVA Foam Inlays · Laser Etch',
+    finish: 'Premium Curated Corporate Keepsakes',
+    image: '/corporate-gifting.jpg',
+    serviceId: 'gift-sets',
+    isFeaturedCenter: true, // Prominent center focal card
+  },
+  {
+    id: 'col-6',
+    title: 'Hardbound Diaries & Planners',
+    category: 'Publications',
+    spec: 'Italian Thermo PU Cover · Silk Ribbon',
+    finish: 'Gilt Edge Foiling with Custom Deboss',
+    image: '/catalog/diaries.jpg',
+    serviceId: 'diaries',
+  },
+
+  // Row 3
+  {
+    id: 'col-7',
     title: 'Institutional Publications',
     category: 'Books & Publishing',
     spec: '120 GSM Munken Pure · Smyth Sewn',
@@ -55,82 +94,16 @@ const COLUMN_1_ITEMS: ReelItem[] = [
     serviceId: 'books-publications',
   },
   {
-    id: 'col1-4',
-    title: 'Executive Stationery Suite',
-    category: 'Brand Collateral',
-    spec: '350 GSM Cotton Wove · Letterpress',
-    finish: 'Duplexed Card with Foil Edge Gilding',
-    image: '/catalog/corporate-stationery.jpg',
-    serviceId: 'corporate-stationery',
-  },
-  {
-    id: 'col1-5',
-    title: 'Konica Minolta AccurioPress C4080',
-    category: 'In-House Press',
-    spec: '81 A4 ppm · 1300mm Long-Sheet',
-    finish: 'Duplex Banner & Inline Booklet Finishing',
-    image: '/client-assets/machinery/accuriopress-c4080.png',
-    serviceId: 'commercial-printing',
-  },
-  {
-    id: 'col1-6',
-    title: 'Product Catalogues',
+    id: 'col-8',
+    title: 'Commercial Print & Catalogues',
     category: 'Commercial Print',
     spec: '170 GSM Silk Text · Delta-E Calibrated',
     finish: 'Multi-Gatefold with Silk Spot Varnish',
-    image: '/catalog/product-catalogues.jpg',
-    serviceId: 'product-catalogues',
-  },
-];
-
-const COLUMN_2_ITEMS: ReelItem[] = [
-  {
-    id: 'col2-1',
-    title: 'Editorial Layouts & Grids',
-    category: 'Design Studio',
-    spec: 'Typographic Baseline Grids',
-    finish: 'Archival Information Architecture',
-    image: '/print-editorial.jpg',
-    serviceId: 'publication-design',
+    image: '/commercial-print.jpg',
+    serviceId: 'commercial-printing',
   },
   {
-    id: 'col2-2',
-    title: 'Thematic Cover Art',
-    category: 'Annual Reports',
-    spec: 'Curated Textures · Dual Foil Stamp',
-    finish: 'Conceptual Visual Storytelling',
-    image: '/catalog/thematic-cover-design.jpg',
-    serviceId: 'thematic-cover-design',
-  },
-  {
-    id: 'col2-3',
-    title: 'Konica Minolta AccurioPress C7100',
-    category: 'Production Flagship',
-    spec: '100 A4 ppm · Heavy Media 400 GSM',
-    finish: '3600 x 2400 DPI High-Definition Full Color',
-    image: '/client-assets/machinery/accuriopress-c7100.png',
-    serviceId: 'digital-printing',
-  },
-  {
-    id: 'col2-4',
-    title: 'Curated Corporate Gifting',
-    category: 'Gifting & Kits',
-    spec: 'Custom EVA Foam Inlays',
-    finish: 'Laser-Etched Branded Keepsakes',
-    image: '/corporate-gifting.jpg',
-    serviceId: 'gift-sets',
-  },
-  {
-    id: 'col2-5',
-    title: 'Hardbound Diaries & Planners',
-    category: 'Publications',
-    spec: 'Italian Thermo PU Cover · Silk Ribbon',
-    finish: 'Gilt Edge Foiling with Custom Debossing',
-    image: '/catalog/diaries.jpg',
-    serviceId: 'diaries',
-  },
-  {
-    id: 'col2-6',
+    id: 'col-9',
     title: 'Bespoke Gatefold Brochures',
     category: 'Brand Collateral',
     spec: '250 GSM Uncoated Linen',
@@ -167,28 +140,35 @@ export function HeroShowcase() {
         aria-hidden="true"
       />
 
-      <div className="page-wrap relative z-10 pt-8 pb-12 lg:pt-10 lg:pb-14">
-        
-        {/* Main Hero Grid: Typographic Anchor (Left) + Vertical Kinetic Scrollers (Right) */}
-        <div className="mt-2 grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
-          {/* Left Column: Bold, High-Impact Editorial Statement */}
-          <div className="reveal">
-            <h1 className="mt-5 font-display text-[clamp(2.5rem,4.8vw,4.8rem)] font-extrabold leading-[0.93] tracking-[-.06em] text-[#10383A]">
+      {/* Two-Part Split Layout: Left Content (50%) + Full Right-Side Collage (50%) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 items-stretch min-h-[640px] xl:min-h-[700px]">
+        {/* Left Part: Editorial Statement & Content */}
+        <div className="relative z-10 flex flex-col justify-center px-6 py-10 sm:px-10 sm:py-12 lg:px-12 xl:px-16 2xl:px-20 lg:py-12">
+          <div className="max-w-[620px] w-full lg:ml-auto">
+            <h1 className="font-display text-[clamp(2.1rem,3.2vw,3.4rem)] font-extrabold leading-[0.98] tracking-[-.04em] text-[#10383A]">
               YOUR TRUSTED<br />
               <span className="text-[#DAA112]">PRINT PARTNER.</span><br />
               FROM CONCEPT TO FINISH.
             </h1>
 
-            <p className="mt-4 font-sans text-xs sm:text-sm font-bold uppercase tracking-[.14em] text-[#666E51]">
+            <p className="mt-3.5 font-sans text-xs sm:text-sm font-bold uppercase tracking-[.14em] text-[#666E51]">
               Your Trusted Partner for Design, Digital Printing &amp; Corporate Gifting
             </p>
 
-            <p className="mt-3 max-w-[500px] text-[15px] sm:text-[16px] leading-[1.65] text-[#55524c]">
-              From concept and creative design to premium printing and finishing, we deliver quality, precision and reliable service for every project. Based in Byculla East, Mumbai, serving organisations across India.
-            </p>
+            <div className="mt-4 space-y-2.5 text-[13.5px] sm:text-[14.5px] leading-[1.62] text-[#55524c]">
+              <p>
+                Established in 2021, PrintOne Graphics is a creative design and printing company based in Byculla East, Mumbai, delivering quality printing solutions to organisations across India.
+              </p>
+              <p>
+                From concept development and creative design to premium printing, binding, and finishing, we combine creativity, precision, and attention to detail to bring every project to life. Our commitment to quality, timely delivery, and reliable service ensures that every project meets our clients’ expectations.
+              </p>
+              <p>
+                At PrintOne Graphics, we believe every print tells a story. Whether it’s books, annual reports, brochures, corporate publications, or customised print materials, we turn ideas into impactful printed experiences.
+              </p>
+            </div>
 
             {/* Quick Category Visual Links */}
-            <div className="mt-6 flex flex-wrap gap-2 text-xs">
+            <div className="mt-5 flex flex-wrap gap-2 text-xs">
               {[
                 { label: 'Annual Reports', tag: 'Ideas to artwork' },
                 { label: 'Commercial & Digital Print', tag: 'Business essentials' },
@@ -199,7 +179,7 @@ export function HeroShowcase() {
                 <Link
                   key={cat.label}
                   href={`/products?tag=${encodeURIComponent(cat.tag)}`}
-                  className="rounded border border-[#ded6c9] bg-white/70 px-3 py-1.5 font-bold text-[#45433d] transition-all hover:border-[#10383A] hover:bg-white hover:text-[#10383A]"
+                  className="rounded border border-[#ded6c9] bg-white/70 px-3 py-1 text-[11px] font-bold text-[#45433d] transition-all hover:border-[#10383A] hover:bg-white hover:text-[#10383A]"
                 >
                   {cat.label}
                 </Link>
@@ -207,7 +187,7 @@ export function HeroShowcase() {
             </div>
 
             {/* Action Buttons */}
-            <div className="mt-8 flex flex-wrap items-center gap-3.5">
+            <div className="mt-6 flex flex-wrap items-center gap-3.5">
               <Link href="/services" className="btn-primary group" data-testid="link-hero-services">
                 <span>Explore our services</span>
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -220,130 +200,80 @@ export function HeroShowcase() {
             </div>
 
             {/* Bottom Proof Metrics Ribbon */}
-            <div className="mt-8 grid grid-cols-3 gap-3 border-t border-[#e2dacf] pt-5">
+            <div className="mt-6 grid grid-cols-3 gap-3 border-t border-[#e2dacf] pt-4">
               <div>
-                <span className="block font-display text-2xl font-black text-[#10383A]">2021</span>
+                <span className="block font-display text-xl sm:text-2xl font-black text-[#10383A]">2021</span>
                 <span className="mt-0.5 block text-[10px] font-bold text-[#768886] uppercase tracking-wider">
                   Established Mumbai
                 </span>
               </div>
 
               <div>
-                <span className="block font-display text-2xl font-black text-[#10383A]">In-House</span>
+                <span className="block font-display text-xl sm:text-2xl font-black text-[#10383A]">In-House</span>
                 <span className="mt-0.5 block text-[10px] font-bold text-[#768886] uppercase tracking-wider">
                   Design &amp; Press Facility
                 </span>
               </div>
 
               <div>
-                <span className="block font-display text-2xl font-black text-[#10383A]">Pan-India</span>
+                <span className="block font-display text-xl sm:text-2xl font-black text-[#10383A]">Pan-India</span>
                 <span className="mt-0.5 block text-[10px] font-bold text-[#768886] uppercase tracking-wider">
                   Dependable Delivery
                 </span>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Right Column: Dynamic Dual-Column Vertical Infinite Scroller */}
-          <div className="relative h-[530px] sm:h-[590px] overflow-hidden rounded-xl border border-[#ded7cb] bg-[#ede7dc]/40 p-3 shadow-inner">
-            {/* Top & Bottom Gradient Fades for Infinite Horizon Look */}
-            <div className="pointer-events-none absolute top-0 left-0 right-0 z-20 h-16 bg-gradient-to-b from-[#faf8f2] via-[#faf8f2]/70 to-transparent" />
-            <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 h-16 bg-gradient-to-t from-[#faf8f2] via-[#faf8f2]/70 to-transparent" />
-
-            {/* Subtle Overlay Hint */}
-            <div className="pointer-events-none absolute top-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 rounded-full bg-[#10383A]/85 px-3 py-1 text-[10px] font-bold uppercase tracking-[.14em] text-white shadow-md backdrop-blur-sm">
-              <Eye size={12} className="text-[#809276]" />
-              <span>Click any piece to inspect</span>
-            </div>
-
-            {/* The 2 Vertical Rolling Columns */}
-            <div className="grid h-full grid-cols-2 gap-3">
-              {/* Column 1: Rolling Upward */}
+        {/* Right Part: Full Height & Width Constant 3x3 Photo Collage */}
+        <div className="relative w-full h-full self-stretch border-t lg:border-t-0 lg:border-l border-[#ded7cb] bg-[#ded7cb]">
+          <div className="grid grid-cols-3 grid-rows-3 h-full min-h-[460px] sm:min-h-[560px] lg:min-h-full gap-[2px] bg-[#ded7cb]">
+            {COLLAGE_ITEMS.map((item) => (
               <div
-                className="flex flex-col gap-3 animate-scroll-up"
-                style={{ willChange: 'transform' }}
+                key={item.id}
+                onClick={() => handleCardClick(item)}
+                className={`group relative cursor-pointer overflow-hidden bg-[#1e2022] transition-all duration-300 ${
+                  item.isFeaturedCenter
+                    ? 'ring-2 ring-inset ring-[#DAA112] z-10'
+                    : 'hover:brightness-105'
+                }`}
+                title={`Inspect ${item.title}`}
               >
-                {[...COLUMN_1_ITEMS, ...COLUMN_1_ITEMS].map((item, idx) => (
-                  <div
-                    key={`${item.id}-${idx}`}
-                    onClick={() => handleCardClick(item)}
-                    className="group relative cursor-pointer overflow-hidden rounded-lg border border-[#ded7cd] bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#10383A]"
-                    title={`Inspect ${item.title}`}
+                {/* Full-bleed responsive image */}
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                  loading="lazy"
+                />
+
+                {/* Ambient dark gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-75 group-hover:opacity-90 transition-opacity" />
+
+                {/* Top Badge */}
+                <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10">
+                  <span
+                    className={`rounded px-1.5 py-0.5 text-[8px] sm:text-[9.5px] font-bold uppercase tracking-wider backdrop-blur-sm ${
+                      item.isFeaturedCenter
+                        ? 'bg-[#DAA112] text-[#10383A] font-black shadow-md'
+                        : 'bg-black/60 text-white'
+                    }`}
                   >
-                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#242628]">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-108"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
+                    {item.category}
+                  </span>
+                </div>
 
-                      <div className="absolute top-2 left-2 rounded bg-black/60 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
-                        {item.category}
-                      </div>
-
-                      <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white">
-                        <h4 className="font-display text-xs sm:text-sm font-bold leading-tight">
-                          {item.title}
-                        </h4>
-                        <p className="mt-1 line-clamp-1 text-[10px] font-medium text-white/80">
-                          {item.spec}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between border-t border-[#f0ebd5] px-2.5 py-1.5 text-[10px] font-bold text-[#10383A] bg-[#faf8f2]">
-                      <span className="truncate">{item.finish}</span>
-                      <ExternalLink size={11} className="flex-none ml-1 opacity-70 group-hover:opacity-100" />
-                    </div>
-                  </div>
-                ))}
+                {/* Bottom Overlay Title & Finish Info */}
+                <div className="absolute bottom-2 left-2 right-2 sm:bottom-3 sm:left-3 sm:right-3 text-white z-10">
+                  <h4 className="font-display text-[11px] sm:text-[13px] font-bold leading-tight line-clamp-1 group-hover:text-[#DAA112] transition-colors">
+                    {item.title}
+                  </h4>
+                  <p className="hidden sm:block mt-0.5 text-[9px] sm:text-[10px] font-medium text-white/80 line-clamp-1">
+                    {item.finish}
+                  </p>
+                </div>
               </div>
-
-              {/* Column 2: Rolling Downward */}
-              <div
-                className="flex flex-col gap-3 animate-scroll-down"
-                style={{ willChange: 'transform' }}
-              >
-                {[...COLUMN_2_ITEMS, ...COLUMN_2_ITEMS].map((item, idx) => (
-                  <div
-                    key={`${item.id}-${idx}`}
-                    onClick={() => handleCardClick(item)}
-                    className="group relative cursor-pointer overflow-hidden rounded-lg border border-[#ded7cd] bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#10383A]"
-                    title={`Inspect ${item.title}`}
-                  >
-                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#242628]">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-108"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
-
-                      <div className="absolute top-2 left-2 rounded bg-black/60 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
-                        {item.category}
-                      </div>
-
-                      <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white">
-                        <h4 className="font-display text-xs sm:text-sm font-bold leading-tight">
-                          {item.title}
-                        </h4>
-                        <p className="mt-1 line-clamp-1 text-[10px] font-medium text-white/80">
-                          {item.spec}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between border-t border-[#f0ebd5] px-2.5 py-1.5 text-[10px] font-bold text-[#666E51] bg-[#faf8f2]">
-                      <span className="truncate">{item.finish}</span>
-                      <ExternalLink size={11} className="flex-none ml-1 opacity-70 group-hover:opacity-100" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
