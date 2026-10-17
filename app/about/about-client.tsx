@@ -110,7 +110,7 @@ export function AboutClient() {
       </section>
 
       {/* 3. Why Choose Us (6 Client Pillars) */}
-      <section className="section-space border-b border-[#e2d9cd] bg-[#ede7dc]">
+      <section className="section-space border-b border-[#e2d9cd] ">
         <div className="page-wrap">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div className="max-w-xl">

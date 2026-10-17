@@ -65,6 +65,50 @@ export const servicesData: ServiceItem[] = [
     ],
   },
   {
+    id: 'esg-sustainability-reporting',
+    number: '01B',
+    title: 'ESG & Sustainability Reporting',
+    category: 'Corporate Stakeholder Reporting',
+    tagFilter: 'Corporate Reporting',
+    shortDescription:
+      'GRI & BRSR-compliant sustainability reports, climate impact disclosures, data-dense infographics, and certified eco-friendly recycled paper fabrication.',
+    fullDescription:
+      'We partner with BSE/NSE listed corporations and institutions to craft world-class ESG, BRSR, and corporate sustainability disclosures. Our team ensures rigorous compliance formatting, bespoke infographic data visualization, and carbon-neutral printing on FSC-certified and recycled stocks.',
+    image: '/annual-report.jpg',
+    accent: '#2c9fc3',
+    features: [
+      'GRI, BRSR & SDG-aligned thematic formatting',
+      'Data-dense carbon & emissions infographics',
+      'FSC-certified 100% recycled paper stocks',
+      'Zero-emission vegetable inks & eco PUR binding',
+      'Interactive digital PDF flipbooks for investors',
+    ],
+    scopeOfWork: [
+      'Narrative structuring for environmental and social metrics',
+      'High-fidelity data visualization and sustainability charts',
+      'BRSR and statutory compliance table typesetting',
+      'Eco-certified substrate selection and carbon accounting',
+      'Fast-turnaround proofing and stakeholder batch delivery',
+    ],
+    machinery: [
+      'Konica Minolta AccurioPress C7100 Digital Production Engine',
+      'Heidelberg 4-Color Speedmaster Offset Press',
+      'Automated PUR Lay-Flat Bookbinding Line',
+    ],
+    materials: [
+      '100% Post-Consumer Recycled & FSC Uncoated Papers (90 - 140 GSM)',
+      'Chlorine-Free Textured European Cover Stock (250 - 320 GSM)',
+      'Water-Based Eco Barrier Coatings',
+    ],
+    turnaround: '48-hour dummy proofs; 3–5 working days for full production run.',
+    useCases: [
+      'Corporate ESG & Sustainability Reports',
+      'Business Responsibility and Sustainability Reporting (BRSR)',
+      'Integrated Climate & Carbon Disclosures',
+      'Social Impact & CSR Annual Overviews',
+    ],
+  },
+  {
     id: 'commercial-digital-printing',
     number: '02',
     title: 'Commercial & Digital Printing',

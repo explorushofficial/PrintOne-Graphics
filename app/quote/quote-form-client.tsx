@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import {
   FileText,
@@ -146,6 +146,20 @@ export function QuoteFormClient() {
   const [copied, setCopied] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [showMobilePreview, setShowMobilePreview] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const serviceParam = params.get('service');
+      if (serviceParam) {
+        setFormData((prev) => ({
+          ...prev,
+          jobTitle: prev.jobTitle || serviceParam,
+          freeFormNotes: prev.freeFormNotes || `Inquiry regarding: ${serviceParam}`,
+        }));
+      }
+    }
+  }, []);
 
   const updateField = <K extends keyof FormState>(field: K, value: FormState[K]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
