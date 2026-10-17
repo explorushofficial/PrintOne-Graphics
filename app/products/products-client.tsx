@@ -59,48 +59,50 @@ export function ProductsClient({ products }: { products: Product[] }) {
 
       {/* 2. Catalog & Filter Bar */}
       <section id="catalog-grid-section" className="page-wrap py-10 sm:py-14">
-        <div className="flex flex-col justify-between gap-6 border-b border-[#ddd6cc] pb-6 lg:flex-row lg:items-center">
-          <div>
-            <p className="eyebrow">Product Catalog ({visible.length} Items)</p>
-            <p className="mt-1 text-xs sm:text-sm text-[#77736d]">
-              Click any product to preview or request a tailored commercial print quote.
-            </p>
-          </div>
+        {/* Header & Filter Controls */}
+        <div className="border-b border-[#ddd6cc] pb-6">
+          {/* Top Row: Title/Subtitle on Left, Search Bar on Right */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="eyebrow">Product Catalog ({visible.length} Items)</p>
+              <p className="mt-1 text-xs sm:text-sm text-[#77736d]">
+                Click any product to preview or request a tailored commercial print quote.
+              </p>
+            </div>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            {/* Search Input */}
-            <div className="relative">
+            {/* Search Input (Above filters, right aligned on desktop) */}
+            <div className="relative w-full sm:w-72 shrink-0">
               <Search
                 size={14}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8e8a82]"
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8e8a82]"
               />
               <input
                 type="text"
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="h-10 w-full sm:w-56 rounded border border-[#d9d2c8] bg-white pl-9 pr-3 text-xs placeholder:text-[#99958d] focus:border-[#10383A] focus:outline-none"
+                className="h-10 w-full rounded-lg border border-[#d9d2c8] bg-white pl-9 pr-3 text-xs placeholder:text-[#99958d] focus:border-[#10383A] focus:outline-none transition-colors shadow-2xs"
               />
             </div>
+          </div>
 
-            {/* Filter Pills */}
-            <div className="flex flex-wrap gap-1.5" aria-label="Filter products">
-              {filters.map((item) => (
-                <button
-                  key={item}
-                  onClick={() => setFilter(item)}
-                  aria-pressed={filter === item}
-                  className={`rounded px-3 py-2 text-[10px] font-bold transition-all ${
-                    filter === item
-                      ? 'border border-[#10383A] bg-[#10383A] text-white shadow-sm'
-                      : 'border border-[#d9d2c8] bg-[#fbf9f4] text-[#696761] hover:border-[#10383A] hover:text-[#10383A]'
-                  }`}
-                  data-testid={`button-filter-${item.toLowerCase().replaceAll(/[^a-z0-9]+/g, '-')}`}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
+          {/* Bottom Row: All Filter Buttons in One Single Clean Line */}
+          <div className="mt-5 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none" aria-label="Filter products">
+            {filters.map((item) => (
+              <button
+                key={item}
+                onClick={() => setFilter(item)}
+                aria-pressed={filter === item}
+                className={`shrink-0 rounded-lg px-3.5 py-2 text-xs font-bold transition-all whitespace-nowrap ${
+                  filter === item
+                    ? 'border border-[#10383A] bg-[#10383A] text-white shadow-xs'
+                    : 'border border-[#d9d2c8] bg-white text-[#696761] hover:border-[#10383A] hover:text-[#10383A]'
+                }`}
+                data-testid={`button-filter-${item.toLowerCase().replaceAll(/[^a-z0-9]+/g, '-')}`}
+              >
+                {item}
+              </button>
+            ))}
           </div>
         </div>
 

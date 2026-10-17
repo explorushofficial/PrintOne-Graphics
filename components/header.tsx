@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FileText, Menu, ShoppingBag, X } from 'lucide-react';
-import { useCart } from '@/context/cart-context';
+import { FileText, Menu, X } from 'lucide-react';
 
 const links = [
   { href: '/', label: 'Home' },
@@ -17,12 +16,6 @@ const links = [
 export function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const { count, setIsCartOpen } = useCart();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   if (pathname?.startsWith('/admin')) {
     return null;
@@ -68,14 +61,18 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-9 md:flex" aria-label="Main navigation">
+          <nav className="hidden items-center gap-2 md:flex" aria-label="Main navigation">
             {links.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`nav-link ${isActive ? 'active' : ''}`}
+                  className={`px-3.5 py-2 rounded-lg text-[13px] font-bold transition-all duration-200 ${
+                    isActive
+                      ? 'bg-[#DAA112] text-white shadow-xs'
+                      : 'text-[#10383A] hover:bg-[#DAA112] hover:text-white'
+                  }`}
                   data-testid={`link-nav-${link.label.toLowerCase().replaceAll(' ', '-')}`}
                 >
                   {link.label}
@@ -87,10 +84,10 @@ export function Header() {
           <div className="flex items-center gap-2.5">
             <Link
               href="/quote"
-              className={`inline-flex h-10 sm:h-11 items-center gap-2 px-3.5 sm:px-5 text-[12px] sm:text-[13px] font-bold transition-all shadow-sm ${
+              className={`inline-flex h-10 sm:h-11 items-center gap-2 rounded-lg px-4 sm:px-5 text-[12px] sm:text-[13px] font-bold transition-all duration-200 shadow-sm ${
                 pathname === '/quote'
-                  ? 'bg-[#10383A] text-white ring-2 ring-[#809276]'
-                  : 'bg-[#10383A] hover:bg-[#1a4e50] text-white'
+                  ? 'bg-[#DAA112] text-white'
+                  : 'bg-[#10383A] text-white hover:bg-[#DAA112] hover:text-white'
               }`}
               data-testid="button-nav-quote"
             >
@@ -99,26 +96,7 @@ export function Header() {
             </Link>
 
             <button
-              type="button"
-              className="relative grid h-10 sm:h-11 w-10 sm:w-11 place-items-center border border-[#768886]/40 bg-white text-[#10383A] hover:border-[#10383A] hover:text-[#10383A] transition-colors shadow-sm"
-              aria-label={`Open inquiry list (${mounted ? count : 0} items)`}
-              title="Inquiry list"
-              onClick={() => setIsCartOpen(true)}
-              data-testid="button-open-cart"
-            >
-              <ShoppingBag size={18} strokeWidth={1.9} />
-              {mounted && count > 0 && (
-                <span
-                  className="absolute -top-1.5 -right-1.5 grid h-4 min-w-4 sm:h-5 sm:min-w-5 place-items-center rounded-full bg-[#10383A] px-1 text-[10px] font-extrabold text-white shadow-sm ring-2 ring-[#faf8f2]"
-                  data-testid="text-cart-count"
-                >
-                  {count}
-                </span>
-              )}
-            </button>
-
-            <button
-              className="grid h-10 sm:h-11 w-10 sm:w-11 place-items-center border border-[#768886]/40 text-[#10383A] md:hidden hover:border-[#10383A] hover:text-[#10383A] transition-colors"
+              className="grid h-10 sm:h-11 w-10 sm:w-11 place-items-center rounded-lg border border-[#768886]/40 text-[#10383A] md:hidden hover:border-[#DAA112] hover:bg-[#DAA112] hover:text-white transition-all"
               aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen(!menuOpen)}
@@ -131,15 +109,17 @@ export function Header() {
 
         {menuOpen && (
           <nav className="border-t border-[#e8e1d8] bg-[#faf8f2] px-5 py-4 md:hidden" aria-label="Mobile navigation">
-            <div className="mx-auto flex max-w-[600px] flex-col">
+            <div className="mx-auto flex max-w-[600px] flex-col gap-1">
               {links.map((link) => {
                 const isActive = pathname === link.href;
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`border-b border-[#e8e1d8] py-3 text-sm font-semibold transition-colors ${
-                      isActive ? 'text-[#10383A] font-bold' : 'text-[#55524d]'
+                    className={`rounded-lg px-3.5 py-2.5 text-sm font-bold transition-all ${
+                      isActive
+                        ? 'bg-[#DAA112] text-white'
+                        : 'text-[#10383A] hover:bg-[#DAA112] hover:text-white'
                     }`}
                     onClick={() => setMenuOpen(false)}
                     data-testid={`link-mobile-${link.label.toLowerCase().replaceAll(' ', '-')}`}
@@ -148,21 +128,13 @@ export function Header() {
                   </Link>
                 );
               })}
-              <button
-                type="button"
-                className="mt-3 flex items-center justify-center gap-2 border border-[#768886]/40 bg-white py-3 text-center text-xs font-bold text-[#10383A] shadow-sm hover:border-[#10383A] transition-colors"
-                onClick={() => {
-                  setMenuOpen(false);
-                  setIsCartOpen(true);
-                }}
-                data-testid="button-mobile-cart"
-              >
-                <ShoppingBag size={15} />
-                <span>Inquiry List {mounted && count > 0 ? `(${count})` : ''}</span>
-              </button>
               <Link
                 href="/quote"
-                className="mt-2 flex items-center justify-center gap-2 bg-[#10383A] py-3 text-center text-xs font-bold text-white shadow-sm hover:bg-[#1a4e50] transition-colors"
+                className={`mt-2 flex items-center justify-center gap-2 rounded-lg py-3 text-center text-xs font-bold transition-all shadow-sm ${
+                  pathname === '/quote'
+                    ? 'bg-[#DAA112] text-white'
+                    : 'bg-[#10383A] text-white hover:bg-[#DAA112] hover:text-white'
+                }`}
                 onClick={() => setMenuOpen(false)}
                 data-testid="link-mobile-quote-cta"
               >
@@ -176,3 +148,4 @@ export function Header() {
     </>
   );
 }
+
