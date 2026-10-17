@@ -33,11 +33,11 @@ export default async function HomePage() {
       {/* 6. Filterable Capabilities & Services Grid */}
       <InteractiveCapabilities initialProducts={products} />
 
-      {/* 7. Client Testimonials (Trusted by Businesses. Proven by Results) */}
-      <Testimonials />
-
-      {/* 8. The 4-Phase Production Journey: From Concept to Delivery */}
+      {/* 7. The 4-Phase Production Journey: From Concept to Delivery */}
       <ProductionJourney />
+
+      {/* 8. Client Testimonials (Trusted by Businesses. Proven by Results) */}
+      <Testimonials />
     </main>
   );
 }

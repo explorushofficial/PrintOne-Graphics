@@ -9,7 +9,7 @@ export function StudioPressDuality() {
   const [activeSide, setActiveSide] = useState<'both' | 'studio' | 'press'>('both');
 
   return (
-    <section className="section-space border-b border-[#e2dad0] bg-[#f5f1e8]">
+    <section className="section-space border-b border-[#e2dad0] bg-[#809276]">
       <div className="page-wrap">
         {/* Punchy Visual Header */}
         <motion.div
@@ -20,12 +20,12 @@ export function StudioPressDuality() {
           className="flex flex-col md:flex-row md:items-end justify-between gap-4"
         >
           <div>
-            <p className="eyebrow">Two Worlds · One Roof</p>
-            <h2 className="mt-3 font-display text-3xl sm:text-5xl font-extrabold tracking-[-.055em] text-[#1e2021]">
+            <p className="eyebrow text-white">Two Worlds · One Roof</p>
+            <h2 className="mt-3 font-display text-3xl sm:text-5xl font-extrabold tracking-[-.055em] text-white">
               The Studio & The Press.
             </h2>
           </div>
-          <p className="max-w-md text-xs sm:text-sm leading-relaxed text-[#615e58]">
+          <p className="max-w-md text-xs sm:text-sm leading-relaxed text-white">
             Creative design intent and industrial press precision, living together under one Mumbai roof.
           </p>
         </motion.div>

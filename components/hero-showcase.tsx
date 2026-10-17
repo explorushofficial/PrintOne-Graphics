@@ -180,7 +180,7 @@ export function HeroShowcase() {
 
             <h1 className="mt-5 font-display text-[clamp(2.5rem,4.8vw,4.8rem)] font-extrabold leading-[0.93] tracking-[-.06em] text-[#10383A]">
               YOUR TRUSTED<br />
-              <span className="text-[#666E51]">PRINT PARTNER.</span><br />
+              <span className="text-[#DAA112]">PRINT PARTNER.</span><br />
               FROM CONCEPT TO FINISH.
             </h1>
 

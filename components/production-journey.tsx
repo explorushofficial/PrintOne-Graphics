@@ -51,7 +51,7 @@ export function ProductionJourney() {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section className="section-space border-b border-[#e2d9cd] bg-[#f7f3ec]">
+    <section className="section-space border-b border-[#e2d9cd] bg-[#809276]">
       <div className="page-wrap">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -60,12 +60,12 @@ export function ProductionJourney() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
         >
-          <p className="eyebrow">The Print One Method</p>
-          <h2 className="mt-4 font-display text-3xl sm:text-5xl font-extrabold tracking-[-.055em] text-[#1c1d1f]">
+          <p className="eyebrow text-white">The Print One Method</p>
+          <h2 className="mt-4 font-display text-3xl sm:text-5xl font-extrabold tracking-[-.055em] text-white">
             From first conversation<br />
             <span className="text-[#10383A]">to delivered impression.</span>
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-[#615e57] leading-relaxed">
+          <p className="mt-4 text-sm sm:text-base text-white leading-relaxed">
             Great print isn’t an accident. It is the result of a rigorous, multi-stage production protocol that ensures consistency across every single copy.
           </p>
         </motion.div>

@@ -22,6 +22,13 @@ const CORE_VALUES = [
     icon: ShieldCheck,
     accent: '#10383A',
     badge: 'Standard',
+    // Emerald / Spruce Crystal
+    crystalBg: 'bg-gradient-to-br from-[#10383A]/[0.08] via-white/85 to-[#10383A]/[0.02]',
+    crystalBorder: 'border-[#10383A]/20 hover:border-[#10383A]/50',
+    crystalGlow: 'hover:shadow-[0_12px_28px_-6px_rgba(16,56,58,0.16)]',
+    badgeStyle: 'bg-[#10383A]/10 text-[#10383A] border border-[#10383A]/20',
+    iconBg: 'bg-[#10383A]',
+    glowColor: '#10383A',
   },
   {
     title: 'Customer Satisfaction',
@@ -30,6 +37,13 @@ const CORE_VALUES = [
     icon: Smile,
     accent: '#2c9fc3',
     badge: 'Commitment',
+    // Aquamarine / Sapphire Crystal
+    crystalBg: 'bg-gradient-to-br from-[#2c9fc3]/[0.09] via-white/85 to-[#2c9fc3]/[0.02]',
+    crystalBorder: 'border-[#2c9fc3]/25 hover:border-[#2c9fc3]/60',
+    crystalGlow: 'hover:shadow-[0_12px_28px_-6px_rgba(44,159,195,0.18)]',
+    badgeStyle: 'bg-[#2c9fc3]/10 text-[#196b86] border border-[#2c9fc3]/25',
+    iconBg: 'bg-[#2c9fc3]',
+    glowColor: '#2c9fc3',
   },
   {
     title: 'Integrity and Transparency',
@@ -38,22 +52,43 @@ const CORE_VALUES = [
     icon: Eye,
     accent: '#cf2879',
     badge: 'Principle',
+    // Rose Quartz / Amethyst Crystal
+    crystalBg: 'bg-gradient-to-br from-[#cf2879]/[0.08] via-white/85 to-[#cf2879]/[0.02]',
+    crystalBorder: 'border-[#cf2879]/20 hover:border-[#cf2879]/50',
+    crystalGlow: 'hover:shadow-[0_12px_28px_-6px_rgba(207,40,121,0.16)]',
+    badgeStyle: 'bg-[#cf2879]/10 text-[#961a55] border border-[#cf2879]/20',
+    iconBg: 'bg-[#cf2879]',
+    glowColor: '#cf2879',
   },
   {
     title: 'Innovation and Continuous Improvement',
     description:
       'Adopting advanced digital printing technology, creative finishes, and modernized production techniques.',
     icon: Lightbulb,
-    accent: '#e7c627',
+    accent: '#d49b10',
     badge: 'Evolution',
+    // Amber Topaz Crystal
+    crystalBg: 'bg-gradient-to-br from-[#DAA112]/[0.09] via-white/85 to-[#DAA112]/[0.02]',
+    crystalBorder: 'border-[#DAA112]/25 hover:border-[#DAA112]/60',
+    crystalGlow: 'hover:shadow-[0_12px_28px_-6px_rgba(218,161,18,0.18)]',
+    badgeStyle: 'bg-[#DAA112]/15 text-[#7c5b08] border border-[#DAA112]/30',
+    iconBg: 'bg-[#c58f0e]',
+    glowColor: '#DAA112',
   },
   {
     title: 'Timely Execution',
     description:
       'Disciplined production scheduling and strict deadline adherence for AGM dates, product launches, and academic cycles.',
     icon: Clock,
-    accent: '#10383A',
+    accent: '#666E51',
     badge: 'Reliability',
+    // Forest Olive / Peridot Crystal
+    crystalBg: 'bg-gradient-to-br from-[#666E51]/[0.10] via-white/85 to-[#666E51]/[0.02]',
+    crystalBorder: 'border-[#666E51]/25 hover:border-[#666E51]/60',
+    crystalGlow: 'hover:shadow-[0_12px_28px_-6px_rgba(102,110,81,0.18)]',
+    badgeStyle: 'bg-[#666E51]/12 text-[#4d533d] border border-[#666E51]/25',
+    iconBg: 'bg-[#666E51]',
+    glowColor: '#666E51',
   },
   {
     title: 'Long-Term Partnerships',
@@ -62,6 +97,13 @@ const CORE_VALUES = [
     icon: Handshake,
     accent: '#809276',
     badge: 'Growth',
+    // Soft Sage / Celadon Crystal
+    crystalBg: 'bg-gradient-to-br from-[#809276]/[0.12] via-white/85 to-[#809276]/[0.03]',
+    crystalBorder: 'border-[#809276]/30 hover:border-[#809276]/65',
+    crystalGlow: 'hover:shadow-[0_12px_28px_-6px_rgba(128,146,118,0.20)]',
+    badgeStyle: 'bg-[#809276]/15 text-[#465440] border border-[#809276]/30',
+    iconBg: 'bg-[#6f8066]',
+    glowColor: '#809276',
   },
 ];
 
@@ -177,7 +219,7 @@ export function VisionMissionValues({ showExpertise = true }: { showExpertise?: 
             </h3>
           </div>
 
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 grid gap-3.5 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {CORE_VALUES.map((val, idx) => {
               const Icon = val.icon;
               return (
@@ -187,26 +229,34 @@ export function VisionMissionValues({ showExpertise = true }: { showExpertise?: 
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                  className="rounded-xl border border-[#ded5c7] bg-white p-6 shadow-sm transition-all hover:border-[#10383A] hover:shadow-md"
+                  whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                  className={`group relative overflow-hidden rounded-xl border p-4 sm:p-4.5 backdrop-blur-md transition-all duration-300 ${val.crystalBg} ${val.crystalBorder} ${val.crystalGlow}`}
                 >
-                  <div className="flex items-center justify-between border-b border-[#f0ecd8] pb-3">
+                  {/* Subtle crystal refraction glow in the top corner */}
+                  <div
+                    className="pointer-events-none absolute -top-8 -right-8 h-20 w-20 rounded-full blur-xl opacity-30 transition-opacity duration-300 group-hover:opacity-60"
+                    style={{ backgroundColor: val.glowColor }}
+                  />
+
+                  {/* Top Bar: Icon + Badge */}
+                  <div className="relative z-10 flex items-center justify-between border-b border-black/[0.06] pb-2.5">
                     <span
-                      className="grid h-9 w-9 place-items-center rounded-lg text-white"
-                      style={{ backgroundColor: val.accent }}
+                      className={`grid h-8 w-8 place-items-center rounded-lg text-white shadow-xs transition-transform duration-300 group-hover:scale-105 ${val.iconBg}`}
                     >
-                      <Icon size={18} />
+                      <Icon size={16} />
                     </span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#8b877f]">
+                    <span className={`rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider ${val.badgeStyle}`}>
                       {val.badge}
                     </span>
                   </div>
 
-                  <h4 className="mt-4 font-display text-lg font-bold text-[#1f2122]">
+                  {/* Title */}
+                  <h4 className="relative z-10 mt-2.5 font-display text-[15px] sm:text-base font-bold text-[#1f2122] transition-colors leading-snug">
                     {val.title}
                   </h4>
 
-                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[#5e5b54]">
+                  {/* Description */}
+                  <p className="relative z-10 mt-1 text-[11px] sm:text-xs leading-normal sm:leading-relaxed text-[#55524b]">
                     {val.description}
                   </p>
                 </motion.div>
