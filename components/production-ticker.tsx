@@ -17,7 +17,7 @@ const TICKER_ITEMS = [
 
 export function ProductionTicker() {
   return (
-    <div className="relative overflow-hidden bg-[#202223] py-4 text-[#faf8f2] border-y border-[#383a3c]">
+    <div className="relative overflow-hidden bg-[#10383A] py-4 text-[#faf8f2] border-y border-[#1a4e50]">
       <div className="animate-marquee flex items-center whitespace-nowrap">
         {/* Render twice for seamless loop */}
         {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, index) => (
@@ -25,8 +25,8 @@ export function ProductionTicker() {
             <span className="text-xs font-bold uppercase tracking-[.18em] text-[#e8e4dc]">
               {item}
             </span>
-            <div className="h-2 w-2 rounded-full bg-[#e97819]" aria-hidden="true" />
-            <div className="print-registration-mark text-[#77746e]" aria-hidden="true" />
+            <div className="h-2 w-2 rounded-full bg-[#DAA112]" aria-hidden="true" />
+            <div className="print-registration-mark text-[#809276]" aria-hidden="true" />
           </div>
         ))}
       </div>

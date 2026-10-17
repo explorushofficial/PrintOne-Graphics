@@ -49,7 +49,7 @@ export function ServiceModal({ service, onClose }: ServiceModalProps) {
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 grid h-9 w-9 place-items-center rounded-full border border-[#ded5c7] bg-white/95 text-[#3b3a37] shadow-sm hover:border-[#e97819] hover:text-[#e97819] transition-colors"
+          className="absolute top-4 right-4 z-20 grid h-9 w-9 place-items-center rounded-full border border-[#ded5c7] bg-white/95 text-[#3b3a37] shadow-sm hover:border-[#10383A] hover:text-[#10383A] transition-colors"
           aria-label="Close service modal"
           data-testid="button-close-service-modal"
         >
@@ -57,7 +57,7 @@ export function ServiceModal({ service, onClose }: ServiceModalProps) {
         </button>
 
         {/* Modal Header Banner */}
-        <div className="relative aspect-[16/8] sm:aspect-[16/7] w-full overflow-hidden bg-[#242628]">
+        <div className="relative aspect-[16/8] sm:aspect-[16/7] w-full overflow-hidden bg-[#10383A]">
           <img
             src={service.image}
             alt={service.title}
@@ -106,13 +106,13 @@ export function ServiceModal({ service, onClose }: ServiceModalProps) {
           {/* Scope of Work & Deliverables */}
           <div className="rounded-xl border border-[#ded7cb] bg-[#f5efe4] p-4 sm:p-5">
             <div className="flex items-center gap-2 border-b border-[#e5dfd4] pb-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-[.14em] text-[#7a7770]">
-              <Sparkles size={14} className="text-[#e97819]" />
+              <Sparkles size={14} className="text-[#10383A]" />
               <span>Full Scope of Work & Deliverables</span>
             </div>
             <div className="mt-3 grid gap-2.5 sm:grid-cols-2 text-xs text-[#43413b]">
               {service.scopeOfWork.map((scope, idx) => (
                 <div key={idx} className="flex items-start gap-2">
-                  <CheckCircle2 size={14} className="text-[#e97819] mt-0.5 shrink-0" />
+                  <CheckCircle2 size={14} className="text-[#10383A] mt-0.5 shrink-0" />
                   <span>{scope}</span>
                 </div>
               ))}
@@ -157,7 +157,7 @@ export function ServiceModal({ service, onClose }: ServiceModalProps) {
           {/* Turnaround & Key Applications */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-lg border border-[#ded7cb] bg-[#fbf9f4] p-3.5 text-xs text-[#636058]">
             <div className="flex items-center gap-2">
-              <Clock size={15} className="text-[#e97819] shrink-0" />
+              <Clock size={15} className="text-[#666E51] shrink-0" />
               <span><strong>Turnaround & Proofing:</strong> {service.turnaround}</span>
             </div>
           </div>
@@ -165,7 +165,7 @@ export function ServiceModal({ service, onClose }: ServiceModalProps) {
           {/* Common Use Cases */}
           <div>
             <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.14em] text-[#78756e]">
-              <Tag size={13} className="text-[#e97819]" />
+              <Tag size={13} className="text-[#10383A]" />
               <span>Common Projects & Applications</span>
             </div>
             <div className="mt-2 flex flex-wrap gap-2">
@@ -201,7 +201,7 @@ export function ServiceModal({ service, onClose }: ServiceModalProps) {
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-1.5 rounded-md border border-[#27292a] bg-[#27292a] px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-[#e97819] hover:border-[#e97819]"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-md border border-[#10383A] bg-[#10383A] px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-[#1a4e50] hover:border-[#1a4e50]"
                   onClick={onClose}
                   data-testid="link-modal-service-contact"
                 >

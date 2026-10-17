@@ -32,7 +32,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="border-t border-[#353738] bg-[#222425] text-[#e8e4dc]">
+    <footer className="border-t border-[#1a4e50] bg-[#10383A] text-[#e3ecea]">
       <div className="page-wrap py-6">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           {/* Brand & Studio Location */}
@@ -48,9 +48,9 @@ export function Footer() {
             </div>
             <div>
               <span className="font-display text-base font-extrabold tracking-[-.04em] text-white">
-                Print One <span className="font-sans text-[8px] font-semibold tracking-[.2em] text-[#c6c0b5]">GRAPHICS</span>
+                Print One <span className="font-sans text-[8px] font-semibold tracking-[.2em] text-[#809276]">GRAPHICS</span>
               </span>
-              <p className="text-[11px] text-[#9b968c]">
+              <p className="text-[11px] text-[#768886]">
                 Byculla East, Mumbai · Since 2021
               </p>
             </div>
@@ -62,7 +62,7 @@ export function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[#cfcac0] hover:text-[#e97819] transition-colors"
+                className="text-[#d0dedb] hover:text-[#809276] transition-colors"
                 data-testid={`link-footer-${link.label.toLowerCase().replaceAll(' ', '-')}`}
               >
                 {link.label}
@@ -71,9 +71,9 @@ export function Footer() {
           </nav>
 
           {/* Contact Details */}
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#b8b3a8]">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#a7b9b5]">
             <a
-              className="text-[#f19a46] hover:text-white transition-colors"
+              className="text-[#809276] hover:text-white transition-colors"
               href="tel:+919819124907"
               data-testid="link-footer-phone"
             >
@@ -81,7 +81,7 @@ export function Footer() {
             </a>
             <span className="hidden sm:inline text-white/20">|</span>
             <a
-              className="text-[#cfcac0] hover:text-white transition-colors"
+              className="text-[#d0dedb] hover:text-white transition-colors"
               href="mailto:printone.graphics21@gmail.com"
               data-testid="link-footer-email"
             >
@@ -91,7 +91,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Copyright Strip */}
-        <div className="mt-5 flex flex-col justify-between gap-2 border-t border-[#333536] pt-4 text-[10px] tracking-[.04em] text-[#8e8a81] sm:flex-row">
+        <div className="mt-5 flex flex-col justify-between gap-2 border-t border-[#1a4e50] pt-4 text-[10px] tracking-[.04em] text-[#768886] sm:flex-row">
           <span>© {currentYear} Print One Graphics. All rights reserved.</span>
           <span>Your Trusted Partner for Design, Digital Printing &amp; Corporate Gifting · Byculla East, Mumbai</span>
         </div>

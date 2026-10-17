@@ -39,12 +39,12 @@ export function ProductsClient({ products }: { products: Product[] }) {
         <div className="page-wrap grid min-h-[300px] items-end gap-8 py-12 md:grid-cols-[1.1fr_0.9fr] md:py-16">
           <div className="reveal">
             <div className="inline-flex items-center gap-2 rounded-full border border-[#ded5c7] bg-[#f5efe5] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.15em] text-[#706c64]">
-              <Package size={13} className="text-[#e97819]" />
+              <Package size={13} className="text-[#10383A]" />
               <span>Pure Products Catalog</span>
             </div>
             <h1 className="mt-4 max-w-3xl font-display text-[clamp(2.4rem,5.5vw,4.5rem)] font-extrabold leading-[.95] tracking-[-.06em]">
               Precision Printed Products &amp;<br />
-              <span className="text-[#e97819]">Branded Merchandise.</span>
+              <span className="text-[#DAA112]">Branded Merchandise.</span>
             </h1>
           </div>
           <div className="pb-1 text-xs sm:text-sm leading-relaxed text-[#615e58]">
@@ -80,7 +80,7 @@ export function ProductsClient({ products }: { products: Product[] }) {
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="h-10 w-full sm:w-56 rounded border border-[#d9d2c8] bg-white pl-9 pr-3 text-xs placeholder:text-[#99958d] focus:border-[#e97819] focus:outline-none"
+                className="h-10 w-full sm:w-56 rounded border border-[#d9d2c8] bg-white pl-9 pr-3 text-xs placeholder:text-[#99958d] focus:border-[#10383A] focus:outline-none"
               />
             </div>
 
@@ -93,8 +93,8 @@ export function ProductsClient({ products }: { products: Product[] }) {
                   aria-pressed={filter === item}
                   className={`rounded px-3 py-2 text-[10px] font-bold transition-all ${
                     filter === item
-                      ? 'border border-[#27292a] bg-[#27292a] text-white shadow-sm'
-                      : 'border border-[#d9d2c8] bg-[#fbf9f4] text-[#696761] hover:border-[#e97819] hover:text-[#d5680e]'
+                      ? 'border border-[#10383A] bg-[#10383A] text-white shadow-sm'
+                      : 'border border-[#d9d2c8] bg-[#fbf9f4] text-[#696761] hover:border-[#10383A] hover:text-[#10383A]'
                   }`}
                   data-testid={`button-filter-${item.toLowerCase().replaceAll(/[^a-z0-9]+/g, '-')}`}
                 >
@@ -119,7 +119,7 @@ export function ProductsClient({ products }: { products: Product[] }) {
 
         {visible.length === 0 && (
           <div className="py-24 text-center">
-            <h3 className="font-display text-xl font-bold text-[#202223]">No products match your search.</h3>
+            <h3 className="font-display text-xl font-bold text-[#10383A]">No products match your search.</h3>
             <p className="mt-2 text-xs text-[#77736d]">Try clearing your search term or selecting &quot;All Products&quot;.</p>
             <button
               onClick={() => {

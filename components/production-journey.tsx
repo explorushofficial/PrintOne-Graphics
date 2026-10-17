@@ -10,7 +10,7 @@ const JOURNEY_STEPS = [
     title: 'Consult & Paper Specification',
     subtitle: 'Matching Purpose with Material Physics',
     icon: FileText,
-    accent: '#e97819',
+    accent: '#10383A',
     details:
       'We examine your brief through both a design and printmaking lens. We guide paper caliper, grain direction, opacity, and tactile finishes so your piece feels intentional.',
     deliverable: 'Custom specification sheet & paper swatch recommendations',
@@ -63,7 +63,7 @@ export function ProductionJourney() {
           <p className="eyebrow">The Print One Method</p>
           <h2 className="mt-4 font-display text-3xl sm:text-5xl font-extrabold tracking-[-.055em] text-[#1c1d1f]">
             From first conversation<br />
-            <span className="text-[#e97819]">to delivered impression.</span>
+            <span className="text-[#10383A]">to delivered impression.</span>
           </h2>
           <p className="mt-4 text-sm sm:text-base text-[#615e57] leading-relaxed">
             Great print isn’t an accident. It is the result of a rigorous, multi-stage production protocol that ensures consistency across every single copy.
@@ -83,7 +83,7 @@ export function ProductionJourney() {
                 whileTap={{ scale: 0.98 }}
                 className={`flex flex-col justify-between rounded-xl border p-6 text-left transition-all duration-300 ${
                   isActive
-                    ? 'border-[#222425] bg-white shadow-lg ring-1 ring-[#e97819]'
+                    ? 'border-[#10383A] bg-white shadow-lg ring-1 ring-[#10383A]'
                     : 'border-[#ded7cb] bg-[#fbf9f4] hover:border-[#b8b1a3]'
                 }`}
                 data-testid={`journey-step-${item.step}`}
@@ -157,15 +157,15 @@ export function ProductionJourney() {
 
               <div className="rounded-xl border border-[#e8e2d8] bg-[#fbf9f4] p-5 lg:min-w-[320px]">
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#79756d]">
-                  <ShieldCheck size={16} className="text-[#e97819]" />
+                  <ShieldCheck size={16} className="text-[#10383A]" />
                   <span>Guaranteed Deliverable</span>
                 </div>
-                <p className="mt-2 text-xs font-semibold text-[#27292a] leading-normal">
+                <p className="mt-2 text-xs font-semibold text-[#10383A] leading-normal">
                   {JOURNEY_STEPS[activeStep].deliverable}
                 </p>
-                <div className="mt-4 flex items-center gap-2 text-[11px] font-bold text-[#e97819]">
+                <div className="mt-4 flex items-center gap-2 text-[11px] font-bold text-[#10383A]">
                   <span>Protocol 100% In-House Monitored</span>
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#e97819]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#10383A]" />
                 </div>
               </div>
             </motion.div>

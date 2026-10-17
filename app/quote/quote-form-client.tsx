@@ -276,16 +276,16 @@ export function QuoteFormClient() {
       <section className="border-b border-[#e5ded4] bg-[#ede8de] py-6 sm:py-10">
         <div className="page-wrap">
           <div className="flex flex-wrap items-center gap-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#73716c]">
-            <Link href="/" className="hover:text-[#e97819] transition-colors">
+            <Link href="/" className="hover:text-[#10383A] transition-colors">
               Home
             </Link>
             <ChevronRight size={13} />
-            <span className="text-[#00828a]">Print Specification Form</span>
+            <span className="text-[#10383A]">Print Specification Form</span>
           </div>
 
           <div className="mt-3">
             <h1 className="font-display text-2xl sm:text-4xl font-extrabold tracking-tight text-[#1c1d1f]">
-              Print Job Specification <span className="text-[#00828a]">&amp; Quote Form</span>
+              Print Job Specification <span className="text-[#10383A]">&amp; Quote Form</span>
             </h1>
             <p className="mt-2 max-w-2xl text-xs sm:text-sm leading-relaxed text-[#615e58]">
               Fill out the required printing, paper, and finishing specifications below.
@@ -1058,7 +1058,7 @@ export function QuoteFormClient() {
             {/* Press Facility Contact Details */}
             <div className="rounded-xl border border-[#e5ded4] bg-[#f8f6f0] p-4 text-xs text-[#615e58] space-y-2.5">
               <h4 className="font-bold uppercase tracking-wider text-[#1c1d1f] flex items-center gap-1.5">
-                <Printer size={15} className="text-[#00828a]" />
+                <Printer size={15} className="text-[#10383A]" />
                 Byculla Press Team
               </h4>
               <p className="leading-relaxed text-[11px]">
@@ -1067,13 +1067,13 @@ export function QuoteFormClient() {
               <div className="pt-2 border-t border-[#e5ded4] space-y-1.5 text-[11px]">
                 <div className="flex items-center justify-between">
                   <span>Jogendra:</span>
-                  <a href="tel:+919594005894" className="font-bold text-[#e97819] hover:underline">
+                  <a href="tel:+919594005894" className="font-bold text-[#10383A] hover:underline">
                     +91 95940 05894
                   </a>
                 </div>
                 <div className="flex items-center justify-between">
                   <span>Shashank:</span>
-                  <a href="tel:+919819124907" className="font-bold text-[#e97819] hover:underline">
+                  <a href="tel:+919819124907" className="font-bold text-[#10383A] hover:underline">
                     +91 98191 24907
                   </a>
                 </div>

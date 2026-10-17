@@ -22,7 +22,7 @@ const SPECIMENS: FinishSpecimen[] = [
     image: '/catalog/thematic-cover-design.jpg',
     feel: 'Copper, gold, and matte silver bonded under heat & steel dies.',
     idealFor: 'Annual reports, luxury packaging, certificate seals.',
-    accent: '#e97819',
+    accent: '#DAA112',
   },
   {
     id: 'deboss',
@@ -58,7 +58,7 @@ const SPECIMENS: FinishSpecimen[] = [
     image: '/print-editorial.jpg',
     feel: 'Warm organic textures spanning vellum, wove, and felt-marked paper.',
     idealFor: 'Corporate stationery, ESG publications, luxury brochures.',
-    accent: '#27292a',
+    accent: '#10383A',
   },
 ];
 
@@ -72,7 +72,7 @@ export function TactileSpecimenBar() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#e97819]"></span>
+              <span className="h-1.5 w-1.5 rounded-full bg-[#DAA112]"></span>
               <p className="eyebrow">The Atelier Finishes Bar</p>
             </div>
             <h2 className="mt-2 font-display text-2xl sm:text-4xl font-extrabold tracking-[-.05em] text-[#1f2122]">
@@ -94,11 +94,11 @@ export function TactileSpecimenBar() {
                 onClick={() => setSelectedFinish(idx)}
                 className={`group cursor-pointer overflow-hidden rounded-lg border transition-all duration-300 ${
                   isSelected
-                    ? 'border-[#1f2122] ring-2 ring-[#e97819] shadow-md'
+                    ? 'border-[#10383A] ring-2 ring-[#DAA112] shadow-md'
                     : 'border-[#dfd8cc] bg-white opacity-75 hover:opacity-100 hover:border-[#b8b0a1]'
                 }`}
               >
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#202223]">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#10383A]">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -117,7 +117,7 @@ export function TactileSpecimenBar() {
         {/* Active Finish Highlight Card */}
         <div className="mt-6 rounded-xl border border-[#ded7cb] bg-[#fbf9f4] p-6 sm:p-8">
           <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[#202223]">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[#10383A]">
               <img
                 src={active.image}
                 alt={active.title}

@@ -70,7 +70,7 @@ export function ProductModal({ service, onClose }: ProductModalProps) {
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 grid h-9 w-9 place-items-center rounded-full border border-[#ded5c7] bg-white/90 text-[#3b3a37] shadow-sm hover:border-[#e97819] hover:text-[#e97819] transition-colors"
+          className="absolute top-4 right-4 z-20 grid h-9 w-9 place-items-center rounded-full border border-[#ded5c7] bg-white/90 text-[#3b3a37] shadow-sm hover:border-[#10383A] hover:text-[#10383A] transition-colors"
           aria-label="Close product modal"
           data-testid="button-close-product-modal"
         >
@@ -78,7 +78,7 @@ export function ProductModal({ service, onClose }: ProductModalProps) {
         </button>
 
         {/* Modal Product Image Header */}
-        <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#242628]">
+        <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#10383A]">
           <img
             src={service.image}
             alt={service.imageAlt}
@@ -120,7 +120,7 @@ export function ProductModal({ service, onClose }: ProductModalProps) {
           {/* Technical Spec Sheet */}
           <div className="mt-5 rounded-xl border border-[#ded7cb] bg-[#f5efe4] p-4 text-xs">
             <div className="flex items-center gap-2 border-b border-[#e5dfd4] pb-2 text-[10px] font-bold uppercase tracking-[.14em] text-[#7a7770]">
-              <Layers size={13} className="text-[#e97819]" />
+              <Layers size={13} className="text-[#10383A]" />
               <span>Production Capabilities for this item</span>
             </div>
 
@@ -138,7 +138,7 @@ export function ProductModal({ service, onClose }: ProductModalProps) {
                 const hasLabel = parts.length > 1;
                 return (
                   <div key={i} className="flex items-start gap-2">
-                    <Check size={14} className="text-[#e97819] mt-0.5 flex-none" />
+                    <Check size={14} className="text-[#10383A] mt-0.5 flex-none" />
                     <span>
                       {hasLabel ? (
                         <>

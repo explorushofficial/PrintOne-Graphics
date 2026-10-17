@@ -39,7 +39,7 @@ export function AboutClient() {
           className="pointer-events-none absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage:
-              'radial-gradient(#202223 1px, transparent 1px), radial-gradient(#202223 1px, #faf8f2 1px)',
+              'radial-gradient(#10383A 1px, transparent 1px), radial-gradient(#10383A 1px, #faf8f2 1px)',
             backgroundSize: '28px 28px',
             backgroundPosition: '0 0, 14px 14px',
           }}
@@ -55,13 +55,13 @@ export function AboutClient() {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="inline-flex items-center gap-2 rounded-full border border-[#ded7cc] bg-[#f2ede4] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6b6760]">
-                <Sparkles size={12} className="text-[#e97819]" />
+                <Sparkles size={12} className="text-[#10383A]" />
                 <span>Byculla East, Mumbai · Established 2021</span>
               </div>
 
               <h1 className="mt-6 font-display text-[clamp(2.4rem,4.6vw,4.3rem)] font-extrabold leading-[0.96] tracking-[-.055em] text-[#1c1d1f]">
                 Your Trusted Partner for Design,<br />
-                <span className="text-[#e97819]">Digital Printing &amp; Corporate Gifting.</span>
+                <span className="text-[#DAA112]">Digital Printing &amp; Corporate Gifting.</span>
               </h1>
 
               <p className="mt-5 max-w-xl text-[15px] sm:text-[16px] leading-[1.7] text-[#55524c]">
@@ -124,7 +124,7 @@ export function AboutClient() {
                   </div>
 
                   <div className="absolute bottom-3 left-3 right-3 text-white">
-                    <span className="text-[10px] font-bold uppercase tracking-[.18em] text-[#e97819]">
+                    <span className="text-[10px] font-bold uppercase tracking-[.18em] text-[#809276]">
                       Konica Minolta AccurioPress C7100
                     </span>
                     <h3 className="font-display text-base sm:text-lg font-bold leading-tight">
@@ -139,7 +139,7 @@ export function AboutClient() {
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#7c7972]">Advanced Digital Press</span>
                   </div>
                   <div className="rounded-lg border border-[#ede7dd] bg-[#faf8f2] p-2.5">
-                    <span className="block font-display text-sm font-extrabold text-[#e97819]">End-to-End</span>
+                    <span className="block font-display text-sm font-extrabold text-[#10383A]">End-to-End</span>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#7c7972]">Design to Delivery</span>
                   </div>
                 </div>
@@ -174,7 +174,7 @@ export function AboutClient() {
             {/* Strategic Pillars Highlight */}
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-xl border border-[#ded5c7] bg-white p-5 shadow-sm">
-                <span className="inline-block rounded-lg bg-[#faf4ec] p-2 text-[#e97819]">
+                <span className="inline-block rounded-lg bg-[#eaf1f1] p-2 text-[#10383A]">
                   <Compass size={20} />
                 </span>
                 <h4 className="mt-3 font-display text-base font-bold text-[#1f2122]">Our Vision</h4>
@@ -216,7 +216,7 @@ export function AboutClient() {
                 title: 'Quality and Professionalism',
                 desc: 'Uncompromising standards of print craft, color fidelity, and professional business ethics across every deliverable.',
                 icon: ShieldCheck,
-                color: '#e97819',
+                color: '#10383A',
               },
               {
                 title: 'Customer Satisfaction',
@@ -240,7 +240,7 @@ export function AboutClient() {
                 title: 'Timely Execution',
                 desc: 'Punctual scheduling and strict turnaround discipline for critical shareholder AGMs, academic sessions, and corporate launches.',
                 icon: Clock,
-                color: '#27292a',
+                color: '#10383A',
               },
               {
                 title: 'Long-term Partnerships',
@@ -293,7 +293,7 @@ export function AboutClient() {
             </div>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 text-xs font-bold text-[#e97819] hover:underline"
+              className="inline-flex items-center gap-2 text-xs font-bold text-[#10383A] hover:underline"
             >
               <span>Speak with our team</span>
               <ArrowRight size={14} />
@@ -307,7 +307,7 @@ export function AboutClient() {
                 title: 'Experienced Team',
                 desc: 'Our experienced design and print professionals ensure every project is executed with precision and care.',
                 icon: Users,
-                accent: '#e97819',
+                accent: '#10383A',
               },
               {
                 num: '2',
@@ -411,7 +411,7 @@ export function AboutClient() {
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                <div className="absolute top-3 left-3 rounded bg-black/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#e97819] backdrop-blur-sm">
+                <div className="absolute top-3 left-3 rounded bg-black/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#809276] backdrop-blur-sm">
                   Flagship Digital Production
                 </div>
                 <div className="absolute bottom-3 left-3 right-3 text-white">
@@ -430,14 +430,14 @@ export function AboutClient() {
                       <span className="text-[10px] text-[#858077] uppercase font-semibold">Engine Speed</span>
                     </div>
                     <div className="rounded border border-[#ece4d8] bg-[#faf8f4] p-2">
-                      <span className="block font-bold text-[#e97819]">Up to 400 gsm</span>
+                      <span className="block font-bold text-[#10383A]">Up to 400 gsm</span>
                       <span className="text-[10px] text-[#858077] uppercase font-semibold">Media Weight</span>
                     </div>
                   </div>
                 </div>
                 <div className="mt-4 pt-3 border-t border-[#f0eae1] flex items-center justify-between text-[11px] font-bold text-[#6c6861]">
                   <span>Annual Reports · Short Runs</span>
-                  <span className="text-[#e97819]">Live In-House</span>
+                  <span className="text-[#10383A]">Live In-House</span>
                 </div>
               </div>
             </motion.div>
@@ -546,10 +546,10 @@ export function AboutClient() {
       </section>
 
       {/* 6. Our Commitment to Every Client */}
-      <section className="bg-[#202223] py-16 sm:py-20 text-[#faf8f2]">
+      <section className="bg-[#10383A] py-16 sm:py-20 text-[#faf8f2]">
         <div className="page-wrap">
           <div className="max-w-2xl mx-auto text-center">
-            <span className="eyebrow justify-center text-[#e97819]">Our Commitment</span>
+            <span className="eyebrow justify-center text-[#809276]">Our Commitment</span>
             <h2 className="mt-3 font-display text-2xl sm:text-4xl font-extrabold tracking-tight">
               Our Commitment to Every Client.
             </h2>
@@ -560,7 +560,7 @@ export function AboutClient() {
               <p>
                 Whether it is a detailed annual report, a publication, an educational book or a customised corporate gift, we approach every assignment with dedication and a focus on delivering value.
               </p>
-              <p className="font-display text-lg sm:text-xl font-bold text-[#e97819] pt-2">
+              <p className="font-display text-lg sm:text-xl font-bold text-[#809276] pt-2">
                 From concept to creation, we bring your ideas to print.
               </p>
             </div>

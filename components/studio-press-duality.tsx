@@ -41,7 +41,7 @@ export function StudioPressDuality() {
             whileHover={{ y: -4, transition: { duration: 0.2 } }}
             className={`group overflow-hidden rounded-xl border p-6 sm:p-8 transition-all duration-300 ${
               activeSide === 'studio' || activeSide === 'both'
-                ? 'border-[#242628] bg-white shadow-lg'
+                ? 'border-[#10383A] bg-white shadow-lg'
                 : 'border-[#dbd3c6] bg-[#fbf9f5] opacity-80'
             }`}
             onMouseEnter={() => setActiveSide('studio')}
@@ -49,7 +49,7 @@ export function StudioPressDuality() {
           >
             <div className="flex items-center justify-between border-b border-[#ece6dd] pb-4">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-[#f2ebd9] px-3 py-1 text-[10px] font-bold uppercase tracking-[.15em] text-[#716d64]">
-                <Palette size={12} className="text-[#e97819]" />
+                <Palette size={12} className="text-[#10383A]" />
                 01 · Design Atelier
               </span>
               <span className="text-[10px] uppercase font-bold tracking-[.15em] text-[#8e8a82]">
@@ -59,7 +59,7 @@ export function StudioPressDuality() {
 
             {/* Visual Image Grid */}
             <div className="mt-5 grid grid-cols-2 gap-3">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#202223]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#10383A]">
                 <img
                   src="/print-editorial.jpg"
                   alt="Editorial Layouts"
@@ -71,7 +71,7 @@ export function StudioPressDuality() {
                 </span>
               </div>
 
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#202223]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#10383A]">
                 <img
                   src="/catalog/thematic-cover-design.jpg"
                   alt="Thematic Cover Art"
@@ -102,7 +102,7 @@ export function StudioPressDuality() {
             <div className="mt-6 border-t border-[#ece6dd] pt-4">
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 text-xs font-bold text-[#e97819] hover:text-[#212324] transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#10383A] hover:text-[#666E51] transition-colors"
               >
                 <span>View studio services</span>
                 <ArrowRight size={14} />
@@ -119,7 +119,7 @@ export function StudioPressDuality() {
             whileHover={{ y: -4, transition: { duration: 0.2 } }}
             className={`group overflow-hidden rounded-xl border p-6 sm:p-8 transition-all duration-300 ${
               activeSide === 'press' || activeSide === 'both'
-                ? 'border-[#242628] bg-white shadow-lg'
+                ? 'border-[#10383A] bg-white shadow-lg'
                 : 'border-[#dbd3c6] bg-[#fbf9f5] opacity-80'
             }`}
             onMouseEnter={() => setActiveSide('press')}
@@ -137,7 +137,7 @@ export function StudioPressDuality() {
 
             {/* Visual Image Grid */}
             <div className="mt-5 grid grid-cols-2 gap-3">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#202223]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#10383A]">
                 <img
                   src="/client-assets/machinery/accuriopress-c7100.png"
                   alt="Konica Minolta AccurioPress C7100"
@@ -155,7 +155,7 @@ export function StudioPressDuality() {
                 </span>
               </div>
 
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#202223]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#10383A]">
                 <img
                   src="/client-assets/machinery/heidelberg-offset.jpg"
                   alt="Heidelberg Speedmaster XL 106"
@@ -192,7 +192,7 @@ export function StudioPressDuality() {
             <div className="mt-6 border-t border-[#ece6dd] pt-4">
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 text-xs font-bold text-[#2c9fc3] hover:text-[#212324] transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#10383A] hover:text-[#DAA112] transition-colors"
               >
                 <span>View press capabilities</span>
                 <ArrowRight size={14} />

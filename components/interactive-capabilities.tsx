@@ -42,7 +42,7 @@ export function InteractiveCapabilities({ initialProducts }: { initialProducts?:
             <p className="eyebrow">Featured Products &amp; Capabilities</p>
             <h2 className="mt-4 font-display text-3xl sm:text-5xl font-extrabold tracking-[-.055em] text-[#1c1d1f]">
               Everything you need,<br />
-              <span className="text-[#e97819]">crafted with precision.</span>
+              <span className="text-[#10383A]">crafted with precision.</span>
             </h2>
           </div>
           <p className="max-w-md text-sm sm:text-base leading-relaxed text-[#63615b]">
@@ -53,7 +53,7 @@ export function InteractiveCapabilities({ initialProducts }: { initialProducts?:
         {/* Category Filter Tabs */}
         <div className="mt-10 flex flex-wrap items-center gap-2 border-b border-[#e5dfd4] pb-4">
           <span className="mr-2 hidden items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#8b877f] sm:flex">
-            <Filter size={13} className="text-[#e97819]" /> Filter:
+            <Filter size={13} className="text-[#10383A]" /> Filter:
           </span>
           {CATEGORIES.map((cat) => {
             const isActive = selectedCategory === cat.id;
@@ -61,11 +61,10 @@ export function InteractiveCapabilities({ initialProducts }: { initialProducts?:
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`rounded px-3.5 py-2 text-xs font-bold transition-all duration-200 ${
-                  isActive
-                    ? 'bg-[#222425] text-white shadow-sm'
-                    : 'bg-[#ede7dc] text-[#55524b] hover:bg-[#e3dcd0] hover:text-[#222425]'
-                }`}
+                className={`rounded px-3.5 py-2 text-xs font-bold transition-all duration-200 ${isActive
+                    ? 'bg-[#10383A] text-white shadow-sm'
+                    : 'bg-[#ede7dc] text-[#55524b] hover:bg-[#e3dcd0] hover:text-[#10383A]'
+                  }`}
                 data-testid={`filter-category-${cat.id.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
               >
                 {cat.label}
@@ -108,7 +107,7 @@ export function InteractiveCapabilities({ initialProducts }: { initialProducts?:
           <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/services"
-              className="inline-flex items-center gap-1.5 font-display text-xs sm:text-sm font-bold text-[#212324] hover:text-[#e97819] transition-colors"
+              className="inline-flex items-center gap-1.5 font-display text-xs sm:text-sm font-bold text-[#212324] hover:text-[#10383A] transition-colors"
               data-testid="link-home-view-services"
             >
               <span>Explore Services</span>
@@ -117,7 +116,7 @@ export function InteractiveCapabilities({ initialProducts }: { initialProducts?:
 
             <Link
               href="/products"
-              className="inline-flex items-center gap-1.5 font-display text-xs sm:text-sm font-bold text-[#e97819] hover:text-[#212324] transition-colors"
+              className="inline-flex items-center gap-1.5 font-display text-xs sm:text-sm font-bold text-[#10383A] hover:text-[#666E51] transition-colors"
               data-testid="link-home-all-products"
             >
               <span>Browse Full Products Catalog</span>

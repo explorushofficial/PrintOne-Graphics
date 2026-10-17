@@ -58,12 +58,12 @@ export function ServicesClient({ services }: ServicesClientProps) {
         <div className="page-wrap grid min-h-[320px] items-end gap-8 py-12 md:grid-cols-[1.2fr_0.8fr] md:py-16">
           <div className="reveal">
             <div className="inline-flex items-center gap-2 rounded-full border border-[#ded5c7] bg-[#f5efe5] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.15em] text-[#706c64]">
-              <Sparkles size={12} className="text-[#e97819]" />
+              <Sparkles size={12} className="text-[#10383A]" />
               <span>What We Do &amp; Our Capabilities</span>
             </div>
             <h1 className="mt-4 max-w-3xl font-display text-[clamp(2.4rem,5vw,4.5rem)] font-extrabold leading-[.98] tracking-[-.06em]">
               Industrial Print Engineering &amp;<br />
-              <span className="text-[#e97819]">Creative Solutions.</span>
+              <span className="text-[#DAA112]">Creative Solutions.</span>
             </h1>
           </div>
           <div className="pb-1 text-xs sm:text-sm leading-relaxed text-[#615e58]">
@@ -81,7 +81,7 @@ export function ServicesClient({ services }: ServicesClientProps) {
       <section className="border-b border-[#e5dfd5] bg-white py-5">
         <div className="page-wrap grid grid-cols-2 gap-4 sm:grid-cols-4 text-xs">
           <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-[#fbf8f2] text-[#e97819]">
+            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-[#fbf8f2] text-[#10383A]">
               <ShieldCheck size={20} />
             </div>
             <div>
@@ -144,7 +144,7 @@ export function ServicesClient({ services }: ServicesClientProps) {
                 placeholder="Search services..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="h-10 w-full sm:w-56 rounded border border-[#d9d2c8] bg-white pl-9 pr-3 text-xs placeholder:text-[#99958d] focus:border-[#e97819] focus:outline-none"
+                className="h-10 w-full sm:w-56 rounded border border-[#d9d2c8] bg-white pl-9 pr-3 text-xs placeholder:text-[#99958d] focus:border-[#DAA112] focus:outline-none"
               />
             </div>
 
@@ -157,8 +157,8 @@ export function ServicesClient({ services }: ServicesClientProps) {
                   aria-pressed={activeFilter === cat}
                   className={`rounded px-3 py-2 text-[10px] font-bold transition-all ${
                     activeFilter === cat
-                      ? 'border border-[#27292a] bg-[#27292a] text-white shadow-sm'
-                      : 'border border-[#d9d2c8] bg-white text-[#696761] hover:border-[#e97819] hover:text-[#d5680e]'
+                      ? 'border border-[#10383A] bg-[#10383A] text-white shadow-sm'
+                      : 'border border-[#d9d2c8] bg-white text-[#696761] hover:border-[#10383A] hover:text-[#10383A]'
                   }`}
                   data-testid={`button-service-filter-${cat.toLowerCase().replaceAll(/[^a-z0-9]+/g, '-')}`}
                 >
@@ -176,13 +176,13 @@ export function ServicesClient({ services }: ServicesClientProps) {
           {filteredServices.map((service) => (
             <div
               key={service.id}
-              className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[#ded7cd] bg-white shadow-xs transition-all duration-300 hover:border-[#e97819] hover:shadow-lg cursor-pointer"
+              className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[#ded7cd] bg-white shadow-xs transition-all duration-300 hover:border-[#DAA112] hover:shadow-lg cursor-pointer"
               onClick={() => setSelectedService(service)}
               data-testid={`service-card-${service.id}`}
             >
               <div>
                 {/* Tastefully sized image header (compact & proportioned) */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#242628]">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#10383A]">
                   <img
                     src={service.image}
                     alt={service.title}
@@ -218,7 +218,7 @@ export function ServicesClient({ services }: ServicesClientProps) {
                   <div className="mt-4 space-y-2 border-t border-[#f0ecd8] pt-3 text-xs text-[#524f47]">
                     {service.features.slice(0, 3).map((feat, i) => (
                       <div key={i} className="flex items-center gap-2">
-                        <CheckCircle2 size={13} className="text-[#e97819] shrink-0" />
+                        <CheckCircle2 size={13} className="text-[#10383A] shrink-0" />
                         <span className="truncate">{feat}</span>
                       </div>
                     ))}
@@ -234,7 +234,7 @@ export function ServicesClient({ services }: ServicesClientProps) {
                     e.stopPropagation();
                     setSelectedService(service);
                   }}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#e97819] hover:text-[#212324] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#10383A] hover:text-[#1a4e50] transition-colors"
                   data-testid={`button-inspect-service-${service.id}`}
                 >
                   <span>View Details &amp; Scope</span>
@@ -310,7 +310,7 @@ export function ServicesClient({ services }: ServicesClientProps) {
                 key={item.step}
                 className="rounded-xl border border-[#ded7cb] bg-white p-5 shadow-xs"
               >
-                <span className="font-display text-2xl font-black text-[#e97819]">
+                <span className="font-display text-2xl font-black text-[#10383A]">
                   {item.step}
                 </span>
                 <h3 className="mt-2 font-display text-base font-bold text-[#1c1d1f]">
@@ -326,10 +326,10 @@ export function ServicesClient({ services }: ServicesClientProps) {
       </section>
 
       {/* 6. Custom Consultation CTA Banner */}
-      <section className="bg-[#27292a] text-white py-12 sm:py-16">
+      <section className="bg-[#10383A] text-white py-12 sm:py-16">
         <div className="page-wrap grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#e8a15c]">
+            <p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#809276]">
               Have a tailored enterprise requirement?
             </p>
             <h2 className="mt-2 font-display text-2xl sm:text-3xl font-extrabold tracking-[-.05em]">
@@ -351,7 +351,7 @@ export function ServicesClient({ services }: ServicesClientProps) {
             </a>
             <Link
               href="/contact"
-              className="btn-outline border-[#74736e] text-white hover:bg-white hover:text-[#27292a]"
+              className="btn-outline border-[#74736e] text-white hover:bg-white hover:text-[#10383A]"
               data-testid="link-service-cta-contact"
             >
               Contact Details <ArrowUpRight size={15} />

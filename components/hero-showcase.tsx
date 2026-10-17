@@ -160,7 +160,7 @@ export function HeroShowcase() {
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage:
-            'radial-gradient(#202223 1px, transparent 1px), radial-gradient(#202223 1px, #faf8f2 1px)',
+            'radial-gradient(#10383A 1px, transparent 1px), radial-gradient(#10383A 1px, #faf8f2 1px)',
           backgroundSize: '28px 28px',
           backgroundPosition: '0 0, 14px 14px',
         }}
@@ -173,18 +173,18 @@ export function HeroShowcase() {
         <div className="mt-2 grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
           {/* Left Column: Bold, High-Impact Editorial Statement */}
           <div className="reveal">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#ded7cc] bg-[#f2ede4] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6b6760]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#e97819]" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#ded7cc] bg-[#f2ede4] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#666E51]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#10383A]" />
               <span>DESIGN • DIGITAL PRINTING • CORPORATE GIFTING</span>
             </div>
 
-            <h1 className="mt-5 font-display text-[clamp(2.5rem,4.8vw,4.8rem)] font-extrabold leading-[0.93] tracking-[-.06em] text-[#1c1d1f]">
+            <h1 className="mt-5 font-display text-[clamp(2.5rem,4.8vw,4.8rem)] font-extrabold leading-[0.93] tracking-[-.06em] text-[#10383A]">
               YOUR TRUSTED<br />
-              <span className="text-[#e97819]">PRINT PARTNER.</span><br />
+              <span className="text-[#666E51]">PRINT PARTNER.</span><br />
               FROM CONCEPT TO FINISH.
             </h1>
 
-            <p className="mt-4 font-sans text-xs sm:text-sm font-bold uppercase tracking-[.14em] text-[#e97819]">
+            <p className="mt-4 font-sans text-xs sm:text-sm font-bold uppercase tracking-[.14em] text-[#666E51]">
               Your Trusted Partner for Design, Digital Printing &amp; Corporate Gifting
             </p>
 
@@ -204,7 +204,7 @@ export function HeroShowcase() {
                 <Link
                   key={cat.label}
                   href={`/products?tag=${encodeURIComponent(cat.tag)}`}
-                  className="rounded border border-[#ded6c9] bg-white/70 px-3 py-1.5 font-bold text-[#45433d] transition-all hover:border-[#e97819] hover:bg-white hover:text-[#e97819]"
+                  className="rounded border border-[#ded6c9] bg-white/70 px-3 py-1.5 font-bold text-[#45433d] transition-all hover:border-[#10383A] hover:bg-white hover:text-[#10383A]"
                 >
                   {cat.label}
                 </Link>
@@ -227,22 +227,22 @@ export function HeroShowcase() {
             {/* Bottom Proof Metrics Ribbon */}
             <div className="mt-8 grid grid-cols-3 gap-3 border-t border-[#e2dacf] pt-5">
               <div>
-                <span className="block font-display text-2xl font-black text-[#1c1d1f]">2021</span>
-                <span className="mt-0.5 block text-[10px] font-bold text-[#7a7770] uppercase tracking-wider">
+                <span className="block font-display text-2xl font-black text-[#10383A]">2021</span>
+                <span className="mt-0.5 block text-[10px] font-bold text-[#768886] uppercase tracking-wider">
                   Established Mumbai
                 </span>
               </div>
 
               <div>
-                <span className="block font-display text-2xl font-black text-[#1c1d1f]">In-House</span>
-                <span className="mt-0.5 block text-[10px] font-bold text-[#7a7770] uppercase tracking-wider">
+                <span className="block font-display text-2xl font-black text-[#10383A]">In-House</span>
+                <span className="mt-0.5 block text-[10px] font-bold text-[#768886] uppercase tracking-wider">
                   Design &amp; Press Facility
                 </span>
               </div>
 
               <div>
-                <span className="block font-display text-2xl font-black text-[#e97819]">Pan-India</span>
-                <span className="mt-0.5 block text-[10px] font-bold text-[#7a7770] uppercase tracking-wider">
+                <span className="block font-display text-2xl font-black text-[#10383A]">Pan-India</span>
+                <span className="mt-0.5 block text-[10px] font-bold text-[#768886] uppercase tracking-wider">
                   Dependable Delivery
                 </span>
               </div>
@@ -256,8 +256,8 @@ export function HeroShowcase() {
             <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 h-16 bg-gradient-to-t from-[#faf8f2] via-[#faf8f2]/70 to-transparent" />
 
             {/* Subtle Overlay Hint */}
-            <div className="pointer-events-none absolute top-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 rounded-full bg-black/75 px-3 py-1 text-[10px] font-bold uppercase tracking-[.14em] text-white shadow-md backdrop-blur-sm">
-              <Eye size={12} className="text-[#e97819]" />
+            <div className="pointer-events-none absolute top-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 rounded-full bg-[#10383A]/85 px-3 py-1 text-[10px] font-bold uppercase tracking-[.14em] text-white shadow-md backdrop-blur-sm">
+              <Eye size={12} className="text-[#809276]" />
               <span>Click any piece to inspect</span>
             </div>
 
@@ -272,7 +272,7 @@ export function HeroShowcase() {
                   <div
                     key={`${item.id}-${idx}`}
                     onClick={() => handleCardClick(item)}
-                    className="group relative cursor-pointer overflow-hidden rounded-lg border border-[#ded7cd] bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#e97819]"
+                    className="group relative cursor-pointer overflow-hidden rounded-lg border border-[#ded7cd] bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#10383A]"
                     title={`Inspect ${item.title}`}
                   >
                     <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#242628]">
@@ -298,7 +298,7 @@ export function HeroShowcase() {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between border-t border-[#f0ebd5] px-2.5 py-1.5 text-[10px] font-bold text-[#e97819] bg-[#faf8f2]">
+                    <div className="flex items-center justify-between border-t border-[#f0ebd5] px-2.5 py-1.5 text-[10px] font-bold text-[#10383A] bg-[#faf8f2]">
                       <span className="truncate">{item.finish}</span>
                       <ExternalLink size={11} className="flex-none ml-1 opacity-70 group-hover:opacity-100" />
                     </div>
@@ -315,7 +315,7 @@ export function HeroShowcase() {
                   <div
                     key={`${item.id}-${idx}`}
                     onClick={() => handleCardClick(item)}
-                    className="group relative cursor-pointer overflow-hidden rounded-lg border border-[#ded7cd] bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#2c9fc3]"
+                    className="group relative cursor-pointer overflow-hidden rounded-lg border border-[#ded7cd] bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#10383A]"
                     title={`Inspect ${item.title}`}
                   >
                     <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#242628]">
@@ -341,7 +341,7 @@ export function HeroShowcase() {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between border-t border-[#f0ebd5] px-2.5 py-1.5 text-[10px] font-bold text-[#2c9fc3] bg-[#faf8f2]">
+                    <div className="flex items-center justify-between border-t border-[#f0ebd5] px-2.5 py-1.5 text-[10px] font-bold text-[#666E51] bg-[#faf8f2]">
                       <span className="truncate">{item.finish}</span>
                       <ExternalLink size={11} className="flex-none ml-1 opacity-70 group-hover:opacity-100" />
                     </div>
@@ -365,7 +365,7 @@ export function HeroShowcase() {
           >
             <button
               onClick={() => setSelectedItem(null)}
-              className="absolute top-4 right-4 grid h-8 w-8 place-items-center rounded-full border border-[#ded7cb] bg-white text-[#52504b] hover:border-[#e97819] hover:text-[#e97819] transition-colors"
+              className="absolute top-4 right-4 grid h-8 w-8 place-items-center rounded-full border border-[#ded7cb] bg-white text-[#52504b] hover:border-[#10383A] hover:text-[#10383A] transition-colors"
               aria-label="Close Preview"
             >
               <X size={16} />
@@ -383,7 +383,7 @@ export function HeroShowcase() {
             </div>
 
             <div className="mt-5">
-              <span className="text-[10px] font-bold uppercase tracking-[.18em] text-[#e97819]">
+              <span className="text-[10px] font-bold uppercase tracking-[.18em] text-[#666E51]">
                 Print One Physical Specimen
               </span>
               <h3 className="mt-1 font-display text-2xl font-extrabold text-[#1d1f20]">
@@ -419,7 +419,7 @@ export function HeroShowcase() {
                   )}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded border border-[#d6cec2] bg-white px-4 py-3 text-xs font-bold text-[#212324] hover:border-[#e97819] hover:text-[#e97819] transition-colors"
+                  className="inline-flex items-center gap-2 rounded border border-[#d6cec2] bg-white px-4 py-3 text-xs font-bold text-[#212324] hover:border-[#10383A] hover:text-[#10383A] transition-colors"
                 >
                   <MessageCircle size={15} />
                   <span>Ask on WhatsApp</span>

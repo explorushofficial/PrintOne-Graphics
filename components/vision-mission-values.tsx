@@ -20,7 +20,7 @@ const CORE_VALUES = [
     description:
       'Rigorous attention to detail, colour consistency, accurate layouts, and premium finishing at every stage of production.',
     icon: ShieldCheck,
-    accent: '#e97819',
+    accent: '#10383A',
     badge: 'Standard',
   },
   {
@@ -52,7 +52,7 @@ const CORE_VALUES = [
     description:
       'Disciplined production scheduling and strict deadline adherence for AGM dates, product launches, and academic cycles.',
     icon: Clock,
-    accent: '#27292a',
+    accent: '#10383A',
     badge: 'Reliability',
   },
   {
@@ -60,7 +60,7 @@ const CORE_VALUES = [
     description:
       'Building enduring relationships founded on mutual trust, responsive service, and consistent value across India.',
     icon: Handshake,
-    accent: '#e97819',
+    accent: '#809276',
     badge: 'Growth',
   },
 ];
@@ -87,12 +87,12 @@ export function VisionMissionValues({ showExpertise = true }: { showExpertise?: 
         {/* Header */}
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#ded5c7] bg-[#ede7dc] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6d6a62]">
-            <Sparkles size={12} className="text-[#e97819]" />
+            <Sparkles size={12} className="text-[#10383A]" />
             <span>Guiding Principles</span>
           </div>
           <h2 className="mt-4 font-display text-3xl sm:text-5xl font-extrabold tracking-[-.055em] text-[#1c1d1f]">
             Our Vision, Mission<br />
-            <span className="text-[#e97819]">&amp; Core Values.</span>
+            <span className="text-[#10383A]">&amp; Core Values.</span>
           </h2>
           <p className="mt-4 text-xs sm:text-base leading-relaxed text-[#615e57]">
             At Print One Graphics, our foundation is built on delivering dependable printing, publishing, and gifting solutions that strengthen your corporate brand and inspire lasting trust.
@@ -110,10 +110,10 @@ export function VisionMissionValues({ showExpertise = true }: { showExpertise?: 
             className="relative rounded-2xl border border-[#ded5c7] bg-white p-7 sm:p-9 shadow-sm"
           >
             <div className="flex items-center justify-between border-b border-[#ece6dd] pb-4">
-              <span className="text-xs font-bold uppercase tracking-[.2em] text-[#e97819]">
+              <span className="text-xs font-bold uppercase tracking-[.2em] text-[#10383A]">
                 Our Vision
               </span>
-              <div className="grid h-10 w-10 place-items-center rounded-xl bg-[#faece1] text-[#e97819]">
+              <div className="grid h-10 w-10 place-items-center rounded-xl bg-[#eaf1f1] text-[#10383A]">
                 <Compass size={20} />
               </div>
             </div>
@@ -169,7 +169,7 @@ export function VisionMissionValues({ showExpertise = true }: { showExpertise?: 
         {/* Core Values Section */}
         <div className="mt-14">
           <div className="border-b border-[#ded5c7] pb-4">
-            <span className="text-xs font-bold uppercase tracking-[.2em] text-[#e97819]">
+            <span className="text-xs font-bold uppercase tracking-[.2em] text-[#10383A]">
               What We Stand For
             </span>
             <h3 className="mt-2 font-display text-2xl sm:text-3xl font-extrabold text-[#1f2122]">
@@ -188,7 +188,7 @@ export function VisionMissionValues({ showExpertise = true }: { showExpertise?: 
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
                   whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                  className="rounded-xl border border-[#ded5c7] bg-white p-6 shadow-sm transition-all hover:border-[#e97819] hover:shadow-md"
+                  className="rounded-xl border border-[#ded5c7] bg-white p-6 shadow-sm transition-all hover:border-[#10383A] hover:shadow-md"
                 >
                   <div className="flex items-center justify-between border-b border-[#f0ecd8] pb-3">
                     <span
@@ -217,17 +217,17 @@ export function VisionMissionValues({ showExpertise = true }: { showExpertise?: 
 
         {/* Core Expertise Strip (Client Request) */}
         {showExpertise && (
-          <div className="mt-14 rounded-2xl border border-[#ded5c7] bg-[#222425] p-7 sm:p-10 text-white shadow-xl">
+          <div className="mt-14 rounded-2xl border border-[#1a4e50] bg-[#10383A] p-7 sm:p-10 text-white shadow-xl">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/15 pb-5">
               <div>
-                <span className="text-xs font-bold uppercase tracking-[.2em] text-[#e97819]">
+                <span className="text-xs font-bold uppercase tracking-[.2em] text-[#809276]">
                   Comprehensive Portfolio
                 </span>
                 <h3 className="mt-1 font-display text-2xl sm:text-3xl font-extrabold">
                   Our Core Expertise
                 </h3>
               </div>
-              <p className="max-w-md text-xs sm:text-sm text-[#b8b4ab]">
+              <p className="max-w-md text-xs sm:text-sm text-[#c2d2cf]">
                 From concept and creative design to premium printing and finishing, we deliver quality, precision and reliable service for every project.
               </p>
             </div>
@@ -236,9 +236,9 @@ export function VisionMissionValues({ showExpertise = true }: { showExpertise?: 
               {CORE_EXPERTISE.map((item, index) => (
                 <span
                   key={item}
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-3.5 py-2 text-xs font-bold tracking-wide text-[#f2ede4] backdrop-blur-sm transition-colors hover:border-[#e97819] hover:bg-[#e97819] hover:text-white"
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-3.5 py-2 text-xs font-bold tracking-wide text-[#f2ede4] backdrop-blur-sm transition-colors hover:border-[#809276] hover:bg-[#809276] hover:text-[#10383A]"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#e97819]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#DAA112]" />
                   {item}
                 </span>
               ))}

@@ -14,7 +14,7 @@ export default function NotFound() {
   return (
     <main className="flex min-h-[70vh] items-center justify-center py-20">
       <div className="page-wrap text-center max-w-lg mx-auto">
-        <div className="mx-auto mb-6 grid h-20 w-20 place-items-center rounded-full bg-[#f0ebe2] text-[#e97819]">
+        <div className="mx-auto mb-6 grid h-20 w-20 place-items-center rounded-full bg-[#10383A]/10 text-[#10383A]">
           <FileQuestion size={36} />
         </div>
         <p className="eyebrow justify-center">Error 404</p>

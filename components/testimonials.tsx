@@ -23,7 +23,7 @@ const TESTIMONIALS: Testimonial[] = [
     clientType: 'Corporate Client',
     projectType: 'Annual Report',
     icon: FileText,
-    accent: '#e97819',
+    accent: '#10383A',
   },
   {
     id: 'test-2',
@@ -63,7 +63,7 @@ const TESTIMONIALS: Testimonial[] = [
     clientType: 'Corporate Client',
     projectType: 'Digital Printing',
     icon: Building2,
-    accent: '#27292a',
+    accent: '#10383A',
   },
   {
     id: 'test-6',
@@ -73,7 +73,7 @@ const TESTIMONIALS: Testimonial[] = [
     clientType: 'Educational & Publishing Client',
     projectType: 'Books & Educational Journals',
     icon: BookOpen,
-    accent: '#e97819',
+    accent: '#809276',
   },
 ];
 
@@ -102,17 +102,17 @@ export function Testimonials() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#ded5c7] pb-8">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-[#ded5c7] bg-[#f5f0e6] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6d6a62]">
-              <Star size={12} className="text-[#e97819] fill-[#e97819]" />
+              <Star size={12} className="text-[#10383A] fill-[#10383A]" />
               <span>Client Testimonials</span>
             </div>
             <h2 className="mt-4 font-display text-3xl sm:text-5xl font-extrabold tracking-[-.055em] text-[#1c1d1f]">
               Trusted by Businesses.<br />
-              <span className="text-[#e97819]">Proven by Results.</span>
+              <span className="text-[#10383A]">Proven by Results.</span>
             </h2>
           </div>
 
           <div className="max-w-md">
-            <p className="border-l-2 border-[#e97819] pl-4 text-xs sm:text-sm italic leading-relaxed text-[#5e5b54]">
+            <p className="border-l-2 border-[#10383A] pl-4 text-xs sm:text-sm italic leading-relaxed text-[#5e5b54]">
               “We value every relationship we build and every project we deliver. Our clients&apos; trust inspires us to continually raise the standard of design, printing and service.”
             </p>
             <p className="mt-2 pl-4 text-[11px] font-bold uppercase tracking-wider text-[#8b877f]">
@@ -134,8 +134,8 @@ export function Testimonials() {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`rounded px-3 py-1.5 text-xs font-bold transition-all duration-200 ${
                   isActive
-                    ? 'bg-[#202223] text-white shadow-sm'
-                    : 'bg-[#faf8f2] text-[#636058] border border-[#ded5c7] hover:border-[#e97819] hover:text-[#e97819]'
+                    ? 'bg-[#10383A] text-white shadow-sm'
+                    : 'bg-[#faf8f2] text-[#636058] border border-[#ded5c7] hover:border-[#10383A] hover:text-[#10383A]'
                 }`}
                 data-testid={`filter-testimonial-${cat.id.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
               >
@@ -158,7 +158,7 @@ export function Testimonials() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: idx * 0.06 }}
-                  className="relative flex flex-col justify-between rounded-xl border border-[#ded5c7] bg-white p-7 shadow-sm transition-shadow duration-300 hover:border-[#e97819] hover:shadow-lg"
+                  className="relative flex flex-col justify-between rounded-xl border border-[#ded5c7] bg-white p-7 shadow-sm transition-shadow duration-300 hover:border-[#10383A] hover:shadow-lg"
                   data-testid={`testimonial-card-${item.id}`}
                 >
                   <div>
@@ -200,9 +200,9 @@ export function Testimonials() {
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-1 text-[#e97819]">
+                    <div className="flex items-center gap-1 text-[#10383A]">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} size={11} className="fill-[#e97819]" />
+                        <Star key={i} size={11} className="fill-[#10383A]" />
                       ))}
                     </div>
                   </div>
@@ -214,7 +214,7 @@ export function Testimonials() {
 
         {/* Bottom Trust Assurance Band */}
         <div className="mt-12 rounded-xl border border-[#ded5c7] bg-[#fbf9f4] p-6 text-center sm:p-8">
-          <p className="text-xs font-bold uppercase tracking-[.18em] text-[#e97819]">
+          <p className="text-xs font-bold uppercase tracking-[.18em] text-[#10383A]">
             Continuous Long-Term Client Partnerships
           </p>
           <h3 className="mt-2 font-display text-xl sm:text-2xl font-extrabold text-[#1f2122]">

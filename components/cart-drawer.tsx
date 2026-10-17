@@ -37,7 +37,7 @@ export function CartDrawer() {
             </h2>
           </div>
           <button
-            className="grid h-10 w-10 place-items-center border border-[#d8d0c6] hover:border-[#e97819] transition-colors"
+            className="grid h-10 w-10 place-items-center border border-[#d8d0c6] hover:border-[#10383A] transition-colors"
             aria-label="Close enquiry list"
             onClick={handleClose}
             data-testid="button-close-cart"
@@ -48,7 +48,7 @@ export function CartDrawer() {
 
         {lines.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center px-8 text-center">
-            <div className="mb-5 grid h-16 w-16 place-items-center rounded-full bg-[#f0ebe2] text-[#e97819]">
+            <div className="mb-5 grid h-16 w-16 place-items-center rounded-full bg-[#10383A]/10 text-[#10383A]">
               <ShoppingBag size={25} />
             </div>
             <h3 className="font-display text-2xl font-bold">Nothing on the list yet.</h3>
@@ -129,7 +129,7 @@ export function CartDrawer() {
                 Continue on WhatsApp <ArrowRight size={16} />
               </a>
               <button
-                className="mt-4 w-full text-center text-xs font-semibold text-[#77736d] hover:text-[#242525] transition-colors"
+                className="mt-4 w-full text-center text-xs font-semibold text-[#77736d] hover:text-[#10383A] transition-colors"
                 onClick={clear}
                 data-testid="button-clear-cart"
               >
