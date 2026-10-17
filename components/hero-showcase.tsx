@@ -173,11 +173,6 @@ export function HeroShowcase() {
         <div className="mt-2 grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
           {/* Left Column: Bold, High-Impact Editorial Statement */}
           <div className="reveal">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#ded7cc] bg-[#f2ede4] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#666E51]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#10383A]" />
-              <span>DESIGN • DIGITAL PRINTING • CORPORATE GIFTING</span>
-            </div>
-
             <h1 className="mt-5 font-display text-[clamp(2.5rem,4.8vw,4.8rem)] font-extrabold leading-[0.93] tracking-[-.06em] text-[#10383A]">
               YOUR TRUSTED<br />
               <span className="text-[#DAA112]">PRINT PARTNER.</span><br />

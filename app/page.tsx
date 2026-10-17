@@ -19,25 +19,25 @@ export default async function HomePage() {
       <HeroShowcase />
 
       {/* 2. Continuous Production & Core Expertise Ticker */}
-      <ProductionTicker />
+      {/* <ProductionTicker /> */}
 
       {/* 3. Our Vision, Mission & Values + Core Expertise (Client Brief) */}
-      <VisionMissionValues showExpertise={true} />
+      {/* <VisionMissionValues showExpertise={true} /> */}
 
       {/* 4. The Studio & The Press: Two Worlds, One Roof */}
-      <StudioPressDuality />
+      {/* <StudioPressDuality /> */}
 
       {/* 5. The Materials & Tactile Finishes Laboratory */}
-      <TactileSpecimenBar />
+      {/* <TactileSpecimenBar /> */}
 
       {/* 6. Filterable Capabilities & Services Grid */}
-      <InteractiveCapabilities initialProducts={products} />
+      {/* <InteractiveCapabilities initialProducts={products} /> */}
 
       {/* 7. The 4-Phase Production Journey: From Concept to Delivery */}
-      <ProductionJourney />
+      {/* <ProductionJourney /> */}
 
       {/* 8. Client Testimonials (Trusted by Businesses. Proven by Results) */}
-      <Testimonials />
+      {/* <Testimonials /> */}
     </main>
   );
 }
