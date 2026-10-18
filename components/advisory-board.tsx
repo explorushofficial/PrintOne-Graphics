@@ -13,28 +13,28 @@ const ADVISORY_MEMBERS: AdvisoryMember[] = [
     id: 'jogendra-vichare',
     name: 'JOGENDRA VICHARE',
     role: 'Advisory Board Member',
-    image: '', // Placeholder for image
-    bio: 'Strategic advisor guiding PrintOne’s visionary growth, client relationships, and industry-wide print innovation.',
+    image: '/advisory/jogendra-vichare.jpg',
+    bio: `With an extensive experience of over 35 years in the printing industry, Mr. Jogendra Vichare brings exceptional expertise, technical knowledge, and industry insight to PrintOne Graphics. His deep understanding of printing, production management, and quality standards ensures excellence in every project. His commitment to quality, timely delivery, and customer satisfaction continues to drive the company’s growth and strengthen its reputation as a trusted printing partner.`,
   },
   {
     id: 'shashank-khandare',
     name: 'SHASHANK KHANDARE',
     role: 'Advisory Board Member',
     image: '', // Placeholder for image
-    bio: 'Providing expertise in corporate stewardship, creative leadership, and high-impact brand solutions.',
+    bio: `Shashank Khandare brings over 18 years of experience in the printing and packaging industry, backed by a Diploma in Printing and an Engineering qualification in Packaging. With strong expertise in sales and marketing, strategic planning, business development, and cost estimation, he plays a key role in driving business growth and building lasting client relationships. His in-depth industry knowledge, commercial acumen, and customer-focused approach enable him to develop effective strategies, deliver competitive solutions, and ensure excellence in quality and service.`,
   },
   {
     id: 'nitesh-patil',
     name: 'NITESH PATIL',
     role: 'Advisory Board Member',
-    image: '', // Placeholder for image
-    bio: 'Championing operational excellence, advanced print manufacturing standards, and pan-India execution.',
+    image: '/advisory/nitesh-patil.jpg',
+    bio: `Nitesh Patil has 5 years of experience in the printing and packaging industry, with sound technical knowledge of printing machinery and packaging processes. He possesses a good understanding of machine operations, production requirements, and technical aspects of printing, contributing to efficient workflow, quality output, and smooth production operations at PrintOne Graphics.`,
   },
 ];
 
 export function AdvisoryBoard() {
   return (
-    <section className="relative overflow-hidden border-b border-[#e5ded4] bg-[#faf8f2] py-12 sm:py-14 lg:py-16">
+    <section className="relative overflow-hidden border-b border-[#e5ded4] bg-[#faf8f2] py-14 sm:py-16 lg:py-20">
       {/* Background Architectural Grid Pattern */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.025]"
@@ -66,20 +66,20 @@ export function AdvisoryBoard() {
           </p>
         </div>
 
-        {/* 3-Member Cards Grid - Wider Container */}
-        <div className="mx-auto mt-10 max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        {/* 3-Member Cards Grid - Slightly Wider Container */}
+        <div className="mx-auto mt-10 sm:mt-12 max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {ADVISORY_MEMBERS.map((member) => (
             <div
               key={member.id}
-              className="group relative flex flex-col rounded-xl border border-[#1b4b4e] bg-[#10383A] p-3 sm:p-3.5 pb-4 sm:pb-5 shadow-lg transition-all duration-300 hover:border-[#DAA112] hover:shadow-[0_16px_36px_rgba(16,56,58,0.35)] hover:-translate-y-0.5"
+              className="group relative flex flex-col rounded-2xl border border-[#1b4b4e] bg-[#10383A] p-4 sm:p-5 pb-5 sm:pb-6 shadow-xl transition-all duration-300 hover:border-[#DAA112] hover:shadow-[0_20px_45px_rgba(16,56,58,0.4)] hover:-translate-y-1"
             >
-              {/* Image Container / Placeholder - Wider Footprint */}
-              <div className="relative aspect-[4/3.5] w-full overflow-hidden rounded-lg border border-[#1d5255] bg-[#ffffff]/60">
+              {/* Image Container / Placeholder - Wider & Slightly Taller */}
+              <div className="relative aspect-[4/3.8] w-full overflow-hidden rounded-xl border border-[#1d5255] bg-[#ffffff]/60">
                 {member.image ? (
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
                 ) : (
                   /* Compact Architectural Placeholder */
@@ -113,19 +113,21 @@ export function AdvisoryBoard() {
               </div>
 
               {/* Member Details */}
-              <div className="mt-4 flex flex-1 flex-col text-center">
-                <span className="text-[10px] font-bold uppercase tracking-[.18em] text-[#DAA112]">
-                  {member.role}
-                </span>
+              <div className="mt-4 sm:mt-5 flex flex-1 flex-col">
+                <div className="text-center">
+                  <span className="text-[10.5px] font-bold uppercase tracking-[.18em] text-[#DAA112]">
+                    {member.role}
+                  </span>
 
-                <h3 className="mt-1 font-display text-[15px] sm:text-base font-bold tracking-tight text-white group-hover:text-[#f7e4a8] transition-colors">
-                  {member.name}
-                </h3>
+                  <h3 className="mt-1 font-display text-[15.5px] sm:text-[17px] font-bold tracking-tight text-white group-hover:text-[#f7e4a8] transition-colors">
+                    {member.name}
+                  </h3>
 
-                <div className="mx-auto my-2 h-[1px] w-6 bg-[#DAA112]/40 transition-all duration-300 group-hover:w-10 group-hover:bg-[#DAA112]" />
+                  <div className="mx-auto my-2.5 h-[1.5px] w-8 bg-[#DAA112]/40 transition-all duration-300 group-hover:w-12 group-hover:bg-[#DAA112]" />
+                </div>
 
                 {member.bio && (
-                  <p className="mt-0.5 text-[11.5px] sm:text-xs leading-relaxed text-[#c2d5d4]">
+                  <p className="mt-2.5 text-[12px] sm:text-[12.5px] leading-[1.65] text-[#b8cecc] text-center font-normal">
                     {member.bio}
                   </p>
                 )}
