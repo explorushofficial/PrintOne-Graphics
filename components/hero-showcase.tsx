@@ -56,6 +56,21 @@ const HERO_SLIDES: HeroSlide[] = [
   },
 ];
 
+const HERO_PARAGRAPHS = [
+  {
+    id: 'story-1',
+    text: 'PrintOne Graphics is a creative design and printing company based in Byculla East, Mumbai, delivering quality printing solutions to organisations across India.',
+  },
+  {
+    id: 'story-2',
+    text: 'From concept development and creative design to premium printing, binding, and finishing, we combine creativity, precision, and attention to detail to bring every project to life. Our commitment to quality, timely delivery, and reliable service ensures that every project meets our clients’ expectations.',
+  },
+  {
+    id: 'story-3',
+    text: 'At PrintOne Graphics, we believe every print tells a story. Whether it’s books, annual reports, brochures, corporate publications, or customised print materials, we turn ideas into impactful printed experiences.',
+  },
+];
+
 export function HeroShowcase() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -63,13 +78,13 @@ export function HeroShowcase() {
   const [selectedItem, setSelectedItem] = useState<HeroSlide | null>(null);
   const { add } = useCart();
 
-  // Auto-advance slider every 5 seconds (pauses on mouse hover)
+  // Auto-advance slider every 3 seconds (pauses on mouse hover)
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
       setDirection(1);
       setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
   }, [isPaused]);
 
@@ -91,7 +106,11 @@ export function HeroShowcase() {
   };
 
   return (
-    <section className="relative overflow-hidden border-b border-[#e5ded4] bg-[#faf8f2]">
+    <section
+      className="relative overflow-hidden border-b border-[#e5ded4] bg-[#faf8f2]"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       {/* Background Architectural Grid Pattern */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
@@ -108,11 +127,14 @@ export function HeroShowcase() {
       <div className="grid grid-cols-1 lg:grid-cols-2 items-stretch min-h-[640px] xl:min-h-[720px]">
         {/* Left Part: Editorial Statement & Content */}
         <div className="relative z-10 flex flex-col justify-center px-6 py-10 sm:px-10 sm:py-12 lg:px-12 xl:px-16 2xl:px-20 lg:py-12">
-          <div className="max-w-[620px] w-full lg:ml-auto">
-            <h1 className="font-display text-[clamp(2.1rem,3.2vw,3.4rem)] font-extrabold leading-[0.98] tracking-[-.04em] text-[#10383A]">
+          <div className="max-w-[640px] xl:max-w-[680px] w-full lg:ml-auto">
+            <h1
+              className="font-display text-[clamp(2.45rem,3.75vw,3.95rem)] font-extrabold italic leading-[0.98] tracking-[-.04em] text-[#10383A]"
+              style={{ fontStyle: 'italic' }}
+            >
               YOUR TRUSTED<br />
               <span className="text-[#DAA112]">PRINT PARTNER.</span><br />
-              FROM CONCEPT TO FINISH.
+              FROM CONCEPT <br /> TO FINISH.
             </h1>
 
             {/* Requested Italic Font for Subtitle */}
@@ -123,35 +145,81 @@ export function HeroShowcase() {
               Your Trusted Partner for Design, Digital Printing &amp; Corporate Gifting
             </p>
 
-            <div className="mt-4 space-y-2.5 text-[13.5px] sm:text-[14.5px] leading-[1.62] text-[#55524c]">
-              <p>
-                PrintOne Graphics is a creative design and printing company based in Byculla East, Mumbai, delivering quality printing solutions to organisations across India.
-              </p>
-              <p>
-                From concept development and creative design to premium printing, binding, and finishing, we combine creativity, precision, and attention to detail to bring every project to life. Our commitment to quality, timely delivery, and reliable service ensures that every project meets our clients’ expectations.
-              </p>
-              <p>
-                At PrintOne Graphics, we believe every print tells a story. Whether it’s books, annual reports, brochures, corporate publications, or customised print materials, we turn ideas into impactful printed experiences.
-              </p>
+            <div className="mt-4 relative min-h-[145px] sm:min-h-[110px] lg:min-h-[105px]">
+              <AnimatePresence initial={false} custom={direction} mode="wait">
+                <motion.div
+                  key={currentSlide}
+                  custom={direction}
+                  initial={{ opacity: 0, y: direction > 0 ? 12 : -12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: direction > 0 ? -12 : 12 }}
+                  transition={{
+                    y: { type: 'spring', stiffness: 300, damping: 28 },
+                    opacity: { duration: 0.28 },
+                  }}
+                  className="text-[13.5px] sm:text-[14.5px] leading-[1.65] text-[#55524c]"
+                >
+                  <p>{HERO_PARAGRAPHS[currentSlide].text}</p>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Progress step indicators for the story paragraphs */}
+              <div className="mt-3 flex items-center gap-2">
+                <div className="flex items-center gap-1.5">
+                  {HERO_PARAGRAPHS.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setDirection(idx > currentSlide ? 1 : -1);
+                        setCurrentSlide(idx);
+                      }}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        currentSlide === idx
+                          ? 'w-6 bg-[#DAA112]'
+                          : 'w-2 bg-[#ded6c9] hover:bg-[#b8ae9d]'
+                      }`}
+                      aria-label={`Jump to narrative step ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+                <span className="text-[11px] font-bold tracking-wider uppercase text-[#8a857b]">
+                  0{currentSlide + 1} / 0{HERO_PARAGRAPHS.length}
+                </span>
+              </div>
             </div>
 
-            {/* Quick Category Visual Links */}
-            <div className="mt-5 flex flex-wrap gap-2 text-xs">
-              {[
-                { label: 'Annual Reports', tag: 'Ideas to artwork' },
-                { label: 'Commercial & Digital Print', tag: 'Business essentials' },
-                { label: 'Books & Publications', tag: 'Books + learning' },
-                { label: 'Corporate Gifting', tag: 'Gifting + merchandise' },
-                { label: 'Packaging & Boxes', tag: 'Production' },
-              ].map((cat) => (
-                <Link
-                  key={cat.label}
-                  href={`/products?tag=${encodeURIComponent(cat.tag)}`}
-                  className="rounded border border-[#ded6c9] bg-white/70 px-3 py-1 text-[11px] font-bold text-[#45433d] transition-all hover:border-[#10383A] hover:bg-white hover:text-[#10383A]"
-                >
-                  {cat.label}
-                </Link>
-              ))}
+            {/* Quick Category Visual Links: 3 up and 2 down */}
+            <div className="mt-2 space-y-2">
+              <div className="flex flex-wrap items-center gap-2">
+                {[
+                  { label: 'Annual Reports', tag: 'Ideas to artwork' },
+                  { label: 'Commercial & Digital Print', tag: 'Business essentials' },
+                  { label: 'Books & Publications', tag: 'Books + learning' },
+                ].map((cat) => (
+                  <Link
+                    key={cat.label}
+                    href={`/products?tag=${encodeURIComponent(cat.tag)}`}
+                    className="rounded border border-[#ded6c9] bg-white/70 px-3 py-1 text-[11px] font-bold text-[#45433d] transition-all hover:border-[#10383A] hover:bg-white hover:text-[#10383A]"
+                  >
+                    {cat.label}
+                  </Link>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                {[
+                  { label: 'Corporate Gifting', tag: 'Gifting + merchandise' },
+                  { label: 'Packaging & Boxes', tag: 'Production' },
+                ].map((cat) => (
+                  <Link
+                    key={cat.label}
+                    href={`/products?tag=${encodeURIComponent(cat.tag)}`}
+                    className="rounded border border-[#ded6c9] bg-white/70 px-3 py-1 text-[11px] font-bold text-[#45433d] transition-all hover:border-[#10383A] hover:bg-white hover:text-[#10383A]"
+                  >
+                    {cat.label}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* Action Buttons */}
@@ -201,30 +269,50 @@ export function HeroShowcase() {
         >
           {/* Slide Motion Wrapper */}
           <div className="relative w-full flex-1 overflow-hidden">
-            <AnimatePresence initial={false} custom={direction} mode="wait">
+            <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={activeSlide.id}
                 custom={direction}
-                initial={{ x: direction > 0 ? '100%' : '-100%', opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: direction > 0 ? '-100%' : '100%', opacity: 0 }}
+                initial={{ opacity: 0, x: direction > 0 ? 60 : -60 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: direction > 0 ? -60 : 60 }}
                 transition={{
-                  x: { type: 'spring', stiffness: 280, damping: 30 },
-                  opacity: { duration: 0.35 },
+                  duration: 0.5,
+                  ease: [0.25, 1, 0.5, 1],
                 }}
-                className="absolute inset-0 w-full h-full cursor-pointer"
-                onClick={() => setSelectedItem(activeSlide)}
+                className="absolute inset-0 w-full h-full overflow-hidden flex flex-col justify-between"
               >
-                {/* Background Image with gentle scale transition */}
-                <img
-                  src={activeSlide.image}
-                  alt={activeSlide.title}
-                  className="w-full h-full object-cover object-center select-none"
-                />
+                {/* Ambient Blurred Backdrop to seamlessly ground the container */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                  <img
+                    src={activeSlide.image}
+                    alt=""
+                    aria-hidden="true"
+                    className="w-full h-full object-cover blur-2xl opacity-35 scale-110 select-none"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#10383A] via-[#10383A]/60 to-[#10383A]/30" />
+                </div>
 
-                {/* Rich Gradient Overlay for PPT Polish */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#10383A] via-[#10383A]/40 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/30" />
+                {/* Centered Showcase Image: Starts zoomed in and smoothly zooms out so the whole image is 100% visible */}
+                <div className="relative z-10 w-full flex-1 flex items-center justify-center pt-16 pb-28 px-4 sm:px-8 overflow-hidden">
+                  <motion.div
+                    key={`img-zoom-${activeSlide.id}`}
+                    initial={{ scale: 1.45, opacity: 0.8 }}
+                    animate={{ scale: 1.0, opacity: 1 }}
+                    exit={{ scale: 0.94, opacity: 0 }}
+                    transition={{
+                      scale: { duration: 1.8, ease: [0.16, 1, 0.3, 1] },
+                      opacity: { duration: 0.4 },
+                    }}
+                    className="relative max-h-full max-w-full flex items-center justify-center"
+                  >
+                    <img
+                      src={activeSlide.image}
+                      alt={activeSlide.title}
+                      className="max-h-[260px] sm:max-h-[340px] lg:max-h-[380px] xl:max-h-[430px] w-auto max-w-[94%] object-contain rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.65)] ring-1 ring-white/15 select-none"
+                    />
+                  </motion.div>
+                </div>
 
                 {/* Slide Top Badge */}
                 <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20 flex items-center gap-2">
@@ -244,7 +332,7 @@ export function HeroShowcase() {
                 </div>
 
                 {/* PPT-Style Animated Captions at Bottom */}
-                <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 z-20 text-white">
+                <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 z-20 text-white pointer-events-none">
                   <motion.div
                     initial={{ y: 25, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -262,12 +350,6 @@ export function HeroShowcase() {
                     <p className="mt-1 text-xs text-white/80 line-clamp-2">
                       {activeSlide.spec}
                     </p>
-
-                    <div className="mt-4 flex items-center gap-3">
-                      <span className="inline-flex items-center gap-1 text-[11px] font-bold text-white hover:text-[#DAA112] underline decoration-[#DAA112] underline-offset-4 transition-colors">
-                        Inspect Specimen Details &rarr;
-                      </span>
-                    </div>
                   </motion.div>
                 </div>
               </motion.div>

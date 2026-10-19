@@ -57,7 +57,7 @@ export function Header() {
               height={58}
             />
             <span className="font-display text-[17px] font-extrabold tracking-[-.04em] text-[#10383A] sm:text-[18px]">
-              Print One <span className="font-sans text-[9px] font-bold tracking-[.22em] text-[#768886]">GRAPHICS</span>
+              PrintOne <span className="font-sans text-[9px] font-bold tracking-[.22em] text-[#768886]">GRAPHICS</span>
             </span>
           </Link>
 
