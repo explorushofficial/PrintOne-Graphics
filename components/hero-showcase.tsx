@@ -106,11 +106,7 @@ export function HeroShowcase() {
   };
 
   return (
-    <section
-      className="relative overflow-hidden border-b border-[#e5ded4] bg-[#faf8f2]"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
+    <section className="relative overflow-hidden border-b border-[#e5ded4] bg-[#faf8f2]">
       {/* Background Architectural Grid Pattern */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
@@ -146,7 +142,7 @@ export function HeroShowcase() {
             </p>
 
             <div className="mt-4 relative min-h-[145px] sm:min-h-[110px] lg:min-h-[105px]">
-              <AnimatePresence initial={false} custom={direction} mode="wait">
+              <AnimatePresence custom={direction} mode="wait">
                 <motion.div
                   key={currentSlide}
                   custom={direction}
@@ -269,7 +265,7 @@ export function HeroShowcase() {
         >
           {/* Slide Motion Wrapper */}
           <div className="relative w-full flex-1 overflow-hidden">
-            <AnimatePresence initial={false} custom={direction}>
+            <AnimatePresence custom={direction}>
               <motion.div
                 key={activeSlide.id}
                 custom={direction}
