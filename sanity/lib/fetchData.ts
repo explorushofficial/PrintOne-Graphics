@@ -85,11 +85,8 @@ export async function getProducts(): Promise<Product[]> {
     }
   }
 
-  // Precedence: Live Sanity CMS Products -> Initial mock products
-  const liveIds = new Set(sanityMapped.map((p) => p.id));
-  const nonCollidingMock = mockProducts.filter((p) => !liveIds.has(p.id));
-
-  return [...sanityMapped, ...nonCollidingMock];
+  // Live Sanity CMS Products ONLY - all mock products and images removed as requested
+  return sanityMapped;
 }
 
 /**
