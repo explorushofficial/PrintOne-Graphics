@@ -105,11 +105,83 @@ export function AboutClient() {
                 We work closely with publishers, corporates, educational institutions, and businesses across India, offering customised solutions that balance quality, cost-effectiveness, and timely delivery. By understanding our clients’ objectives and maintaining close attention to every detail, we strive to transform ideas into impactful printed materials that reflect their brand identity and vision. Our commitment to quality is supported by professional expertise, efficient production processes, and a customer-focused approach—delivering consistent results from short-run digital printing to bulk commercial printing. At PrintOne Graphics, our journey is driven by creativity, trust, and continuous improvement as we build long-term partnerships, embrace new opportunities, and deliver printing solutions that make every project stand out.
               </p>
             </div>
+
+            {/* Creative Thinking Visual Showcase Card */}
+            <div className="mt-8 overflow-hidden rounded-2xl border border-white/20 bg-white/10 p-2 sm:p-3 shadow-2xl backdrop-blur-sm">
+              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-black/30">
+                <img
+                  src="/printone-assets/about-creative-thinking.png"
+                  alt="PrintOne Graphics Creative Thinking and Ideation Session"
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 flex items-center justify-between text-left text-white">
+                  <div>
+                    <span className="inline-block rounded bg-[#DAA112] px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#10383A]">
+                      Creative Studio
+                    </span>
+                    <p className="mt-1 font-display text-sm sm:text-base font-bold text-white drop-shadow-sm">
+                      Creative Thinking. Thoughtful Typography. Impactful Storytelling.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 3. Why Choose Us (6 Client Pillars) */}
+      {/* 3. Modern Print Production Floor Showcase */}
+      <section className="border-b border-[#ded7cd] bg-[#faf8f2] py-14 sm:py-18">
+        <div className="page-wrap">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#ded7cd] bg-[#f2ede4] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6b6760]">
+              <Sparkles size={12} className="text-[#DAA112]" />
+              <span>In-House Press Infrastructure</span>
+            </div>
+
+            <h2 className="mt-3 font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-[-.04em] text-[#10383A]">
+              Our Modern Print Production Floor.
+            </h2>
+            <div className="mx-auto mt-2.5 h-0.5 w-12 bg-[#DAA112]" />
+            <p className="mt-3 text-xs sm:text-sm text-[#55524c] max-w-2xl mx-auto leading-relaxed">
+              Equipped with heavy-duty offset presses, high-definition digital production engines, precision computerized cutters, and automated bindery lines in Byculla East, Mumbai.
+            </p>
+          </div>
+
+          <div className="mt-8 overflow-hidden rounded-2xl border border-[#ded7cd] bg-white p-2.5 sm:p-4 shadow-xl">
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-[#1e2022]">
+              <img
+                src="/printone-assets/about-modern-print-floor.png"
+                alt="PrintOne Graphics Modern Print Production Floor and Machinery"
+                className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-white">
+                <div>
+                  <span className="rounded bg-[#10383A] px-2.5 py-1 text-[9.5px] font-bold uppercase tracking-wider text-[#DAA112] border border-white/20">
+                    Production Plant · Byculla East
+                  </span>
+                  <h3 className="mt-1.5 font-display text-lg sm:text-2xl font-extrabold text-white">
+                    Advanced Heidelberg Offset &amp; High-Speed Digital Presses
+                  </h3>
+                  <p className="mt-0.5 text-xs text-white/80 max-w-xl">
+                    Multi-color high-definition calibration, automated spectrophotometers, section sewing, and custom foil gilding.
+                  </p>
+                </div>
+                <Link
+                  href="/services"
+                  className="btn-primary shrink-0 text-xs py-2 px-3.5 bg-[#DAA112] text-[#10383A] border-[#DAA112] hover:bg-white hover:text-[#10383A] hover:border-white"
+                >
+                  Explore Capabilities &rarr;
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Why Choose Us (6 Client Pillars) */}
       <section className="section-space border-b border-[#e2d9cd] ">
         <div className="page-wrap">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">

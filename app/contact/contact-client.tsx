@@ -13,9 +13,8 @@ export function ContactClient() {
 
   function submitEnquiry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const body = `Hello Print One Graphics,\n\n${message}\n\nName: ${name}\nOrganisation: ${
-      organisation || 'Not specified'
-    }\nProject: ${project || 'Not specified'}`;
+    const body = `Hello Print One Graphics,\n\n${message}\n\nName: ${name}\nOrganisation: ${organisation || 'Not specified'
+      }\nProject: ${project || 'Not specified'}`;
     window.open(createWhatsAppUrl(body), '_blank', 'noopener,noreferrer');
   }
 
@@ -44,27 +43,6 @@ export function ContactClient() {
             <p className="text-xs sm:text-sm leading-relaxed text-[#615e58]">
               From concept and paper selection to printing, high-precision finishing and pan-India delivery, our team provides complete solutions tailored to your brand.
             </p>
-
-            <div className="space-y-3 pt-5 border-t border-[#e2dbd1]">
-              <div className="flex items-start gap-3">
-                <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#10383A]/10 text-[#10383A] text-[11px] font-bold">✓</span>
-                <p className="text-xs text-[#55524d] leading-relaxed">
-                  <strong className="text-[#10383A]">Commercial Presses:</strong> Heidelberg 4-color offset &amp; Konica Minolta AccurioPress C7100.
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#10383A]/10 text-[#10383A] text-[11px] font-bold">✓</span>
-                <p className="text-xs text-[#55524d] leading-relaxed">
-                  <strong className="text-[#10383A]">Luxury Finishing:</strong> Foil stamping, spot UV, embossing, rigid boxes &amp; thermal lamination.
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#10383A]/10 text-[#10383A] text-[11px] font-bold">✓</span>
-                <p className="text-xs text-[#55524d] leading-relaxed">
-                  <strong className="text-[#10383A]">Direct Production Desk:</strong> Immediate assistance from our Byculla East team.
-                </p>
-              </div>
-            </div>
           </div>
 
           {/* Right Column: Form on top + 3 Cards (Email, Contacts, Address) below */}
@@ -72,7 +50,7 @@ export function ContactClient() {
             {/* The Form Box */}
             <div className="relative overflow-hidden rounded-xl border border-[#e2dbd1] bg-[#f0ece4] p-4 sm:p-6 shadow-sm">
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#10383A] via-[#666E51] to-[#809276]" />
-              
+
               <div>
                 <div className="flex items-center justify-between">
                   <div>
