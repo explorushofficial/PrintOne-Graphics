@@ -51,6 +51,13 @@ export type FormState = {
   binding: string;
   handsOnDetails: string;
 
+  // Other Custom Inputs
+  otherProjectType?: string;
+  otherSizeUnit?: string;
+  otherCoverColour?: string;
+  otherInsideColour?: string;
+  otherBinding?: string;
+
   // Free Form
   freeFormNotes: string;
 };
@@ -88,6 +95,13 @@ const initialFormState: FormState = {
   binding: 'None',
   handsOnDetails: '',
 
+  // Other Custom Inputs
+  otherProjectType: '',
+  otherSizeUnit: '',
+  otherCoverColour: '',
+  otherInsideColour: '',
+  otherBinding: '',
+
   // Free Form
   freeFormNotes: '',
 };
@@ -104,6 +118,7 @@ const projectTypeOptions = [
   'Poster',
   'Hard Bound Book',
   'Custom Job',
+  'Other',
 ];
 
 const colourOptions = [
@@ -111,6 +126,7 @@ const colourOptions = [
   '2 colours',
   '4 colours (CMYK)',
   '5+ colours / Special PMS',
+  'Other',
 ];
 
 const bindingOptions = [
@@ -124,12 +140,14 @@ const bindingOptions = [
   'Wiro Binding',
   'Section Sewing',
   'With Hard Bound',
+  'Other',
 ];
 
 const sizeUnitOptions = [
   { value: 'mm', label: 'mm' },
   { value: 'inches', label: 'inches' },
   { value: 'cm', label: 'cm' },
+  { value: 'Other', label: 'Other' },
 ];
 
 export function QuoteFormClient() {
@@ -165,10 +183,35 @@ export function QuoteFormClient() {
   };
 
   const buildWhatsAppMessage = () => {
+    const unit =
+      formData.sizeUnit === 'Other'
+        ? formData.otherSizeUnit?.trim() || 'units'
+        : formData.sizeUnit;
+
     const dimensions =
       formData.sizeWidth && formData.sizeHeight
-        ? `${formData.sizeWidth} × ${formData.sizeHeight} ${formData.sizeUnit} (${formData.sizeFormat})`
+        ? `${formData.sizeWidth} × ${formData.sizeHeight} ${unit} (${formData.sizeFormat})`
         : 'Not specified';
+
+    const projectTypeDisplay =
+      formData.projectType === 'Other'
+        ? formData.otherProjectType?.trim() || 'Other'
+        : formData.projectType || 'Flyer';
+
+    const coverColourDisplay =
+      formData.coverColour === 'Other'
+        ? formData.otherCoverColour?.trim() || 'Other'
+        : formData.coverColour;
+
+    const insideColourDisplay =
+      formData.insideColour === 'Other'
+        ? formData.otherInsideColour?.trim() || 'Other'
+        : formData.insideColour;
+
+    const bindingDisplay =
+      formData.binding === 'Other'
+        ? formData.otherBinding?.trim() || 'Other'
+        : formData.binding;
 
     const lines: string[] = [
       '📋 *PRINT JOB SPECIFICATION & QUOTATION*',
@@ -185,22 +228,22 @@ export function QuoteFormClient() {
       '',
       '📄 *JOB DESCRIPTION*',
       formData.jobTitle ? `• Job Title: ${formData.jobTitle}` : '• Job Title: Print Enquiry',
-      `• Project Type: ${formData.projectType || 'Flyer'}`,
+      `• Project Type: ${projectTypeDisplay}`,
       `• Quantity: ${formData.quantity || 'Not specified'}`,
       `• Size: ${dimensions}`,
       '',
       '🎨 *MATERIAL FOR COVER*',
       formData.coverPaperGsm ? `• Paper / GSM: ${formData.coverPaperGsm}` : '• Paper / GSM: Standard recommended',
-      `• Colour: ${formData.coverColour}`,
+      `• Colour: ${coverColourDisplay}`,
       `• Lamination: ${formData.coverLamination}`,
       '',
       '📖 *MATERIAL FOR INSIDE PAGES*',
       formData.insidePaperGsm ? `• Paper / GSM: ${formData.insidePaperGsm}` : '• Paper / GSM: Standard recommended',
-      `• Colour: ${formData.insideColour}`,
+      `• Colour: ${insideColourDisplay}`,
       '',
       '⚙️ *PRE / POST PRINTING*',
       formData.fileFormat ? `• Format in which job is stored: ${formData.fileFormat}` : null,
-      `• Binding: ${formData.binding}`,
+      `• Binding: ${bindingDisplay}`,
       formData.handsOnDetails ? `• Other hands-on details: ${formData.handsOnDetails}` : null,
       '',
       formData.freeFormNotes
@@ -507,6 +550,17 @@ export function QuoteFormClient() {
                           </option>
                         ))}
                       </select>
+                      {formData.projectType === 'Other' && (
+                        <input
+                          type="text"
+                          value={formData.otherProjectType || ''}
+                          onChange={(e) => updateField('otherProjectType', e.target.value)}
+                          placeholder="Please specify project type..."
+                          className="mt-2 w-full rounded border border-[#10383A] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A] animate-in fade-in duration-200"
+                          data-testid="input-other-project-type"
+                          autoFocus
+                        />
+                      )}
                     </div>
                   </div>
 
@@ -589,6 +643,20 @@ export function QuoteFormClient() {
                           </label>
                         </div>
                       </div>
+
+                      {formData.sizeUnit === 'Other' && (
+                        <div className="mt-2">
+                          <input
+                            type="text"
+                            value={formData.otherSizeUnit || ''}
+                            onChange={(e) => updateField('otherSizeUnit', e.target.value)}
+                            placeholder="Please specify unit (e.g. ft, pt, px)..."
+                            className="w-full sm:w-64 rounded border border-[#10383A] bg-white px-3 py-1.5 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A] animate-in fade-in duration-200"
+                            data-testid="input-other-size-unit"
+                            autoFocus
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -635,6 +703,17 @@ export function QuoteFormClient() {
                           </option>
                         ))}
                       </select>
+                      {formData.coverColour === 'Other' && (
+                        <input
+                          type="text"
+                          value={formData.otherCoverColour || ''}
+                          onChange={(e) => updateField('otherCoverColour', e.target.value)}
+                          placeholder="Please specify cover colour..."
+                          className="mt-2 w-full rounded border border-[#10383A] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A] animate-in fade-in duration-200"
+                          data-testid="input-other-cover-colour"
+                          autoFocus
+                        />
+                      )}
                     </div>
                   </div>
 
@@ -711,6 +790,17 @@ export function QuoteFormClient() {
                           </option>
                         ))}
                       </select>
+                      {formData.insideColour === 'Other' && (
+                        <input
+                          type="text"
+                          value={formData.otherInsideColour || ''}
+                          onChange={(e) => updateField('otherInsideColour', e.target.value)}
+                          placeholder="Please specify inside colour..."
+                          className="mt-2 w-full rounded border border-[#10383A] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A] animate-in fade-in duration-200"
+                          data-testid="input-other-inside-colour"
+                          autoFocus
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
@@ -759,6 +849,17 @@ export function QuoteFormClient() {
                           </option>
                         ))}
                       </select>
+                      {formData.binding === 'Other' && (
+                        <input
+                          type="text"
+                          value={formData.otherBinding || ''}
+                          onChange={(e) => updateField('otherBinding', e.target.value)}
+                          placeholder="Please specify binding method..."
+                          className="mt-2 w-full rounded border border-[#10383A] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A] animate-in fade-in duration-200"
+                          data-testid="input-other-binding"
+                          autoFocus
+                        />
+                      )}
                     </div>
                   </div>
 
