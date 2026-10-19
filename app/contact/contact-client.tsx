@@ -156,18 +156,18 @@ export function ContactClient() {
                   </div>
                   <div className="mt-2 space-y-1">
                     <a
-                      className="block text-[11px] font-semibold text-[#10383A] hover:text-[#666E51] transition-colors break-all leading-snug"
+                      className="block text-[10.5px] font-semibold text-[#10383A] hover:text-[#666E51] transition-colors break-all leading-snug"
                       href="mailto:printone.graphics21@gmail.com"
                       data-testid="link-email-contact"
                     >
-                      printone.graphics21@gmail.com
+                     quote.printonegraphics@gmail.com
                     </a>
                     <a
                       className="block text-[10px] text-[#77736d] hover:text-[#10383A] transition-colors break-all leading-snug"
-                      href="mailto:printonebyculla@gmail.com"
+                      href="mailto:printone.graphics21@gmail.com"
                       data-testid="link-email-alternate"
                     >
-                      printonebyculla@gmail.com
+                      quote.printonegraphics@gmail.com
                     </a>
                   </div>
                 </div>

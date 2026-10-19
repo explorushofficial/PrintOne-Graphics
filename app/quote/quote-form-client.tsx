@@ -39,11 +39,14 @@ export type FormState = {
 
   // Material for Cover
   coverPaperGsm: string;
+  coverPageCount: string;
   coverColour: string;
   coverLamination: 'Yes' | 'No';
+  coverFinishing: 'Matte' | 'Glossy';
 
   // Material for Inside Pages
   insidePaperGsm: string;
+  insidePageCount: string;
   insideColour: string;
 
   // Pre / Post Printing
@@ -83,11 +86,14 @@ const initialFormState: FormState = {
 
   // Material for Cover
   coverPaperGsm: '',
+  coverPageCount: '',
   coverColour: '1 colour',
   coverLamination: 'Yes',
+  coverFinishing: 'Matte',
 
   // Material for Inside Pages
   insidePaperGsm: '',
+  insidePageCount: '',
   insideColour: '1 colour',
 
   // Pre / Post Printing
@@ -234,11 +240,14 @@ export function QuoteFormClient() {
       '',
       '🎨 *MATERIAL FOR COVER*',
       formData.coverPaperGsm ? `• Paper / GSM: ${formData.coverPaperGsm}` : '• Paper / GSM: Standard recommended',
+      formData.coverPageCount ? `• Page Count: ${formData.coverPageCount}` : null,
       `• Colour: ${coverColourDisplay}`,
       `• Lamination: ${formData.coverLamination}`,
+      `• Finishing: ${formData.coverFinishing}`,
       '',
       '📖 *MATERIAL FOR INSIDE PAGES*',
       formData.insidePaperGsm ? `• Paper / GSM: ${formData.insidePaperGsm}` : '• Paper / GSM: Standard recommended',
+      formData.insidePageCount ? `• Page Count: ${formData.insidePageCount}` : null,
       `• Colour: ${insideColourDisplay}`,
       '',
       '⚙️ *PRE / POST PRINTING*',
@@ -669,8 +678,8 @@ export function QuoteFormClient() {
                 </h2>
 
                 <div className="mt-5 space-y-4">
-                  {/* Paper GSM and Colour in ONE ROW */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Paper GSM, Page Count and Colour */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                       <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
                         <span className="text-[#DAA112] font-bold">▸</span>
@@ -683,6 +692,21 @@ export function QuoteFormClient() {
                         placeholder="e.g. 300 GSM Art Card"
                         className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
                         data-testid="input-cover-paper-gsm"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>Page Count :</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.coverPageCount}
+                        onChange={(e) => updateField('coverPageCount', e.target.value)}
+                        placeholder="e.g. 4 Pages"
+                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
+                        data-testid="input-cover-page-count"
                       />
                     </div>
 
@@ -717,33 +741,70 @@ export function QuoteFormClient() {
                     </div>
                   </div>
 
-                  {/* Lamination (compact inline row) */}
-                  <div className="flex items-center gap-4 pt-1">
-                    <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
-                      <span className="text-[#DAA112] font-bold">▸</span>
-                      <span>Lamination :</span>
-                    </label>
-                    <div className="flex items-center gap-5">
-                      <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                        <input
-                          type="radio"
-                          name="coverLamination"
-                          checked={formData.coverLamination === 'Yes'}
-                          onChange={() => updateField('coverLamination', 'Yes')}
-                          className="h-4 w-4 text-[#10383A] focus:ring-[#10383A]"
-                        />
-                        <span>Yes</span>
+                  {/* Lamination & Finishing (compact inline row) */}
+                  <div className="flex flex-wrap items-center gap-x-8 gap-y-3 pt-1">
+                    {/* Lamination */}
+                    <div className="flex items-center gap-4">
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>Lamination :</span>
                       </label>
-                      <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                        <input
-                          type="radio"
-                          name="coverLamination"
-                          checked={formData.coverLamination === 'No'}
-                          onChange={() => updateField('coverLamination', 'No')}
-                          className="h-4 w-4 text-[#10383A] focus:ring-[#10383A]"
-                        />
-                        <span>No</span>
+                      <div className="flex items-center gap-5">
+                        <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
+                          <input
+                            type="radio"
+                            name="coverLamination"
+                            checked={formData.coverLamination === 'Yes'}
+                            onChange={() => updateField('coverLamination', 'Yes')}
+                            className="h-4 w-4 text-[#10383A] focus:ring-[#10383A]"
+                            data-testid="radio-cover-lamination-yes"
+                          />
+                          <span>Yes</span>
+                        </label>
+                        <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
+                          <input
+                            type="radio"
+                            name="coverLamination"
+                            checked={formData.coverLamination === 'No'}
+                            onChange={() => updateField('coverLamination', 'No')}
+                            className="h-4 w-4 text-[#10383A] focus:ring-[#10383A]"
+                            data-testid="radio-cover-lamination-no"
+                          />
+                          <span>No</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    {/* Finishing */}
+                    <div className="flex items-center gap-4">
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>Finishing :</span>
                       </label>
+                      <div className="flex items-center gap-5">
+                        <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
+                          <input
+                            type="radio"
+                            name="coverFinishing"
+                            checked={formData.coverFinishing === 'Matte'}
+                            onChange={() => updateField('coverFinishing', 'Matte')}
+                            className="h-4 w-4 text-[#10383A] focus:ring-[#10383A]"
+                            data-testid="radio-cover-finishing-matte"
+                          />
+                          <span>Matte</span>
+                        </label>
+                        <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
+                          <input
+                            type="radio"
+                            name="coverFinishing"
+                            checked={formData.coverFinishing === 'Glossy'}
+                            onChange={() => updateField('coverFinishing', 'Glossy')}
+                            className="h-4 w-4 text-[#10383A] focus:ring-[#10383A]"
+                            data-testid="radio-cover-finishing-glossy"
+                          />
+                          <span>Glossy</span>
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -756,8 +817,8 @@ export function QuoteFormClient() {
                 </h2>
 
                 <div className="mt-5">
-                  {/* Paper GSM and Colour in ONE ROW */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Paper GSM, Page Count and Colour */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                       <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
                         <span className="text-[#DAA112] font-bold">▸</span>
@@ -770,6 +831,21 @@ export function QuoteFormClient() {
                         placeholder="e.g. 130 GSM Art Paper"
                         className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
                         data-testid="input-inside-paper-gsm"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>Page Count :</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.insidePageCount}
+                        onChange={(e) => updateField('insidePageCount', e.target.value)}
+                        placeholder="e.g. 16 Pages"
+                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
+                        data-testid="input-inside-page-count"
                       />
                     </div>
 
