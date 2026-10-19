@@ -31,7 +31,7 @@ export function AboutClient() {
           aria-hidden="true"
         />
 
-        <div className="page-wrap relative z-10 py-16 sm:py-20 lg:py-24">
+        <div className="page-wrap relative z-10 py-10 sm:py-12 lg:py-14">
           <div className="mx-auto max-w-4xl lg:max-w-5xl text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -49,7 +49,7 @@ export function AboutClient() {
 
               <div className="mx-auto mt-6 max-w-4xl lg:max-w-[1020px] space-y-4 text-center text-[15px] sm:text-[16px] leading-[1.75] text-[#524f48]">
                 <p>
-                  Established in 2021, PrintOne Graphics is a Mumbai-based printing and graphic design company dedicated to delivering high-quality printing solutions with creativity, precision, and reliability. From concept development and creative design to premium printing, finishing, and binding, we offer end-to-end solutions tailored to meet the diverse needs of businesses, publishers, educational institutions, and organisations across India. We specialise in <strong className="font-bold text-[#10383A]">books and publication printing, annual reports, brochures, catalogues, corporate stationery, commercial printing, typesetting, and binding services</strong>.
+                 PrintOne Graphics is a Mumbai-based printing and graphic design company dedicated to delivering high-quality printing solutions with creativity, precision, and reliability. From concept development and creative design to premium printing, finishing, and binding, we offer end-to-end solutions tailored to meet the diverse needs of businesses, publishers, educational institutions, and organisations across India. We specialise in <strong className="font-bold text-[#10383A]">books and publication printing, annual reports, brochures, catalogues, corporate stationery, commercial printing, typesetting, and binding services</strong>.
                 </p>
                 <p>
                   Our focus is on combining innovative design, quality materials, and professional execution to ensure every project meets the highest standards. At PrintOne Graphics, we believe that every print project tells a story. Our commitment to quality, attention to detail, timely delivery, and customer satisfaction helps us build lasting relationships with our clients. Based in Byculla East, Mumbai, we strive to be your trusted printing partner—transforming your ideas into impactful printed experiences.
@@ -72,11 +72,11 @@ export function AboutClient() {
               </div>
 
               {/* Atelier Credentials Pill Tags */}
-              <div className="mx-auto mt-10 flex max-w-xl flex-wrap items-center justify-center gap-2 pt-6 border-t border-[#e5dfd4] text-[11px] font-bold uppercase tracking-wider text-[#636058]">
-                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1">Creative Design</span>
-                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1">Digital Printing</span>
-                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1">Corporate Gifting</span>
-                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1">In-House Production</span>
+              <div className="mx-auto mt-10 flex w-full max-w-2xl flex-nowrap items-center justify-center gap-2 sm:gap-2.5 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pt-6 border-t border-[#e5dfd4] text-[11px] sm:text-[11.5px] font-bold uppercase tracking-wider text-[#636058]">
+                <span className="shrink-0 whitespace-nowrap rounded border border-[#ded7cd] bg-white px-3 py-1 sm:px-3.5 sm:py-1.5 shadow-xs">Creative Design</span>
+                <span className="shrink-0 whitespace-nowrap rounded border border-[#ded7cd] bg-white px-3 py-1 sm:px-3.5 sm:py-1.5 shadow-xs">Digital Printing</span>
+                <span className="shrink-0 whitespace-nowrap rounded border border-[#ded7cd] bg-white px-3 py-1 sm:px-3.5 sm:py-1.5 shadow-xs">Corporate Gifting</span>
+                <span className="shrink-0 whitespace-nowrap rounded border border-[#ded7cd] bg-white px-3 py-1 sm:px-3.5 sm:py-1.5 shadow-xs">In-House Production</span>
               </div>
             </motion.div>
           </div>
