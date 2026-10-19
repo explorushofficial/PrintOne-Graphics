@@ -100,8 +100,11 @@ export function ServicesClient({ services }: ServicesClientProps) {
             </h1>
 
             {/* 8 Areas Line */}
-            <div className="mx-auto mt-3.5 max-w-3xl">
-              <p className="text-xs sm:text-[13px] font-bold tracking-wide text-[#10383A]">
+            <div className="mx-auto mt-4 max-w-4xl">
+              <p
+                className="font-serif text-[15px] sm:text-[18px] font-bold italic tracking-wide text-[#10383A] leading-relaxed"
+                style={{ fontStyle: 'italic', fontStyleRule: 'italic' } as React.CSSProperties}
+              >
                 Corporate Reporting · Commercial Print · Books &amp; Publishing · Corporate Gifting · Packaging &amp; Production · Large Format · Design &amp; Artwork · Finishing &amp; Bindery
               </p>
             </div>
@@ -182,211 +185,59 @@ export function ServicesClient({ services }: ServicesClientProps) {
             })}
           </div>
 
-          {/* Single Compact Service Card with Swipe & Arrows (for areas with multiple cards) */}
-          {currentService ? (
-            <div
-              className="relative px-2 sm:px-3"
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-            >
-              {/* Left Arrow - displayed when this area has multiple cards */}
-              {totalCardsInArea > 1 && (
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handlePrev();
-                  }}
-                  aria-label="Previous offering in this area"
-                  className="absolute -left-2 sm:-left-3 md:-left-4 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-[#ded7cd] bg-white text-[#10383A] shadow-md transition-all hover:bg-[#10383A] hover:text-white hover:scale-105"
-                >
-                  <ChevronLeft size={18} />
-                </button>
-              )}
+          {/* Service Spectrum Wheel Image Showcase (Replacing individual service card) */}
+          <div className="mt-6 overflow-hidden rounded-2xl border border-[#ded7cd] bg-white p-3 sm:p-6 shadow-sm">
+            <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center justify-center">
+              <img
+                src="/printone-assets/services-service-spectrum.png"
+                alt="PrintOne Graphics Service Spectrum Wheel - 8 Core Solution Areas"
+                className="w-full max-h-[580px] object-contain transition-transform duration-500 hover:scale-101"
+              />
+            </div>
 
-              {/* Right Arrow - displayed when this area has multiple cards */}
-              {totalCardsInArea > 1 && (
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleNext();
-                  }}
-                  aria-label="Next offering in this area"
-                  className="absolute -right-2 sm:-right-3 md:-right-4 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-[#ded7cd] bg-white text-[#10383A] shadow-md transition-all hover:bg-[#10383A] hover:text-white hover:scale-105"
-                >
-                  <ChevronRight size={18} />
-                </button>
-              )}
-
-              {/* The Single Compact Card */}
-              <div
-                className="group relative overflow-hidden rounded-xl border border-[#ded7cd] bg-white shadow-xs transition-all duration-300 hover:border-[#DAA112] hover:shadow-sm cursor-pointer"
-                onClick={() => setSelectedService(currentService)}
-                data-testid={`service-card-${currentService.id}`}
-              >
-                <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] lg:grid-cols-[240px_1fr]">
-                  {/* Left Thumbnail Banner - Decreased Height */}
-                  <div className="relative h-40 md:h-full md:min-h-[160px] md:max-h-[195px] w-full overflow-hidden bg-[#10383A]">
-                    <img
-                      src={currentService.image}
-                      alt={currentService.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/80 via-black/25 to-transparent" />
-
-                    {/* Pillar Badge */}
-                    <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
-                      <span className="rounded bg-black/70 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider text-[#DAA112] backdrop-blur-sm">
-                        Pillar {currentService.number}
-                      </span>
-                    </div>
-
-                    <div className="absolute bottom-2.5 left-3 right-3 text-white">
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-white/90 truncate">
-                        {currentService.category}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Right Details Container - Sleek & Decreased Height */}
-                  <div className="flex flex-col justify-between p-3.5 sm:p-4 sm:px-5">
-                    <div>
-                      {/* Top Bar */}
-                      <div className="flex flex-wrap items-center justify-between gap-1.5">
-                        <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-[#10383A]">
-                          <Sparkles size={11} className="text-[#DAA112]" />
-                          {currentService.tagFilter}
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <span className="rounded-full bg-[#f3efe6] px-2 py-0.5 text-[9px] font-semibold text-[#716e67]">
-                            ⏱ {currentService.turnaround.split(';')[0]}
-                          </span>
-                          <span className="text-[10px] font-bold text-[#8e8a82]">
-                            {totalCardsInArea > 1
-                              ? `Card 0${safeCardIndex + 1} of 0${totalCardsInArea}`
-                              : `Area ${currentService.tagFilter}`}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Title */}
-                      <h3 className="mt-1 font-display text-base sm:text-lg font-extrabold text-[#1c1d1f] group-hover:text-[#10383A] transition-colors leading-snug line-clamp-1">
-                        {currentService.title}
-                      </h3>
-
-                      {/* Short Description */}
-                      <p className="mt-1 text-xs text-[#5e5b54] leading-relaxed line-clamp-1 sm:line-clamp-2">
-                        {currentService.shortDescription}
-                      </p>
-
-                      {/* Deliverables (2 key highlights in compact inline row) */}
-                      <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-[#f0ecd8] pt-1.5 text-[11px] text-[#45423b]">
-                        {currentService.features.slice(0, 2).map((feat, i) => (
-                          <div key={i} className="flex items-center gap-1.5 truncate max-w-[280px]">
-                            <CheckCircle2 size={12} className="text-[#10383A] shrink-0" />
-                            <span className="truncate">{feat}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Footer Actions */}
-                    <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 border-t border-[#f0ecd8] pt-2">
-                      <div className="flex items-center gap-2">
-                        <Link
-                          href={`/quote?service=${encodeURIComponent(currentService.title)}`}
-                          onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1.5 rounded-md bg-[#10383A] px-3.5 py-1.5 text-xs font-bold text-white transition-all hover:bg-[#164a4d] shadow-xs"
-                          data-testid={`button-inquiry-service-${currentService.id}`}
-                        >
-                          <span>Inquiry &amp; Get Quote</span>
-                          <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
-                        </Link>
-
-                        <a
-                          href={createWhatsAppUrl(`Hi PrintOne Graphics, I would like to inquire about specifications and pricing for "${currentService.title}".`)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1 rounded-md border border-[#25D366] bg-[#25D366]/10 px-2.5 py-1.5 text-xs font-bold text-[#128C7E] hover:bg-[#25D366] hover:text-white transition-colors"
-                        >
-                          <MessageCircle size={12} />
-                          <span className="hidden sm:inline">WhatsApp</span>
-                        </a>
-                      </div>
-
-                      {/* Pagination Dots for Multiple Cards in this Area */}
-                      {totalCardsInArea > 1 && (
-                        <div className="flex items-center gap-1.5">
-                          {areaServices.map((_, i) => (
-                            <button
-                              key={i}
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setCardIndex(i);
-                              }}
-                              className={`h-2 rounded-full transition-all ${
-                                safeCardIndex === i
-                                  ? 'w-5 bg-[#10383A]'
-                                  : 'w-2 bg-[#ded7cd] hover:bg-[#8e8a82]'
-                              }`}
-                              title={`Card ${i + 1}`}
-                              aria-label={`Jump to card ${i + 1}`}
-                            />
-                          ))}
-                          <span className="text-[10px] font-semibold text-[#8e8a82] hidden sm:inline">
-                            Swipe or click arrow ({safeCardIndex + 1}/{totalCardsInArea})
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
+            <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-[#f0eae0] pt-4 text-center sm:text-left">
+              <div>
+                <p className="text-xs font-bold text-[#10383A] uppercase tracking-wider">
+                  Complete Service Spectrum Across 8 Specialized Domains
+                </p>
+                <p className="text-[11px] text-[#76726b]">
+                  Corporate Reporting · Commercial Print · Books &amp; Publishing · Corporate Gifting · Packaging · Large Format · Design · Bindery
+                </p>
               </div>
-            </div>
-          ) : (
-            <div className="rounded-xl border border-[#ded7cd] bg-white py-12 text-center">
-              <h3 className="font-display text-base font-bold text-[#202223]">
-                No service offerings match your search in {activeFilter}.
-              </h3>
-              <p className="mt-1 text-xs text-[#77736d]">
-                Try clearing your search term or select another service area above.
-              </p>
-              <button
-                onClick={() => {
-                  setSearchQuery('');
-                  setCardIndex(0);
-                }}
-                className="btn-outline mt-3 py-1.5 px-3 text-xs"
+
+              <a
+                href={createWhatsAppUrl(`Hello PrintOne Graphics, I would like to consult about your services in ${activeFilter}.`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary text-xs py-2 px-4 whitespace-nowrap"
               >
-                Clear Search
-              </button>
+                <MessageCircle size={14} />
+                <span>Inquire About {activeFilter}</span>
+              </a>
             </div>
-          )}
+          </div>
         </div>
       </section>
 
-      {/* 3. Print-on-Demand (POD) Section - Compact Height */}
-      <section className="bg-[#809276] text-white py-7 sm:py-9 border-b border-[#6e7f65]">
+      {/* 3. Print-on-Demand (POD) & Educational Publishing Section with Village Classroom Image */}
+      <section className="bg-[#809276] text-white py-10 sm:py-14 border-b border-[#6e7f65]">
         <div className="page-wrap">
           <div className="mx-auto max-w-4xl lg:max-w-5xl text-center">
             <p className="text-[10px] font-extrabold uppercase tracking-[.2em] text-[#f5efe5]">
-              Flexible Publishing &amp; Inventory Control
+              Flexible Publishing &amp; Educational Impact
             </p>
             <h2 className="mt-1 font-display text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-[-.03em] text-white">
-              Print-on-Demand (POD)
+              Print-on-Demand (POD) &amp; Educational Publishing
             </h2>
 
-            <div className="mx-auto mt-1.5 h-0.5 w-10 bg-[#DAA112]" />
+            <div className="mx-auto mt-2 h-0.5 w-12 bg-[#DAA112]" />
 
             <div className="mt-4 space-y-2.5 text-center text-[13.5px] sm:text-[14.5px] leading-[1.65] text-white/95">
               <p>
                 Looking for a smarter way to meet customer demand without the burden of overprinting? <strong className="font-extrabold text-white bg-[#10383A]/45 px-2 py-0.5 rounded border border-white/20 inline-block my-0.5">PrintOne Graphics offers flexible and cost-effective print-on-demand solutions</strong> that give publishers greater control over printing costs and inventory. Print only the quantities you need — whether it’s a single copy or hundreds of books — while minimising wastage, reducing overheads, and responding quickly to market demand. With PrintOne Graphics, keep your books available without investing in large print runs or excess inventory.
               </p>
               <p>
-                From backlist titles and academic publications to new releases and bestsellers, our print-on-demand services produce books as and when required, without compromising on quality. We offer paperbacks, hardcovers, journals, and customised formats with flexible sizes, quality paper stocks, and professional finishing. Our streamlined production avoids unnecessary stock accumulation, making publishing operations efficient for authors, publishers, educational institutions, and businesses.
+                From backlist titles and academic publications to new releases and classroom textbooks, our print-on-demand services produce books as and when required, without compromising on quality. We offer paperbacks, hardcovers, journals, and customised formats with flexible sizes, quality paper stocks, and professional finishing. Our streamlined production avoids unnecessary stock accumulation, making publishing operations efficient for authors, publishers, educational institutions, and businesses.
               </p>
               <div className="pt-1">
                 <p className="rounded-lg border border-white/25 bg-[#10383A]/40 px-4 py-2 text-xs sm:text-[13.5px] font-extrabold text-white max-w-2xl mx-auto shadow-xs">
@@ -396,7 +247,40 @@ export function ServicesClient({ services }: ServicesClientProps) {
               </div>
             </div>
 
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+            {/* Village Classroom Stories & Learning Visual Showcase */}
+            <div className="mt-8 overflow-hidden rounded-2xl border border-white/25 bg-white/10 p-2 sm:p-3.5 shadow-2xl backdrop-blur-sm">
+              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-black/40">
+                <img
+                  src="/printone-assets/services-village-classroom.png"
+                  alt="Students in village classroom holding printed educational books by PrintOne Graphics"
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-left text-white">
+                  <div>
+                    <span className="inline-block rounded bg-[#DAA112] px-2.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wider text-[#10383A]">
+                      Education &amp; Community Impact
+                    </span>
+                    <h3 className="mt-1 font-display text-base sm:text-xl font-bold text-white drop-shadow-md">
+                      Village Classrooms: Stories, Learning &amp; Educational Books
+                    </h3>
+                    <p className="mt-0.5 text-xs text-white/80 max-w-xl">
+                      Delivering curriculum-aligned textbooks, learning resources, and storybooks to institutions and communities across India.
+                    </p>
+                  </div>
+                  <a
+                    href={createWhatsAppUrl('Hi PrintOne Graphics, I would like to inquire about educational book printing and classroom publication publishing.')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary shrink-0 text-xs py-2 px-3.5 bg-white text-[#10383A] border-white hover:bg-[#DAA112] hover:text-[#10383A] hover:border-[#DAA112]"
+                  >
+                    Publish Educational Books &rarr;
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <a
                 href={createWhatsAppUrl('Hi PrintOne Graphics, I would like to inquire about your Print-on-Demand (POD) book publishing and printing services.')}
                 target="_blank"
@@ -629,7 +513,57 @@ export function ServicesClient({ services }: ServicesClientProps) {
         </div>
       </section>
 
-      {/* 5. Custom Consultation CTA Banner */}
+      {/* 5. Machinery & End-to-End Capabilities: From Design to Finish */}
+      <section className="border-b border-[#ded7cd] bg-white py-14 sm:py-20">
+        <div className="page-wrap">
+          <div className="text-center max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#ded5c7] bg-[#f5efe5] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6b6760]">
+              <Sparkles size={12} className="text-[#DAA112]" />
+              <span>In-House Machinery &amp; Full Process Spectrum</span>
+            </div>
+            <h2 className="mt-3 font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-[-.03em] text-[#1c1d1f]">
+              PrintOne Graphics: From Design to Finish.
+            </h2>
+            <div className="mx-auto mt-2.5 h-0.5 w-12 bg-[#DAA112]" />
+            <p className="mt-3 text-xs sm:text-sm text-[#615e58] leading-relaxed max-w-2xl mx-auto">
+              Our 7 integrated workflow stages powered by advanced Heidelberg offset presses, Konica Minolta AccurioPress engines, automated bindery, and custom luxury packaging lines.
+            </p>
+          </div>
+
+          <div className="mt-8 overflow-hidden rounded-2xl border border-[#ded7cd] bg-[#faf8f2] p-3 sm:p-5 shadow-lg">
+            <div className="relative w-full overflow-hidden rounded-xl bg-white p-2 sm:p-4 flex items-center justify-center">
+              <img
+                src="/printone-assets/services-design-to-finish.png"
+                alt="PrintOne Graphics Machinery and Process - From Design to Finish"
+                className="w-full max-h-[640px] object-contain transition-transform duration-500 hover:scale-101"
+              />
+            </div>
+
+            <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-[#ded7cd] pt-4 text-center sm:text-left">
+              <div>
+                <p className="text-xs font-bold text-[#10383A] uppercase tracking-wider">
+                  Industrial Print Engineering · Quality Assurance · Zero-Defect Finishing
+                </p>
+                <p className="text-[11px] text-[#716e67]">
+                  Continuous maintenance calibration, genuine OEM toners, FSC-certified paper substrates, and automated binding lines.
+                </p>
+              </div>
+
+              <a
+                href={createWhatsAppUrl('Hello PrintOne Graphics, I would like to schedule a visit to your Byculla East production facility and discuss our upcoming printing project.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary text-xs py-2 px-4 whitespace-nowrap"
+              >
+                <MessageCircle size={14} />
+                <span>Schedule Press Inspection</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Custom Consultation CTA Banner */}
       <section className="bg-[#10383A] text-white py-12 sm:py-16">
         <div className="page-wrap grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
           <div>

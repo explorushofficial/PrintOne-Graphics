@@ -20,7 +20,7 @@ const ADVISORY_MEMBERS: AdvisoryMember[] = [
     id: 'shashank-khandare',
     name: 'SHASHANK KHANDARE',
     role: 'Advisory Board Member',
-    image: '', // Placeholder for image
+    image: '/printone-assets/confident-executive.png',
     bio: `Shashank Khandare brings over 18 years of experience in the printing and packaging industry, backed by a Diploma in Printing and an Engineering qualification in Packaging. With strong expertise in sales and marketing, strategic planning, business development, and cost estimation, he plays a key role in driving business growth and building lasting client relationships. His in-depth industry knowledge, commercial acumen, and customer-focused approach enable him to develop effective strategies, deliver competitive solutions, and ensure excellence in quality and service.`,
   },
   {

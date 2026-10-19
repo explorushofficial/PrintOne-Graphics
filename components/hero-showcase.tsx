@@ -1,18 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import {
   ArrowRight,
   ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
   MessageCircle,
   Plus,
+  Sparkles,
   X,
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { useCart, createWhatsAppUrl } from '@/context/cart-context';
 import { services } from '@/data/services';
 
-interface ReelItem {
+interface HeroSlide {
   id: string;
   title: string;
   category: string;
@@ -20,108 +24,68 @@ interface ReelItem {
   image: string;
   finish: string;
   serviceId: string;
-  isFeaturedCenter?: boolean;
 }
 
-const COLLAGE_ITEMS: ReelItem[] = [
-  // Row 1
+const HERO_SLIDES: HeroSlide[] = [
   {
-    id: 'col-1',
-    title: 'Integrated Annual Report',
+    id: 'hero-slide-1',
+    title: 'Integrated Annual Report Mockup',
     category: 'Annual Reports',
-    spec: '320 GSM Colorplan · Copper Foil',
-    finish: 'Section Sewn Hardcover with Spine',
-    image: '/annual-report.jpg',
+    spec: '320 GSM Colorplan · Metallic Foil · Section Sewn',
+    finish: 'Hardcover Binding with Custom Gold Foil Stamping',
+    image: '/printone-assets/home-annual-report-mockup.png',
     serviceId: 'annual-report-design',
   },
   {
-    id: 'col-2',
-    title: 'Executive Stationery Suite',
-    category: 'Stationery',
-    spec: '350 GSM Cotton Wove · Letterpress',
-    finish: 'Duplexed Card with Foil Edge Gilding',
-    image: '/catalog/corporate-stationery.jpg',
-    serviceId: 'corporate-stationery',
-  },
-  {
-    id: 'col-3',
-    title: 'Editorial Layouts & Grids',
-    category: 'Design Studio',
-    spec: 'Typographic Baseline Grids',
-    finish: 'Archival Information Architecture',
-    image: '/print-editorial.jpg',
-    serviceId: 'publication-design',
-  },
-
-  // Row 2
-  {
-    id: 'col-4',
-    title: 'Rigid Luxury Packaging Box',
-    category: 'Packaging',
-    spec: '1200 GSM Kappa Core · Magnetic Flap',
-    finish: 'Raised Dimensional Scodix 3D Gloss',
-    image: '/catalog/packaging-boxes.jpg',
-    serviceId: 'packaging-boxes',
-  },
-  {
-    id: 'col-5',
-    title: 'Curated Corporate Gifting',
-    category: 'Corporate Gifting',
-    spec: 'Custom EVA Foam Inlays · Laser Etch',
-    finish: 'Premium Curated Corporate Keepsakes',
-    image: '/corporate-gifting.jpg',
+    id: 'hero-slide-2',
+    title: 'Design Studio & Corporate Gifting',
+    category: 'Design & Gifting',
+    spec: 'Custom EVA Foam Inlays · Laser Etch · Luxury Boxes',
+    finish: 'Bespoke Curated Executive Gift Sets & Presentation Hampers',
+    image: '/printone-assets/home-design-gifting-banner.png',
     serviceId: 'gift-sets',
-    isFeaturedCenter: true, // Prominent center focal card
   },
   {
-    id: 'col-6',
-    title: 'Hardbound Diaries & Planners',
-    category: 'Publications',
-    spec: 'Italian Thermo PU Cover · Silk Ribbon',
-    finish: 'Gilt Edge Foiling with Custom Deboss',
-    image: '/catalog/diaries.jpg',
-    serviceId: 'diaries',
-  },
-
-  // Row 3
-  {
-    id: 'col-7',
-    title: 'Institutional Publications',
-    category: 'Books & Publishing',
-    spec: '120 GSM Munken Pure · Smyth Sewn',
-    finish: 'Blind Debossed Crest with Velvet Matte',
-    image: '/education-publications.jpg',
-    serviceId: 'books-publications',
-  },
-  {
-    id: 'col-8',
-    title: 'Commercial Print & Catalogues',
+    id: 'hero-slide-3',
+    title: 'Annual Report Print Showcase',
     category: 'Commercial Print',
-    spec: '170 GSM Silk Text · Delta-E Calibrated',
-    finish: 'Multi-Gatefold with Silk Spot Varnish',
-    image: '/commercial-print.jpg',
+    spec: 'FMCG & Corporate Reports · Delta-E Calibrated',
+    finish: 'High-Volume Offset & Digital Press Production with Velvet Matte',
+    image: '/printone-assets/home-annual-report-showcase.png',
     serviceId: 'commercial-printing',
-  },
-  {
-    id: 'col-9',
-    title: 'Bespoke Gatefold Brochures',
-    category: 'Brand Collateral',
-    spec: '250 GSM Uncoated Linen',
-    finish: 'Accordion Die-Cut Precision Fold',
-    image: '/catalog/brochures.jpg',
-    serviceId: 'brochures',
   },
 ];
 
 export function HeroShowcase() {
-  const [selectedItem, setSelectedItem] = useState<ReelItem | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<HeroSlide | null>(null);
   const { add } = useCart();
 
-  const handleCardClick = (item: ReelItem) => {
-    setSelectedItem(item);
+  // Auto-advance slider every 5 seconds (pauses on mouse hover)
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setDirection(1);
+      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const handleNext = () => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
   };
 
-  const handleAddToCart = (item: ReelItem) => {
+  const handlePrev = () => {
+    setDirection(-1);
+    setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+  };
+
+  const activeSlide = HERO_SLIDES[currentSlide];
+
+  const handleAddToCart = (item: HeroSlide) => {
     const s = services.find((srv) => srv.id === item.serviceId) || services[0];
     add(s);
   };
@@ -140,8 +104,8 @@ export function HeroShowcase() {
         aria-hidden="true"
       />
 
-      {/* Two-Part Split Layout: Left Content (50%) + Full Right-Side Collage (50%) */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 items-stretch min-h-[640px] xl:min-h-[700px]">
+      {/* Two-Part Split Layout: Left Content (50%) + Right Interactive Slider (50%) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 items-stretch min-h-[640px] xl:min-h-[720px]">
         {/* Left Part: Editorial Statement & Content */}
         <div className="relative z-10 flex flex-col justify-center px-6 py-10 sm:px-10 sm:py-12 lg:px-12 xl:px-16 2xl:px-20 lg:py-12">
           <div className="max-w-[620px] w-full lg:ml-auto">
@@ -151,13 +115,17 @@ export function HeroShowcase() {
               FROM CONCEPT TO FINISH.
             </h1>
 
-            <p className="mt-3.5 font-sans text-xs sm:text-sm font-bold uppercase tracking-[.14em] text-[#666E51]">
+            {/* Requested Italic Font for Subtitle */}
+            <p
+              className="mt-3.5 font-serif text-[16px] sm:text-[18.5px] font-bold italic tracking-wide text-[#666E51] leading-snug"
+              style={{ fontStyle: 'italic', fontStyleRule: 'italic' } as React.CSSProperties}
+            >
               Your Trusted Partner for Design, Digital Printing &amp; Corporate Gifting
             </p>
 
             <div className="mt-4 space-y-2.5 text-[13.5px] sm:text-[14.5px] leading-[1.62] text-[#55524c]">
               <p>
-                Established in 2021, PrintOne Graphics is a creative design and printing company based in Byculla East, Mumbai, delivering quality printing solutions to organisations across India.
+                PrintOne Graphics is a creative design and printing company based in Byculla East, Mumbai, delivering quality printing solutions to organisations across India.
               </p>
               <p>
                 From concept development and creative design to premium printing, binding, and finishing, we combine creativity, precision, and attention to detail to bring every project to life. Our commitment to quality, timely delivery, and reliable service ensures that every project meets our clients’ expectations.
@@ -225,55 +193,125 @@ export function HeroShowcase() {
           </div>
         </div>
 
-        {/* Right Part: Full Height & Width Constant 3x3 Photo Collage */}
-        <div className="relative w-full h-full self-stretch border-t lg:border-t-0 lg:border-l border-[#ded7cb] bg-[#ded7cb]">
-          <div className="grid grid-cols-3 grid-rows-3 h-full min-h-[460px] sm:min-h-[560px] lg:min-h-full gap-[2px] bg-[#ded7cb]">
-            {COLLAGE_ITEMS.map((item) => (
-              <div
-                key={item.id}
-                onClick={() => handleCardClick(item)}
-                className={`group relative cursor-pointer overflow-hidden bg-[#1e2022] transition-all duration-300 ${
-                  item.isFeaturedCenter
-                    ? 'ring-2 ring-inset ring-[#DAA112] z-10'
-                    : 'hover:brightness-105'
-                }`}
-                title={`Inspect ${item.title}`}
+        {/* Right Part: Animated Horizontal Slide Showcase with PPT Presentation Motion */}
+        <div
+          className="relative w-full h-full min-h-[460px] sm:min-h-[540px] lg:min-h-full border-t lg:border-t-0 lg:border-l border-[#ded7cb] bg-[#10383A] overflow-hidden flex flex-col justify-between"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {/* Slide Motion Wrapper */}
+          <div className="relative w-full flex-1 overflow-hidden">
+            <AnimatePresence initial={false} custom={direction} mode="wait">
+              <motion.div
+                key={activeSlide.id}
+                custom={direction}
+                initial={{ x: direction > 0 ? '100%' : '-100%', opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: direction > 0 ? '-100%' : '100%', opacity: 0 }}
+                transition={{
+                  x: { type: 'spring', stiffness: 280, damping: 30 },
+                  opacity: { duration: 0.35 },
+                }}
+                className="absolute inset-0 w-full h-full cursor-pointer"
+                onClick={() => setSelectedItem(activeSlide)}
               >
-                {/* Full-bleed responsive image */}
+                {/* Background Image with gentle scale transition */}
                 <img
-                  src={item.image}
-                  alt={item.title}
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                  loading="lazy"
+                  src={activeSlide.image}
+                  alt={activeSlide.title}
+                  className="w-full h-full object-cover object-center select-none"
                 />
 
-                {/* Ambient dark gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-75 group-hover:opacity-90 transition-opacity" />
+                {/* Rich Gradient Overlay for PPT Polish */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#10383A] via-[#10383A]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/30" />
 
-                {/* Top Badge */}
-                <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10">
-                  <span
-                    className={`rounded px-1.5 py-0.5 text-[8px] sm:text-[9.5px] font-bold uppercase tracking-wider backdrop-blur-sm ${
-                      item.isFeaturedCenter
-                        ? 'bg-[#DAA112] text-[#10383A] font-black shadow-md'
-                        : 'bg-black/60 text-white'
-                    }`}
+                {/* Slide Top Badge */}
+                <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20 flex items-center gap-2">
+                  <motion.span
+                    initial={{ y: -15, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.15, duration: 0.4 }}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/60 px-3 py-1 text-[10px] font-bold uppercase tracking-[.18em] text-[#DAA112] backdrop-blur-md shadow-md"
                   >
-                    {item.category}
+                    <Sparkles size={11} className="text-[#DAA112]" />
+                    <span>{activeSlide.category}</span>
+                  </motion.span>
+
+                  <span className="rounded-full bg-white/20 px-2.5 py-0.5 text-[10px] font-bold text-white backdrop-blur-md">
+                    0{currentSlide + 1} / 0{HERO_SLIDES.length}
                   </span>
                 </div>
 
-                {/* Bottom Overlay Title & Finish Info */}
-                <div className="absolute bottom-2 left-2 right-2 sm:bottom-3 sm:left-3 sm:right-3 text-white z-10">
-                  <h4 className="font-display text-[11px] sm:text-[13px] font-bold leading-tight line-clamp-1 group-hover:text-[#DAA112] transition-colors">
-                    {item.title}
-                  </h4>
-                  <p className="hidden sm:block mt-0.5 text-[9px] sm:text-[10px] font-medium text-white/80 line-clamp-1">
-                    {item.finish}
-                  </p>
+                {/* PPT-Style Animated Captions at Bottom */}
+                <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 z-20 text-white">
+                  <motion.div
+                    initial={{ y: 25, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2, duration: 0.45 }}
+                    className="max-w-xl"
+                  >
+                    <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-[-.03em] leading-tight text-white drop-shadow-md">
+                      {activeSlide.title}
+                    </h3>
+
+                    <p className="mt-2 text-xs sm:text-sm font-semibold text-[#DAA112] tracking-wide">
+                      {activeSlide.finish}
+                    </p>
+
+                    <p className="mt-1 text-xs text-white/80 line-clamp-2">
+                      {activeSlide.spec}
+                    </p>
+
+                    <div className="mt-4 flex items-center gap-3">
+                      <span className="inline-flex items-center gap-1 text-[11px] font-bold text-white hover:text-[#DAA112] underline decoration-[#DAA112] underline-offset-4 transition-colors">
+                        Inspect Specimen Details &rarr;
+                      </span>
+                    </div>
+                  </motion.div>
                 </div>
-              </div>
-            ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Navigation Controls Bar */}
+          <div className="relative z-30 flex items-center justify-between border-t border-white/15 bg-[#10383A]/90 px-5 py-3 backdrop-blur-md">
+            {/* Slide Indicator Dots */}
+            <div className="flex items-center gap-2">
+              {HERO_SLIDES.map((slide, idx) => (
+                <button
+                  key={slide.id}
+                  onClick={() => {
+                    setDirection(idx > currentSlide ? 1 : -1);
+                    setCurrentSlide(idx);
+                  }}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    currentSlide === idx
+                      ? 'w-8 bg-[#DAA112]'
+                      : 'w-2 bg-white/40 hover:bg-white/70'
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Prev / Next Arrow Controls */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handlePrev}
+                className="grid h-9 w-9 place-items-center rounded-full border border-white/20 bg-white/10 text-white hover:bg-[#DAA112] hover:text-[#10383A] transition-colors"
+                aria-label="Previous Slide"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                onClick={handleNext}
+                className="grid h-9 w-9 place-items-center rounded-full border border-white/20 bg-white/10 text-white hover:bg-[#DAA112] hover:text-[#10383A] transition-colors"
+                aria-label="Next Slide"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
