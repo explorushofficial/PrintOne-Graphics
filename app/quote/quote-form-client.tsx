@@ -19,7 +19,7 @@ import {
 import { createWhatsAppUrl, getWhatsAppNumber } from '@/context/cart-context';
 
 export type FormState = {
-  // Contact Information (Image 2)
+  // Contact Information
   firstName: string;
   lastName: string;
   organisation: string;
@@ -28,7 +28,7 @@ export type FormState = {
   fax: string;
   city: string;
 
-  // Job Description (Image 2)
+  // Job Description
   jobTitle: string;
   projectType: string;
   quantity: string;
@@ -36,28 +36,22 @@ export type FormState = {
   sizeHeight: string;
   sizeUnit: string;
   sizeFormat: 'Open' | 'Folded';
-  numberOfPages: string;
-  includingCover: 'Yes' | 'No';
 
-  // Material for Cover (Image 2)
+  // Material for Cover
   coverPaperGsm: string;
   coverColour: string;
-  coverMetallic: 'Yes' | 'No';
-  coverFinish: 'Matt' | 'Gloss' | 'Plain (Maplitho/Creamwove)';
   coverLamination: 'Yes' | 'No';
 
-  // Material for Inside Pages (Image 1)
+  // Material for Inside Pages
   insidePaperGsm: string;
   insideColour: string;
-  insideMetallic: 'Yes' | 'No';
-  insideFinish: 'Matt' | 'Gloss' | 'Plain (Maplitho/Creamwove)';
 
-  // Pre / Post Printing (Image 1)
+  // Pre / Post Printing
   fileFormat: string;
   binding: string;
   handsOnDetails: string;
 
-  // Free Form (Image 1)
+  // Free Form
   freeFormNotes: string;
 };
 
@@ -79,21 +73,15 @@ const initialFormState: FormState = {
   sizeHeight: '',
   sizeUnit: 'mm',
   sizeFormat: 'Folded',
-  numberOfPages: '',
-  includingCover: 'Yes',
 
   // Material for Cover
   coverPaperGsm: '',
   coverColour: '1 colour',
-  coverMetallic: 'No',
-  coverFinish: 'Matt',
   coverLamination: 'Yes',
 
   // Material for Inside Pages
   insidePaperGsm: '',
   insideColour: '1 colour',
-  insideMetallic: 'No',
-  insideFinish: 'Matt',
 
   // Pre / Post Printing
   fileFormat: '',
@@ -127,11 +115,15 @@ const colourOptions = [
 
 const bindingOptions = [
   'None',
-  'Saddle Stitch / Stapled',
+  'One Folde',
+  'Multiple-Fold',
+  'Center Pinning',
   'Perfect Binding',
-  'Hard Bound',
-  'Spiral / Wire-O',
-  'Section Sewn',
+  'Side Stitching',
+  'Spiral Binding',
+  'Wiro Binding',
+  'Section Sewing',
+  'With Hard Bound',
 ];
 
 const sizeUnitOptions = [
@@ -173,10 +165,10 @@ export function QuoteFormClient() {
   };
 
   const buildWhatsAppMessage = () => {
-    const fullName = [formData.firstName, formData.lastName].filter(Boolean).join(' ') || 'Customer';
-    const dimensions = formData.sizeWidth && formData.sizeHeight
-      ? `${formData.sizeWidth} × ${formData.sizeHeight} ${formData.sizeUnit} (${formData.sizeFormat})`
-      : 'Not specified';
+    const dimensions =
+      formData.sizeWidth && formData.sizeHeight
+        ? `${formData.sizeWidth} × ${formData.sizeHeight} ${formData.sizeUnit} (${formData.sizeFormat})`
+        : 'Not specified';
 
     const lines: string[] = [
       '📋 *PRINT JOB SPECIFICATION & QUOTATION*',
@@ -186,7 +178,7 @@ export function QuoteFormClient() {
       `• First Name: ${formData.firstName || 'Not provided'}`,
       `• Last Name: ${formData.lastName || 'Not provided'}`,
       formData.organisation ? `• Organisation: ${formData.organisation}` : null,
-      `• Phone: ${formData.phone || 'Not provided'}`,
+      `• Mobile / Phone: ${formData.phone || 'Not provided'}`,
       `• Email: ${formData.email || 'Not provided'}`,
       formData.fax ? `• Fax: ${formData.fax}` : null,
       formData.city ? `• City: ${formData.city}` : null,
@@ -196,21 +188,15 @@ export function QuoteFormClient() {
       `• Project Type: ${formData.projectType || 'Flyer'}`,
       `• Quantity: ${formData.quantity || 'Not specified'}`,
       `• Size: ${dimensions}`,
-      formData.numberOfPages ? `• Number of Pages: ${formData.numberOfPages}` : null,
-      `• Including Cover: ${formData.includingCover}`,
       '',
       '🎨 *MATERIAL FOR COVER*',
       formData.coverPaperGsm ? `• Paper / GSM: ${formData.coverPaperGsm}` : '• Paper / GSM: Standard recommended',
       `• Colour: ${formData.coverColour}`,
-      `• Metallic / Special Colour: ${formData.coverMetallic}`,
-      `• Finish: ${formData.coverFinish}`,
       `• Lamination: ${formData.coverLamination}`,
       '',
       '📖 *MATERIAL FOR INSIDE PAGES*',
       formData.insidePaperGsm ? `• Paper / GSM: ${formData.insidePaperGsm}` : '• Paper / GSM: Standard recommended',
       `• Colour: ${formData.insideColour}`,
-      `• Metallic / Special Colour: ${formData.insideMetallic}`,
-      `• Finish: ${formData.insideFinish}`,
       '',
       '⚙️ *PRE / POST PRINTING*',
       formData.fileFormat ? `• Format in which job is stored: ${formData.fileFormat}` : null,
@@ -236,9 +222,9 @@ export function QuoteFormClient() {
       newErrors.lastName = 'Last Name is required';
     }
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
+      newErrors.phone = 'Mobile / Phone number is required';
     } else if (formData.phone.replace(/[^\d]/g, '').length < 8) {
-      newErrors.phone = 'Please enter a valid phone number';
+      newErrors.phone = 'Please enter a valid mobile / phone number';
     }
     if (!formData.email.trim()) {
       newErrors.email = 'Email address is required';
@@ -319,12 +305,13 @@ export function QuoteFormClient() {
             className="space-y-6 sm:space-y-8"
             aria-label="Print Specification Form"
           >
-            {/* Top Teal Accent Card Header */}
-            <div className="rounded-xl border border-[#d8d0c6] bg-white shadow-xs overflow-hidden border-t-4 border-t-[#00828a]">
-              
+            {/* Top Brand Accent Card */}
+            <div className="relative rounded-xl border border-[#d8d0c6] bg-white shadow-xs overflow-hidden">
+              <div className="h-1.5 w-full bg-gradient-to-r from-[#10383A] via-[#666E51] to-[#DAA112]" />
+
               {/* SECTION 1: Contact Information */}
               <div className="p-4 sm:p-6 md:p-8 border-b border-[#e8e1d8]">
-                <h2 className="font-display text-lg sm:text-xl font-bold tracking-tight text-[#00828a]">
+                <h2 className="font-display text-lg sm:text-xl font-bold tracking-tight text-[#10383A]">
                   Contact Information
                 </h2>
 
@@ -332,8 +319,11 @@ export function QuoteFormClient() {
                   {/* First Name & Last Name */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-[#494a49]">
-                        First Name <span className="text-[#bd4a3a]">*</span> :
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>
+                          First Name <span className="text-[#bd4a3a]">*</span> :
+                        </span>
                       </label>
                       <input
                         type="text"
@@ -341,7 +331,7 @@ export function QuoteFormClient() {
                         value={formData.firstName}
                         onChange={(e) => updateField('firstName', e.target.value)}
                         placeholder="First Name"
-                        className={`mt-1.5 w-full rounded border px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a] ${
+                        className={`mt-1.5 w-full rounded border px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A] ${
                           errors.firstName ? 'border-[#bd4a3a] bg-red-50/30' : 'border-[#cfc9bf] bg-white'
                         }`}
                         data-testid="input-first-name"
@@ -352,8 +342,11 @@ export function QuoteFormClient() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-[#494a49]">
-                        Last Name <span className="text-[#bd4a3a]">*</span> :
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>
+                          Last Name <span className="text-[#bd4a3a]">*</span> :
+                        </span>
                       </label>
                       <input
                         type="text"
@@ -361,7 +354,7 @@ export function QuoteFormClient() {
                         value={formData.lastName}
                         onChange={(e) => updateField('lastName', e.target.value)}
                         placeholder="Last Name"
-                        className={`mt-1.5 w-full rounded border px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a] ${
+                        className={`mt-1.5 w-full rounded border px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A] ${
                           errors.lastName ? 'border-[#bd4a3a] bg-red-50/30' : 'border-[#cfc9bf] bg-white'
                         }`}
                         data-testid="input-last-name"
@@ -374,32 +367,37 @@ export function QuoteFormClient() {
 
                   {/* Organisation */}
                   <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Organisation :
+                    <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                      <span className="text-[#DAA112] font-bold">▸</span>
+                      <span>Organisation :</span>
                     </label>
                     <input
                       type="text"
                       value={formData.organisation}
                       onChange={(e) => updateField('organisation', e.target.value)}
                       placeholder="Organisation / Company"
-                      className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
+                      className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
                       data-testid="input-organisation"
                     />
                   </div>
 
-                  {/* Phone & Email */}
+                  {/* Mobile/Phone & Email */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-[#494a49]">
-                        Phone <span className="text-[#bd4a3a]">*</span> :
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <Phone size={13} className="text-[#10383A]" />
+                        <span>
+                          Mobile / Phone <span className="text-[#bd4a3a]">*</span> :
+                        </span>
                       </label>
                       <input
                         type="tel"
                         required
                         value={formData.phone}
                         onChange={(e) => updateField('phone', e.target.value)}
-                        placeholder="Phone / Mobile Number"
-                        className={`mt-1.5 w-full rounded border px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a] ${
+                        placeholder="Mobile or Phone Number"
+                        className={`mt-1.5 w-full rounded border px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A] ${
                           errors.phone ? 'border-[#bd4a3a] bg-red-50/30' : 'border-[#cfc9bf] bg-white'
                         }`}
                         data-testid="input-phone"
@@ -410,8 +408,11 @@ export function QuoteFormClient() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-[#494a49]">
-                        Email <span className="text-[#bd4a3a]">*</span> :
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>
+                          Email <span className="text-[#bd4a3a]">*</span> :
+                        </span>
                       </label>
                       <input
                         type="email"
@@ -419,7 +420,7 @@ export function QuoteFormClient() {
                         value={formData.email}
                         onChange={(e) => updateField('email', e.target.value)}
                         placeholder="Email Address"
-                        className={`mt-1.5 w-full rounded border px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a] ${
+                        className={`mt-1.5 w-full rounded border px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A] ${
                           errors.email ? 'border-[#bd4a3a] bg-red-50/30' : 'border-[#cfc9bf] bg-white'
                         }`}
                         data-testid="input-email"
@@ -430,32 +431,34 @@ export function QuoteFormClient() {
                     </div>
                   </div>
 
-                  {/* Fax & City */}
+                  {/* Fax / Landline & City */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-[#494a49]">
-                        Fax :
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>Fax / Landline :</span>
                       </label>
                       <input
                         type="text"
                         value={formData.fax}
                         onChange={(e) => updateField('fax', e.target.value)}
                         placeholder="Fax / Landline"
-                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
+                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
                         data-testid="input-fax"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-[#494a49]">
-                        City :
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>City :</span>
                       </label>
                       <input
                         type="text"
                         value={formData.city}
                         onChange={(e) => updateField('city', e.target.value)}
                         placeholder="City"
-                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
+                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
                         data-testid="input-city"
                       />
                     </div>
@@ -465,170 +468,126 @@ export function QuoteFormClient() {
 
               {/* SECTION 2: Job Description */}
               <div className="p-4 sm:p-6 md:p-8 border-b border-[#e8e1d8]">
-                <h2 className="font-display text-lg sm:text-xl font-bold tracking-tight text-[#00828a]">
+                <h2 className="font-display text-lg sm:text-xl font-bold tracking-tight text-[#10383A]">
                   Job Description
                 </h2>
 
                 <div className="mt-5 space-y-4">
-                  {/* Job Title */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Job Title :
-                    </label>
-                    <div className="mt-1.5 flex flex-col sm:flex-row sm:items-center gap-2">
+                  {/* Job Title & Project Type */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>Job Title :</span>
+                      </label>
                       <input
                         type="text"
                         value={formData.jobTitle}
                         onChange={(e) => updateField('jobTitle', e.target.value)}
                         placeholder="e.g. Annual Reports"
-                        className="flex-1 rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
+                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
                         data-testid="input-job-title"
                       />
-                      <span className="text-xs text-[#77736d] shrink-0">
-                        e.g. Annual Reports
-                      </span>
+                    </div>
+
+                    <div>
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>Project Type :</span>
+                      </label>
+                      <select
+                        value={formData.projectType}
+                        onChange={(e) => updateField('projectType', e.target.value)}
+                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
+                        data-testid="select-project-type"
+                      >
+                        {projectTypeOptions.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
 
-                  {/* Project Type */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Project Type :
-                    </label>
-                    <select
-                      value={formData.projectType}
-                      onChange={(e) => updateField('projectType', e.target.value)}
-                      className="mt-1.5 w-full sm:max-w-md rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
-                      data-testid="select-project-type"
-                    >
-                      {projectTypeOptions.map((opt) => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {/* Quantity */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Quantity :
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.quantity}
-                      onChange={(e) => updateField('quantity', e.target.value)}
-                      placeholder="Quantity"
-                      className="mt-1.5 w-full sm:max-w-md rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
-                      data-testid="input-quantity"
-                    />
-                  </div>
-
-                  {/* Size: Width, Height, Unit dropdown, and Open / Folded radios */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Size :
-                    </label>
-                    <div className="mt-1.5 grid grid-cols-2 sm:grid-cols-[140px_140px_120px] gap-2.5">
+                  {/* Quantity & Size IN ONE ROW (Reduced width & compact row) */}
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-start pt-1">
+                    {/* Quantity */}
+                    <div className="md:col-span-4">
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>Quantity :</span>
+                      </label>
                       <input
                         type="text"
-                        value={formData.sizeWidth}
-                        onChange={(e) => updateField('sizeWidth', e.target.value)}
-                        placeholder="Width"
-                        className="rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
-                        data-testid="input-size-width"
+                        value={formData.quantity}
+                        onChange={(e) => updateField('quantity', e.target.value)}
+                        placeholder="e.g. 1000"
+                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
+                        data-testid="input-quantity"
                       />
-                      <input
-                        type="text"
-                        value={formData.sizeHeight}
-                        onChange={(e) => updateField('sizeHeight', e.target.value)}
-                        placeholder="Height"
-                        className="rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
-                        data-testid="input-size-height"
-                      />
-                      <div className="col-span-2 sm:col-span-1">
+                    </div>
+
+                    {/* Size: Width, Height, Unit dropdown, and Open / Folded radios */}
+                    <div className="md:col-span-8">
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>Size :</span>
+                      </label>
+                      <div className="mt-1.5 flex flex-wrap sm:flex-nowrap items-center gap-2">
+                        <input
+                          type="text"
+                          value={formData.sizeWidth}
+                          onChange={(e) => updateField('sizeWidth', e.target.value)}
+                          placeholder="Width"
+                          className="w-full sm:w-24 rounded border border-[#cfc9bf] bg-white px-2.5 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
+                          data-testid="input-size-width"
+                        />
+                        <span className="hidden sm:inline text-xs text-[#77736d] font-bold">×</span>
+                        <input
+                          type="text"
+                          value={formData.sizeHeight}
+                          onChange={(e) => updateField('sizeHeight', e.target.value)}
+                          placeholder="Height"
+                          className="w-full sm:w-24 rounded border border-[#cfc9bf] bg-white px-2.5 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
+                          data-testid="input-size-height"
+                        />
                         <select
                           value={formData.sizeUnit}
                           onChange={(e) => updateField('sizeUnit', e.target.value)}
-                          className="w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
+                          className="w-full sm:w-24 rounded border border-[#cfc9bf] bg-white px-2 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
                           data-testid="select-size-unit"
                         >
-                          <option value="">--Select--</option>
                           {sizeUnitOptions.map((unit) => (
                             <option key={unit.value} value={unit.value}>
                               {unit.label}
                             </option>
                           ))}
                         </select>
-                      </div>
-                    </div>
 
-                    {/* Open / Folded Radios */}
-                    <div className="mt-2.5 flex items-center gap-6">
-                      <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                        <input
-                          type="radio"
-                          name="sizeFormat"
-                          checked={formData.sizeFormat === 'Open'}
-                          onChange={() => updateField('sizeFormat', 'Open')}
-                          className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
-                        />
-                        <span>Open</span>
-                      </label>
-                      <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                        <input
-                          type="radio"
-                          name="sizeFormat"
-                          checked={formData.sizeFormat === 'Folded'}
-                          onChange={() => updateField('sizeFormat', 'Folded')}
-                          className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
-                        />
-                        <span>Folded</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  {/* Number of Pages & Including Cover */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-                    <div>
-                      <label className="block text-xs font-semibold text-[#494a49]">
-                        Number of Pages :
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.numberOfPages}
-                        onChange={(e) => updateField('numberOfPages', e.target.value)}
-                        placeholder="Number of Pages"
-                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
-                        data-testid="input-number-of-pages"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-[#494a49]">
-                        Including Cover :
-                      </label>
-                      <div className="mt-3 flex items-center gap-6">
-                        <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                          <input
-                            type="radio"
-                            name="includingCover"
-                            checked={formData.includingCover === 'Yes'}
-                            onChange={() => updateField('includingCover', 'Yes')}
-                            className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
-                          />
-                          <span>Yes</span>
-                        </label>
-                        <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                          <input
-                            type="radio"
-                            name="includingCover"
-                            checked={formData.includingCover === 'No'}
-                            onChange={() => updateField('includingCover', 'No')}
-                            className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
-                          />
-                          <span>No</span>
-                        </label>
+                        {/* Open / Folded Radios */}
+                        <div className="flex items-center gap-3 shrink-0 ml-1 py-1">
+                          <label className="flex items-center gap-1.5 text-xs font-medium cursor-pointer text-[#333]">
+                            <input
+                              type="radio"
+                              name="sizeFormat"
+                              checked={formData.sizeFormat === 'Open'}
+                              onChange={() => updateField('sizeFormat', 'Open')}
+                              className="h-3.5 w-3.5 text-[#10383A] focus:ring-[#10383A]"
+                            />
+                            <span>Open</span>
+                          </label>
+                          <label className="flex items-center gap-1.5 text-xs font-medium cursor-pointer text-[#333]">
+                            <input
+                              type="radio"
+                              name="sizeFormat"
+                              checked={formData.sizeFormat === 'Folded'}
+                              onChange={() => updateField('sizeFormat', 'Folded')}
+                              className="h-3.5 w-3.5 text-[#10383A] focus:ring-[#10383A]"
+                            />
+                            <span>Folded</span>
+                          </label>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -637,136 +596,72 @@ export function QuoteFormClient() {
 
               {/* SECTION 3: Material for Cover */}
               <div className="p-4 sm:p-6 md:p-8 border-b border-[#e8e1d8]">
-                <h2 className="font-display text-lg sm:text-xl font-bold tracking-tight text-[#00828a]">
+                <h2 className="font-display text-lg sm:text-xl font-bold tracking-tight text-[#10383A]">
                   Material for Cover
                 </h2>
 
                 <div className="mt-5 space-y-4">
-                  {/* Paper / GSM */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Paper / GSM :
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.coverPaperGsm}
-                      onChange={(e) => updateField('coverPaperGsm', e.target.value)}
-                      placeholder="e.g. 300 GSM Art Card"
-                      className="mt-1.5 w-full sm:max-w-md rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
-                      data-testid="input-cover-paper-gsm"
-                    />
-                  </div>
-
-                  {/* Colour */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Colour :
-                    </label>
-                    <select
-                      value={formData.coverColour}
-                      onChange={(e) => updateField('coverColour', e.target.value)}
-                      className="mt-1.5 w-full sm:max-w-md rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
-                      data-testid="select-cover-colour"
-                    >
-                      {colourOptions.map((opt) => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {/* Metallic / Special Colour */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Metallic / Special Colour :
-                    </label>
-                    <div className="mt-2 flex items-center gap-6">
-                      <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                        <input
-                          type="radio"
-                          name="coverMetallic"
-                          checked={formData.coverMetallic === 'Yes'}
-                          onChange={() => updateField('coverMetallic', 'Yes')}
-                          className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
-                        />
-                        <span>Yes</span>
+                  {/* Paper GSM and Colour in ONE ROW */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>Paper / GSM :</span>
                       </label>
-                      <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                        <input
-                          type="radio"
-                          name="coverMetallic"
-                          checked={formData.coverMetallic === 'No'}
-                          onChange={() => updateField('coverMetallic', 'No')}
-                          className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
-                        />
-                        <span>No</span>
+                      <input
+                        type="text"
+                        value={formData.coverPaperGsm}
+                        onChange={(e) => updateField('coverPaperGsm', e.target.value)}
+                        placeholder="e.g. 300 GSM Art Card"
+                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
+                        data-testid="input-cover-paper-gsm"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>Colour :</span>
                       </label>
+                      <select
+                        value={formData.coverColour}
+                        onChange={(e) => updateField('coverColour', e.target.value)}
+                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
+                        data-testid="select-cover-colour"
+                      >
+                        {colourOptions.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
 
-                  {/* Finish */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Finish :
+                  {/* Lamination (compact inline row) */}
+                  <div className="flex items-center gap-4 pt-1">
+                    <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                      <span className="text-[#DAA112] font-bold">▸</span>
+                      <span>Lamination :</span>
                     </label>
-                    <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-2">
-                      <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                        <input
-                          type="radio"
-                          name="coverFinish"
-                          checked={formData.coverFinish === 'Matt'}
-                          onChange={() => updateField('coverFinish', 'Matt')}
-                          className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
-                        />
-                        <span>Matt</span>
-                      </label>
-                      <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                        <input
-                          type="radio"
-                          name="coverFinish"
-                          checked={formData.coverFinish === 'Gloss'}
-                          onChange={() => updateField('coverFinish', 'Gloss')}
-                          className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
-                        />
-                        <span>Gloss</span>
-                      </label>
-                      <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                        <input
-                          type="radio"
-                          name="coverFinish"
-                          checked={formData.coverFinish === 'Plain (Maplitho/Creamwove)'}
-                          onChange={() => updateField('coverFinish', 'Plain (Maplitho/Creamwove)')}
-                          className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
-                        />
-                        <span>Plain (Maplitho/Creamwove)</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  {/* Lamination */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Lamination :
-                    </label>
-                    <div className="mt-2 flex items-center gap-6">
-                      <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
+                    <div className="flex items-center gap-5">
+                      <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
                         <input
                           type="radio"
                           name="coverLamination"
                           checked={formData.coverLamination === 'Yes'}
                           onChange={() => updateField('coverLamination', 'Yes')}
-                          className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
+                          className="h-4 w-4 text-[#10383A] focus:ring-[#10383A]"
                         />
                         <span>Yes</span>
                       </label>
-                      <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
+                      <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
                         <input
                           type="radio"
                           name="coverLamination"
                           checked={formData.coverLamination === 'No'}
                           onChange={() => updateField('coverLamination', 'No')}
-                          className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
+                          className="h-4 w-4 text-[#10383A] focus:ring-[#10383A]"
                         />
                         <span>No</span>
                       </label>
@@ -777,110 +672,45 @@ export function QuoteFormClient() {
 
               {/* SECTION 4: Material for Inside Pages */}
               <div className="p-4 sm:p-6 md:p-8 border-b border-[#e8e1d8]">
-                <h2 className="font-display text-lg sm:text-xl font-bold tracking-tight text-[#00828a]">
+                <h2 className="font-display text-lg sm:text-xl font-bold tracking-tight text-[#10383A]">
                   Material for Inside Pages
                 </h2>
 
-                <div className="mt-5 space-y-4">
-                  {/* Paper / GSM */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Paper / GSM :
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.insidePaperGsm}
-                      onChange={(e) => updateField('insidePaperGsm', e.target.value)}
-                      placeholder="e.g. 130 GSM Art Paper"
-                      className="mt-1.5 w-full sm:max-w-md rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
-                      data-testid="input-inside-paper-gsm"
-                    />
-                  </div>
-
-                  {/* Colour */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Colour :
-                    </label>
-                    <select
-                      value={formData.insideColour}
-                      onChange={(e) => updateField('insideColour', e.target.value)}
-                      className="mt-1.5 w-full sm:max-w-md rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
-                      data-testid="select-inside-colour"
-                    >
-                      {colourOptions.map((opt) => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {/* Metallic / Special Colour */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Metallic / Special Colour :
-                    </label>
-                    <div className="mt-2 flex items-center gap-6">
-                      <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                        <input
-                          type="radio"
-                          name="insideMetallic"
-                          checked={formData.insideMetallic === 'Yes'}
-                          onChange={() => updateField('insideMetallic', 'Yes')}
-                          className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
-                        />
-                        <span>Yes</span>
+                <div className="mt-5">
+                  {/* Paper GSM and Colour in ONE ROW */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>Paper / GSM :</span>
                       </label>
-                      <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                        <input
-                          type="radio"
-                          name="insideMetallic"
-                          checked={formData.insideMetallic === 'No'}
-                          onChange={() => updateField('insideMetallic', 'No')}
-                          className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
-                        />
-                        <span>No</span>
-                      </label>
+                      <input
+                        type="text"
+                        value={formData.insidePaperGsm}
+                        onChange={(e) => updateField('insidePaperGsm', e.target.value)}
+                        placeholder="e.g. 130 GSM Art Paper"
+                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
+                        data-testid="input-inside-paper-gsm"
+                      />
                     </div>
-                  </div>
 
-                  {/* Finish */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Finish :
-                    </label>
-                    <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-2">
-                      <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                        <input
-                          type="radio"
-                          name="insideFinish"
-                          checked={formData.insideFinish === 'Matt'}
-                          onChange={() => updateField('insideFinish', 'Matt')}
-                          className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
-                        />
-                        <span>Matt</span>
+                    <div>
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>Colour :</span>
                       </label>
-                      <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                        <input
-                          type="radio"
-                          name="insideFinish"
-                          checked={formData.insideFinish === 'Gloss'}
-                          onChange={() => updateField('insideFinish', 'Gloss')}
-                          className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
-                        />
-                        <span>Gloss</span>
-                      </label>
-                      <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer text-[#333]">
-                        <input
-                          type="radio"
-                          name="insideFinish"
-                          checked={formData.insideFinish === 'Plain (Maplitho/Creamwove)'}
-                          onChange={() => updateField('insideFinish', 'Plain (Maplitho/Creamwove)')}
-                          className="h-4 w-4 text-[#00828a] focus:ring-[#00828a]"
-                        />
-                        <span>Plain (Maplitho/Creamwove)</span>
-                      </label>
+                      <select
+                        value={formData.insideColour}
+                        onChange={(e) => updateField('insideColour', e.target.value)}
+                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
+                        data-testid="select-inside-colour"
+                      >
+                        {colourOptions.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -888,57 +718,62 @@ export function QuoteFormClient() {
 
               {/* SECTION 5: Pre / Post Printing */}
               <div className="p-4 sm:p-6 md:p-8 border-b border-[#e8e1d8]">
-                <h2 className="font-display text-lg sm:text-xl font-bold tracking-tight text-[#00828a]">
+                <h2 className="font-display text-lg sm:text-xl font-bold tracking-tight text-[#10383A]">
                   Pre / Post Printing
                 </h2>
 
                 <div className="mt-5 space-y-4">
-                  {/* Format in which the job is stored */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Format in which the job is stored: <br className="sm:hidden" />
-                      <span className="text-[#77736d] font-normal">(PDF, Pagemaker etc) :</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.fileFormat}
-                      onChange={(e) => updateField('fileFormat', e.target.value)}
-                      placeholder="e.g. PDF, Pagemaker, InDesign, CDR, etc."
-                      className="mt-1.5 w-full sm:max-w-md rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
-                      data-testid="input-file-format"
-                    />
-                  </div>
+                  {/* Format & Binding in ONE ROW */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>
+                          Job Format <span className="text-[#77736d] font-normal">(PDF, CDR etc.)</span> :
+                        </span>
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.fileFormat}
+                        onChange={(e) => updateField('fileFormat', e.target.value)}
+                        placeholder="e.g. PDF, InDesign, CDR, etc."
+                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
+                        data-testid="input-file-format"
+                      />
+                    </div>
 
-                  {/* Binding */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Binding :
-                    </label>
-                    <select
-                      value={formData.binding}
-                      onChange={(e) => updateField('binding', e.target.value)}
-                      className="mt-1.5 w-full sm:max-w-md rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
-                      data-testid="select-binding"
-                    >
-                      {bindingOptions.map((opt) => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
+                    <div>
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                        <span className="text-[#DAA112] font-bold">▸</span>
+                        <span>Binding :</span>
+                      </label>
+                      <select
+                        value={formData.binding}
+                        onChange={(e) => updateField('binding', e.target.value)}
+                        className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
+                        data-testid="select-binding"
+                      >
+                        {bindingOptions.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
 
                   {/* Other hands-on details */}
                   <div>
-                    <label className="block text-xs font-semibold text-[#494a49]">
-                      Other hands-on details :
+                    <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A]">
+                      <span className="text-[#DAA112] font-bold">▸</span>
+                      <span>Other hands-on details :</span>
                     </label>
                     <textarea
-                      rows={3}
+                      rows={2}
                       value={formData.handsOnDetails}
                       onChange={(e) => updateField('handsOnDetails', e.target.value)}
                       placeholder="Other hands-on details"
-                      className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
+                      className="mt-1.5 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
                       data-testid="textarea-hands-on-details"
                     />
                   </div>
@@ -947,29 +782,30 @@ export function QuoteFormClient() {
 
               {/* SECTION 6: Free Form */}
               <div className="p-4 sm:p-6 md:p-8">
-                <h2 className="font-display text-lg sm:text-xl font-bold tracking-tight text-[#00828a]">
+                <h2 className="font-display text-lg sm:text-xl font-bold tracking-tight text-[#10383A]">
                   Free Form
                 </h2>
 
-                <div className="mt-5">
-                  <label className="block text-xs font-semibold text-[#494a49] leading-relaxed">
-                    Provide as much detail as you need for your job or ask us a question using the space below:
+                <div className="mt-4">
+                  <label className="flex items-center gap-1.5 text-xs font-semibold text-[#10383A] leading-relaxed">
+                    <span className="text-[#DAA112] font-bold">▸</span>
+                    <span>Provide as much detail as you need for your job or ask us a question:</span>
                   </label>
                   <textarea
-                    rows={4}
+                    rows={3}
                     value={formData.freeFormNotes}
                     onChange={(e) => updateField('freeFormNotes', e.target.value)}
                     placeholder="Provide additional details or ask a question here..."
-                    className="mt-2 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#00828a] focus:ring-1 focus:ring-[#00828a]"
+                    className="mt-2 w-full rounded border border-[#cfc9bf] bg-white px-3 py-2 text-base sm:text-sm transition-colors focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
                     data-testid="textarea-free-form"
                   />
                 </div>
 
-                {/* Submit Button inside Form matching image */}
+                {/* Submit Button inside Form */}
                 <div className="mt-8 pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-[#e8e1d8]">
                   <button
                     type="submit"
-                    className="inline-flex items-center justify-center gap-2 bg-[#00828a] hover:bg-[#006e75] text-white px-8 py-3 text-sm font-bold shadow-sm transition-all cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 bg-[#10383A] hover:bg-[#0c2b2c] text-white px-8 py-3 text-sm font-bold shadow-sm hover:shadow transition-all cursor-pointer rounded-sm"
                     data-testid="button-submit-form"
                   >
                     <span>Submit</span>
@@ -980,7 +816,7 @@ export function QuoteFormClient() {
                     <button
                       type="button"
                       onClick={handleCopy}
-                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 border border-[#cfc9bf] bg-white px-3.5 py-2.5 text-xs font-semibold text-[#494a49] hover:border-[#00828a] hover:text-[#00828a] transition-colors"
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 border border-[#cfc9bf] bg-white px-3.5 py-2.5 text-xs font-semibold text-[#494a49] hover:border-[#10383A] hover:text-[#10383A] transition-colors rounded-sm"
                     >
                       {copied ? <Check size={14} className="text-green-600" /> : <Copy size={14} />}
                       <span>{copied ? 'Copied' : 'Copy'}</span>
@@ -989,7 +825,7 @@ export function QuoteFormClient() {
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 border border-[#cfc9bf] bg-white px-3.5 py-2.5 text-xs font-semibold text-[#73716c] hover:border-[#1c1d1f] hover:text-[#1c1d1f] transition-colors"
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 border border-[#cfc9bf] bg-white px-3.5 py-2.5 text-xs font-semibold text-[#73716c] hover:border-[#1c1d1f] hover:text-[#1c1d1f] transition-colors rounded-sm"
                     >
                       <RotateCcw size={13} />
                       <span>Reset</span>
@@ -1017,9 +853,9 @@ export function QuoteFormClient() {
           <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
             {/* WhatsApp Real-Time Message Preview Card */}
             <div className="rounded-xl border border-[#d8d0c6] bg-white shadow-xs overflow-hidden">
-              <div className="bg-[#075e54] px-4 py-3 text-white flex items-center justify-between">
+              <div className="bg-[#10383A] px-4 py-3 text-white flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="grid h-8 w-8 place-items-center rounded-full bg-white/20 font-bold text-white text-xs">
+                  <div className="grid h-8 w-8 place-items-center rounded-full bg-white/15 font-bold text-white text-xs">
                     PO
                   </div>
                   <div>
@@ -1048,7 +884,7 @@ export function QuoteFormClient() {
                 }}
               >
                 <div className="rounded-lg bg-white p-3.5 shadow-2xs border border-black/5 whitespace-pre-wrap font-sans text-[11px] leading-5 max-h-[380px] overflow-y-auto">
-                  <div className="font-bold text-[#075e54] text-xs pb-1 border-b border-[#e5ded4] mb-2">
+                  <div className="font-bold text-[#10383A] text-xs pb-1 border-b border-[#e5ded4] mb-2">
                     📋 PRINT JOB SPECIFICATION
                   </div>
                   {buildWhatsAppMessage()}
@@ -1060,7 +896,7 @@ export function QuoteFormClient() {
                 <button
                   type="button"
                   onClick={() => handleWhatsAppSubmit()}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white py-3 text-xs font-bold shadow-xs hover:shadow transition-all cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white py-3 text-xs font-bold shadow-xs hover:shadow transition-all cursor-pointer rounded-sm"
                   data-testid="button-sidebar-whatsapp"
                 >
                   <MessageCircle size={16} fill="currentColor" />
@@ -1111,7 +947,7 @@ export function QuoteFormClient() {
         <button
           type="button"
           onClick={() => handleWhatsAppSubmit()}
-          className="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white py-2.5 px-4 text-xs font-bold shadow-sm transition-all"
+          className="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white py-2.5 px-4 text-xs font-bold shadow-sm transition-all rounded-sm"
           data-testid="button-mobile-floating-whatsapp"
         >
           <MessageCircle size={16} fill="currentColor" />

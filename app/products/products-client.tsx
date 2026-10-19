@@ -118,7 +118,33 @@ export function ProductsClient({ products }: { products: Product[] }) {
           ))}
         </div>
 
-        {visible.length === 0 && (
+        {products.length === 0 ? (
+          <div className="py-20 text-center max-w-xl mx-auto">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#f3efe6] text-[#10383A] mb-4 border border-[#ded7cd]">
+              <Package size={26} className="text-[#DAA112]" />
+            </div>
+            <h3 className="font-display text-2xl font-bold text-[#10383A]">
+              Product Catalog Updating
+            </h3>
+            <p className="mt-2 text-sm text-[#716e67] leading-relaxed">
+              We are actively populating our official product inventory directly from the admin studio. In the meantime, explore our full suite of print services or message our team directly for custom product orders.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <Link href="/services" className="btn-primary text-xs">
+                Explore Services &rarr;
+              </Link>
+              <a
+                href={createWhatsAppUrl('Hello Print One Graphics, I would like to inquire about custom printed products and corporate merchandise.')}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-outline text-xs"
+              >
+                <MessageCircle size={14} />
+                <span>Inquire on WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        ) : visible.length === 0 ? (
           <div className="py-24 text-center">
             <h3 className="font-display text-xl font-bold text-[#10383A]">No products match your search.</h3>
             <p className="mt-2 text-xs text-[#77736d]">Try clearing your search term or selecting &quot;All Products&quot;.</p>
@@ -132,7 +158,7 @@ export function ProductsClient({ products }: { products: Product[] }) {
               Reset filters
             </button>
           </div>
-        )}
+        ) : null}
       </section>
 
       {/* 4. Bottom Custom Request Bar */}
