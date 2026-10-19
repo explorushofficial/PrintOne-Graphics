@@ -48,7 +48,7 @@ export function Footer() {
             </div>
             <div>
               <span className="font-display text-base font-extrabold tracking-[-.04em] text-white">
-                Print One <span className="font-sans text-[8px] font-semibold tracking-[.2em] text-[#809276]">GRAPHICS</span>
+                PrintOne <span className="font-sans text-[8px] font-semibold tracking-[.2em] text-[#809276]">GRAPHICS</span>
               </span>
               <p className="text-[11px] text-[#768886]">
                 Byculla East, Mumbai · Since 2021

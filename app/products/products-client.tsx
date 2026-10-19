@@ -175,22 +175,24 @@ export function ProductsClient({ products }: { products: Product[] }) {
               From annual report design and commercial offset production to custom packaging engineering and corporate gifting programs.
             </p>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/services"
-              className="btn-primary"
+              className="inline-flex items-center justify-center gap-2 border border-[#DAA112] bg-[#DAA112] text-[#10383A] px-5 py-3.5 text-[13px] font-extrabold transition-all hover:bg-white hover:border-white hover:text-[#10383A]"
               data-testid="link-products-to-services"
             >
-              View Our Services
+              <span>View Our Services</span>
+              <ArrowUpRight size={15} />
             </Link>
             <a
-              className="btn-outline border-[#74736e] text-white hover:bg-white hover:text-[#27292a]"
+              className="inline-flex items-center justify-center gap-2 border border-white/50 bg-white/10 text-white px-5 py-3.5 text-[13px] font-bold backdrop-blur-xs transition-all hover:bg-white hover:border-white hover:text-[#27292a]"
               href={createWhatsAppUrl('Hello Print One Graphics, I have a custom product fabrication enquiry.')}
               target="_blank"
               rel="noreferrer"
               data-testid="link-custom-whatsapp"
             >
-              <MessageCircle size={15} /> Custom WhatsApp Request
+              <MessageCircle size={15} />
+              <span>Custom WhatsApp Request</span>
             </a>
           </div>
         </div>

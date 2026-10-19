@@ -6,11 +6,8 @@ import {
   ArrowRight,
   ArrowUpRight,
   CheckCircle2,
-  ChevronLeft,
-  ChevronRight,
   MapPin,
   MessageCircle,
-  Search,
   Sparkles,
   Truck,
 } from 'lucide-react';
@@ -34,54 +31,7 @@ const CATEGORY_FILTERS = [
 ];
 
 export function ServicesClient({ services }: ServicesClientProps) {
-  const [activeFilter, setActiveFilter] = useState(CATEGORY_FILTERS[0]);
-  const [searchQuery, setSearchQuery] = useState('');
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
-  const [cardIndex, setCardIndex] = useState(0);
-  const [touchStartX, setTouchStartX] = useState<number | null>(null);
-
-  // Filter services belonging to the active area (and matching search if entered)
-  const areaServices = services.filter((service) => {
-    const matchesArea = service.tagFilter === activeFilter;
-    const matchesSearch =
-      searchQuery.trim() === '' ||
-      service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      service.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      service.shortDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      service.features.some((f) => f.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesArea && matchesSearch;
-  });
-
-  const totalCardsInArea = areaServices.length;
-  const safeCardIndex = totalCardsInArea > 0 ? ((cardIndex % totalCardsInArea) + totalCardsInArea) % totalCardsInArea : 0;
-  const currentService = totalCardsInArea > 0 ? areaServices[safeCardIndex] : null;
-
-  const handleNext = () => {
-    if (totalCardsInArea > 1) {
-      setCardIndex((prev) => (prev + 1) % totalCardsInArea);
-    }
-  };
-
-  const handlePrev = () => {
-    if (totalCardsInArea > 1) {
-      setCardIndex((prev) => (prev - 1 + totalCardsInArea) % totalCardsInArea);
-    }
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStartX(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX === null) return;
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (diff > 40) {
-      handleNext();
-    } else if (diff < -40) {
-      handlePrev();
-    }
-    setTouchStartX(null);
-  };
 
   return (
     <main>
@@ -126,93 +76,58 @@ export function ServicesClient({ services }: ServicesClientProps) {
       <section className="border-b border-[#ded7cd] bg-[#faf8f2] py-10 sm:py-14">
         <div className="page-wrap">
           {/* Header Row */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6">
-            <div>
-              <p className="eyebrow">Service Spectrum (8 Areas)</p>
-              <p className="mt-1 text-xs sm:text-sm text-[#716e67] max-w-2xl">
-                Select any service area to explore capabilities and submit your specifications for an instant inquiry &amp; quotation.
-              </p>
-            </div>
-
-            {/* Search Input */}
-            <div className="relative shrink-0">
-              <Search
-                size={14}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8e8a82]"
-              />
-              <input
-                type="text"
-                placeholder="Search 8 service areas..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="h-9 w-full sm:w-60 rounded-lg border border-[#d9d2c8] bg-white pl-9 pr-3 text-xs placeholder:text-[#99958d] focus:border-[#DAA112] focus:outline-none"
-              />
-            </div>
+          <div className="pb-6">
+            <p className="eyebrow">Service Spectrum (8 Areas)</p>
+            <p className="mt-1 text-xs sm:text-sm text-[#716e67] max-w-3xl">
+              Comprehensive printing, design, and packaging services structured across eight specialized production domains to serve businesses across India.
+            </p>
           </div>
 
-          {/* 8 Horizontal Area Filter Buttons (Decreased height, single row on desktop) */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-1.5 pb-4" aria-label="Service Areas">
-            {CATEGORY_FILTERS.map((cat, idx) => {
-              const isActive = activeFilter === cat && searchQuery.trim() === '';
-              return (
-                <button
-                  key={cat}
-                  onClick={() => {
-                    setActiveFilter(cat);
-                    setSearchQuery('');
-                    setCardIndex(0);
-                  }}
-                  aria-pressed={isActive}
-                  className={`group flex items-center justify-center gap-1.5 rounded-lg py-1.5 px-2 text-center transition-all min-h-[34px] ${
-                    isActive
-                      ? 'border border-[#10383A] bg-[#10383A] text-white shadow-xs'
-                      : 'border border-[#ded7cd] bg-white text-[#55524b] hover:border-[#10383A] hover:bg-[#f7f5ee] hover:text-[#10383A]'
-                  }`}
-                  data-testid={`button-service-filter-${cat.toLowerCase().replaceAll(/[^a-z0-9]+/g, '-')}`}
-                >
-                  <span
-                    className={`text-[9px] font-extrabold uppercase leading-none ${
-                      isActive ? 'text-[#DAA112]' : 'text-[#8e8a82] group-hover:text-[#10383A]'
-                    }`}
-                  >
-                    0{idx + 1}
-                  </span>
-                  <span className="text-[10px] font-bold leading-tight truncate">
-                    {cat}
-                  </span>
-                </button>
-              );
-            })}
+          {/* 8 Solution Area Cards (Increased height, uniform display with no selected box) */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5 pb-4" aria-label="Service Areas">
+            {CATEGORY_FILTERS.map((cat, idx) => (
+              <div
+                key={cat}
+                className="flex flex-col items-center justify-center rounded-xl border border-[#ded7cd] bg-white px-3 py-3.5 text-center min-h-[70px] sm:min-h-[78px] transition-all hover:border-[#10383A] hover:shadow-xs group"
+              >
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#DAA112] leading-none">
+                  0{idx + 1}
+                </span>
+                <span className="mt-1.5 text-[11px] sm:text-[11.5px] font-bold text-[#10383A] leading-snug">
+                  {cat}
+                </span>
+              </div>
+            ))}
           </div>
 
-          {/* Service Spectrum Wheel Image Showcase (Replacing individual service card) */}
+          {/* Service Spectrum Infographic Showcase */}
           <div className="mt-6 overflow-hidden rounded-2xl border border-[#ded7cd] bg-white p-3 sm:p-6 shadow-sm">
-            <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center justify-center">
+            <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center">
               <img
-                src="/printone-assets/services-service-spectrum.png"
-                alt="PrintOne Graphics Service Spectrum Wheel - 8 Core Solution Areas"
-                className="w-full max-h-[580px] object-contain transition-transform duration-500 hover:scale-101"
+                src="/printone-assets/services-service-spectrum.jpg"
+                alt="PrintOne Graphics Complete Service Spectrum Infographic - Annual Reports, Commercial Print, Publication, Packaging, Signage, Design, Finishing"
+                className="w-full max-h-[660px] object-contain transition-transform duration-500 hover:scale-101"
               />
             </div>
 
             <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-[#f0eae0] pt-4 text-center sm:text-left">
               <div>
                 <p className="text-xs font-bold text-[#10383A] uppercase tracking-wider">
-                  Complete Service Spectrum Across 8 Specialized Domains
+                  Complete Service Spectrum Across Specialized Domains
                 </p>
                 <p className="text-[11px] text-[#76726b]">
-                  Corporate Reporting · Commercial Print · Books &amp; Publishing · Corporate Gifting · Packaging · Large Format · Design · Bindery
+                  Annual Reports · Commercial Print · Books &amp; Publishing · Packaging &amp; Rigid Boxes · Large-Format Signage · Creative Design · Specialty Finishing
                 </p>
               </div>
 
               <a
-                href={createWhatsAppUrl(`Hello PrintOne Graphics, I would like to consult about your services in ${activeFilter}.`)}
+                href={createWhatsAppUrl('Hello PrintOne Graphics, I would like to consult about your services across your specialized printing and packaging domains.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary text-xs py-2 px-4 whitespace-nowrap"
               >
                 <MessageCircle size={14} />
-                <span>Inquire About {activeFilter}</span>
+                <span>Inquire on WhatsApp</span>
               </a>
             </div>
           </div>
@@ -454,11 +369,10 @@ export function ServicesClient({ services }: ServicesClientProps) {
                 ].map((hub) => (
                   <div
                     key={hub.city}
-                    className={`rounded-xl border p-4 transition-all duration-300 ${
-                      hub.highlight
+                    className={`rounded-xl border p-4 transition-all duration-300 ${hub.highlight
                         ? 'border-[#10383A] bg-[#10383A] text-white shadow-sm'
                         : 'border-[#ded7cd] bg-white text-[#1c1d1f] hover:border-[#DAA112] hover:shadow-xs'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center justify-between gap-2">
                       <div className="flex items-center gap-1.5">
@@ -471,20 +385,18 @@ export function ServicesClient({ services }: ServicesClientProps) {
                         </h3>
                       </div>
                       <span
-                        className={`rounded px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider ${
-                          hub.highlight
+                        className={`rounded px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider ${hub.highlight
                             ? 'bg-white/15 text-[#DAA112]'
                             : 'bg-[#f4efe5] text-[#706c64]'
-                        }`}
+                          }`}
                       >
                         {hub.state}
                       </span>
                     </div>
 
                     <p
-                      className={`mt-2 text-xs leading-relaxed ${
-                        hub.highlight ? 'text-white/85' : 'text-[#615e58]'
-                      }`}
+                      className={`mt-2 text-xs leading-relaxed ${hub.highlight ? 'text-white/85' : 'text-[#615e58]'
+                        }`}
                     >
                       {hub.desc}
                     </p>
@@ -535,29 +447,17 @@ export function ServicesClient({ services }: ServicesClientProps) {
               <img
                 src="/printone-assets/services-design-to-finish.png"
                 alt="PrintOne Graphics Machinery and Process - From Design to Finish"
-                className="w-full max-h-[640px] object-contain transition-transform duration-500 hover:scale-101"
+                className="w-full max-h-[480px] sm:max-h-[520px] object-contain transition-transform duration-500 hover:scale-101"
               />
             </div>
 
-            <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-[#ded7cd] pt-4 text-center sm:text-left">
-              <div>
-                <p className="text-xs font-bold text-[#10383A] uppercase tracking-wider">
-                  Industrial Print Engineering · Quality Assurance · Zero-Defect Finishing
-                </p>
-                <p className="text-[11px] text-[#716e67]">
-                  Continuous maintenance calibration, genuine OEM toners, FSC-certified paper substrates, and automated binding lines.
-                </p>
-              </div>
-
-              <a
-                href={createWhatsAppUrl('Hello PrintOne Graphics, I would like to schedule a visit to your Byculla East production facility and discuss our upcoming printing project.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary text-xs py-2 px-4 whitespace-nowrap"
-              >
-                <MessageCircle size={14} />
-                <span>Schedule Press Inspection</span>
-              </a>
+            <div className="mt-4 border-t border-[#ded7cd] pt-3 text-center sm:text-left">
+              <p className="text-xs font-bold text-[#10383A] uppercase tracking-wider">
+                Industrial Print Engineering · Quality Assurance · Zero-Defect Finishing
+              </p>
+              <p className="mt-0.5 text-[11px] text-[#716e67]">
+                Continuous maintenance calibration, genuine OEM toners, FSC-certified paper substrates, and automated binding lines.
+              </p>
             </div>
           </div>
         </div>
@@ -577,22 +477,24 @@ export function ServicesClient({ services }: ServicesClientProps) {
               Visit our Byculla East production facility or request physical specimen sample kits delivered to your corporate office.
             </p>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <a
-              className="btn-primary"
+              className="inline-flex items-center justify-center gap-2 border border-[#DAA112] bg-[#DAA112] text-[#10383A] px-5 py-3.5 text-[13px] font-extrabold transition-all hover:bg-white hover:border-white hover:text-[#10383A]"
               href={createWhatsAppUrl('Hello Print One Graphics, I would like to consult with your production directors regarding an upcoming print project.')}
               target="_blank"
               rel="noreferrer"
               data-testid="link-service-cta-whatsapp"
             >
-              <MessageCircle size={15} /> Consult on WhatsApp
+              <MessageCircle size={15} />
+              <span>Consult on WhatsApp</span>
             </a>
             <Link
               href="/contact"
-              className="btn-outline border-[#74736e] text-white hover:bg-white hover:text-[#10383A]"
+              className="inline-flex items-center justify-center gap-2 border border-white/50 bg-white/10 text-white px-5 py-3.5 text-[13px] font-bold backdrop-blur-xs transition-all hover:bg-white hover:border-white hover:text-[#10383A]"
               data-testid="link-service-cta-contact"
             >
-              Contact Details <ArrowUpRight size={15} />
+              <span>Contact Details</span>
+              <ArrowUpRight size={15} />
             </Link>
           </div>
         </div>
