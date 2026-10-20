@@ -161,33 +161,59 @@ export function ServicesClient({ services }: ServicesClientProps) {
 
             {/* Village Classroom Stories & Learning Visual Showcase */}
             <div className="mt-8 overflow-hidden rounded-2xl border border-white/25 bg-white/10 p-2 sm:p-3.5 shadow-2xl backdrop-blur-sm">
-              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-black/40">
-                <img
-                  src="/printone-assets/services-village-classroom.png"
-                  alt="Students in village classroom holding printed educational books by PrintOne Graphics"
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-left text-white">
-                  <div>
-                    <span className="inline-block rounded bg-[#DAA112] px-2.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wider text-[#10383A]">
-                      Education &amp; Community Impact
-                    </span>
-                    <h3 className="mt-1 font-display text-base sm:text-xl font-bold text-white drop-shadow-md">
-                      Village Classrooms: Stories, Learning &amp; Educational Books
-                    </h3>
-                    <p className="mt-0.5 text-xs text-white/80 max-w-xl">
-                      Delivering curriculum-aligned textbooks, learning resources, and storybooks to institutions and communities across India.
-                    </p>
+              <div className="relative w-full overflow-hidden rounded-xl bg-black/40">
+                <div className="relative aspect-[16/9] w-full overflow-hidden">
+                  <img
+                    src="/printone-assets/services-village-classroom.png"
+                    alt="Students in village classroom holding printed educational books by PrintOne Graphics"
+                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
+                  />
+                  {/* Desktop overlay: Preserved exactly for sm and up */}
+                  <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                  <div className="hidden sm:flex absolute bottom-5 left-5 right-5 flex-row items-end justify-between gap-3 text-left text-white">
+                    <div>
+                      <span className="inline-block rounded bg-[#DAA112] px-2.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wider text-[#10383A]">
+                        Education &amp; Community Impact
+                      </span>
+                      <h3 className="mt-1 font-display text-base sm:text-xl font-bold text-white drop-shadow-md">
+                        Village Classrooms: Stories, Learning &amp; Educational Books
+                      </h3>
+                      <p className="mt-0.5 text-xs text-white/80 max-w-xl">
+                        Delivering curriculum-aligned textbooks, learning resources, and storybooks to institutions and communities across India.
+                      </p>
+                    </div>
+                    <a
+                      href={createWhatsAppUrl('Hi PrintOne Graphics, I would like to inquire about educational book printing and classroom publication publishing.')}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary shrink-0 text-xs py-2 px-3.5 bg-white text-[#10383A] border-white hover:bg-[#DAA112] hover:text-[#10383A] hover:border-[#DAA112]"
+                    >
+                      Publish Educational Books &rarr;
+                    </a>
                   </div>
-                  <a
-                    href={createWhatsAppUrl('Hi PrintOne Graphics, I would like to inquire about educational book printing and classroom publication publishing.')}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary shrink-0 text-xs py-2 px-3.5 bg-white text-[#10383A] border-white hover:bg-[#DAA112] hover:text-[#10383A] hover:border-[#DAA112]"
-                  >
-                    Publish Educational Books &rarr;
-                  </a>
+                </div>
+
+                {/* Mobile-only dedicated card below the photo: clean, high contrast, button on point */}
+                <div className="block sm:hidden bg-[#10383A] p-4 text-left text-white border-t border-white/10">
+                  <span className="inline-block rounded bg-[#DAA112] px-2.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wider text-[#10383A]">
+                    Education &amp; Community Impact
+                  </span>
+                  <h3 className="mt-2 font-display text-base font-bold text-white leading-snug">
+                    Village Classrooms: Stories, Learning &amp; Educational Books
+                  </h3>
+                  <p className="mt-1 text-xs text-white/80 leading-relaxed">
+                    Delivering curriculum-aligned textbooks, learning resources, and storybooks to institutions and communities across India.
+                  </p>
+                  <div className="mt-3.5">
+                    <a
+                      href={createWhatsAppUrl('Hi PrintOne Graphics, I would like to inquire about educational book printing and classroom publication publishing.')}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center w-full rounded-lg bg-white text-[#10383A] font-bold text-xs py-2.5 px-4 shadow-sm hover:bg-[#DAA112] transition-colors"
+                    >
+                      Publish Educational Books &rarr;
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

@@ -2,7 +2,8 @@
 
 import { useState, type FormEvent } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, Clock, FileText, Mail, MapPin, MessageCircle, Phone, Send } from 'lucide-react';
+import { ArrowUpRight, Clock, FileText, Mail, MapPin, MessageCircle, Phone, Send, Sparkles } from 'lucide-react';
+import { motion } from 'motion/react';
 import { createWhatsAppUrl } from '@/context/cart-context';
 
 export function ContactClient() {
@@ -19,34 +20,94 @@ export function ContactClient() {
   }
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       {/* 2-Grid Contact Layout */}
       <div className="page-wrap py-8 sm:py-12">
         <div className="grid gap-8 lg:gap-10 lg:grid-cols-[0.88fr_1.12fr] items-start">
-          {/* Left Column: Let's Create Something Great Together Branding */}
-          <div className="lg:sticky lg:top-24 space-y-5">
+          {/* Left Column: Let's Create Something Great Together Branding - Animated PPT Slide-in from Left */}
+          <motion.div
+            initial={{ opacity: 0, x: -45 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:sticky lg:top-24 space-y-5"
+          >
             <div>
-              <p className="eyebrow">Contact Us • Get a Quote</p>
-              <h1 className="mt-3 font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-extrabold leading-[1.02] tracking-[-.045em] text-[#10383A]">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#ded7cb] bg-[#efe9dc] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#69655e]"
+              >
+                <Sparkles size={11} className="text-[#DAA112]" />
+                <span>Contact Us • Get a Quote</span>
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, x: -35 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.65, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-3 font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-extrabold leading-[1.02] tracking-[-.045em] text-[#10383A]"
+              >
                 Let’s Create<br />
                 <span className="text-[#DAA112]">Something Great</span><br />
                 Together.
-              </h1>
-              <p className="mt-3 font-sans text-xs sm:text-sm font-bold uppercase tracking-[.14em] text-[#666E51]">
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.55, delay: 0.28 }}
+                className="mt-3 font-sans text-xs sm:text-sm font-bold uppercase tracking-[.14em] text-[#666E51]"
+              >
                 Design • Digital Printing • Corporate Gifting
-              </p>
+              </motion.p>
             </div>
 
-            <p className="text-xs sm:text-sm leading-relaxed text-[#615e58]">
-              Have a printing project, annual report, corporate publication, luxury packaging or corporate gifting requirement in mind? Print One Graphics is here to help.
-            </p>
-            <p className="text-xs sm:text-sm leading-relaxed text-[#615e58]">
-              From concept and paper selection to printing, high-precision finishing and pan-India delivery, our team provides complete solutions tailored to your brand.
-            </p>
-          </div>
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="space-y-3"
+            >
+              <p className="text-xs sm:text-sm leading-relaxed text-[#615e58]">
+                Have a printing project, annual report, corporate publication, luxury packaging or corporate gifting requirement in mind? Print One Graphics is here to help.
+              </p>
+              <p className="text-xs sm:text-sm leading-relaxed text-[#615e58]">
+                From concept and paper selection to printing, high-precision finishing and pan-India delivery, our team provides complete solutions tailored to your brand.
+              </p>
+            </motion.div>
 
-          {/* Right Column: Form on top + 3 Cards (Email, Contacts, Address) below */}
-          <div className="space-y-3.5">
+            {/* Visual Quick Response Badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.42 }}
+              className="pt-2 grid grid-cols-2 gap-2.5 text-xs text-[#10383A]"
+            >
+              <div className="flex items-center gap-2 rounded-lg border border-[#e2dbd1] bg-white/70 p-2.5 shadow-xs backdrop-blur-xs">
+                <Clock size={16} className="text-[#DAA112] shrink-0" />
+                <div>
+                  <p className="font-bold text-[11px] leading-tight text-[#10383A]">Fast Turnaround</p>
+                  <p className="text-[10px] text-[#716e67]">Within 2 hrs on WhatsApp</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border border-[#e2dbd1] bg-white/70 p-2.5 shadow-xs backdrop-blur-xs">
+                <Sparkles size={16} className="text-[#DAA112] shrink-0" />
+                <div>
+                  <p className="font-bold text-[11px] leading-tight text-[#10383A]">In-House Press</p>
+                  <p className="text-[10px] text-[#716e67]">Byculla East, Mumbai</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Column: Form on top + 3 Cards (Email, Contacts, Address) below - Animated PPT Slide-in from Right */}
+          <motion.div
+            initial={{ opacity: 0, x: 45 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="space-y-3.5"
+          >
             {/* The Form Box */}
             <div className="relative overflow-hidden rounded-xl border border-[#e2dbd1] bg-[#f0ece4] p-4 sm:p-6 shadow-sm">
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#10383A] via-[#666E51] to-[#809276]" />
@@ -145,10 +206,16 @@ export function ContactClient() {
               </div>
             </div>
 
-            {/* 3 Rounded Cards Below Form in the Right Column: Email | Contacts | Address */}
+            {/* 3 Rounded Cards Below Form in the Right Column: Email | Contacts | Address - Staggered Slide In */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {/* Card 1: Email */}
-              <div className="flex flex-col justify-between rounded-xl border border-[#e4ddd3] bg-white p-3.5 shadow-sm hover:border-[#10383A]/50 hover:shadow-md transition-all">
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                className="flex flex-col justify-between rounded-xl border border-[#e4ddd3] bg-white p-3.5 shadow-sm hover:border-[#10383A]/50 hover:shadow-md transition-all"
+              >
                 <div>
                   <div className="flex items-center gap-1.5 text-[#10383A]">
                     <Mail size={16} />
@@ -180,10 +247,16 @@ export function ContactClient() {
                     Compose mail <ArrowUpRight size={11} />
                   </a>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Card 2: Contacts */}
-              <div className="flex flex-col justify-between rounded-xl border border-[#e4ddd3] bg-white p-3.5 shadow-sm hover:border-[#10383A]/50 hover:shadow-md transition-all">
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                className="flex flex-col justify-between rounded-xl border border-[#e4ddd3] bg-white p-3.5 shadow-sm hover:border-[#10383A]/50 hover:shadow-md transition-all"
+              >
                 <div>
                   <div className="flex items-center gap-1.5 text-[#10383A]">
                     <Phone size={16} />
@@ -225,10 +298,16 @@ export function ContactClient() {
                     <MessageCircle size={11} /> WhatsApp <ArrowUpRight size={11} />
                   </a>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Card 3: Address */}
-              <div className="flex flex-col justify-between rounded-xl border border-[#e4ddd3] bg-white p-3.5 shadow-sm hover:border-[#10383A]/50 hover:shadow-md transition-all">
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                className="flex flex-col justify-between rounded-xl border border-[#e4ddd3] bg-white p-3.5 shadow-sm hover:border-[#10383A]/50 hover:shadow-md transition-all"
+              >
                 <div>
                   <div className="flex items-center gap-1.5 text-[#10383A]">
                     <MapPin size={16} />
@@ -252,14 +331,20 @@ export function ContactClient() {
                     Google Maps <ArrowUpRight size={11} />
                   </a>
                 </div>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Established Credibility Strip */}
-      <section className="border-y border-[#e2dbd1] bg-[#f5f1e9]">
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="border-y border-[#e2dbd1] bg-[#f5f1e9]"
+      >
         <div className="page-wrap grid gap-5 py-6 sm:grid-cols-3">
           <p className="text-xs font-semibold text-[#696761]">
             <span className="mr-2 text-[#10383A]">01</span>Established in 2021
@@ -271,7 +356,7 @@ export function ContactClient() {
             <span className="mr-2 text-[#10383A]">03</span>Serving organisations across India
           </p>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }

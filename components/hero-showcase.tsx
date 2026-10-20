@@ -256,7 +256,7 @@ export function HeroShowcase() {
 
         {/* Right Part: Animated Horizontal Slide Showcase with PPT Presentation Motion */}
         <div
-          className="relative w-full h-full min-h-[460px] sm:min-h-[540px] lg:min-h-full border-t lg:border-t-0 lg:border-l border-[#ded7cb] bg-[#10383A] overflow-hidden flex flex-col justify-between"
+          className="relative w-full h-full min-h-[490px] sm:min-h-[540px] lg:min-h-full border-t lg:border-t-0 lg:border-l border-[#ded7cb] bg-[#10383A] overflow-hidden flex flex-col justify-between"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
@@ -287,7 +287,7 @@ export function HeroShowcase() {
                 </div>
 
                 {/* Centered Showcase Image: Starts zoomed in and smoothly zooms out so the whole image is 100% visible */}
-                <div className="relative z-10 w-full flex-1 flex items-center justify-center pt-16 pb-28 px-4 sm:px-8 overflow-hidden">
+                <div className="relative z-10 w-full flex-1 flex items-center justify-center pt-14 pb-36 sm:pt-16 sm:pb-28 px-4 sm:px-8 overflow-hidden">
                   <motion.div
                     key={`img-zoom-${activeSlide.id}`}
                     initial={{ scale: 1.45, opacity: 0.8 }}
@@ -302,7 +302,7 @@ export function HeroShowcase() {
                     <img
                       src={activeSlide.image}
                       alt={activeSlide.title}
-                      className="max-h-[260px] sm:max-h-[340px] lg:max-h-[380px] xl:max-h-[430px] w-auto max-w-[94%] object-contain rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.65)] ring-1 ring-white/15 select-none"
+                      className="max-h-[175px] xs:max-h-[210px] sm:max-h-[340px] lg:max-h-[380px] xl:max-h-[430px] w-auto max-w-[92%] sm:max-w-[94%] object-contain rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.65)] ring-1 ring-white/15 select-none"
                     />
                   </motion.div>
                 </div>
@@ -324,23 +324,26 @@ export function HeroShowcase() {
                   </span>
                 </div>
 
+                {/* Mobile Scrim to protect text contrast */}
+                <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#10383A] via-[#10383A]/90 to-transparent pointer-events-none sm:hidden z-15" />
+
                 {/* PPT-Style Animated Captions at Bottom */}
-                <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 z-20 text-white pointer-events-none">
+                <div className="absolute bottom-4 left-4 right-4 sm:bottom-8 sm:left-8 sm:right-8 z-20 text-white pointer-events-none">
                   <motion.div
                     initial={{ y: 25, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.2, duration: 0.45 }}
                     className="max-w-xl"
                   >
-                    <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-[-.03em] leading-tight text-white drop-shadow-md">
+                    <h3 className="font-display text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-[-.03em] leading-tight text-white drop-shadow-md">
                       {activeSlide.title}
                     </h3>
 
-                    <p className="mt-2 text-xs sm:text-sm font-semibold text-[#DAA112] tracking-wide">
+                    <p className="mt-1 sm:mt-2 text-[11px] sm:text-sm font-semibold text-[#DAA112] tracking-wide">
                       {activeSlide.finish}
                     </p>
 
-                    <p className="mt-1 text-xs text-white/80 line-clamp-2">
+                    <p className="mt-0.5 sm:mt-1 text-[10.5px] sm:text-xs text-white/80 line-clamp-2">
                       {activeSlide.spec}
                     </p>
                   </motion.div>

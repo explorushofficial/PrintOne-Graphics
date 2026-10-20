@@ -108,22 +108,35 @@ export function AboutClient() {
 
             {/* Creative Thinking Visual Showcase Card */}
             <div className="mt-8 overflow-hidden rounded-2xl border border-white/20 bg-white/10 p-2 sm:p-3 shadow-2xl backdrop-blur-sm">
-              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-black/30">
-                <img
-                  src="/printone-assets/about-creative-thinking.png"
-                  alt="PrintOne Graphics Creative Thinking and Ideation Session"
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 flex items-center justify-between text-left text-white">
-                  <div>
-                    <span className="inline-block rounded bg-[#DAA112] px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#10383A]">
-                      Creative Studio
-                    </span>
-                    <p className="mt-1 font-display text-sm sm:text-base font-bold text-white drop-shadow-sm">
-                      Creative Thinking. Thoughtful Typography. Impactful Storytelling.
-                    </p>
+              <div className="relative w-full overflow-hidden rounded-xl bg-black/30">
+                <div className="relative aspect-[16/9] w-full overflow-hidden">
+                  <img
+                    src="/printone-assets/about-creative-thinking.png"
+                    alt="PrintOne Graphics Creative Thinking and Ideation Session"
+                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
+                  />
+                  {/* Desktop overlay gradient & caption: Exactly unchanged for sm and up */}
+                  <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
+                  <div className="hidden sm:flex absolute bottom-4 left-4 right-4 items-center justify-between text-left text-white">
+                    <div>
+                      <span className="inline-block rounded bg-[#DAA112] px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#10383A]">
+                        Creative Studio
+                      </span>
+                      <p className="mt-1 font-display text-base font-bold text-white drop-shadow-sm">
+                        Creative Thinking. Thoughtful Typography. Impactful Storytelling.
+                      </p>
+                    </div>
                   </div>
+                </div>
+
+                {/* Mobile-only dedicated caption bar: clean, no text on image, 100% visible */}
+                <div className="block sm:hidden bg-[#10383A] p-3.5 text-left text-white border-t border-white/10">
+                  <span className="inline-block rounded bg-[#DAA112] px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#10383A]">
+                    Creative Studio
+                  </span>
+                  <p className="mt-1.5 font-display text-sm font-bold text-white leading-snug">
+                    Creative Thinking. Thoughtful Typography. Impactful Storytelling.
+                  </p>
                 </div>
               </div>
             </div>
@@ -150,31 +163,55 @@ export function AboutClient() {
           </div>
 
           <div className="mt-8 overflow-hidden rounded-2xl border border-[#ded7cd] bg-white p-2.5 sm:p-4 shadow-xl">
-            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-[#1e2022]">
-              <img
-                src="/printone-assets/about-modern-print-floor.png"
-                alt="PrintOne Graphics Modern Print Production Floor and Machinery"
-                className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-white">
-                <div>
-                  <span className="rounded bg-[#10383A] px-2.5 py-1 text-[9.5px] font-bold uppercase tracking-wider text-[#DAA112] border border-white/20">
-                    Production Plant · Byculla East
-                  </span>
-                  <h3 className="mt-1.5 font-display text-lg sm:text-2xl font-extrabold text-white">
-                    Advanced Heidelberg Offset &amp; High-Speed Digital Presses
-                  </h3>
-                  <p className="mt-0.5 text-xs text-white/80 max-w-xl">
-                    Multi-color high-definition calibration, automated spectrophotometers, section sewing, and custom foil gilding.
-                  </p>
+            <div className="relative w-full overflow-hidden rounded-xl bg-[#1e2022]">
+              <div className="relative aspect-[16/9] w-full overflow-hidden">
+                <img
+                  src="/printone-assets/about-modern-print-floor.png"
+                  alt="PrintOne Graphics Modern Print Production Floor and Machinery"
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
+                />
+                {/* Desktop overlay: Preserved exactly for sm and up */}
+                <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                <div className="hidden sm:flex absolute bottom-6 left-6 right-6 flex-row items-end justify-between gap-3 text-white">
+                  <div>
+                    <span className="rounded bg-[#10383A] px-2.5 py-1 text-[9.5px] font-bold uppercase tracking-wider text-[#DAA112] border border-white/20">
+                      Production Plant · Byculla East
+                    </span>
+                    <h3 className="mt-1.5 font-display text-2xl font-extrabold text-white">
+                      Advanced Heidelberg Offset &amp; High-Speed Digital Presses
+                    </h3>
+                    <p className="mt-0.5 text-xs text-white/80 max-w-xl">
+                      Multi-color high-definition calibration, automated spectrophotometers, section sewing, and custom foil gilding.
+                    </p>
+                  </div>
+                  <Link
+                    href="/services"
+                    className="btn-primary shrink-0 text-xs py-2 px-3.5 bg-[#DAA112] text-[#10383A] border-[#DAA112] hover:bg-white hover:text-[#10383A] hover:border-white"
+                  >
+                    Explore Capabilities &rarr;
+                  </Link>
                 </div>
-                <Link
-                  href="/services"
-                  className="btn-primary shrink-0 text-xs py-2 px-3.5 bg-[#DAA112] text-[#10383A] border-[#DAA112] hover:bg-white hover:text-[#10383A] hover:border-white"
-                >
-                  Explore Capabilities &rarr;
-                </Link>
+              </div>
+
+              {/* Mobile-only dedicated card below the photo: clean, high contrast, button on point */}
+              <div className="block sm:hidden bg-[#10383A] p-4 text-left text-white border-t border-white/10">
+                <span className="inline-block rounded bg-[#DAA112] px-2.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wider text-[#10383A]">
+                  Production Plant · Byculla East
+                </span>
+                <h3 className="mt-2 font-display text-base font-extrabold text-white leading-snug">
+                  Advanced Heidelberg Offset &amp; High-Speed Digital Presses
+                </h3>
+                <p className="mt-1 text-xs text-white/80 leading-relaxed">
+                  Multi-color high-definition calibration, automated spectrophotometers, section sewing, and custom foil gilding.
+                </p>
+                <div className="mt-3.5">
+                  <Link
+                    href="/services"
+                    className="inline-flex items-center justify-center w-full rounded-lg bg-[#DAA112] py-2.5 px-4 text-xs font-bold text-[#10383A] shadow-sm hover:bg-white transition-colors"
+                  >
+                    Explore Capabilities &rarr;
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
