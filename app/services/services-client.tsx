@@ -51,10 +51,7 @@ export function ServicesClient({ services }: ServicesClientProps) {
 
             {/* 8 Areas Line */}
             <div className="mx-auto mt-4 max-w-4xl">
-              <p
-                className="font-serif text-[15px] sm:text-[18px] font-bold italic tracking-wide text-[#10383A] leading-relaxed"
-                style={{ fontStyle: 'italic', fontStyleRule: 'italic' } as React.CSSProperties}
-              >
+              <p className="font-serif text-[15px] sm:text-[18px] font-bold italic tracking-wide text-[#10383A] leading-relaxed">
                 Corporate Reporting · Commercial Print · Books &amp; Publishing · Corporate Gifting · Packaging &amp; Production · Large Format · Design &amp; Artwork · Finishing &amp; Bindery
               </p>
             </div>
