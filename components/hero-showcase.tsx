@@ -134,10 +134,7 @@ export function HeroShowcase() {
             </h1>
 
             {/* Requested Italic Font for Subtitle */}
-            <p
-              className="mt-3.5 font-serif text-[16px] sm:text-[18.5px] font-bold italic tracking-wide text-[#666E51] leading-snug"
-              style={{ fontStyle: 'italic', fontStyleRule: 'italic' } as React.CSSProperties}
-            >
+            <p className="mt-3.5 font-serif text-[16px] sm:text-[18.5px] font-bold italic tracking-wide text-[#666E51] leading-snug">
               Your Trusted Partner for Design, Digital Printing &amp; Corporate Gifting
             </p>
 

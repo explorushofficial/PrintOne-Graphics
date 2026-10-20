@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { DM_Sans, Manrope } from 'next/font/google';
+import { DM_Sans, Manrope, Lora } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers';
 import { Header } from '@/components/header';
@@ -13,6 +13,13 @@ const dmSans = DM_Sans({
 
 const manrope = Manrope({
   subsets: ['latin'],
+  variable: '--app-font-display',
+  display: 'swap',
+});
+
+const lora = Lora({
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
   variable: '--app-font-serif',
   display: 'swap',
 });
@@ -268,7 +275,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${dmSans.variable} ${manrope.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${dmSans.variable} ${manrope.variable} ${lora.variable}`}>
       <head>
         <script
           type="application/ld+json"
