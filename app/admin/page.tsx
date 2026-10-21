@@ -316,9 +316,9 @@ export default function AdminPage() {
         <header className="px-6 py-4 flex items-center justify-between border-b border-[#e5dfd4] bg-white/70 backdrop-blur-xs">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center border border-[#e5dfd4] shadow-xs">
-              <img src="/printone-logo.png" alt="Print One Graphics" className="h-full w-full object-contain" />
+              <img src="/printone-logo.png" alt="PrintOne Graphics" className="h-full w-full object-contain" />
             </div>
-            <span className="font-bold text-sm text-[#1c1d1f]">Print One Graphics</span>
+            <span className="font-bold text-sm text-[#1c1d1f]">PrintOne Graphics</span>
           </Link>
           <Link
             href="/"
@@ -408,7 +408,7 @@ export default function AdminPage() {
 
         {/* Simple bottom footer */}
         <footer className="py-4 text-center text-[11px] text-[#918c81]">
-          Print One Graphics &copy; {new Date().getFullYear()} &bull; Secure Management Portal
+          PrintOne Graphics &copy; {new Date().getFullYear()} &bull; Secure Management Portal
         </footer>
       </div>
     );
@@ -421,12 +421,12 @@ export default function AdminPage() {
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-white p-1 flex items-center justify-center border border-[#e5dfd4] shadow-xs">
-              <img src="/printone-logo.png" alt="Print One Graphics" className="h-full w-full object-contain" />
+              <img src="/printone-logo.png" alt="PrintOne Graphics" className="h-full w-full object-contain" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-base sm:text-lg font-bold font-display text-[#1c1d1f] tracking-tight">
-                  Print One Graphics Desk
+                  PrintOne Graphics Desk
                 </h1>
                 <span className="hidden sm:inline-block px-2 py-0.5 text-[10px] font-bold rounded-full bg-[#eaf3f0] text-[#10383A] border border-[#b8dbd2] uppercase tracking-wider">
                   Admin Panel

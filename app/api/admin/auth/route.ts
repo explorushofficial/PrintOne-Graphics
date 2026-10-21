@@ -38,7 +38,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: 'Access granted. Welcome to Print One Admin.',
+      message: 'Access granted. Welcome to PrintOne Admin.',
     });
   } catch (err) {
     console.error('Login error:', err);

@@ -356,7 +356,7 @@ export function HeroShowcase() {
 
             <div className="mt-5">
               <span className="text-[10px] font-bold uppercase tracking-[.18em] text-[#666E51]">
-                Print One Physical Specimen
+                PrintOne Physical Specimen
               </span>
               <h3 className="mt-1 font-display text-2xl font-extrabold text-[#1d1f20]">
                 {selectedItem.title}
@@ -387,7 +387,7 @@ export function HeroShowcase() {
 
                 <a
                   href={createWhatsAppUrl(
-                    `Hello Print One Graphics! I would like to enquire about ${selectedItem.title} (${selectedItem.spec}).`
+                    `Hello PrintOne Graphics! I would like to enquire about ${selectedItem.title} (${selectedItem.spec}).`
                   )}
                   target="_blank"
                   rel="noreferrer"

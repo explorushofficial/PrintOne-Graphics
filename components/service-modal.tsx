@@ -32,7 +32,7 @@ export function ServiceModal({ service, onClose }: ServiceModalProps) {
 
   if (!service) return null;
 
-  const whatsAppMessage = `Hello Print One Graphics,\n\nI would like to enquire about your service:\n*${service.title}* (${service.category})\n\nCould we discuss project requirements, turnaround times, and a customized quotation?`;
+  const whatsAppMessage = `Hello PrintOne Graphics,\n\nI would like to enquire about your service:\n*${service.title}* (${service.category})\n\nCould we discuss project requirements, turnaround times, and a customized quotation?`;
 
   return (
     <div

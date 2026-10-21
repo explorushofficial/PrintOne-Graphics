@@ -44,19 +44,19 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Print One Graphics | Design, Printing & Corporate Gifting, Mumbai',
-    template: '%s | Print One Graphics',
+    default: 'PrintOne Graphics | Design, Printing & Corporate Gifting, Mumbai',
+    template: '%s | PrintOne Graphics',
   },
   description:
-    'Print One Graphics is Mumbai’s trusted printing press located in Byculla East, delivering commercial offset & digital printing, annual reports, publications, catalogs, packaging boxes, and corporate gifting across India.',
-  applicationName: 'Print One Graphics',
-  authors: [{ name: 'Print One Graphics', url: siteUrl }],
-  creator: 'Print One Graphics',
-  publisher: 'Print One Graphics',
+    'PrintOne Graphics is Mumbai’s trusted printing press located in Byculla East, delivering commercial offset & digital printing, annual reports, publications, catalogs, packaging boxes, and corporate gifting across India.',
+  applicationName: 'PrintOne Graphics',
+  authors: [{ name: 'PrintOne Graphics', url: siteUrl }],
+  creator: 'PrintOne Graphics',
+  publisher: 'PrintOne Graphics',
   category: 'Commercial Printing & Design Services',
   keywords: [
-    'Print One Graphics',
-    'Print One Graphics Mumbai',
+    'PrintOne Graphics',
+    'PrintOne Graphics Mumbai',
     'Printing press Mumbai',
     'Commercial printing Mumbai',
     'Digital printing Byculla',
@@ -97,11 +97,11 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.webmanifest',
   openGraph: {
-    title: 'Print One Graphics | Design, Printing & Corporate Gifting, Mumbai',
+    title: 'PrintOne Graphics | Design, Printing & Corporate Gifting, Mumbai',
     description:
       'Mumbai’s premier printing press in Byculla East. High precision offset & digital printing, annual reports, publications, and bespoke corporate gifting.',
     url: siteUrl,
-    siteName: 'Print One Graphics',
+    siteName: 'PrintOne Graphics',
     locale: 'en_IN',
     type: 'website',
     images: [
@@ -109,14 +109,14 @@ export const metadata: Metadata = {
         url: '/printone-og-banner.jpg',
         width: 1200,
         height: 630,
-        alt: 'Print One Graphics — Design, Print, Brand',
+        alt: 'PrintOne Graphics — Design, Print, Brand',
         type: 'image/jpeg',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Print One Graphics | Design, Printing & Corporate Gifting, Mumbai',
+    title: 'PrintOne Graphics | Design, Printing & Corporate Gifting, Mumbai',
     description:
       'Mumbai’s premier printing press in Byculla East. Commercial offset, digital printing, reports & gifting.',
     images: ['/printone-og-banner.jpg'],
@@ -150,8 +150,8 @@ const jsonLd = {
     {
       '@type': 'Organization',
       '@id': `${siteUrl}/#organization`,
-      name: 'Print One Graphics',
-      alternateName: ['Print One Graphics', 'Print One Graphics Mumbai'],
+      name: 'PrintOne Graphics',
+      alternateName: ['PrintOne Graphics', 'PrintOne Graphics Mumbai'],
       url: siteUrl,
       logo: `${siteUrl}/printone-logo.png`,
       image: `${siteUrl}/printone-og-banner.jpg`,
@@ -181,7 +181,7 @@ const jsonLd = {
     {
       '@type': ['LocalBusiness', 'PrintShop', 'ProfessionalService'],
       '@id': `${siteUrl}/#localbusiness`,
-      name: 'Print One Graphics',
+      name: 'PrintOne Graphics',
       parentOrganization: {
         '@id': `${siteUrl}/#organization`,
       },
@@ -189,7 +189,7 @@ const jsonLd = {
       logo: `${siteUrl}/printone-logo.png`,
       image: `${siteUrl}/printone-og-banner.jpg`,
       description:
-        'Print One Graphics is Mumbai’s premier printing press and corporate gifting provider based in Byculla East, delivering commercial offset, digital printing, annual reports, packaging boxes, and publications across India.',
+        'PrintOne Graphics is Mumbai’s premier printing press and corporate gifting provider based in Byculla East, delivering commercial offset, digital printing, annual reports, packaging boxes, and publications across India.',
       telephone: '+919819124907',
       email: 'printone.graphics21@gmail.com',
       priceRange: '₹₹',
@@ -266,7 +266,7 @@ const jsonLd = {
       '@type': 'WebSite',
       '@id': `${siteUrl}/#website`,
       url: siteUrl,
-      name: 'Print One Graphics',
+      name: 'PrintOne Graphics',
       description: 'Premier printing and design partner in Byculla East, Mumbai.',
       publisher: {
         '@id': `${siteUrl}/#organization`,

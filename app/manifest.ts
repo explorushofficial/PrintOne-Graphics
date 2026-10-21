@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Print One Graphics',
+    name: 'PrintOne Graphics',
     short_name: 'Print One',
     description:
       'Mumbai’s premier printing press and corporate gifting partner based in Byculla East.',

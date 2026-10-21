@@ -40,7 +40,7 @@ export function Footer() {
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-white p-1 shadow-sm ring-1 ring-white/10">
               <img
                 src="/printone-logo.png"
-                alt="Print One Graphics"
+                alt="PrintOne Graphics"
                 className="h-full w-full object-contain"
                 width={40}
                 height={40}

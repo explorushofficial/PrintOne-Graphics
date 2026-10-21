@@ -592,7 +592,7 @@ export function ServicesClient({ services }: ServicesClientProps) {
           <div className="flex flex-wrap items-center gap-3">
             <a
               className="inline-flex items-center justify-center gap-2 border border-[#DAA112] bg-[#DAA112] text-[#10383A] px-5 py-3.5 text-[13px] font-extrabold transition-all hover:bg-white hover:border-white hover:text-[#10383A]"
-              href={createWhatsAppUrl('Hello Print One Graphics, I would like to consult with your production directors regarding an upcoming print project.')}
+              href={createWhatsAppUrl('Hello PrintOne Graphics, I would like to consult with your production directors regarding an upcoming print project.')}
               target="_blank"
               rel="noreferrer"
               data-testid="link-service-cta-whatsapp"

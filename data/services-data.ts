@@ -117,7 +117,7 @@ export const servicesData: ServiceItem[] = [
     shortDescription:
       'High-precision marketing collateral, brochures, catalogues, flyers, and stationery tailored with vibrant color fidelity and rapid delivery.',
     fullDescription:
-      'Print One Graphics delivers high-end commercial print solutions for corporate enterprises, luxury retailers, and creative agencies. From high-volume offset runs to short-turnaround on-demand digital prints, we ensure exact brand color matching, crisp micro-typography, and premium post-press finishing.',
+      'PrintOne Graphics delivers high-end commercial print solutions for corporate enterprises, luxury retailers, and creative agencies. From high-volume offset runs to short-turnaround on-demand digital prints, we ensure exact brand color matching, crisp micro-typography, and premium post-press finishing.',
     image: '/commercial-print.jpg',
     accent: '#2c9fc3',
     features: [
@@ -254,7 +254,7 @@ export const servicesData: ServiceItem[] = [
     shortDescription:
       'Custom luxury rigid boxes, folding monocartons, product sleeves, and die-cut packaging engineered for superior brand presence.',
     fullDescription:
-      'Make an unforgettable first impression before your customer even opens the product. Print One Graphics manufactures bespoke rigid gift boxes, product display cartons, and corrugated presentation shippers with custom die-cut foam inserts, magnetic closures, and luxury laminates.',
+      'Make an unforgettable first impression before your customer even opens the product. PrintOne Graphics manufactures bespoke rigid gift boxes, product display cartons, and corrugated presentation shippers with custom die-cut foam inserts, magnetic closures, and luxury laminates.',
     image: '/catalog/packaging-boxes.jpg',
     accent: '#27292a',
     features: [
@@ -387,7 +387,7 @@ export const servicesData: ServiceItem[] = [
     shortDescription:
       'Elevate standard print into collector specimens with metallic foil stamping, raised UV emboss, velvet soft-touch laminates, and Smyth sewing.',
     fullDescription:
-      'Post-press finishing is where print transforms from ink on paper into a sensory, tactile experience. At Print One Graphics, we own and operate specialized finishing machinery that gives your business cards, book covers, packaging, and certificates unforgettable texture and prestige.',
+      'Post-press finishing is where print transforms from ink on paper into a sensory, tactile experience. At PrintOne Graphics, we own and operate specialized finishing machinery that gives your business cards, book covers, packaging, and certificates unforgettable texture and prestige.',
     image: '/production/finishing-bindery.jpg',
     accent: '#e97819',
     features: [

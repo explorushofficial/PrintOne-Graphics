@@ -221,7 +221,7 @@ export function QuoteFormClient() {
 
     const lines: string[] = [
       '📋 *PRINT JOB SPECIFICATION & QUOTATION*',
-      '*Print One Graphics — Byculla East, Mumbai*',
+      '*PrintOne Graphics — Byculla East, Mumbai*',
       '────────────────────────────',
       '👤 *CONTACT INFORMATION*',
       `• First Name: ${formData.firstName || 'Not provided'}`,
@@ -259,7 +259,7 @@ export function QuoteFormClient() {
         ? `💬 *FREE FORM / ADDITIONAL DETAILS:*\n${formData.freeFormNotes}\n`
         : null,
       '────────────────────────────',
-      '⚡ _Sent via Print One Graphics Specification Form_',
+      '⚡ _Sent via PrintOne Graphics Specification Form_',
     ].filter((item): item is string => item !== null);
 
     return lines.join('\n');
@@ -1036,7 +1036,7 @@ export function QuoteFormClient() {
                     PO
                   </div>
                   <div>
-                    <h3 className="text-xs font-bold leading-none">Print One Graphics</h3>
+                    <h3 className="text-xs font-bold leading-none">PrintOne Graphics</h3>
                     <p className="text-[10px] text-white/80 mt-1">Direct WhatsApp Message</p>
                   </div>
                 </div>

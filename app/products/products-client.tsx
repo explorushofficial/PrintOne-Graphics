@@ -134,7 +134,7 @@ export function ProductsClient({ products }: { products: Product[] }) {
                 Explore Services &rarr;
               </Link>
               <a
-                href={createWhatsAppUrl('Hello Print One Graphics, I would like to inquire about custom printed products and corporate merchandise.')}
+                href={createWhatsAppUrl('Hello PrintOne Graphics, I would like to inquire about custom printed products and corporate merchandise.')}
                 target="_blank"
                 rel="noreferrer"
                 className="btn-outline text-xs"
@@ -186,7 +186,7 @@ export function ProductsClient({ products }: { products: Product[] }) {
             </Link>
             <a
               className="inline-flex items-center justify-center gap-2 border border-white/50 bg-white/10 text-white px-5 py-3.5 text-[13px] font-bold backdrop-blur-xs transition-all hover:bg-white hover:border-white hover:text-[#27292a]"
-              href={createWhatsAppUrl('Hello Print One Graphics, I have a custom product fabrication enquiry.')}
+              href={createWhatsAppUrl('Hello PrintOne Graphics, I have a custom product fabrication enquiry.')}
               target="_blank"
               rel="noreferrer"
               data-testid="link-custom-whatsapp"

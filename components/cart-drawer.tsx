@@ -9,7 +9,7 @@ export function CartDrawer() {
 
   if (!isCartOpen) return null;
 
-  const message = `Hello Print One Graphics,\n\nI'd like to enquire about:\n${lines
+  const message = `Hello PrintOne Graphics,\n\nI'd like to enquire about:\n${lines
     .map((line) => `• ${line.service.title} — quantity ${line.quantity}`)
     .join('\n')}\n\nPlease share details and next steps.`;
 
@@ -136,7 +136,7 @@ export function CartDrawer() {
                 Clear selection
               </button>
               <p className="mt-3 text-center text-[10px] leading-4 text-[#89857d]">
-                Your selection will be included in one message to Print One Graphics.
+                Your selection will be included in one message to PrintOne Graphics.
               </p>
             </div>
           </>

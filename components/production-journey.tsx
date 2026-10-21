@@ -60,7 +60,7 @@ export function ProductionJourney() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
         >
-          <p className="eyebrow text-white">The Print One Method</p>
+          <p className="eyebrow text-white">The PrintOne Method</p>
           <h2 className="mt-4 font-display text-3xl sm:text-5xl font-extrabold tracking-[-.055em] text-white">
             From first conversation<br />
             <span className="text-[#10383A]">to delivered impression.</span>

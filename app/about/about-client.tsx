@@ -156,7 +156,7 @@ export function AboutClient() {
                 Why Choose Us.
               </h2>
               <p className="mt-2 text-xs sm:text-sm text-[#615e58] leading-relaxed">
-                Six foundational strengths that make Print One Graphics the preferred choice for businesses across India.
+                Six foundational strengths that make PrintOne Graphics the preferred choice for businesses across India.
               </p>
             </div>
             <Link

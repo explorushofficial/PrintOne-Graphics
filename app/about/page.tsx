@@ -6,16 +6,16 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://printonegraphics.in
 export const metadata: Metadata = {
   title: 'About Us',
   description:
-    'Established in 2021 in Byculla East, Mumbai, Print One Graphics combines creative design, Heidelberg offset printing, and modern Konica Minolta digital presses to serve businesses across India.',
+    'Established in 2021 in Byculla East, Mumbai, PrintOne Graphics combines creative design, Heidelberg offset printing, and modern Konica Minolta digital presses to serve businesses across India.',
   alternates: {
     canonical: '/about',
   },
   openGraph: {
-    title: 'About Us | Print One Graphics',
+    title: 'About Us | PrintOne Graphics',
     description:
-      'Established in 2021 in Byculla East, Mumbai, Print One Graphics combines creative design, Heidelberg offset printing, and modern Konica Minolta digital presses to serve businesses across India.',
+      'Established in 2021 in Byculla East, Mumbai, PrintOne Graphics combines creative design, Heidelberg offset printing, and modern Konica Minolta digital presses to serve businesses across India.',
     url: `${siteUrl}/about`,
-    siteName: 'Print One Graphics',
+    siteName: 'PrintOne Graphics',
     locale: 'en_IN',
     type: 'website',
     images: [
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
         url: '/printone-og-banner.jpg',
         width: 1200,
         height: 630,
-        alt: 'About Print One Graphics',
+        alt: 'About PrintOne Graphics',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'About Us | Print One Graphics',
+    title: 'About Us | PrintOne Graphics',
     description:
       'Mumbai’s premier printing press and corporate gifting partner in Byculla East.',
     images: ['/printone-og-banner.jpg'],

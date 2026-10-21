@@ -7,16 +7,16 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://printonegraphics.in
 export const metadata: Metadata = {
   title: 'Products',
   description:
-    'Browse the official products catalog of Print One Graphics: brochures, corporate stationery, textbooks, journals, custom calendars, diaries, packaging boxes, and promotional merchandise.',
+    'Browse the official products catalog of PrintOne Graphics: brochures, corporate stationery, textbooks, journals, custom calendars, diaries, packaging boxes, and promotional merchandise.',
   alternates: {
     canonical: '/products',
   },
   openGraph: {
-    title: 'Products | Print One Graphics',
+    title: 'Products | PrintOne Graphics',
     description:
-      'Browse brochures, corporate stationery, textbooks, journals, custom calendars, diaries, packaging boxes, and promotional merchandise by Print One Graphics, Mumbai.',
+      'Browse brochures, corporate stationery, textbooks, journals, custom calendars, diaries, packaging boxes, and promotional merchandise by PrintOne Graphics, Mumbai.',
     url: `${siteUrl}/products`,
-    siteName: 'Print One Graphics',
+    siteName: 'PrintOne Graphics',
     locale: 'en_IN',
     type: 'website',
     images: [
@@ -24,13 +24,13 @@ export const metadata: Metadata = {
         url: '/printone-og-banner.jpg',
         width: 1200,
         height: 630,
-        alt: 'Print One Graphics Products Catalog',
+        alt: 'PrintOne Graphics Products Catalog',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Products | Print One Graphics',
+    title: 'Products | PrintOne Graphics',
     description:
       'Explore corporate print products, annual reports, publications, and custom corporate gifting.',
     images: ['/printone-og-banner.jpg'],

@@ -7,16 +7,16 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://printonegraphics.in
 export const metadata: Metadata = {
   title: 'Services',
   description:
-    'Explore comprehensive print production services by Print One Graphics in Byculla East, Mumbai: commercial offset printing, high-speed digital printing, annual reports, publication typesetting, packaging, and custom corporate gifting.',
+    'Explore comprehensive print production services by PrintOne Graphics in Byculla East, Mumbai: commercial offset printing, high-speed digital printing, annual reports, publication typesetting, packaging, and custom corporate gifting.',
   alternates: {
     canonical: '/services',
   },
   openGraph: {
-    title: 'Services | Print One Graphics',
+    title: 'Services | PrintOne Graphics',
     description:
       'Full-spectrum commercial offset printing, digital printing, annual reports, corporate gifting, packaging boxes, and publication printing in Mumbai.',
     url: `${siteUrl}/services`,
-    siteName: 'Print One Graphics',
+    siteName: 'PrintOne Graphics',
     locale: 'en_IN',
     type: 'website',
     images: [
@@ -24,13 +24,13 @@ export const metadata: Metadata = {
         url: '/printone-og-banner.jpg',
         width: 1200,
         height: 630,
-        alt: 'Print One Graphics Services',
+        alt: 'PrintOne Graphics Services',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Services | Print One Graphics',
+    title: 'Services | PrintOne Graphics',
     description:
       'Commercial offset & digital printing, annual reports, publications, and corporate gifting in Mumbai.',
     images: ['/printone-og-banner.jpg'],

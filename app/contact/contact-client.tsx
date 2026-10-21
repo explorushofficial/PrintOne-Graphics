@@ -63,7 +63,7 @@ export function ContactClient() {
 
   function submitEnquiry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const body = `Hello Print One Graphics,\n\n${message}\n\nName: ${name}\nOrganisation: ${organisation || 'Not specified'
+    const body = `Hello PrintOne Graphics,\n\n${message}\n\nName: ${name}\nOrganisation: ${organisation || 'Not specified'
       }\nProject: ${project || 'Not specified'}`;
     window.open(createWhatsAppUrl(body), '_blank', 'noopener,noreferrer');
   }
@@ -169,7 +169,7 @@ export function ContactClient() {
               className="space-y-3"
             >
               <p className="text-xs sm:text-sm leading-relaxed text-[#615e58]">
-                Have a printing project, annual report, corporate publication, luxury packaging or corporate gifting requirement in mind? Print One Graphics is here to help.
+                Have a printing project, annual report, corporate publication, luxury packaging or corporate gifting requirement in mind? PrintOne Graphics is here to help.
               </p>
               <p className="text-xs sm:text-sm leading-relaxed text-[#615e58]">
                 From concept and paper selection to printing, high-precision finishing and pan-India delivery, our team provides complete solutions tailored to your brand.
@@ -381,7 +381,7 @@ export function ContactClient() {
 
                 <div className="mt-3 pt-2 border-t border-[#f0ece4]">
                   <a
-                    href={createWhatsAppUrl('Hello Print One Graphics, I would like to discuss a project.')}
+                    href={createWhatsAppUrl('Hello PrintOne Graphics, I would like to discuss a project.')}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-1 text-[10px] font-bold text-[#10383A] hover:text-[#666E51] transition-colors"

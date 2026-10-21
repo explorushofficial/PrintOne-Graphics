@@ -46,12 +46,12 @@ export function Header() {
           <Link
             href="/"
             className="flex items-center gap-2.5"
-            aria-label="Print One Graphics home"
+            aria-label="PrintOne Graphics home"
             data-testid="link-home-logo"
           >
             <img
               src="/printone-logo.png"
-              alt="Print One Graphics — Design, Print, Brand"
+              alt="PrintOne Graphics — Design, Print, Brand"
               className="h-[58px] w-auto object-contain"
               width={58}
               height={58}
