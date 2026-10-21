@@ -86,10 +86,10 @@ export function SwatchEnquiryBanner() {
               <div className="flex items-center gap-3">
                 <Mail size={15} className="text-[#809276]" />
                 <a
-                  href="mailto:printonegraphics@gmail.com"
+                  href="mailto:printone.graphics21@gmail.com"
                   className="hover:text-white transition-colors"
                 >
-                  printonegraphics@gmail.com
+                  printone.graphics21@gmail.com
                 </a>
               </div>
             </div>
