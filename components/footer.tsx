@@ -92,7 +92,7 @@ export function Footer() {
 
         {/* Bottom Copyright Strip */}
         <div className="mt-5 flex flex-col justify-between gap-2 border-t border-[#1a4e50] pt-4 text-[10px] tracking-[.04em] text-[#768886] sm:flex-row">
-          <span>© {currentYear} Print One Graphics. All rights reserved.</span>
+          <span>© {currentYear} PrintOne Graphics. All rights reserved.</span>
           <span>Your Trusted Partner for Design, Digital Printing &amp; Corporate Gifting · Byculla East, Mumbai</span>
         </div>
       </div>
