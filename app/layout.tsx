@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { DM_Sans, Manrope, Lora } from 'next/font/google';
+import { DM_Sans, Manrope, Lora, EB_Garamond } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers';
 import { Header } from '@/components/header';
@@ -21,6 +21,13 @@ const lora = Lora({
   subsets: ['latin'],
   style: ['normal', 'italic'],
   variable: '--app-font-serif',
+  display: 'swap',
+});
+
+const ebGaramond = EB_Garamond({
+  subsets: ['latin'],
+  style: ['italic', 'normal'],
+  variable: '--app-font-garamond',
   display: 'swap',
 });
 
@@ -275,7 +282,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${dmSans.variable} ${manrope.variable} ${lora.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${dmSans.variable} ${manrope.variable} ${lora.variable} ${ebGaramond.variable}`}>
       <head>
         <script
           type="application/ld+json"
