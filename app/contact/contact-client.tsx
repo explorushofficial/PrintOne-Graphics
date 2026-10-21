@@ -1,10 +1,15 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, Clock, FileText, Mail, MapPin, MessageCircle, Phone, Send, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
 import { createWhatsAppUrl } from '@/context/cart-context';
+
+const LINE_1 = 'Let’s Create';
+const LINE_2 = 'Something Great';
+const LINE_3 = 'Together.';
+const COMBINED_HEADLINE = `${LINE_1}\n${LINE_2}\n${LINE_3}`;
 
 export function ContactClient() {
   const [name, setName] = useState('');
@@ -12,12 +17,77 @@ export function ContactClient() {
   const [project, setProject] = useState('');
   const [message, setMessage] = useState('');
 
+  // Continuous typing animation for the headline, matching hero-showcase on the home screen
+  const [charCount, setCharCount] = useState(0);
+  const [isTypingDone, setIsTypingDone] = useState(false);
+
+  useEffect(() => {
+    let index = 0;
+    let timer: ReturnType<typeof setInterval> | null = null;
+    let restartTimeout: ReturnType<typeof setTimeout> | null = null;
+    let isCancelled = false;
+
+    const startTyping = () => {
+      index = 0;
+      setCharCount(0);
+      setIsTypingDone(false);
+
+      const speed = 45; // Snappy typing speed per character
+      timer = setInterval(() => {
+        if (isCancelled) return;
+        if (index < COMBINED_HEADLINE.length) {
+          index++;
+          setCharCount(index);
+        } else {
+          setIsTypingDone(true);
+          if (timer) clearInterval(timer);
+
+          // Pause for 5 seconds after completing, then restart the animation
+          restartTimeout = setTimeout(() => {
+            if (!isCancelled) {
+              startTyping();
+            }
+          }, 5000);
+        }
+      }, speed);
+    };
+
+    startTyping();
+
+    return () => {
+      isCancelled = true;
+      if (timer) clearInterval(timer);
+      if (restartTimeout) clearTimeout(restartTimeout);
+    };
+  }, []);
+
   function submitEnquiry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const body = `Hello Print One Graphics,\n\n${message}\n\nName: ${name}\nOrganisation: ${organisation || 'Not specified'
       }\nProject: ${project || 'Not specified'}`;
     window.open(createWhatsAppUrl(body), '_blank', 'noopener,noreferrer');
   }
+
+  // Derive per-line sliced text based on character progress
+  const line1Limit = LINE_1.length; // 12
+  const line2Limit = line1Limit + 1 + LINE_2.length; // 28
+  const line3Limit = line2Limit + 1 + LINE_3.length; // 38
+
+  const line1Text = charCount <= line1Limit ? LINE_1.slice(0, charCount) : LINE_1;
+  const line2Text =
+    charCount > line1Limit + 1
+      ? LINE_2.slice(0, charCount - (line1Limit + 1))
+      : charCount > line1Limit
+      ? ''
+      : '';
+  const line3Text =
+    charCount > line2Limit + 1
+      ? LINE_3.slice(0, charCount - (line2Limit + 1))
+      : charCount > line2Limit
+      ? ''
+      : '';
+
+  const activeLine = charCount <= line1Limit ? 1 : charCount <= line2Limit ? 2 : 3;
 
   return (
     <main className="overflow-x-hidden">
@@ -42,16 +112,45 @@ export function ContactClient() {
                 <span>Contact Us • Get a Quote</span>
               </motion.div>
 
-              <motion.h1
-                initial={{ opacity: 0, x: -35 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.65, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-3 font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-extrabold leading-[1.02] tracking-[-.045em] text-[#10383A]"
+              {/* Continuous character-by-character typing animation matching home screen hero */}
+              <h1
+                className="mt-3 min-h-[145px] sm:min-h-[160px] lg:min-h-[185px] font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-extrabold leading-[1.05] tracking-[-.045em] text-[#10383A]"
+                aria-label="Let’s Create Something Great Together."
               >
-                Let’s Create<br />
-                <span className="text-[#DAA112]">Something Great</span><br />
-                Together.
-              </motion.h1>
+                <span className="block">
+                  {line1Text}
+                  {activeLine === 1 && (
+                    <span
+                      className={`inline-block w-[3px] sm:w-[4px] h-[0.82em] ml-1 align-baseline bg-[#DAA112] transition-opacity duration-200 ${
+                        isTypingDone ? 'animate-pulse opacity-40' : 'animate-ping opacity-90'
+                      }`}
+                      aria-hidden="true"
+                    />
+                  )}
+                </span>
+                <span className="block text-[#DAA112]">
+                  {line2Text}
+                  {activeLine === 2 && (
+                    <span
+                      className={`inline-block w-[3px] sm:w-[4px] h-[0.82em] ml-1 align-baseline bg-[#10383A] transition-opacity duration-200 ${
+                        isTypingDone ? 'animate-pulse opacity-40' : 'animate-ping opacity-90'
+                      }`}
+                      aria-hidden="true"
+                    />
+                  )}
+                </span>
+                <span className="block">
+                  {line3Text}
+                  {activeLine === 3 && (
+                    <span
+                      className={`inline-block w-[3px] sm:w-[4px] h-[0.82em] ml-1 align-baseline bg-[#DAA112] transition-opacity duration-200 ${
+                        isTypingDone ? 'animate-pulse opacity-40' : 'animate-ping opacity-90'
+                      }`}
+                      aria-hidden="true"
+                    />
+                  )}
+                </span>
+              </h1>
 
               <motion.p
                 initial={{ opacity: 0, x: -20 }}

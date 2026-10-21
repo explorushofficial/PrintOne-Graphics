@@ -69,165 +69,168 @@ export function ServicesClient({ services }: ServicesClientProps) {
         </div>
       </section>
 
-      {/* 2. Unified Service Spectrum Section (8 Areas + Compact Horizontal Cards) */}
-      <section className="border-b border-[#ded7cd] bg-[#faf8f2] py-10 sm:py-14">
+      {/* 2. Unified Service Spectrum Section (Image on Left, Content on Right) */}
+      <section className="border-b border-[#ded7cd] bg-[#faf8f2] py-12 sm:py-16">
         <div className="page-wrap">
-          {/* Header Row */}
-          <div className="pb-6">
-            <p className="eyebrow">Service Spectrum (8 Areas)</p>
-            <p className="mt-1 text-xs sm:text-sm text-[#716e67] max-w-3xl">
-              Comprehensive printing, design, and packaging services structured across eight specialized production domains to serve businesses across India.
-            </p>
-          </div>
-
-          {/* 8 Solution Area Cards (Increased height, uniform display with no selected box) */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5 pb-4" aria-label="Service Areas">
-            {CATEGORY_FILTERS.map((cat, idx) => (
-              <div
-                key={cat}
-                className="flex flex-col items-center justify-center rounded-xl border border-[#ded7cd] bg-white px-3 py-3.5 text-center min-h-[70px] sm:min-h-[78px] transition-all hover:border-[#10383A] hover:shadow-xs group"
-              >
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#DAA112] leading-none">
-                  0{idx + 1}
-                </span>
-                <span className="mt-1.5 text-[11px] sm:text-[11.5px] font-bold text-[#10383A] leading-snug">
-                  {cat}
-                </span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left Column: Service Spectrum Infographic Showcase Image */}
+            <div className="lg:col-span-6 xl:col-span-5 order-2 lg:order-1 flex flex-col justify-center">
+              <div className="overflow-hidden rounded-2xl border border-[#ded7cd] bg-white p-3 sm:p-5 shadow-md">
+                <div className="relative w-full overflow-hidden rounded-xl bg-white flex items-center justify-center">
+                  <img
+                    src="/printone-assets/services-service-spectrum.jpg"
+                    alt="PrintOne Graphics Complete Service Spectrum Infographic - Annual Reports, Commercial Print, Publication, Packaging, Signage, Design, Finishing"
+                    className="w-full max-h-[560px] object-contain transition-transform duration-500 hover:scale-101"
+                  />
+                </div>
+                <div className="mt-3.5 border-t border-[#f0eae0] pt-3 text-center sm:text-left">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#10383A]">
+                    Annual Reports &amp; Full Service Spectrum Across 8 Areas
+                  </p>
+                  <p className="mt-0.5 text-[10.5px] text-[#76726b]">
+                    Precision offset, digital publishing, luxury packaging, and corporate merchandise.
+                  </p>
+                </div>
               </div>
-            ))}
-          </div>
-
-          {/* Service Spectrum Infographic Showcase */}
-          <div className="mt-6 overflow-hidden rounded-2xl border border-[#ded7cd] bg-white p-3 sm:p-6 shadow-sm">
-            <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center">
-              <img
-                src="/printone-assets/services-service-spectrum.jpg"
-                alt="PrintOne Graphics Complete Service Spectrum Infographic - Annual Reports, Commercial Print, Publication, Packaging, Signage, Design, Finishing"
-                className="w-full max-h-[660px] object-contain transition-transform duration-500 hover:scale-101"
-              />
             </div>
 
-            <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-[#f0eae0] pt-4 text-center sm:text-left">
-              <div>
-                <p className="text-xs font-bold text-[#10383A] uppercase tracking-wider">
-                  Complete Service Spectrum Across Specialized Domains
-                </p>
-                <p className="text-[11px] text-[#76726b]">
-                  Annual Reports · Commercial Print · Books &amp; Publishing · Packaging &amp; Rigid Boxes · Large-Format Signage · Creative Design · Specialty Finishing
-                </p>
+            {/* Right Column: Content and 8 Area Badges */}
+            <div className="lg:col-span-6 xl:col-span-7 order-1 lg:order-2 flex flex-col justify-center text-left">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#ded5c7] bg-[#f5efe5] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6b6760] w-fit">
+                <Sparkles size={12} className="text-[#DAA112]" />
+                <span>Service Spectrum (8 Areas)</span>
               </div>
 
-              <a
-                href={createWhatsAppUrl('Hello PrintOne Graphics, I would like to consult about your services across your specialized printing and packaging domains.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary text-xs py-2 px-4 whitespace-nowrap"
-              >
-                <MessageCircle size={14} />
-                <span>Inquire on WhatsApp</span>
-              </a>
+              <h2 className="mt-3 font-display text-[clamp(1.75rem,2.8vw,2.5rem)] font-extrabold tracking-[-.035em] text-[#1c1d1f] leading-tight">
+                Comprehensive Production Across 8 Specialized Domains.
+              </h2>
+              <div className="mt-2.5 h-0.5 w-12 bg-[#DAA112]" />
+
+              <p className="mt-3 text-xs sm:text-sm text-[#615e58] leading-relaxed max-w-2xl">
+                Comprehensive printing, design, and packaging services structured across eight specialized production domains to serve businesses, publishers, and institutions across India.
+              </p>
+
+              {/* 8 Solution Area Cards */}
+              <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-2 pb-2" aria-label="Service Areas">
+                {CATEGORY_FILTERS.map((cat, idx) => (
+                  <div
+                    key={cat}
+                    className="flex flex-col items-center justify-center rounded-xl border border-[#ded7cd] bg-white px-3 py-3 text-center min-h-[66px] transition-all hover:border-[#10383A] hover:shadow-xs group"
+                  >
+                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#DAA112] leading-none">
+                      0{idx + 1}
+                    </span>
+                    <span className="mt-1 text-[11px] font-bold text-[#10383A] leading-snug">
+                      {cat}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-5 flex flex-wrap items-center gap-3">
+                <a
+                  href={createWhatsAppUrl('Hello PrintOne Graphics, I would like to consult about your services across your specialized printing and packaging domains.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary text-xs py-2.5 px-4"
+                >
+                  <MessageCircle size={14} />
+                  <span>Inquire on WhatsApp</span>
+                </a>
+                <Link
+                  href="/products"
+                  className="btn-outline text-xs py-2.5 px-4"
+                >
+                  <span>Browse Catalog</span>
+                  <ArrowUpRight size={14} />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. Print-on-Demand (POD) & Educational Publishing Section with Village Classroom Image */}
-      <section className="bg-[#809276] text-white py-10 sm:py-14 border-b border-[#6e7f65]">
+      {/* 3. Print-on-Demand (POD) & Educational Publishing: Content on Left, Image on Right */}
+      <section className="bg-[#809276] text-white py-12 sm:py-16 lg:py-20 border-b border-[#6e7f65]">
         <div className="page-wrap">
-          <div className="mx-auto max-w-4xl lg:max-w-5xl text-center">
-            <p className="text-[10px] font-extrabold uppercase tracking-[.2em] text-[#f5efe5]">
-              Flexible Publishing &amp; Educational Impact
-            </p>
-            <h2 className="mt-1 font-display text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-[-.03em] text-white">
-              Print-on-Demand (POD) &amp; Educational Publishing
-            </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left Column: Content */}
+            <div className="lg:col-span-6 xl:col-span-7 flex flex-col justify-center text-left">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-3 py-0.5 text-[10.5px] font-bold uppercase tracking-[.18em] text-white backdrop-blur-sm w-fit">
+                <span>Flexible Publishing &amp; Educational Impact</span>
+              </div>
 
-            <div className="mx-auto mt-2 h-0.5 w-12 bg-[#DAA112]" />
+              <h2 className="mt-3 font-display text-[clamp(1.75rem,2.8vw,2.5rem)] font-extrabold tracking-[-.03em] text-white leading-tight">
+                Print-on-Demand (POD) &amp; Educational Publishing
+              </h2>
 
-            <div className="mt-4 space-y-2.5 text-center text-[13.5px] sm:text-[14.5px] leading-[1.65] text-white/95">
-              <p>
-                Looking for a smarter way to meet customer demand without the burden of overprinting? <strong className="font-extrabold text-white bg-[#10383A]/45 px-2 py-0.5 rounded border border-white/20 inline-block my-0.5">PrintOne Graphics offers flexible and cost-effective print-on-demand solutions</strong> that give publishers greater control over printing costs and inventory. Print only the quantities you need — whether it’s a single copy or hundreds of books — while minimising wastage, reducing overheads, and responding quickly to market demand. With PrintOne Graphics, keep your books available without investing in large print runs or excess inventory.
-              </p>
-              <p>
-                From backlist titles and academic publications to new releases and classroom textbooks, our print-on-demand services produce books as and when required, without compromising on quality. We offer paperbacks, hardcovers, journals, and customised formats with flexible sizes, quality paper stocks, and professional finishing. Our streamlined production avoids unnecessary stock accumulation, making publishing operations efficient for authors, publishers, educational institutions, and businesses.
-              </p>
-              <div className="pt-1">
-                <p className="rounded-lg border border-white/25 bg-[#10383A]/40 px-4 py-2 text-xs sm:text-[13.5px] font-extrabold text-white max-w-2xl mx-auto shadow-xs">
-                  <span className="text-[#DAA112]">★ </span>
-                  Let PrintOne Graphics take care of your printing needs while you focus on what matters most — creating, publishing, and reaching more readers.
+              <div className="mt-2.5 h-0.5 w-12 bg-[#DAA112]" />
+
+              <div className="mt-4 space-y-3 text-left text-[13.5px] sm:text-[14.5px] leading-[1.65] text-white/95 max-w-2xl">
+                <p>
+                  Looking for a smarter way to meet customer demand without the burden of overprinting? <strong className="font-extrabold text-white bg-[#10383A]/45 px-2 py-0.5 rounded border border-white/20 inline-block my-0.5">PrintOne Graphics offers flexible and cost-effective print-on-demand solutions</strong> that give publishers greater control over printing costs and inventory. Print only the quantities you need — whether it’s a single copy or hundreds of books — while minimising wastage, reducing overheads, and responding quickly to market demand.
                 </p>
+                <p>
+                  From backlist titles and academic publications to new releases and classroom textbooks, our print-on-demand services produce books as and when required, without compromising on quality. We offer paperbacks, hardcovers, journals, and customised formats with flexible sizes, quality paper stocks, and professional finishing.
+                </p>
+                <div className="pt-1">
+                  <p className="rounded-lg border border-white/25 bg-[#10383A]/40 px-3.5 py-2 text-xs sm:text-[13px] font-extrabold text-white shadow-xs">
+                    <span className="text-[#DAA112]">★ </span>
+                    Let PrintOne Graphics take care of your printing needs while you focus on what matters most — creating, publishing, and reaching more readers.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <a
+                  href={createWhatsAppUrl('Hi PrintOne Graphics, I would like to inquire about your Print-on-Demand (POD) book publishing and printing services.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#10383A] px-4 py-2.5 text-xs font-bold text-white transition-all hover:bg-[#164a4d] shadow-sm"
+                >
+                  <MessageCircle size={14} />
+                  <span>Inquire About Print-on-Demand</span>
+                </a>
               </div>
             </div>
 
-            {/* Village Classroom Stories & Learning Visual Showcase */}
-            <div className="mt-8 overflow-hidden rounded-2xl border border-white/25 bg-white/10 p-2 sm:p-3.5 shadow-2xl backdrop-blur-sm">
-              <div className="relative w-full overflow-hidden rounded-xl bg-black/40">
-                <div className="relative aspect-[16/9] w-full overflow-hidden">
-                  <img
-                    src="/printone-assets/services-village-classroom.png"
-                    alt="Students in village classroom holding printed educational books by PrintOne Graphics"
-                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
-                  />
-                  {/* Desktop overlay: Preserved exactly for sm and up */}
-                  <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-                  <div className="hidden sm:flex absolute bottom-5 left-5 right-5 flex-row items-end justify-between gap-3 text-left text-white">
-                    <div>
-                      <span className="inline-block rounded bg-[#DAA112] px-2.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wider text-[#10383A]">
+            {/* Right Column: Village Classroom Stories & Learning Visual Showcase */}
+            <div className="lg:col-span-6 xl:col-span-5 flex flex-col justify-center">
+              <div className="overflow-hidden rounded-2xl border border-white/25 bg-white/10 p-2.5 sm:p-3 shadow-2xl backdrop-blur-sm">
+                <div className="relative w-full overflow-hidden rounded-xl bg-black/40">
+                  <div className="relative aspect-[4/3] sm:aspect-[16/11] w-full overflow-hidden">
+                    <img
+                      src="/printone-assets/services-village-classroom.png"
+                      alt="Students in village classroom holding printed educational books by PrintOne Graphics"
+                      className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+                    
+                    <div className="absolute bottom-4 left-4 right-4 text-left text-white">
+                      <span className="inline-block rounded bg-[#DAA112] px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#10383A]">
                         Education &amp; Community Impact
                       </span>
-                      <h3 className="mt-1 font-display text-base sm:text-xl font-bold text-white drop-shadow-md">
+                      <h3 className="mt-1.5 font-display text-base sm:text-lg font-bold text-white drop-shadow-md leading-snug">
                         Village Classrooms: Stories, Learning &amp; Educational Books
                       </h3>
-                      <p className="mt-0.5 text-xs text-white/80 max-w-xl">
+                      <p className="mt-1 text-[11px] text-white/80 leading-relaxed">
                         Delivering curriculum-aligned textbooks, learning resources, and storybooks to institutions and communities across India.
                       </p>
+                      <div className="mt-2.5">
+                        <a
+                          href={createWhatsAppUrl('Hi PrintOne Graphics, I would like to inquire about educational book printing and classroom publication publishing.')}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#DAA112] hover:text-white transition-colors"
+                        >
+                          <span>Publish Educational Books</span>
+                          <ArrowRight size={13} />
+                        </a>
+                      </div>
                     </div>
-                    <a
-                      href={createWhatsAppUrl('Hi PrintOne Graphics, I would like to inquire about educational book printing and classroom publication publishing.')}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary shrink-0 text-xs py-2 px-3.5 bg-white text-[#10383A] border-white hover:bg-[#DAA112] hover:text-[#10383A] hover:border-[#DAA112]"
-                    >
-                      Publish Educational Books &rarr;
-                    </a>
-                  </div>
-                </div>
-
-                {/* Mobile-only dedicated card below the photo: clean, high contrast, button on point */}
-                <div className="block sm:hidden bg-[#10383A] p-4 text-left text-white border-t border-white/10">
-                  <span className="inline-block rounded bg-[#DAA112] px-2.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wider text-[#10383A]">
-                    Education &amp; Community Impact
-                  </span>
-                  <h3 className="mt-2 font-display text-base font-bold text-white leading-snug">
-                    Village Classrooms: Stories, Learning &amp; Educational Books
-                  </h3>
-                  <p className="mt-1 text-xs text-white/80 leading-relaxed">
-                    Delivering curriculum-aligned textbooks, learning resources, and storybooks to institutions and communities across India.
-                  </p>
-                  <div className="mt-3.5">
-                    <a
-                      href={createWhatsAppUrl('Hi PrintOne Graphics, I would like to inquire about educational book printing and classroom publication publishing.')}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center w-full rounded-lg bg-white text-[#10383A] font-bold text-xs py-2.5 px-4 shadow-sm hover:bg-[#DAA112] transition-colors"
-                    >
-                      Publish Educational Books &rarr;
-                    </a>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <a
-                href={createWhatsAppUrl('Hi PrintOne Graphics, I would like to inquire about your Print-on-Demand (POD) book publishing and printing services.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg bg-[#10383A] px-4 py-2 text-xs font-bold text-white transition-all hover:bg-[#164a4d] shadow-sm"
-              >
-                <MessageCircle size={13} />
-                <span>Inquire About Print-on-Demand</span>
-              </a>
             </div>
           </div>
         </div>
@@ -448,39 +451,100 @@ export function ServicesClient({ services }: ServicesClientProps) {
         </div>
       </section>
 
-      {/* 5. Machinery & End-to-End Capabilities: From Design to Finish */}
-      <section className="border-b border-[#ded7cd] bg-white py-14 sm:py-20">
+      {/* 5. Machinery & End-to-End Capabilities: From Design to Finish (Image on Left, Content on Right) */}
+      <section className="border-b border-[#ded7cd] bg-white py-12 sm:py-16 lg:py-20">
         <div className="page-wrap">
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#ded5c7] bg-[#f5efe5] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6b6760]">
-              <Sparkles size={12} className="text-[#DAA112]" />
-              <span>In-House Machinery &amp; Full Process Spectrum</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left Column: Machinery & Process Diagram Image */}
+            <div className="lg:col-span-6 xl:col-span-6 order-2 lg:order-1 flex flex-col justify-center">
+              <div className="overflow-hidden rounded-2xl border border-[#ded7cd] bg-[#faf8f2] p-3 sm:p-5 shadow-lg">
+                <div className="relative w-full overflow-hidden rounded-xl bg-white p-2 sm:p-4 flex items-center justify-center">
+                  <img
+                    src="/printone-assets/services-design-to-finish.png"
+                    alt="PrintOne Graphics Machinery and Process - From Design to Finish"
+                    className="w-full max-h-[460px] object-contain transition-transform duration-500 hover:scale-101"
+                  />
+                </div>
+                <div className="mt-3.5 border-t border-[#ded7cd] pt-3 text-center sm:text-left">
+                  <p className="text-[11px] font-bold text-[#10383A] uppercase tracking-wider">
+                    Industrial Print Engineering · Quality Assurance · Zero-Defect Finishing
+                  </p>
+                  <p className="mt-0.5 text-[10.5px] text-[#716e67]">
+                    Continuous maintenance calibration, genuine OEM toners, FSC-certified paper substrates, and automated binding lines.
+                  </p>
+                </div>
+              </div>
             </div>
-            <h2 className="mt-3 font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-[-.03em] text-[#1c1d1f]">
-              PrintOne Graphics: From Design to Finish.
-            </h2>
-            <div className="mx-auto mt-2.5 h-0.5 w-12 bg-[#DAA112]" />
-            <p className="mt-3 text-xs sm:text-sm text-[#615e58] leading-relaxed max-w-2xl mx-auto">
-              Our 7 integrated workflow stages powered by advanced Heidelberg offset presses, Konica Minolta AccurioPress engines, automated bindery, and custom luxury packaging lines.
-            </p>
-          </div>
 
-          <div className="mt-8 overflow-hidden rounded-2xl border border-[#ded7cd] bg-[#faf8f2] p-3 sm:p-5 shadow-lg">
-            <div className="relative w-full overflow-hidden rounded-xl bg-white p-2 sm:p-4 flex items-center justify-center">
-              <img
-                src="/printone-assets/services-design-to-finish.png"
-                alt="PrintOne Graphics Machinery and Process - From Design to Finish"
-                className="w-full max-h-[480px] sm:max-h-[520px] object-contain transition-transform duration-500 hover:scale-101"
-              />
-            </div>
+            {/* Right Column: Process & Machinery Content */}
+            <div className="lg:col-span-6 xl:col-span-6 order-1 lg:order-2 flex flex-col justify-center text-left">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#ded5c7] bg-[#f5efe5] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6b6760] w-fit">
+                <Sparkles size={12} className="text-[#DAA112]" />
+                <span>In-House Machinery &amp; Full Process Spectrum</span>
+              </div>
 
-            <div className="mt-4 border-t border-[#ded7cd] pt-3 text-center sm:text-left">
-              <p className="text-xs font-bold text-[#10383A] uppercase tracking-wider">
-                Industrial Print Engineering · Quality Assurance · Zero-Defect Finishing
-              </p>
-              <p className="mt-0.5 text-[11px] text-[#716e67]">
-                Continuous maintenance calibration, genuine OEM toners, FSC-certified paper substrates, and automated binding lines.
-              </p>
+              <h2 className="mt-3 font-display text-[clamp(1.75rem,2.8vw,2.5rem)] font-extrabold tracking-[-.03em] text-[#1c1d1f] leading-tight">
+                PrintOne Graphics: From Design to Finish.
+              </h2>
+              <div className="mt-2.5 h-0.5 w-12 bg-[#DAA112]" />
+
+              <div className="mt-4 space-y-3 text-xs sm:text-sm text-[#615e58] leading-relaxed">
+                <p>
+                  Our 7 integrated workflow stages powered by advanced Heidelberg offset presses, Konica Minolta AccurioPress engines, automated bindery, and custom luxury packaging lines in Byculla East, Mumbai.
+                </p>
+                <p>
+                  From prepress digital proofs to spectrophotometer calibration and robotic finishing, we guarantee millimeter precision and consistent PANTONE color accuracy across every batch.
+                </p>
+              </div>
+
+              {/* 4 Feature Badges */}
+              <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {[
+                  {
+                    title: 'Precision Offset & Digital',
+                    desc: 'Heidelberg Speedmaster & Konica Minolta AccurioPress',
+                  },
+                  {
+                    title: 'FOGRA Color Profiling',
+                    desc: 'Spectrophotometer densitometry & certified proofs',
+                  },
+                  {
+                    title: 'Integrated Bindery',
+                    desc: 'Section sewing, PUR, hardcover casing & die-cutting',
+                  },
+                  {
+                    title: 'Pan-India Delivery',
+                    desc: 'Damage-proof packaging & scheduled batch dispatches',
+                  },
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="rounded-xl border border-[#ded7cd] bg-[#faf8f2] p-3 text-left"
+                  >
+                    <p className="text-xs font-bold text-[#10383A]">{item.title}</p>
+                    <p className="mt-0.5 text-[11px] text-[#76726b]">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <a
+                  href={createWhatsAppUrl('Hello PrintOne Graphics, I would like to consult about your end-to-end production machinery and finishing capabilities.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary text-xs py-2.5 px-4"
+                >
+                  <MessageCircle size={14} />
+                  <span>Consult Production Team</span>
+                </a>
+                <Link
+                  href="/contact"
+                  className="btn-outline text-xs py-2.5 px-4"
+                >
+                  <span>Visit Our Facility</span>
+                  <ArrowUpRight size={14} />
+                </Link>
+              </div>
             </div>
           </div>
         </div>

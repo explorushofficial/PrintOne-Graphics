@@ -8,7 +8,6 @@ import {
   Handshake,
   Layers,
   ShieldCheck,
-  Sparkles,
   Users,
   Wrench,
 } from 'lucide-react';
@@ -31,32 +30,36 @@ export function AboutClient() {
           aria-hidden="true"
         />
 
-        <div className="page-wrap relative z-10 py-10 sm:py-12 lg:py-14">
-          <div className="mx-auto max-w-4xl lg:max-w-5xl text-center">
+        <div className="page-wrap relative z-10 py-10 sm:py-14 lg:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Hero Left Column: Content */}
             <motion.div
+              className="lg:col-span-6 xl:col-span-7 flex flex-col justify-center text-left"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#ded7cc] bg-[#f2ede4] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6b6760]">
-                <span>Byculla East, Mumbai · Established 2021</span>
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#ded7cc] bg-[#f2ede4] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6b6760]">
+                  <span>Byculla East, Mumbai · Established 2021</span>
+                </div>
               </div>
 
-              <h1 className="mt-4 font-display text-[clamp(1.65rem,3vw,2.85rem)] font-extrabold leading-[1.15] tracking-[-.035em] text-[#1c1d1f]">
-                <span className="block sm:whitespace-nowrap">Your Trusted Partner for Design,</span>
-                <span className="block text-[#DAA112] sm:whitespace-nowrap">Digital Printing &amp; Corporate Gifting.</span>
+              <h1 className="mt-4 font-display text-[clamp(1.75rem,2.8vw,2.85rem)] font-extrabold leading-[1.12] tracking-[-.035em] text-[#1c1d1f]">
+                <span className="block">Your Trusted Partner for Design,</span>
+                <span className="block text-[#DAA112]">Digital Printing &amp; Corporate Gifting.</span>
               </h1>
 
-              <div className="mx-auto mt-6 max-w-4xl lg:max-w-[1020px] space-y-4 text-center text-[15px] sm:text-[16px] leading-[1.75] text-[#524f48]">
+              <div className="mt-5 space-y-3.5 text-left text-[14px] sm:text-[15px] leading-[1.7] text-[#524f48]">
                 <p>
-                 PrintOne Graphics is a Mumbai-based printing and graphic design company dedicated to delivering high-quality printing solutions with creativity, precision, and reliability. From concept development and creative design to premium printing, finishing, and binding, we offer end-to-end solutions tailored to meet the diverse needs of businesses, publishers, educational institutions, and organisations across India. We specialise in <strong className="font-bold text-[#10383A]">books and publication printing, annual reports, brochures, catalogues, corporate stationery, commercial printing, typesetting, and binding services</strong>.
+                  PrintOne Graphics is a Mumbai-based printing and graphic design company dedicated to delivering high-quality printing solutions with creativity, precision, and reliability. From concept development and creative design to premium printing, finishing, and binding, we offer end-to-end solutions tailored to meet the diverse needs of businesses, publishers, educational institutions, and organisations across India. We specialise in <strong className="font-bold text-[#10383A]">books and publication printing, annual reports, brochures, catalogues, corporate stationery, commercial printing, typesetting, and binding services</strong>.
                 </p>
                 <p>
                   Our focus is on combining innovative design, quality materials, and professional execution to ensure every project meets the highest standards. At PrintOne Graphics, we believe that every print project tells a story. Our commitment to quality, attention to detail, timely delivery, and customer satisfaction helps us build lasting relationships with our clients. Based in Byculla East, Mumbai, we strive to be your trusted printing partner—transforming your ideas into impactful printed experiences.
                 </p>
               </div>
 
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
+              <div className="mt-6 flex flex-wrap items-center gap-3.5">
                 <Link href="/services" className="btn-primary group" data-testid="link-about-hero-services">
                   <span>Explore our services</span>
                   <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -72,146 +75,110 @@ export function AboutClient() {
               </div>
 
               {/* Atelier Credentials Pill Tags */}
-              <div className="mx-auto mt-10 flex w-full max-w-2xl flex-nowrap items-center justify-center gap-2 sm:gap-2.5 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pt-6 border-t border-[#e5dfd4] text-[11px] sm:text-[11.5px] font-bold uppercase tracking-wider text-[#636058]">
-                <span className="shrink-0 whitespace-nowrap rounded border border-[#ded7cd] bg-white px-3 py-1 sm:px-3.5 sm:py-1.5 shadow-xs">Creative Design</span>
-                <span className="shrink-0 whitespace-nowrap rounded border border-[#ded7cd] bg-white px-3 py-1 sm:px-3.5 sm:py-1.5 shadow-xs">Digital Printing</span>
-                <span className="shrink-0 whitespace-nowrap rounded border border-[#ded7cd] bg-white px-3 py-1 sm:px-3.5 sm:py-1.5 shadow-xs">Corporate Gifting</span>
-                <span className="shrink-0 whitespace-nowrap rounded border border-[#ded7cd] bg-white px-3 py-1 sm:px-3.5 sm:py-1.5 shadow-xs">In-House Production</span>
+              <div className="mt-7 flex flex-wrap items-center gap-2 pt-5 border-t border-[#e5dfd4] text-[11px] sm:text-[11.5px] font-bold uppercase tracking-wider text-[#636058]">
+                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1 shadow-xs">Creative Design</span>
+                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1 shadow-xs">Digital Printing</span>
+                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1 shadow-xs">Corporate Gifting</span>
+                <span className="rounded border border-[#ded7cd] bg-white px-3 py-1 shadow-xs">In-House Production</span>
+              </div>
+            </motion.div>
+
+            {/* Hero Right Column: Modern Print Production Floor Image */}
+            <motion.div
+              className="lg:col-span-6 xl:col-span-5 flex flex-col justify-center"
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="overflow-hidden rounded-2xl border border-[#ded7cd] bg-white p-2.5 sm:p-3 shadow-xl">
+                <div className="relative w-full overflow-hidden rounded-xl bg-[#1e2022]">
+                  <div className="relative aspect-[4/3] sm:aspect-[16/11] w-full overflow-hidden">
+                    <img
+                      src="/printone-assets/about-modern-print-floor.png"
+                      alt="PrintOne Graphics Modern Print Production Floor and Heidelberg Offset Machinery"
+                      className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+                    
+                    <div className="absolute bottom-4 left-4 right-4 text-left text-white">
+                      <span className="rounded bg-[#10383A] px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#DAA112] border border-white/20">
+                        Production Plant · Byculla East
+                      </span>
+                      <h3 className="mt-1.5 font-display text-lg sm:text-xl font-extrabold text-white leading-snug">
+                        Advanced Heidelberg Offset &amp; High-Speed Digital Presses
+                      </h3>
+                      <p className="mt-1 text-[11px] sm:text-xs text-white/80 leading-relaxed">
+                        Multi-color high-definition calibration, automated spectrophotometers, section sewing, and custom foil gilding.
+                      </p>
+                      <div className="mt-2.5">
+                        <Link
+                          href="/services"
+                          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#DAA112] hover:text-white transition-colors"
+                        >
+                          <span>Explore Capabilities</span>
+                          <ArrowRight size={13} />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* 2. Our Story Section with bg-[#809276] - Compact Height */}
-      <section className="py-10 sm:py-12 lg:py-14 border-b border-[#6f8066] bg-[#809276] text-white">
+      {/* 2. Our Story Section: Left Image (Creative Thinking) + Right Content */}
+      <section className="py-12 sm:py-16 lg:py-20 border-b border-[#6f8066] bg-[#809276] text-white">
         <div className="page-wrap">
-          <div className="mx-auto max-w-4xl lg:max-w-[1020px] text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-3 py-0.5 text-[10.5px] font-bold uppercase tracking-[.18em] text-white backdrop-blur-sm">
-              <span>Our Story</span>
-            </div>
-
-            <h2 className="mt-2.5 font-display text-[clamp(1.75rem,2.8vw,2.6rem)] font-extrabold tracking-[-.035em] text-white">
-              Creative Thinking. Quality Printing. Reliable Delivery.
-            </h2>
-
-            <div className="mx-auto mt-2 h-0.5 w-10 bg-[#DAA112]" />
-
-            <div className="mt-5 space-y-3 text-center text-[14.5px] sm:text-[15.5px] leading-[1.7] text-white/90">
-              <p>
-                Established in 2021, PrintOne Graphics began with a vision to deliver creative, reliable, and high-quality printing solutions that help businesses, publishers, and organisations communicate their ideas effectively. Based in Byculla East, Mumbai, we have been building our expertise in printing, publishing, and graphic design, combining creativity, precision, and professional service to meet the diverse needs of our clients. At PrintOne Graphics, we believe that every printed piece tells a story. From concept development and creative designing to typesetting, printing, binding, and finishing, we provide end-to-end solutions tailored to the unique requirements of every project—covering books and publications, annual reports, corporate stationery, brochures, catalogues, calendars, and a wide range of commercial printing requirements.
-              </p>
-              <p>
-                We work closely with publishers, corporates, educational institutions, and businesses across India, offering customised solutions that balance quality, cost-effectiveness, and timely delivery. By understanding our clients’ objectives and maintaining close attention to every detail, we strive to transform ideas into impactful printed materials that reflect their brand identity and vision. Our commitment to quality is supported by professional expertise, efficient production processes, and a customer-focused approach—delivering consistent results from short-run digital printing to bulk commercial printing. At PrintOne Graphics, our journey is driven by creativity, trust, and continuous improvement as we build long-term partnerships, embrace new opportunities, and deliver printing solutions that make every project stand out.
-              </p>
-            </div>
-
-            {/* Creative Thinking Visual Showcase Card */}
-            <div className="mt-8 overflow-hidden rounded-2xl border border-white/20 bg-white/10 p-2 sm:p-3 shadow-2xl backdrop-blur-sm">
-              <div className="relative w-full overflow-hidden rounded-xl bg-black/30">
-                <div className="relative aspect-[16/9] w-full overflow-hidden">
-                  <img
-                    src="/printone-assets/about-creative-thinking.png"
-                    alt="PrintOne Graphics Creative Thinking and Ideation Session"
-                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
-                  />
-                  {/* Desktop overlay gradient & caption: Exactly unchanged for sm and up */}
-                  <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
-                  <div className="hidden sm:flex absolute bottom-4 left-4 right-4 items-center justify-between text-left text-white">
-                    <div>
-                      <span className="inline-block rounded bg-[#DAA112] px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#10383A]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left Column: Creative Thinking Visual Showcase Card */}
+            <div className="lg:col-span-6 xl:col-span-5 order-2 lg:order-1">
+              <div className="overflow-hidden rounded-2xl border border-white/25 bg-white/10 p-2.5 sm:p-3 shadow-2xl backdrop-blur-sm">
+                <div className="relative w-full overflow-hidden rounded-xl bg-black/40">
+                  <div className="relative aspect-[4/3] sm:aspect-[16/11] w-full overflow-hidden">
+                    <img
+                      src="/printone-assets/about-creative-thinking.png"
+                      alt="PrintOne Graphics Creative Thinking and Ideation Session"
+                      className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+                    
+                    <div className="absolute bottom-4 left-4 right-4 text-left text-white">
+                      <span className="inline-block rounded bg-[#DAA112] px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#10383A]">
                         Creative Studio
                       </span>
-                      <p className="mt-1 font-display text-base font-bold text-white drop-shadow-sm">
+                      <h3 className="mt-1.5 font-display text-base sm:text-lg font-bold text-white drop-shadow-sm leading-snug">
                         Creative Thinking. Thoughtful Typography. Impactful Storytelling.
+                      </h3>
+                      <p className="mt-1 text-[11px] text-white/80">
+                        Concept development, editorial layouts, color theory, and bespoke brand aesthetics.
                       </p>
                     </div>
                   </div>
                 </div>
-
-                {/* Mobile-only dedicated caption bar: clean, no text on image, 100% visible */}
-                <div className="block sm:hidden bg-[#10383A] p-3.5 text-left text-white border-t border-white/10">
-                  <span className="inline-block rounded bg-[#DAA112] px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#10383A]">
-                    Creative Studio
-                  </span>
-                  <p className="mt-1.5 font-display text-sm font-bold text-white leading-snug">
-                    Creative Thinking. Thoughtful Typography. Impactful Storytelling.
-                  </p>
-                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* 3. Modern Print Production Floor Showcase */}
-      <section className="border-b border-[#ded7cd] bg-[#faf8f2] py-14 sm:py-18">
-        <div className="page-wrap">
-          <div className="mx-auto max-w-4xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#ded7cd] bg-[#f2ede4] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-[#6b6760]">
-              <Sparkles size={12} className="text-[#DAA112]" />
-              <span>In-House Press Infrastructure</span>
-            </div>
-
-            <h2 className="mt-3 font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-[-.04em] text-[#10383A]">
-              Our Modern Print Production Floor.
-            </h2>
-            <div className="mx-auto mt-2.5 h-0.5 w-12 bg-[#DAA112]" />
-            <p className="mt-3 text-xs sm:text-sm text-[#55524c] max-w-2xl mx-auto leading-relaxed">
-              Equipped with heavy-duty offset presses, high-definition digital production engines, precision computerized cutters, and automated bindery lines in Byculla East, Mumbai.
-            </p>
-          </div>
-
-          <div className="mt-8 overflow-hidden rounded-2xl border border-[#ded7cd] bg-white p-2.5 sm:p-4 shadow-xl">
-            <div className="relative w-full overflow-hidden rounded-xl bg-[#1e2022]">
-              <div className="relative aspect-[16/9] w-full overflow-hidden">
-                <img
-                  src="/printone-assets/about-modern-print-floor.png"
-                  alt="PrintOne Graphics Modern Print Production Floor and Machinery"
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-103"
-                />
-                {/* Desktop overlay: Preserved exactly for sm and up */}
-                <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-                <div className="hidden sm:flex absolute bottom-6 left-6 right-6 flex-row items-end justify-between gap-3 text-white">
-                  <div>
-                    <span className="rounded bg-[#10383A] px-2.5 py-1 text-[9.5px] font-bold uppercase tracking-wider text-[#DAA112] border border-white/20">
-                      Production Plant · Byculla East
-                    </span>
-                    <h3 className="mt-1.5 font-display text-2xl font-extrabold text-white">
-                      Advanced Heidelberg Offset &amp; High-Speed Digital Presses
-                    </h3>
-                    <p className="mt-0.5 text-xs text-white/80 max-w-xl">
-                      Multi-color high-definition calibration, automated spectrophotometers, section sewing, and custom foil gilding.
-                    </p>
-                  </div>
-                  <Link
-                    href="/services"
-                    className="btn-primary shrink-0 text-xs py-2 px-3.5 bg-[#DAA112] text-[#10383A] border-[#DAA112] hover:bg-white hover:text-[#10383A] hover:border-white"
-                  >
-                    Explore Capabilities &rarr;
-                  </Link>
-                </div>
+            {/* Right Column: Our Story Content */}
+            <div className="lg:col-span-6 xl:col-span-7 order-1 lg:order-2 text-left">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-3 py-0.5 text-[10.5px] font-bold uppercase tracking-[.18em] text-white backdrop-blur-sm">
+                <span>Our Story</span>
               </div>
 
-              {/* Mobile-only dedicated card below the photo: clean, high contrast, button on point */}
-              <div className="block sm:hidden bg-[#10383A] p-4 text-left text-white border-t border-white/10">
-                <span className="inline-block rounded bg-[#DAA112] px-2.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wider text-[#10383A]">
-                  Production Plant · Byculla East
-                </span>
-                <h3 className="mt-2 font-display text-base font-extrabold text-white leading-snug">
-                  Advanced Heidelberg Offset &amp; High-Speed Digital Presses
-                </h3>
-                <p className="mt-1 text-xs text-white/80 leading-relaxed">
-                  Multi-color high-definition calibration, automated spectrophotometers, section sewing, and custom foil gilding.
+              <h2 className="mt-3 font-display text-[clamp(1.75rem,2.8vw,2.6rem)] font-extrabold tracking-[-.035em] text-white leading-tight">
+                Creative Thinking. Quality Printing. Reliable Delivery.
+              </h2>
+
+              <div className="mt-2.5 h-0.5 w-12 bg-[#DAA112]" />
+
+              <div className="mt-5 space-y-3.5 text-left text-[14px] sm:text-[15px] leading-[1.7] text-white/95">
+                <p>
+                  Established in 2021, PrintOne Graphics began with a vision to deliver creative, reliable, and high-quality printing solutions that help businesses, publishers, and organisations communicate their ideas effectively. Based in Byculla East, Mumbai, we have been building our expertise in printing, publishing, and graphic design, combining creativity, precision, and professional service to meet the diverse needs of our clients. At PrintOne Graphics, we believe that every printed piece tells a story. From concept development and creative designing to typesetting, printing, binding, and finishing, we provide end-to-end solutions tailored to the unique requirements of every project—covering books and publications, annual reports, corporate stationery, brochures, catalogues, calendars, and a wide range of commercial printing requirements.
                 </p>
-                <div className="mt-3.5">
-                  <Link
-                    href="/services"
-                    className="inline-flex items-center justify-center w-full rounded-lg bg-[#DAA112] py-2.5 px-4 text-xs font-bold text-[#10383A] shadow-sm hover:bg-white transition-colors"
-                  >
-                    Explore Capabilities &rarr;
-                  </Link>
-                </div>
+                <p>
+                  We work closely with publishers, corporates, educational institutions, and businesses across India, offering customised solutions that balance quality, cost-effectiveness, and timely delivery. By understanding our clients’ objectives and maintaining close attention to every detail, we strive to transform ideas into impactful printed materials that reflect their brand identity and vision. Our commitment to quality is supported by professional expertise, efficient production processes, and a customer-focused approach—delivering consistent results from short-run digital printing to bulk commercial printing. At PrintOne Graphics, our journey is driven by creativity, trust, and continuous improvement as we build long-term partnerships, embrace new opportunities, and deliver printing solutions that make every project stand out.
+                </p>
               </div>
             </div>
           </div>
