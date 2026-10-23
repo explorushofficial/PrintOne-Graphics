@@ -13,23 +13,33 @@ import {
   type Variants,
 } from 'motion/react';
 
+export interface HeroSlideItem {
+  id?: string;
+  src: string;
+  focus?: string;
+  title?: string;
+}
+
 // Background photos (Pexels, free for commercial use) that slide automatically.
 // For production, download them into /public and use local paths instead.
 const pexels = (path: string) =>
   `https://images.pexels.com/photos/${path}?auto=compress&cs=tinysrgb&w=1920`;
 
-const HERO_IMAGES: { src: string; focus: string }[] = [
+const HERO_IMAGES: HeroSlideItem[] = [
   {
     src: pexels('20042067/pexels-photo-20042067/free-photo-of-professional-printer-in-print-studio.jpeg'),
     focus: '85% center',
+    title: 'Professional Printer in Print Studio',
   },
   {
     src: pexels('17536002/pexels-photo-17536002/free-photo-of-photo-printer.jpeg'),
     focus: '85% center',
+    title: 'Precision Photo Printer',
   },
   {
     src: pexels('19316522/pexels-photo-19316522/free-photo-of-printing-machine-in-workshop.png'),
     focus: '85% center',
+    title: 'Printing Machine in Workshop',
   },
 ];
 
@@ -103,13 +113,6 @@ function CropMark({ className }: { className: string }) {
       />
     </svg>
   );
-}
-
-export interface HeroSlideItem {
-  id?: string;
-  src: string;
-  focus?: string;
-  title?: string;
 }
 
 interface HeroShowcaseProps {
