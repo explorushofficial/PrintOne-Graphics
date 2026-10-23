@@ -78,14 +78,14 @@ export function ContactClient() {
     charCount > line1Limit + 1
       ? LINE_2.slice(0, charCount - (line1Limit + 1))
       : charCount > line1Limit
-      ? ''
-      : '';
+        ? ''
+        : '';
   const line3Text =
     charCount > line2Limit + 1
       ? LINE_3.slice(0, charCount - (line2Limit + 1))
       : charCount > line2Limit
-      ? ''
-      : '';
+        ? ''
+        : '';
 
   const activeLine = charCount <= line1Limit ? 1 : charCount <= line2Limit ? 2 : 3;
 
@@ -121,9 +121,8 @@ export function ContactClient() {
                   {line1Text}
                   {activeLine === 1 && (
                     <span
-                      className={`inline-block w-[3px] sm:w-[4px] h-[0.82em] ml-1 align-baseline bg-[#DAA112] transition-opacity duration-200 ${
-                        isTypingDone ? 'animate-pulse opacity-40' : 'animate-ping opacity-90'
-                      }`}
+                      className={`inline-block w-[3px] sm:w-[4px] h-[0.82em] ml-1 align-baseline bg-[#DAA112] transition-opacity duration-200 ${isTypingDone ? 'animate-pulse opacity-40' : 'animate-ping opacity-90'
+                        }`}
                       aria-hidden="true"
                     />
                   )}
@@ -132,9 +131,8 @@ export function ContactClient() {
                   {line2Text}
                   {activeLine === 2 && (
                     <span
-                      className={`inline-block w-[3px] sm:w-[4px] h-[0.82em] ml-1 align-baseline bg-[#10383A] transition-opacity duration-200 ${
-                        isTypingDone ? 'animate-pulse opacity-40' : 'animate-ping opacity-90'
-                      }`}
+                      className={`inline-block w-[3px] sm:w-[4px] h-[0.82em] ml-1 align-baseline bg-[#10383A] transition-opacity duration-200 ${isTypingDone ? 'animate-pulse opacity-40' : 'animate-ping opacity-90'
+                        }`}
                       aria-hidden="true"
                     />
                   )}
@@ -143,9 +141,8 @@ export function ContactClient() {
                   {line3Text}
                   {activeLine === 3 && (
                     <span
-                      className={`inline-block w-[3px] sm:w-[4px] h-[0.82em] ml-1 align-baseline bg-[#DAA112] transition-opacity duration-200 ${
-                        isTypingDone ? 'animate-pulse opacity-40' : 'animate-ping opacity-90'
-                      }`}
+                      className={`inline-block w-[3px] sm:w-[4px] h-[0.82em] ml-1 align-baseline bg-[#DAA112] transition-opacity duration-200 ${isTypingDone ? 'animate-pulse opacity-40' : 'animate-ping opacity-90'
+                        }`}
                       aria-hidden="true"
                     />
                   )}
@@ -156,7 +153,7 @@ export function ContactClient() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.55, delay: 0.28 }}
-                className="mt-3 font-sans text-xs sm:text-sm font-bold uppercase tracking-[.14em] text-[#666E51]"
+                className="mt-3 font-garamond-italic text-[30px] sm:text-[25px] xl:text-[20px] font-normal tracking-wide text-[#10383A] leading-tight"
               >
                 Design • Digital Printing • Corporate Gifting
               </motion.p>

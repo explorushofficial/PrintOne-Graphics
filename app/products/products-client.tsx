@@ -48,11 +48,10 @@ export function ProductsClient({ products }: { products: Product[] }) {
               <span className="block text-[#DAA112] sm:whitespace-nowrap">Branded Merchandise.</span>
             </h1>
 
-            <div className="mx-auto mt-6 max-w-3xl lg:max-w-4xl space-y-3 text-center text-[15px] sm:text-[16px] leading-[1.75] text-[#524f48]">
-              <p>
-                Explore our comprehensive range of commercial printed stationery, books, corporate gifting items, packaging boxes, and display merchandise.
-              </p>
-            </div>
+            <p className="mt-3.5 font-garamond-italic text-[15px] sm:text-[18px] xl:text-[21px] font-normal tracking-wide text-[#10383A] leading-tight">
+              Explore our comprehensive range of commercial printed stationery, books, corporate gifting items, packaging boxes, and display merchandise.
+            </p>
+
           </div>
         </div>
       </section>
@@ -93,11 +92,10 @@ export function ProductsClient({ products }: { products: Product[] }) {
                 key={item}
                 onClick={() => setFilter(item)}
                 aria-pressed={filter === item}
-                className={`shrink-0 rounded-lg px-3.5 py-2 text-xs font-bold transition-all whitespace-nowrap ${
-                  filter === item
-                    ? 'border border-[#10383A] bg-[#10383A] text-white shadow-xs'
-                    : 'border border-[#d9d2c8] bg-white text-[#696761] hover:border-[#10383A] hover:text-[#10383A]'
-                }`}
+                className={`shrink-0 rounded-lg px-3.5 py-2 text-xs font-bold transition-all whitespace-nowrap ${filter === item
+                  ? 'border border-[#10383A] bg-[#10383A] text-white shadow-xs'
+                  : 'border border-[#d9d2c8] bg-white text-[#696761] hover:border-[#10383A] hover:text-[#10383A]'
+                  }`}
                 data-testid={`button-filter-${item.toLowerCase().replaceAll(/[^a-z0-9]+/g, '-')}`}
               >
                 {item}

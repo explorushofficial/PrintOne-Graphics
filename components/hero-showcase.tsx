@@ -1,406 +1,390 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState, type MouseEvent } from 'react';
 import Link from 'next/link';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import {
-  ArrowRight,
-  ArrowUpRight,
-  MessageCircle,
-  Plus,
-  Sparkles,
-  X,
-  ExternalLink,
-} from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import { useCart, createWhatsAppUrl } from '@/context/cart-context';
-import { services } from '@/data/services';
+  motion,
+  AnimatePresence,
+  MotionConfig,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  type Variants,
+} from 'motion/react';
 
-interface HeroSlide {
-  id: string;
-  title: string;
-  category: string;
-  spec: string;
-  image: string;
-  finish: string;
-  serviceId: string;
-}
+// Background photos (Pexels, free for commercial use) that slide automatically.
+// For production, download them into /public and use local paths instead.
+const pexels = (path: string) =>
+  `https://images.pexels.com/photos/${path}?auto=compress&cs=tinysrgb&w=1920`;
 
-const HERO_SLIDES: HeroSlide[] = [
+const HERO_IMAGES: { src: string; focus: string }[] = [
   {
-    id: 'hero-slide-1',
-    title: 'Annual Report 2024–25 Showcase',
-    category: 'Annual Reports',
-    spec: '300 GSM Art Card · Hardbound & Center Spread · Spot UV & Foil',
-    finish: 'Premium Multi-Page Annual Report with Precision Section Stitching',
-    image: '/printone-assets/hero-annual-report-2024%20transperant.png',
-    serviceId: 'annual-report-design',
+    src: pexels('20042067/pexels-photo-20042067/free-photo-of-professional-printer-in-print-studio.jpeg'),
+    focus: '85% center',
   },
   {
-    id: 'hero-slide-2',
-    title: 'Design, Digital Printing & Corporate Gifting',
-    category: 'Design & Gifting',
-    spec: 'Wide-Format Production · Executive Diaries · Custom Drinkware & Bags',
-    finish: 'Integrated Studio Design, Digital Press & Curated Brand Merchandise',
-    image: '/printone-assets/hero-studio-branding-print.png',
-    serviceId: 'gift-sets',
+    src: pexels('17536002/pexels-photo-17536002/free-photo-of-photo-printer.jpeg'),
+    focus: '85% center',
   },
   {
-    id: 'hero-slide-3',
-    title: 'Annual Report 2025–26 & Corporate Publications',
-    category: 'Commercial Print',
-    spec: 'Sleek Hardcover · Matte Black Contrast Cover · High-Density Color Printing',
-    finish: 'Custom Corporate Governance & Financial Report with Gold Foil Accent',
-    image: '/printone-assets/hero-annual-report-2025.png',
-    serviceId: 'commercial-printing',
+    src: pexels('19316522/pexels-photo-19316522/free-photo-of-printing-machine-in-workshop.png'),
+    focus: '85% center',
   },
 ];
 
-// Full 3 story paragraphs combined into one continuous narrative
+/** How long each photo stays before sliding to the next */
+const SLIDE_INTERVAL_MS = 5000;
+
 const FULL_STORY_PARAGRAPHS = [
   'PrintOne Graphics is a creative design and printing company based in Byculla East, Mumbai, delivering quality printing solutions to organisations across India.',
   'From concept development and creative design to premium printing, binding, and finishing, we combine creativity, precision, and attention to detail to bring every project to life. Our commitment to quality, timely delivery, and reliable service ensures that every project meets our clients’ expectations.',
   'At PrintOne Graphics, we believe every print tells a story. Whether it’s books, annual reports, brochures, corporate publications, or customised print materials, we turn ideas into impactful printed experiences.',
 ];
 
-const COMBINED_STORY = FULL_STORY_PARAGRAPHS.join('\n\n');
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const WIPE_EASE: [number, number, number, number] = [0.76, 0, 0.24, 1];
+
+/** Photo reveal: a clip-path wipe, like a press roller laying down ink */
+const wipeVariants: Variants = {
+  enter: { clipPath: 'inset(0 0 0 100%)' },
+  center: {
+    clipPath: 'inset(0 0 0 0%)',
+    transition: { duration: 1, ease: WIPE_EASE },
+  },
+  exit: { opacity: 0.99, transition: { duration: 1 } },
+};
+
+/** Staggered load-in used for the one orchestrated page-load sequence */
+const rise = (delay: number) => ({
+  initial: { opacity: 0, y: 18 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.7, delay, ease: EASE },
+});
+
+/** Masked line reveal for the headline */
+function HeadlineLine({
+  children,
+  delay,
+}: {
+  children: React.ReactNode;
+  delay: number;
+}) {
+  return (
+    <span className="block overflow-hidden pb-[0.08em] sm:whitespace-nowrap">
+      <motion.span
+        className="block"
+        initial={{ y: '110%' }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.9, delay, ease: EASE }}
+      >
+        {children}
+      </motion.span>
+    </span>
+  );
+}
+
+/** Print crop mark that draws itself in */
+function CropMark({ className }: { className: string }) {
+  return (
+    <svg
+      className={`pointer-events-none absolute hidden h-8 w-8 text-[#10383A]/45 lg:block ${className}`}
+      viewBox="0 0 32 32"
+      fill="none"
+      aria-hidden="true"
+    >
+      <motion.path
+        d="M0 24 H12 M8 32 V20"
+        stroke="currentColor"
+        strokeWidth="1"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 1.2, delay: 0.4, ease: EASE }}
+      />
+    </svg>
+  );
+}
 
 export function HeroShowcase() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [direction, setDirection] = useState(1);
-  const [isPaused, setIsPaused] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<HeroSlide | null>(null);
-  const { add } = useCart();
+  const [current, setCurrent] = useState(0);
+  const [sweepKey, setSweepKey] = useState(0);
+  const [failed, setFailed] = useState<Record<number, boolean>>({});
 
-  // Looping typing animation: types text, pauses for 5 seconds, then restarts
-  const [displayedStory, setDisplayedStory] = useState('');
-  const [isTypingDone, setIsTypingDone] = useState(false);
-
+  // Preload the other photos so slides never pop in late
   useEffect(() => {
-    let charIndex = 0;
-    let timer: ReturnType<typeof setInterval> | null = null;
-    let restartTimeout: ReturnType<typeof setTimeout> | null = null;
-    let isCancelled = false;
-
-    const startTyping = () => {
-      charIndex = 0;
-      setDisplayedStory('');
-      setIsTypingDone(false);
-
-      const speed = 12; // Snappy, comfortable typing speed
-      timer = setInterval(() => {
-        if (isCancelled) return;
-        if (charIndex < COMBINED_STORY.length) {
-          setDisplayedStory(COMBINED_STORY.slice(0, charIndex + 1));
-          charIndex++;
-        } else {
-          setIsTypingDone(true);
-          if (timer) clearInterval(timer);
-
-          // Pause for 5 seconds after completing, then restart the animation
-          restartTimeout = setTimeout(() => {
-            if (!isCancelled) {
-              startTyping();
-            }
-          }, 5000);
-        }
-      }, speed);
-    };
-
-    startTyping();
-
-    return () => {
-      isCancelled = true;
-      if (timer) clearInterval(timer);
-      if (restartTimeout) clearTimeout(restartTimeout);
-    };
+    HERO_IMAGES.forEach((img) => {
+      const i = new Image();
+      i.src = img.src;
+    });
   }, []);
 
-  // Auto-advance slider every 4.5 seconds (pauses on mouse hover)
+  // Auto-advance the background slideshow
   useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setDirection(1);
-      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 4500);
-    return () => clearInterval(interval);
-  }, [isPaused]);
+    const id = setInterval(() => {
+      setCurrent((c) => (c + 1) % HERO_IMAGES.length);
+      setSweepKey((k) => k + 1);
+    }, SLIDE_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, []);
 
-  const handleNext = () => {
-    setDirection(1);
-    setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-  };
+  // ---- Mouse parallax for the background layer ----
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const sx = useSpring(mx, { stiffness: 55, damping: 18, mass: 0.6 });
+  const sy = useSpring(my, { stiffness: 55, damping: 18, mass: 0.6 });
+  const bgX = useTransform(sx, [-0.5, 0.5], [-22, 22]);
+  const bgY = useTransform(sy, [-0.5, 0.5], [-14, 14]);
 
-  const handlePrev = () => {
-    setDirection(-1);
-    setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
-  };
-
-  const activeSlide = HERO_SLIDES[currentSlide];
-
-  const handleAddToCart = (item: HeroSlide) => {
-    const s = services.find((srv) => srv.id === item.serviceId) || services[0];
-    add(s);
+  const handleMouseMove = (e: MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mx.set((e.clientX - rect.left) / rect.width - 0.5);
+    my.set((e.clientY - rect.top) / rect.height - 0.5);
   };
 
   return (
-    <section className="relative overflow-hidden border-b border-[#e5ded4] bg-[#faf8f2]">
-      {/* Background Architectural Grid Pattern - matched with advisory section */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.025]"
-        style={{
-          backgroundImage:
-            'radial-gradient(#10383A 1px, transparent 1px), radial-gradient(#10383A 1px, #faf8f2 1px)',
-          backgroundSize: '24px 24px',
-          backgroundPosition: '0 0, 12px 12px',
-        }}
-        aria-hidden="true"
-      />
+    <MotionConfig reducedMotion="user">
+      <section
+        className="relative isolate flex min-h-[680px] overflow-hidden border-b border-[#e5ded4] bg-[#faf8f2] lg:min-h-[calc(100svh-96px)]"
+        onMouseMove={handleMouseMove}
+      >
+        <style>{`
+          @keyframes heroDrift { 0% { background-position: 0 0, 12px 12px; } 100% { background-position: 24px 24px, 36px 36px; } }
+          @media (prefers-reduced-motion: reduce) {
+            .hero-grid { animation: none !important; }
+          }
+        `}</style>
 
-      {/* Unified Single Section Container (No vertical center dividing line) */}
-      <div className="relative z-10 mx-auto max-w-[1536px] px-6 py-5 sm:px-10 sm:py-7 lg:px-12 xl:px-16 2xl:px-20 lg:py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-6 lg:gap-10 xl:gap-12">
-          {/* Left Column: Headline, Subtitle in Garamond Italic, 3 Paragraphs, Categories, CTA */}
-          <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center">
-            <h1
-              className="font-display text-[clamp(1.85rem,2.8vw,3.35rem)] font-extrabold italic leading-[1.06] tracking-[-.035em] text-[#10383A]"
-              style={{ fontStyle: 'italic' }}
+        {/* ============ LAYER 0: Drifting dot grid ============ */}
+        <div
+          className="hero-grid pointer-events-none absolute inset-0 z-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              'radial-gradient(#10383A 1px, transparent 1px), radial-gradient(#10383A 1px, #faf8f2 1px)',
+            backgroundSize: '24px 24px',
+            backgroundPosition: '0 0, 12px 12px',
+            animation: 'heroDrift 14s linear infinite',
+          }}
+          aria-hidden="true"
+        />
+
+        {/* ============ LAYER 1: Auto-changing full-bleed photos ============ */}
+        <div className="absolute inset-0 z-[1] overflow-hidden" aria-hidden="true">
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={current}
+              variants={wipeVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="absolute inset-0"
             >
-              <span className="block sm:whitespace-nowrap">
-                YOUR TRUSTED <span className="text-[#DAA112]">PRINT PARTNER.</span>
-              </span>
-              <span className="block sm:whitespace-nowrap">
-                FROM CONCEPT TO FINISH.
-              </span>
+              {/* Parallax wrapper (follows the cursor) */}
+              <motion.div
+                className="absolute inset-0"
+                style={{ x: bgX, y: bgY, scale: 1.06 }}
+              >
+                {!failed[current] && (
+                  <motion.img
+                    src={HERO_IMAGES[current].src}
+                    alt=""
+                    draggable={false}
+                    referrerPolicy="no-referrer"
+                    onError={() => setFailed((f) => ({ ...f, [current]: true }))}
+                    className="absolute inset-0 h-full w-full select-none object-cover"
+                    style={{ objectPosition: HERO_IMAGES[current].focus }}
+                    initial={{ scale: 1 }}
+                    animate={{ scale: 1.1 }}
+                    transition={{
+                      duration: 8,
+                      ease: 'easeInOut',
+                      repeat: Infinity,
+                      repeatType: 'reverse',
+                    }}
+                  />
+                )}
+                {/* Brand tint so the photos sit with the green/gold palette */}
+                <div className="absolute inset-0 bg-[#10383A]/15 mix-blend-multiply" />
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Gold leading edge that rides the wipe on every change */}
+          {sweepKey > 0 && (
+            <motion.div
+              key={`sweep-${sweepKey}`}
+              className="pointer-events-none absolute inset-y-0 z-10 w-[6px] bg-[#DAA112] shadow-[0_0_40px_14px_rgba(218,161,18,0.45)]"
+              initial={{ left: '100%', opacity: 1 }}
+              animate={{ left: '0%', opacity: [1, 1, 0] }}
+              transition={{ duration: 1, ease: WIPE_EASE }}
+            />
+          )}
+        </div>
+
+        {/* ============ LAYER 2: Readability scrims ============ */}
+        <div
+          className="pointer-events-none absolute inset-0 z-[2] hidden lg:block"
+          style={{
+            background:
+              'linear-gradient(90deg, #faf8f2 0%, rgba(250,248,242,0.92) 30%, rgba(250,248,242,0.55) 48%, rgba(250,248,242,0) 68%)',
+          }}
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 z-[2] lg:hidden"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(250,248,242,0.95) 0%, rgba(250,248,242,0.88) 55%, rgba(250,248,242,0.72) 100%)',
+          }}
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-32 bg-gradient-to-t from-[#faf8f2]/90 to-transparent"
+          aria-hidden="true"
+        />
+
+        {/* ============ Print-shop details ============ */}
+        <CropMark className="left-4 top-4 rotate-0" />
+        <CropMark className="right-4 top-4 rotate-90" />
+        <CropMark className="bottom-4 left-4 -rotate-90" />
+        <CropMark className="bottom-4 right-4 rotate-180" />
+
+        {/* CMYK colour bar that rolls in */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[6] flex h-[5px]" aria-hidden="true">
+          {['#00A3E0', '#E6007E', '#FFD500', '#10383A'].map((c, i) => (
+            <motion.span
+              key={c}
+              className="h-full flex-1 origin-left"
+              style={{ backgroundColor: c }}
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 1.2 + i * 0.12, ease: EASE }}
+            />
+          ))}
+        </div>
+
+        {/* ============ LAYER 3: Content on top ============ */}
+        <div className="relative z-10 mx-auto flex w-full max-w-[1536px] items-center px-6 py-10 sm:px-10 lg:px-12 xl:px-16 2xl:px-20">
+          <div className="flex w-full max-w-[700px] flex-col justify-center">
+            <h1 className="font-display text-[clamp(2rem,3.3vw,3.6rem)] font-extrabold leading-[1.06] tracking-[-.035em] text-[#10383A]">
+              <HeadlineLine delay={0.15}>
+                YOUR TRUSTED{' '}
+                <span className="relative inline-block text-[#DAA112]">
+                  PRINT PARTNER.
+                  <motion.span
+                    className="absolute -bottom-0.5 left-0 h-[3px] w-full origin-left bg-[#DAA112]/50"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 0.9, delay: 1.1, ease: EASE }}
+                    aria-hidden="true"
+                  />
+                </span>
+              </HeadlineLine>
+              <HeadlineLine delay={0.3}>FROM CONCEPT TO FINISH.</HeadlineLine>
             </h1>
 
-            {/* Subtitle in Garamond Italic (matching reference style) */}
-            <p className="mt-2.5 font-garamond-italic text-[26px] sm:text-[28px] xl:text-[31px] font-normal tracking-wide text-[#10383A] leading-tight">
+            <motion.p
+              {...rise(0.6)}
+              className="mt-3 font-garamond-italic text-[26px] font-normal leading-tight tracking-wide text-[#10383A] sm:text-[30px] xl:text-[34px]"
+            >
               Your Trusted Partner for Design, Digital Printing and Corporate Gifting
-            </p>
+            </motion.p>
 
-            {/* Full 3 Paragraphs with Smooth Character-by-Character Typing Animation (Looping every 5s) */}
-            <div className="mt-3 min-h-[135px] sm:min-h-[120px] lg:min-h-[110px] space-y-2 text-[12.5px] sm:text-[13.5px] leading-[1.6] text-[#55524c] max-w-xl">
-              {displayedStory.split('\n\n').map((para, idx, arr) => {
-                const isLast = idx === arr.length - 1;
-                return (
-                  <p key={idx}>
-                    <span>{para}</span>
-                    {isLast && (
-                      <span
-                        className={`inline-block w-[2px] h-[1.1em] ml-0.5 align-middle bg-[#10383A] transition-opacity duration-200 ${
-                          isTypingDone ? 'animate-pulse opacity-40' : 'animate-ping opacity-90'
-                        }`}
-                        aria-hidden="true"
-                      />
-                    )}
-                  </p>
-                );
-              })}
-            </div>
+            {/* Story paragraphs: one green card, appears as a single block */}
+            <motion.div
+              {...rise(0.8)}
+              className="relative mt-4 max-w-xl overflow-hidden rounded-xl border border-[#1d5154]  bg-[#10383A] p-5 shadow-[0_24px_50px_-24px_rgba(16,56,58,0.8)] sm:p-6"
+            >
+              {/* Gold accent edge */}
+              <span className="absolute inset-y-0 left-0 w-1 bg-[#DAA112]" aria-hidden="true" />
 
-            {/* Quick Category Visual Links: 3 up and 2 down */}
-            <div className="mt-3.5 space-y-1.5">
-              <div className="flex flex-wrap items-center gap-2">
-                {[
+              {/* Slow looping light sheen */}
+              <motion.span
+                className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                initial={{ x: '0%' }}
+                animate={{ x: '450%' }}
+                transition={{
+                  duration: 2.6,
+                  ease: 'easeInOut',
+                  repeat: Infinity,
+                  repeatDelay: 4,
+                }}
+                aria-hidden="true"
+              />
+
+              <div className="relative space-y-3 pl-2 text-[13.5px] leading-[1.7] text-[#e6eee9] sm:text-[14.5px]">
+                {FULL_STORY_PARAGRAPHS.map((para) => (
+                  <p key={para.slice(0, 24)}>{para}</p>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Category chips: 3 up, 2 down */}
+            <div className="mt-4 space-y-2">
+              {[
+                [
                   { label: 'Annual Reports', tag: 'Ideas to artwork' },
                   { label: 'Commercial & Digital Print', tag: 'Business essentials' },
                   { label: 'Books & Publications', tag: 'Books + learning' },
-                ].map((cat) => (
-                  <Link
-                    key={cat.label}
-                    href={`/products?tag=${encodeURIComponent(cat.tag)}`}
-                    className="rounded border border-[#ded6c9] bg-white/80 px-3 py-1 text-[11px] font-bold text-[#45433d] transition-all hover:border-[#10383A] hover:bg-[#10383A] hover:text-white shadow-xs"
-                  >
-                    {cat.label}
-                  </Link>
-                ))}
-              </div>
-
-              <div className="flex flex-wrap items-center gap-2">
-                {[
+                ],
+                [
                   { label: 'Corporate Gifting', tag: 'Gifting + merchandise' },
                   { label: 'Packaging & Boxes', tag: 'Production' },
-                ].map((cat) => (
-                  <Link
-                    key={cat.label}
-                    href={`/products?tag=${encodeURIComponent(cat.tag)}`}
-                    className="rounded border border-[#ded6c9] bg-white/80 px-3 py-1 text-[11px] font-bold text-[#45433d] transition-all hover:border-[#10383A] hover:bg-[#10383A] hover:text-white shadow-xs"
-                  >
-                    {cat.label}
-                  </Link>
-                ))}
-              </div>
+                ],
+              ].map((row, rowIdx) => (
+                <div key={rowIdx} className="flex flex-wrap items-center gap-2">
+                  {row.map((cat, i) => (
+                    <motion.div key={cat.label} {...rise(1.0 + (rowIdx * 3 + i) * 0.07)}>
+                      <Link
+                        href={`/products?tag=${encodeURIComponent(cat.tag)}`}
+                        className="block rounded border border-[#ded6c9] bg-white/85 px-3.5 py-1.5 text-[11.5px] font-bold text-[#45433d] shadow-xs backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-[#10383A] hover:bg-[#10383A] hover:text-white"
+                      >
+                        {cat.label}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              ))}
             </div>
 
-            {/* Action Buttons */}
-            <div className="mt-4 flex flex-wrap items-center gap-3">
+            {/* Buttons */}
+            <motion.div {...rise(1.3)} className="mt-5 flex flex-wrap items-center gap-3">
               <Link href="/services" className="btn-primary group" data-testid="link-hero-services">
                 <span>Explore our services</span>
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
 
-              <Link href="/products" className="btn-outline group" data-testid="link-hero-products">
+              <Link href="/products" className="btn-outline group bg-white/60 backdrop-blur-sm" data-testid="link-hero-products">
                 <span>Browse products</span>
-                <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </Link>
-            </div>
-
-            {/* Bottom Proof Metrics Ribbon */}
-            <div className="mt-4 grid grid-cols-3 gap-3 border-t border-[#e2dacf] pt-3 max-w-xl">
-              <div>
-                <span className="block font-display text-lg sm:text-xl font-black text-[#10383A]">2021</span>
-                <span className="mt-0.5 block text-[9.5px] font-bold text-[#768886] uppercase tracking-wider">
-                  Established Mumbai
-                </span>
-              </div>
-
-              <div>
-                <span className="block font-display text-lg sm:text-xl font-black text-[#10383A]">In-House</span>
-                <span className="mt-0.5 block text-[9.5px] font-bold text-[#768886] uppercase tracking-wider">
-                  Design &amp; Press Facility
-                </span>
-              </div>
-
-              <div>
-                <span className="block font-display text-lg sm:text-xl font-black text-[#10383A]">Pan-India</span>
-                <span className="mt-0.5 block text-[9.5px] font-bold text-[#768886] uppercase tracking-wider">
-                  Dependable Delivery
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Clean 3D Showcase (Substantially Larger Width & Height) */}
-          <div
-            className="lg:col-span-6 xl:col-span-6 relative flex flex-col items-center justify-center min-h-[420px] sm:min-h-[500px] lg:min-h-[560px] xl:min-h-[620px]"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-          >
-            {/* Slide Motion Wrapper */}
-            <div className="relative w-full flex-1 flex items-center justify-center p-0">
-              <AnimatePresence custom={direction} mode="wait">
-                <motion.div
-                  key={activeSlide.id}
-                  custom={direction}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.02 }}
-                  transition={{
-                    duration: 0.45,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="relative w-full flex items-center justify-center py-0"
-                >
-                  {/* Centered Showcase Image on warm surface with realistic drop shadow */}
-                  <div className="relative w-full flex items-center justify-center select-none px-1 sm:px-3">
-                    <img
-                      src={activeSlide.image}
-                      alt={activeSlide.title}
-                      className="w-full max-w-[820px] max-h-[460px] sm:max-h-[540px] md:max-h-[590px] lg:max-h-[640px] xl:max-h-[680px] 2xl:max-h-[720px] object-contain select-none drop-shadow-[0_22px_45px_rgba(0,0,0,0.16)] transition-transform duration-500 hover:scale-[1.02]"
-                    />
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Slide Indicator Dots Centered Under the Image */}
-            <div className="mt-2 flex items-center justify-center gap-2 z-20">
-              {HERO_SLIDES.map((slide, idx) => (
-                <button
-                  key={slide.id}
-                  onClick={() => {
-                    setDirection(idx > currentSlide ? 1 : -1);
-                    setCurrentSlide(idx);
-                  }}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    currentSlide === idx
-                      ? 'w-8 bg-[#DAA112]'
-                      : 'w-2 bg-[#d8d0c2] hover:bg-[#b0a797]'
-                  }`}
-                  aria-label={`Go to slide ${idx + 1}`}
+                <ArrowUpRight
+                  size={15}
+                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                 />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+              </Link>
+            </motion.div>
 
-      {/* Quick-Inspect Modal when clicking any card in the scroller */}
-      {selectedItem && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
-          onClick={() => setSelectedItem(null)}
-        >
-          <div
-            className="relative w-full max-w-lg rounded-2xl border border-[#ded7cb] bg-[#faf8f2] p-6 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setSelectedItem(null)}
-              className="absolute top-4 right-4 grid h-8 w-8 place-items-center rounded-full border border-[#ded7cb] bg-white text-[#52504b] hover:border-[#10383A] hover:text-[#10383A] transition-colors"
-              aria-label="Close Preview"
+            {/* Proof metrics */}
+            <motion.div
+              {...rise(1.45)}
+              className="mt-5 grid max-w-xl grid-cols-3 gap-3 border-t border-[#e2dacf] pt-3.5"
             >
-              <X size={16} />
-            </button>
-
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-white border border-[#ded7cb] flex items-center justify-center p-4">
-              <img
-                src={selectedItem.image}
-                alt={selectedItem.title}
-                className="h-full w-auto object-contain drop-shadow-md"
-              />
-              <div className="absolute top-3 left-3 rounded-full bg-white/95 border border-[#ded7cc] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#10383A] shadow-xs">
-                {selectedItem.category}
-              </div>
-            </div>
-
-            <div className="mt-5">
-              <span className="text-[10px] font-bold uppercase tracking-[.18em] text-[#666E51]">
-                PrintOne Physical Specimen
-              </span>
-              <h3 className="mt-1 font-display text-2xl font-extrabold text-[#1d1f20]">
-                {selectedItem.title}
-              </h3>
-
-              <div className="mt-4 rounded-xl border border-[#ded7cb] bg-[#f4efe6] p-3.5 text-xs space-y-1.5 text-gray-700">
-                <div>
-                  <span className="font-bold text-[#1f2122]">Material &amp; Weight: </span>
-                  <span>{selectedItem.spec}</span>
+              {[
+                { big: '2021', small: 'Established Mumbai' },
+                { big: 'In-House', small: 'Design & Press Facility' },
+                { big: 'Pan-India', small: 'Dependable Delivery' },
+              ].map((m) => (
+                <div key={m.big}>
+                  <span className="block font-display text-lg font-black text-[#10383A] sm:text-xl">
+                    {m.big}
+                  </span>
+                  <span className="mt-0.5 block text-[9.5px] font-bold uppercase tracking-wider text-[#657876]">
+                    {m.small}
+                  </span>
                 </div>
-                <div>
-                  <span className="font-bold text-[#1f2122]">Finish &amp; Structure: </span>
-                  <span>{selectedItem.finish}</span>
-                </div>
-              </div>
-
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <button
-                  onClick={() => {
-                    handleAddToCart(selectedItem);
-                    setSelectedItem(null);
-                  }}
-                  className="btn-primary text-xs flex-1 rounded-lg"
-                >
-                  <Plus size={14} />
-                  <span>Add to Enquiry List</span>
-                </button>
-
-                <a
-                  href={createWhatsAppUrl(
-                    `Hello PrintOne Graphics! I would like to enquire about ${selectedItem.title} (${selectedItem.spec}).`
-                  )}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-[#ded7cb] bg-white px-4 py-3 text-xs font-bold text-[#212324] hover:border-[#10383A] hover:text-[#10383A] transition-colors"
-                >
-                  <MessageCircle size={15} />
-                  <span>Ask on WhatsApp</span>
-                </a>
-              </div>
-            </div>
+              ))}
+            </motion.div>
           </div>
         </div>
-      )}
-    </section>
+      </section>
+    </MotionConfig>
   );
 }
