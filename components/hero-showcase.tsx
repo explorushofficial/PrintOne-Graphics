@@ -105,27 +105,51 @@ function CropMark({ className }: { className: string }) {
   );
 }
 
-export function HeroShowcase() {
+export interface HeroSlideItem {
+  id?: string;
+  src: string;
+  focus?: string;
+  title?: string;
+}
+
+interface HeroShowcaseProps {
+  initialImages?: HeroSlideItem[];
+}
+
+export function HeroShowcase({ initialImages }: HeroShowcaseProps = {}) {
+  const images = initialImages && initialImages.length > 0 ? initialImages : HERO_IMAGES;
+
   const [current, setCurrent] = useState(0);
   const [sweepKey, setSweepKey] = useState(0);
   const [failed, setFailed] = useState<Record<number, boolean>>({});
 
-  // Preload the other photos so slides never pop in late
+  // Ensure current is within bounds if images change
   useEffect(() => {
-    HERO_IMAGES.forEach((img) => {
-      const i = new Image();
-      i.src = img.src;
+    if (current >= images.length) {
+      setCurrent(0);
+    }
+  }, [images.length, current]);
+
+  // Preload the photos so slides never pop in late
+  useEffect(() => {
+    images.forEach((img) => {
+      if (img?.src) {
+        const i = new Image();
+        i.src = img.src;
+      }
     });
-  }, []);
+  }, [images]);
 
   // Auto-advance the background slideshow
   useEffect(() => {
+    if (images.length <= 1) return;
+
     const id = setInterval(() => {
-      setCurrent((c) => (c + 1) % HERO_IMAGES.length);
+      setCurrent((c) => (c + 1) % images.length);
       setSweepKey((k) => k + 1);
     }, SLIDE_INTERVAL_MS);
     return () => clearInterval(id);
-  }, []);
+  }, [images.length]);
 
   // ---- Mouse parallax for the background layer ----
   const mx = useMotionValue(0);
@@ -185,13 +209,13 @@ export function HeroShowcase() {
               >
                 {!failed[current] && (
                   <motion.img
-                    src={HERO_IMAGES[current].src}
-                    alt=""
+                    src={(images[current] || images[0]).src}
+                    alt={(images[current] || images[0]).title || ''}
                     draggable={false}
                     referrerPolicy="no-referrer"
                     onError={() => setFailed((f) => ({ ...f, [current]: true }))}
                     className="absolute inset-0 h-full w-full select-none object-cover"
-                    style={{ objectPosition: HERO_IMAGES[current].focus }}
+                    style={{ objectPosition: (images[current] || images[0]).focus || '85% center' }}
                     initial={{ scale: 1 }}
                     animate={{ scale: 1.1 }}
                     transition={{
@@ -384,6 +408,26 @@ export function HeroShowcase() {
             </motion.div>
           </div>
         </div>
+
+        {/* ============ Slide navigation indicators ============ */}
+        {images.length > 1 && (
+          <div className="absolute right-6 bottom-6 z-20 hidden items-center gap-1.5 rounded-full bg-[#10383A]/60 px-3 py-1.5 backdrop-blur-md border border-white/20 sm:flex">
+            {images.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => {
+                  setCurrent(idx);
+                  setSweepKey((k) => k + 1);
+                }}
+                aria-label={`Go to slide ${idx + 1}`}
+                className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                  current === idx ? 'w-6 bg-[#DAA112]' : 'w-1.5 bg-white/40 hover:bg-white/70'
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </section>
     </MotionConfig>
   );

@@ -7,17 +7,20 @@ import { TactileSpecimenBar } from '@/components/tactile-specimen-bar';
 import { InteractiveCapabilities } from '@/components/interactive-capabilities';
 import { Testimonials } from '@/components/testimonials';
 import { ProductionJourney } from '@/components/production-journey';
-import { getProducts } from '@/sanity/lib/fetchData';
+import { getProducts, getHeroSlides } from '@/sanity/lib/fetchData';
 
 export const instant = false;
 
 export default async function HomePage() {
-  const products = await getProducts();
+  const [products, heroSlides] = await Promise.all([
+    getProducts(),
+    getHeroSlides(),
+  ]);
 
   return (
     <main>
       {/* 1. Interactive Hero with Live Specimen Console & Client Value Proposition */}
-      <HeroShowcase />
+      <HeroShowcase initialImages={heroSlides} />
 
       {/* Advisory Board Section */}
       <AdvisoryBoard />

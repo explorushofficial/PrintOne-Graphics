@@ -146,3 +146,97 @@ export async function getServices(): Promise<ServiceItem[]> {
 
   return [...sanityMapped, ...nonCollidingMock];
 }
+
+export interface HeroSlide {
+  id: string;
+  title?: string;
+  src: string;
+  focus: string;
+  order?: number;
+}
+
+const pexels = (path: string) =>
+  `https://images.pexels.com/photos/${path}?auto=compress&cs=tinysrgb&w=1920`;
+
+export const DEFAULT_HERO_SLIDES: HeroSlide[] = [
+  {
+    id: 'default-1',
+    title: 'Professional Printer in Print Studio',
+    src: pexels('20042067/pexels-photo-20042067/free-photo-of-professional-printer-in-print-studio.jpeg'),
+    focus: '85% center',
+    order: 1,
+  },
+  {
+    id: 'default-2',
+    title: 'Precision Photo Printer',
+    src: pexels('17536002/pexels-photo-17536002/free-photo-of-photo-printer.jpeg'),
+    focus: '85% center',
+    order: 2,
+  },
+  {
+    id: 'default-3',
+    title: 'Printing Machine in Workshop',
+    src: pexels('19316522/pexels-photo-19316522/free-photo-of-printing-machine-in-workshop.png'),
+    focus: '85% center',
+    order: 3,
+  },
+];
+
+interface SanityHeroSlideDoc {
+  _id: string;
+  title?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  image?: any;
+  imageUrl?: string;
+  focus?: string;
+  order?: number;
+  isActive?: boolean;
+}
+
+/**
+ * Fetches active hero showcase slides directly from Sanity CMS.
+ * Returns default fallback photography if no slides are published yet in Sanity.
+ */
+export async function getHeroSlides(): Promise<HeroSlide[]> {
+  'use cache';
+  cacheTag('hero-slides');
+  cacheLife('seconds');
+
+  if (client) {
+    try {
+      const sanitySlides = await client.fetch<SanityHeroSlideDoc[]>(
+        `*[_type == "heroSlide" && isActive != false] | order(order asc, _createdAt asc)`
+      );
+
+      if (sanitySlides && sanitySlides.length > 0) {
+        const mapped = sanitySlides
+          .map((slide) => {
+            let resolvedSrc = '';
+            if (slide.image) {
+              resolvedSrc = urlForImage(slide.image) || '';
+            } else if (slide.imageUrl) {
+              resolvedSrc = slide.imageUrl;
+            }
+
+            return {
+              id: slide._id,
+              title: slide.title || 'PrintOne Hero Slide',
+              src: resolvedSrc,
+              focus: slide.focus || '85% center',
+              order: slide.order ?? 1,
+            };
+          })
+          .filter((slide) => Boolean(slide.src));
+
+        if (mapped.length > 0) {
+          return mapped;
+        }
+      }
+    } catch (error) {
+      console.warn('[Sanity CMS] Could not fetch hero slides, using fallback:', error);
+    }
+  }
+
+  return DEFAULT_HERO_SLIDES;
+}
+

@@ -11,6 +11,7 @@ import {
   Eye,
   EyeOff,
   Filter,
+  Images,
   Loader2,
   Lock,
   LogOut,
@@ -26,6 +27,15 @@ import {
 } from 'lucide-react';
 import type { Product } from '@/data/products';
 import { AdminImageUploader } from '@/components/admin-image-uploader';
+
+interface AdminHeroSlide {
+  id: string;
+  title: string;
+  image: string;
+  focus: string;
+  order: number;
+  isActive: boolean;
+}
 
 const PRODUCT_TAGS = [
   'Business essentials',
@@ -46,9 +56,10 @@ const PRESET_COLORS = [
 ];
 
 export default function AdminPage() {
-  const [activeTab, setActiveTab] = useState<'products' | 'settings'>('products');
+  const [activeTab, setActiveTab] = useState<'products' | 'hero' | 'settings'>('products');
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
+  const [heroSlides, setHeroSlides] = useState<AdminHeroSlide[]>([]);
   const [sanityStatus, setSanityStatus] = useState({ configured: false, writeAccess: false });
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTag, setSelectedTag] = useState('ALL');
@@ -66,6 +77,10 @@ export default function AdminPage() {
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [editingProductId, setEditingProductId] = useState<string | null>(null);
 
+  // Hero Modal states
+  const [isHeroModalOpen, setIsHeroModalOpen] = useState(false);
+  const [editingHeroId, setEditingHeroId] = useState<string | null>(null);
+
   // Product Form State
   const [prodForm, setProdForm] = useState({
     title: '',
@@ -76,6 +91,16 @@ export default function AdminPage() {
     image: '',
     imageAlt: '',
     order: 1,
+  });
+
+  // Hero Form State
+  const [heroForm, setHeroForm] = useState({
+    title: '',
+    image: '',
+    sanityAssetId: '',
+    focus: '85% center',
+    order: 1,
+    isActive: true,
   });
 
   const [capabilitiesList, setCapabilitiesList] = useState<string[]>([
@@ -95,6 +120,7 @@ export default function AdminPage() {
       if (res.ok) {
         const data = await res.json();
         setProducts(data.products || []);
+        setHeroSlides(data.heroSlides || []);
         setSanityStatus({
           configured: Boolean(data.sanityConfigured),
           writeAccess: Boolean(data.hasWriteAccess),
@@ -285,6 +311,94 @@ export default function AdminPage() {
       }
     } catch {
       showToast('error', 'Network error deleting item.');
+    }
+  };
+
+  // Hero Slide Handlers
+  const openNewHeroModal = () => {
+    setEditingHeroId(null);
+    setHeroForm({
+      title: '',
+      image: '',
+      sanityAssetId: '',
+      focus: '85% center',
+      order: heroSlides.length + 1,
+      isActive: true,
+    });
+    setIsHeroModalOpen(true);
+  };
+
+  const openEditHeroModal = (slide: AdminHeroSlide) => {
+    setEditingHeroId(slide.id);
+    setHeroForm({
+      title: slide.title,
+      image: slide.image,
+      sanityAssetId: '',
+      focus: slide.focus || '85% center',
+      order: slide.order ?? 1,
+      isActive: slide.isActive !== false,
+    });
+    setIsHeroModalOpen(true);
+  };
+
+  const handleSaveHeroSlide = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!heroForm.title.trim()) {
+      showToast('error', 'Please enter a title or label for the slide.');
+      return;
+    }
+    if (!heroForm.image) {
+      showToast('error', 'Please upload a photo for the hero slide.');
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const payload = {
+        ...heroForm,
+        ...(editingHeroId ? { id: editingHeroId } : {}),
+      };
+
+      const res = await fetch('/api/admin/hero-slides', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        showToast(
+          'success',
+          editingHeroId
+            ? `Hero slide "${heroForm.title}" updated successfully!`
+            : `Hero slide "${heroForm.title}" saved! Live on hero section.`
+        );
+        setIsHeroModalOpen(false);
+        await fetchData();
+      } else {
+        showToast('error', data.error || 'Failed to save hero slide');
+      }
+    } catch {
+      showToast('error', 'Network error saving hero slide');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleDeleteHeroSlide = async (id: string, title: string) => {
+    if (!confirm(`Are you sure you want to delete hero slide "${title}"?`)) return;
+    try {
+      const res = await fetch(`/api/admin/hero-slides?id=${encodeURIComponent(id)}`, {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        showToast('success', `"${title}" deleted from hero section.`);
+        await fetchData();
+      } else {
+        showToast('error', 'Could not delete hero slide.');
+      }
+    } catch {
+      showToast('error', 'Network error deleting hero slide.');
     }
   };
 
@@ -508,6 +622,20 @@ export default function AdminPage() {
             </span>
           </button>
 
+          <button
+            onClick={() => setActiveTab('hero')}
+            className={`flex items-center gap-2 px-4 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all ${
+              activeTab === 'hero'
+                ? 'border-[#10383A] text-[#10383A] bg-white rounded-t-lg shadow-xs'
+                : 'border-transparent text-[#6e695f] hover:text-[#1c1d1f]'
+            }`}
+          >
+            <Images size={15} />
+            <span>Hero Showcase</span>
+            <span className="px-1.5 py-0.2 rounded-full bg-[#ede6da] text-[10px] text-[#5c584f] font-semibold">
+              {heroSlides.length}
+            </span>
+          </button>
 
           <button
             onClick={() => setActiveTab('settings')}
@@ -664,6 +792,152 @@ export default function AdminPage() {
           </div>
         )}
 
+        {/* ================= HERO SHOWCASE TAB ================= */}
+        {activeTab === 'hero' && (
+          <div className="space-y-6">
+            {/* Action Bar: Title, Description & "+ Add Hero Image" Button */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 sm:p-5 rounded-2xl border border-[#e5dfd4] shadow-xs">
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-base sm:text-lg font-bold text-[#1c1d1f]">
+                    Hero Showcase Slides ({heroSlides.length})
+                  </h2>
+                  <span className="px-2 py-0.5 rounded-full bg-[#eaf3f0] border border-[#b8dbd2] text-[#10383A] text-[10px] font-bold">
+                    Homepage Carousel
+                  </span>
+                </div>
+                <p className="text-xs text-[#78746c] mt-0.5">
+                  Upload and manage the background photography rotating in the live homepage hero section
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={openNewHeroModal}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#10383A] hover:bg-[#164a4d] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                >
+                  <Plus size={15} />
+                  <span>Upload Hero Image</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Information Callout */}
+            <div className="p-4 rounded-xl bg-[#faf8f2] border border-[#ded7cb] text-xs text-[#5c584f] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <span className="font-bold text-[#10383A]">How Hero Images Work: </span>
+                <span>
+                  The hero banner auto-cycles through active photos with an ink-roller wipe transition and mouse parallax effect.
+                  {heroSlides.length === 0 && ' (Currently running default studio photography until you upload your first image).'}
+                </span>
+              </div>
+              <Link
+                href="/"
+                target="_blank"
+                className="shrink-0 inline-flex items-center gap-1 font-bold text-[#10383A] hover:underline"
+              >
+                <span>Preview Live Homepage</span>
+                <ExternalLink size={12} />
+              </Link>
+            </div>
+
+            {/* Slides Grid or Empty State */}
+            {heroSlides.length === 0 ? (
+              <div className="bg-white rounded-2xl border border-[#e5dfd4] p-12 text-center text-[#78746c]">
+                <Images size={38} className="mx-auto mb-2 text-[#b0a99c]" />
+                <p className="font-bold text-sm text-[#1c1d1f]">No custom hero images uploaded yet</p>
+                <p className="text-xs mt-1 text-[#78746c] max-w-md mx-auto">
+                  The homepage hero banner is currently displaying default photography. Upload your own workshop photos, offset press pictures, or printed product shots here to manage them directly from the CMS.
+                </p>
+                <button
+                  type="button"
+                  onClick={openNewHeroModal}
+                  className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#10383A] hover:bg-[#164a4d] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                >
+                  <Plus size={15} />
+                  <span>Upload Your First Hero Image</span>
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {heroSlides.map((slide) => (
+                  <div
+                    key={slide.id}
+                    className="group flex flex-col justify-between rounded-2xl border border-[#e5dfd4] bg-white overflow-hidden hover:border-[#cfc6b5] hover:shadow-md transition-all"
+                  >
+                    <div>
+                      {/* Image Preview with object-position */}
+                      <div className="relative aspect-16/10 w-full bg-[#10383A] overflow-hidden border-b border-[#eee8dc]">
+                        <img
+                          src={slide.image}
+                          alt={slide.title}
+                          className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
+                          style={{ objectPosition: slide.focus || '85% center' }}
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = '/catalog/brochures.jpg';
+                          }}
+                        />
+                        {/* Sequence badge */}
+                        <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#10383A]/90 text-white shadow-2xs backdrop-blur-xs">
+                          Sequence #{slide.order}
+                        </span>
+
+                        {/* Active status */}
+                        <span
+                          className={`absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full text-[10px] font-bold shadow-2xs backdrop-blur-xs flex items-center gap-1 ${
+                            slide.isActive
+                              ? 'bg-white/95 text-[#166534] border border-[#86efac]'
+                              : 'bg-white/95 text-[#9a3412] border border-[#fed7aa]'
+                          }`}
+                        >
+                          <span
+                            className={`w-1.5 h-1.5 rounded-full ${
+                              slide.isActive ? 'bg-[#16a34a]' : 'bg-[#ea580c]'
+                            }`}
+                          />
+                          <span>{slide.isActive ? 'Live in Hero' : 'Hidden'}</span>
+                        </span>
+                      </div>
+
+                      {/* Content */}
+                      <div className="p-4">
+                        <h3 className="font-bold text-sm text-[#1c1d1f] line-clamp-1">{slide.title}</h3>
+                        <div className="mt-2 flex items-center gap-2">
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#f5efe6] text-[#605c53] border border-[#e5ded4]">
+                            Focus: {slide.focus || '85% center'}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Card Actions: Edit & Delete */}
+                    <div className="flex items-center justify-between gap-2 p-3 border-t border-[#f0eae0] bg-[#faf8f4]">
+                      <button
+                        type="button"
+                        onClick={() => openEditHeroModal(slide)}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[#ded7cc] hover:border-[#10383A] hover:text-[#10383A] text-[#4d4a43] text-xs font-semibold transition-all cursor-pointer shadow-2xs"
+                      >
+                        <Pencil size={12} />
+                        <span>Edit</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteHeroSlide(slide.id, slide.title)}
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg hover:bg-[#fee2e2] text-[#8c877d] hover:text-[#dc2626] text-xs font-semibold transition-colors cursor-pointer"
+                        title="Delete hero slide"
+                      >
+                        <Trash2 size={13} />
+                        <span>Delete</span>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
 
         {/* ================= SETTINGS TAB ================= */}
         {activeTab === 'settings' && (
@@ -855,6 +1129,158 @@ export default function AdminPage() {
         </div>
       )}
 
+      {/* ================= 6. POPUP MODAL: ADD / EDIT HERO SLIDE ================= */}
+      {isHeroModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 sm:p-6 overflow-y-auto">
+          <div className="relative w-full max-w-xl max-h-[90vh] bg-white rounded-2xl border border-[#e5dfd4] shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[#eee8dc] bg-[#faf8f4]">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-[#eaf3f0] border border-[#b8dbd2] flex items-center justify-center text-[#10383A]">
+                  {editingHeroId ? <Pencil size={15} /> : <Plus size={16} />}
+                </div>
+                <div>
+                  <h3 className="font-bold text-base text-[#1c1d1f]">
+                    {editingHeroId ? 'Edit Hero Showcase Slide' : 'Upload Hero Showcase Image'}
+                  </h3>
+                  <p className="text-[11px] text-[#78746c]">
+                    {editingHeroId
+                      ? 'Update image, alignment, and display order in the live hero section'
+                      : 'Upload a new high-resolution photo for the homepage hero carousel'}
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsHeroModalOpen(false)}
+                className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[#eee7dc] text-[#6e6a60] transition-colors cursor-pointer"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <form onSubmit={handleSaveHeroSlide} className="flex-1 overflow-y-auto p-6 space-y-4 text-xs">
+              {/* Image Upload Component */}
+              <AdminImageUploader
+                label="Hero Background Photo *"
+                value={heroForm.image}
+                onChange={(url, assetId) =>
+                  setHeroForm({
+                    ...heroForm,
+                    image: url,
+                    ...(assetId ? { sanityAssetId: assetId } : {}),
+                  })
+                }
+              />
+
+              {/* Title / Caption */}
+              <div>
+                <label className="block font-semibold text-[#302e29] mb-1.5">
+                  Slide Title / Caption <span className="text-[#10383A]">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g., Commercial Offset Printing Press in Workshop"
+                  value={heroForm.title}
+                  onChange={(e) => setHeroForm({ ...heroForm, title: e.target.value })}
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] placeholder-[#938e83] focus:outline-none focus:bg-white focus:border-[#10383A] focus:ring-1 focus:ring-[#10383A]"
+                />
+                <p className="text-[10px] text-[#8c877d] mt-1">
+                  Descriptive label for this photo and image alt text.
+                </p>
+              </div>
+
+              {/* Focal Alignment & Sequence Order */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block font-semibold text-[#302e29] mb-1.5">
+                    Focal Alignment
+                  </label>
+                  <select
+                    value={heroForm.focus}
+                    onChange={(e) => setHeroForm({ ...heroForm, focus: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] focus:outline-none focus:bg-white focus:border-[#10383A]"
+                  >
+                    <option value="85% center">85% Center (Recommended / Right-aligned machine)</option>
+                    <option value="center center">Center Center</option>
+                    <option value="top center">Top Center</option>
+                    <option value="bottom center">Bottom Center</option>
+                    <option value="left center">Left Center</option>
+                    <option value="right center">Right Center</option>
+                  </select>
+                  <p className="text-[10px] text-[#8c877d] mt-1">
+                    Aligns photo subject so it does not collide with hero text.
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block font-semibold text-[#302e29] mb-1.5">
+                    Slide Sequence Order
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    value={heroForm.order}
+                    onChange={(e) =>
+                      setHeroForm({ ...heroForm, order: parseInt(e.target.value) || 1 })
+                    }
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#faf8f2] border border-[#dcd5c7] text-[#1c1d1f] focus:outline-none focus:bg-white focus:border-[#10383A]"
+                  />
+                  <p className="text-[10px] text-[#8c877d] mt-1">
+                    Sequence number (1 displays first, then 2, 3...)
+                  </p>
+                </div>
+              </div>
+
+              {/* Active Toggle */}
+              <div className="pt-2">
+                <label className="flex items-center gap-2.5 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={heroForm.isActive}
+                    onChange={(e) => setHeroForm({ ...heroForm, isActive: e.target.checked })}
+                    className="w-4 h-4 rounded text-[#10383A] focus:ring-[#10383A] border-[#dcd5c7]"
+                  />
+                  <span className="font-semibold text-xs text-[#302e29]">
+                    Active in Hero Carousel (Show on live website)
+                  </span>
+                </label>
+              </div>
+
+              {/* Modal Action Buttons */}
+              <div className="pt-4 flex items-center justify-end gap-3 border-t border-[#eee8dc]">
+                <button
+                  type="button"
+                  onClick={() => setIsHeroModalOpen(false)}
+                  className="px-4 py-2.5 rounded-xl border border-[#ded7cb] bg-[#faf8f2] hover:bg-white text-xs font-semibold text-[#5a564d] transition-colors cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="px-5 py-2.5 rounded-xl bg-[#10383A] hover:bg-[#164a4d] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                >
+                  {submitting ? (
+                    <>
+                      <Loader2 size={14} className="animate-spin" />
+                      <span>Saving to CMS...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Check size={14} />
+                      <span>{editingHeroId ? 'Save Slide Changes' : 'Publish to Hero Section'}</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
     </div>
   );

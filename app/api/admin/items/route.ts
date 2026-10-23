@@ -42,6 +42,17 @@ interface SanityServiceDoc {
   order?: number;
 }
 
+interface SanityHeroSlideDoc {
+  _id: string;
+  title?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  image?: any;
+  imageUrl?: string;
+  focus?: string;
+  order?: number;
+  isActive?: boolean;
+}
+
 /**
  * Returns ONLY items that actually exist in Sanity CMS Cloud.
  * Does not include mock data, so the admin panel strictly reflects your real CMS database.
@@ -77,14 +88,26 @@ export async function GET() {
     useCases: string[];
   }> = [];
 
+  let heroSlides: Array<{
+    id: string;
+    title: string;
+    image: string;
+    focus: string;
+    order: number;
+    isActive: boolean;
+  }> = [];
+
   if (client) {
     try {
-      const [sanityProducts, sanityServices] = await Promise.all([
+      const [sanityProducts, sanityServices, sanityHeroSlides] = await Promise.all([
         client.fetch<SanityProductDoc[]>(
           `*[_type == "product"] | order(order asc, _createdAt desc)`
         ),
         client.fetch<SanityServiceDoc[]>(
           `*[_type == "service"] | order(order asc, _createdAt desc)`
+        ),
+        client.fetch<SanityHeroSlideDoc[]>(
+          `*[_type == "heroSlide"] | order(order asc, _createdAt desc)`
         ),
       ]);
 
@@ -139,6 +162,26 @@ export async function GET() {
           };
         });
       }
+
+      if (sanityHeroSlides && sanityHeroSlides.length > 0) {
+        heroSlides = sanityHeroSlides.map((slide, idx) => {
+          let resolvedImage = '';
+          if (slide.imageUrl) {
+            resolvedImage = slide.imageUrl;
+          } else if (slide.image) {
+            resolvedImage = urlForImage(slide.image) || '';
+          }
+
+          return {
+            id: slide._id,
+            title: slide.title || `Hero Slide ${idx + 1}`,
+            image: resolvedImage,
+            focus: slide.focus || '85% center',
+            order: slide.order ?? idx + 1,
+            isActive: slide.isActive !== false,
+          };
+        });
+      }
     } catch (err) {
       console.warn('[Sanity CMS] Admin items fetch from Sanity failed:', err);
     }
@@ -149,8 +192,10 @@ export async function GET() {
     hasWriteAccess,
     totalProducts: products.length,
     totalServices: services.length,
+    totalHeroSlides: heroSlides.length,
     products,
     services,
+    heroSlides,
   });
 }
 
@@ -158,7 +203,7 @@ export async function DELETE(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
-    const type = searchParams.get('type'); // 'product' | 'service'
+    const type = searchParams.get('type'); // 'product' | 'service' | 'heroSlide' | 'hero-slide'
 
     if (!id || !type) {
       return NextResponse.json({ error: 'Missing id or type parameter' }, { status: 400 });
@@ -171,7 +216,12 @@ export async function DELETE(request: Request) {
       );
     }
 
-    const docId = id.startsWith(`${type}-`) ? id : `${type}-${id}`;
+    let docId = id;
+    if (type === 'heroSlide' || type === 'hero-slide') {
+      docId = id.startsWith('hero-slide-') ? id : `hero-slide-${id}`;
+    } else {
+      docId = id.startsWith(`${type}-`) ? id : `${type}-${id}`;
+    }
 
     // Direct deletion from Sanity CMS
     await writeClient.delete(docId);
@@ -179,6 +229,7 @@ export async function DELETE(request: Request) {
     try {
       revalidateTag('products', 'seconds');
       revalidateTag('services', 'seconds');
+      revalidateTag('hero-slides', 'seconds');
       revalidatePath('/', 'layout');
     } catch (err) {
       console.warn('Revalidation notice:', err);
