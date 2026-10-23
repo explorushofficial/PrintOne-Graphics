@@ -49,7 +49,7 @@ interface SanityServiceDoc {
 export async function getProducts(): Promise<Product[]> {
   'use cache';
   cacheTag('products');
-  cacheLife('seconds');
+  cacheLife('minutes');
   let sanityMapped: Product[] = [];
 
   if (client) {
@@ -96,7 +96,7 @@ export async function getProducts(): Promise<Product[]> {
 export async function getServices(): Promise<ServiceItem[]> {
   'use cache';
   cacheTag('services');
-  cacheLife('seconds');
+  cacheLife('minutes');
   let sanityMapped: ServiceItem[] = [];
 
   if (client) {
@@ -200,7 +200,7 @@ interface SanityHeroSlideDoc {
 export async function getHeroSlides(): Promise<HeroSlide[]> {
   'use cache';
   cacheTag('hero-slides');
-  cacheLife('seconds');
+  cacheLife('minutes');
 
   if (client) {
     try {

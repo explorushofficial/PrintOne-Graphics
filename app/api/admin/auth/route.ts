@@ -4,12 +4,14 @@ import {
   COOKIE_NAME,
   getExpectedPassword,
   generateSessionToken,
-  verifyAdminSession,
 } from '@/lib/admin-auth';
 
+/**
+ * Always returns authenticated: false so whenever anyone navigates or refreshes /admin,
+ * they are compulsorily prompted to enter the administrative passcode every single time.
+ */
 export async function GET() {
-  const authenticated = await verifyAdminSession();
-  return NextResponse.json({ authenticated });
+  return NextResponse.json({ authenticated: false });
 }
 
 export async function POST(request: Request) {
@@ -28,11 +30,11 @@ export async function POST(request: Request) {
     const cookieStore = await cookies();
     const token = generateSessionToken(expected.trim());
 
+    // Ephemeral session cookie (no long maxAge) so it does not persist across sessions
     cookieStore.set(COOKIE_NAME, token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 7, // 7 days session
       path: '/',
     });
 

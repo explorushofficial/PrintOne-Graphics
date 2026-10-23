@@ -66,8 +66,8 @@ export default function AdminPage() {
   const [submitting, setSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-  // Authentication States
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  // Authentication States — Always default to false so entering the password is compulsory on every visit
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [loginPassword, setLoginPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loginLoading, setLoginLoading] = useState(false);
@@ -133,26 +133,12 @@ export default function AdminPage() {
     }
   };
 
-  // Check if session is already active
-  const checkAuth = async () => {
-    try {
-      const res = await fetch('/api/admin/auth');
-      const data = await res.json();
-      if (data.authenticated) {
-        setIsAuthenticated(true);
-        fetchData();
-      } else {
-        setIsAuthenticated(false);
-        setLoading(false);
-      }
-    } catch {
-      setIsAuthenticated(false);
-      setLoading(false);
-    }
-  };
-
+  // Enforce mandatory password entry:
+  // Every time someone visits, reloads, or clicks /admin, clear any prior session and require password
   useEffect(() => {
-    checkAuth();
+    setIsAuthenticated(false);
+    setLoading(false);
+    fetch('/api/admin/auth', { method: 'DELETE' }).catch(() => {});
   }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -414,15 +400,6 @@ export default function AdminPage() {
   });
 
 
-  if (isAuthenticated === null) {
-    return (
-      <div className="min-h-screen bg-[#faf8f2] flex flex-col items-center justify-center p-4">
-        <Loader2 size={32} className="animate-spin text-[#10383A]" />
-        <p className="mt-3 text-xs text-[#78746c] font-medium">Checking authorization...</p>
-      </div>
-    );
-  }
-
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-[#faf8f2] text-[#1c1d1f] flex flex-col justify-between font-sans">
@@ -522,7 +499,7 @@ export default function AdminPage() {
 
         {/* Simple bottom footer */}
         <footer className="py-4 text-center text-[11px] text-[#918c81]">
-          PrintOne Graphics &copy; {new Date().getFullYear()} &bull; Secure Management Portal
+          PrintOne Graphics &copy; 2026 &bull; Secure Management Portal
         </footer>
       </div>
     );
